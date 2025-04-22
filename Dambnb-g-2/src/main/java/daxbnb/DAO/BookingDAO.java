@@ -1,4 +1,4 @@
-package DAO;
+package daxbnb.DAO;
 
 public class BookingDAO {
 

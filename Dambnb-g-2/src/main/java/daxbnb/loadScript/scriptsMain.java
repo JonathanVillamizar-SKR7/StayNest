@@ -1,4 +1,4 @@
-package loadScript;
+package daxbnb.loadScript;
 
 public class scriptsMain {
 
