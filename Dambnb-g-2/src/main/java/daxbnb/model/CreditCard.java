@@ -3,7 +3,7 @@ package daxbnb.model;
 import java.sql.Date;
 
 public class CreditCard extends User{
-
+//Hola sadasd
     private int idCreditCard;
     private int idUser;
     private String cardHolderName;
