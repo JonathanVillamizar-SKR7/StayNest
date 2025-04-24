@@ -2,29 +2,25 @@ package daxbnb.model;
 
 import java.util.Date;
 
-public class Reserve extends Housing{
+public class Reserve {
 
 	private int idReserva;
-	private int idHouse;
-	private int idUser;
-	private String name;
+	private Housing housing;
 	private Date checkIn;
 	private Date checkOut;
 	private int numGuests;
 	private double totalPrice;
+	private int idUser;
 	
-	public Reserve(int idHouse, String name, String description, String location, int numGuest, int numBedroom,
-			int numBed, int numBath, int idType, double price, int idReserva, int idHouse2, int idUser, String name2,
-			Date checkIn, Date checkOut, int numGuests, double totalPrice) {
-		super(idHouse, name, description, location, numGuest, numBedroom, numBed, numBath, idType, price);
+	public Reserve(int idReserva, Housing housing, Date checkIn, Date checkOut, int numGuests, double totalPrice,
+			int idUser) {
 		this.idReserva = idReserva;
-		idHouse = idHouse2;
-		this.idUser = idUser;
-		name = name2;
+		this.housing = housing;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.numGuests = numGuests;
 		this.totalPrice = totalPrice;
+		this.idUser = idUser;
 	}
 
 	public int getIdReserva() {
@@ -35,28 +31,12 @@ public class Reserve extends Housing{
 		this.idReserva = idReserva;
 	}
 
-	public int getIdHouse() {
-		return idHouse;
+	public Housing getHousing() {
+		return housing;
 	}
 
-	public void setIdHouse(int idHouse) {
-		this.idHouse = idHouse;
-	}
-
-	public int getIdUser() {
-		return idUser;
-	}
-
-	public void setIdUser(int idUser) {
-		this.idUser = idUser;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setHousing(Housing housing) {
+		this.housing = housing;
 	}
 
 	public Date getCheckIn() {
@@ -91,12 +71,21 @@ public class Reserve extends Housing{
 		this.totalPrice = totalPrice;
 	}
 
+	public int getIdUser() {
+		return idUser;
+	}
+
+	public void setIdUser(int idUser) {
+		this.idUser = idUser;
+	}
+
 	@Override
 	public String toString() {
-		return "Reserve [idReserva=" + idReserva + ", idHouse=" + idHouse + ", idUser=" + idUser + ", name=" + name
-				+ ", checkIn=" + checkIn + ", checkOut=" + checkOut + ", numGuests=" + numGuests + ", totalPrice="
-				+ totalPrice + ", toString()=" + super.toString() + "]";
+		return "Reserve [idReserva=" + idReserva + ", housing=" + housing + ", checkIn=" + checkIn + ", checkOut="
+				+ checkOut + ", numGuests=" + numGuests + ", totalPrice=" + totalPrice + ", idUser=" + idUser + "]";
 	}
+	
+	
 	
 	
 	
