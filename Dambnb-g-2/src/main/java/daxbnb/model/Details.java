@@ -1,33 +1,19 @@
 package daxbnb.model;
 
-import java.sql.Date;
+import java.util.List;
 
 public class Details extends User{
 
-    private String userName;
     private String password;
     private String userType;
-    private String description;
+    private String userDescription;
     
-	public Details(int idHouse, String name, String description, String location, int numGuest, int numBedroom,
-			int numBed, int numBath, int idType, double price, int idReserva, int idHouse2, int idUser, String name2,
-			Date checkIn, Date checkOut, int numGuests, double totalPrice, String userName, int idUser2, int phone,
-			String email, int passport, String userName2, String password, String userType, String description2) {
-		super(idHouse, name, description, location, numGuest, numBedroom, numBed, numBath, idType, price, idReserva,
-				idHouse2, idUser, name2, checkIn, checkOut, numGuests, totalPrice, userName, idUser2, phone, email,
-				passport);
-		userName = userName2;
+	public Details(String userName, int idUser, int phone, String email, int passport, List<CreditCard> creditCard,
+			String password, String userType, String userDescription) {
+		super(userName, idUser, phone, email, passport, creditCard);
 		this.password = password;
 		this.userType = userType;
-		description = description2;
-	}
-
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
+		this.userDescription = userDescription;
 	}
 
 	public String getPassword() {
@@ -46,19 +32,25 @@ public class Details extends User{
 		this.userType = userType;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getUserDescription() {
+		return userDescription;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setUserDescription(String userDescription) {
+		this.userDescription = userDescription;
 	}
 
 	@Override
 	public String toString() {
-		return "Details [userName=" + userName + ", password=" + password + ", userType=" + userType + ", description="
-				+ description + ", toString()=" + super.toString() + "]";
+		return "Details [password=" + password + ", userType=" + userType + ", userDescription=" + userDescription
+				+ ", toString()=" + super.toString() + "]";
 	}
+
+
+    
+	
+    
+    
     
     
 }
