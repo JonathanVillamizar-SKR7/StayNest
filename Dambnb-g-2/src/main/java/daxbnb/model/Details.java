@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Details extends User{
 
+	//Prueba de Diana, git push primera vez
     private String password;
     private String userType;
     private String userDescription;
