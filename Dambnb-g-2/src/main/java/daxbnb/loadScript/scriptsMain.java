@@ -16,6 +16,7 @@ public static void main(String[] args) {
 			Connection connection = dbConnection.connect(); // Abrimos la conexion
 			Statement stmt = connection.createStatement(); // Creamos el statement que se crea a partir de la conexion y
 															// sirve para enviar instruciones SQL
+			
 			stmt.execute(sql);//Aqui ejecutamos el sql con el statement
 			System.out.println("Base de datos creada correctamente.");
 
