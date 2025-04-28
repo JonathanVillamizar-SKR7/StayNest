@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-	public static final String URL_DB = "jdbc:mysql://localhost:3307/mydb";
+	public static final String URL_DB = "jdbc:mysql://localhost:3307/mydb?allowMultiQueries=true";
 	public static final String USER = "user";
 	public static final String PASSWORD = "userpass";
 	public static final String CLASS_NAME = "com.mysql.cj.jdbc.Driver";

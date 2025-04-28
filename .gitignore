@@ -1,3 +1,13 @@
+# Ignorar configuraciones locales de Eclipse
+.classpath
+.project
+.settings/
+
+# Ignorar archivos jar (para evitar problemas de rutas locales como TimeJump.jar)
 *.jar
+
+# Ignorar archivos YAML
 *.yml
+
+# Ignorar archivos SQL
 *.sql
