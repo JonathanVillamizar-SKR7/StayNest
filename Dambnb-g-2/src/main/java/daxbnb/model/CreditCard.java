@@ -9,10 +9,10 @@ public class CreditCard {
     private String cardHolderName;
     private Date expiration;
     private int cvv;
-    private int creditCardNum;
+    private long creditCardNum;
     
 	public CreditCard(String userName, int idCreditCard, String cardHolderName, Date expiration, int cvv,
-			int creditCardNum) {
+			long creditCardNum) {
 		this.userName = userName;
 		this.idCreditCard = idCreditCard;
 		this.cardHolderName = cardHolderName;
@@ -61,7 +61,7 @@ public class CreditCard {
 		this.cvv = cvv;
 	}
 
-	public int getCreditCardNum() {
+	public long getCreditCardNum() {
 		return creditCardNum;
 	}
 

@@ -24,7 +24,7 @@ CREATE TABLE Details (
     userName VARCHAR(100) PRIMARY KEY,
     password VARCHAR(100),
     userType VARCHAR(50),
-    description TEXT,
+    userDescription TEXT,
     FOREIGN KEY (userName) REFERENCES Users(userName)
 );
 
@@ -43,7 +43,6 @@ CREATE TABLE CreditCards (
 CREATE TABLE Housing (
     idHouse INT PRIMARY KEY,
     name VARCHAR(100),
-    description TEXT,
     location VARCHAR(100),
     numGuest INT,
     numBedroom INT,
