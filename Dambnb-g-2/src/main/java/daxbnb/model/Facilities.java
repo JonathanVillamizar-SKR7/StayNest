@@ -1,8 +1,8 @@
 package daxbnb.model;
 
 /**
- * Representa una instalación asociada a una vivienda (por ejemplo, piscina,
- * wifi, garaje). Contiene información sobre su disponibilidad y tipo.
+ * Clase que representa las instalaciones disponibles en una casa. Contiene
+ * información sobre la casa, el tipo de instalación y si está disponible.
  * 
  * @author Alfredo, Jonathan, Diana
  */
@@ -13,14 +13,13 @@ public class Facilities {
 	private boolean available;
 
 	/**
-	 * Crea una nueva instancia de {@code Facilities} asociada a una vivienda.
+	 * Constructor
 	 * 
-	 * @param idHouse        Identificador de la vivienda a la que pertenece la
-	 *                       instalación.
-	 * @param idFacilities   Identificador único de la instalación.
-	 * @param typeFacilities Tipo o nombre de la instalación (e.g.,
-	 *                       "Wifi","Piscina").
-	 * @param available      Indica si la instalación está disponible actualmente.
+	 * @param idHouse        El ID de la casa asociada a estas instalaciones.
+	 * @param idFacilities   El ID de la instalación.
+	 * @param typeFacilities El tipo de la instalación (p. ej., "piscina", "WiFi").
+	 * @param available      El estado de disponibilidad de la instalación (true si
+	 *                       está disponible, false si no).
 	 */
 	public Facilities(int idHouse, int idFacilities, String typeFacilities, boolean available) {
 		this.idHouse = idHouse;
@@ -32,7 +31,7 @@ public class Facilities {
 	/**
 	 * Obtiene el identificador de la vivienda asociada.
 	 * 
-	 * @return ID de la vivienda.
+	 * @return El ID de la casa.
 	 */
 	public int getIdHouse() {
 		return idHouse;
@@ -41,7 +40,7 @@ public class Facilities {
 	/**
 	 * Establece el identificador de la vivienda asociada.
 	 * 
-	 * @param idHouse Nuevo ID de la vivienda.
+	 * @param idHouse El nuevo ID de la casa.
 	 */
 	public void setIdHouse(int idHouse) {
 		this.idHouse = idHouse;
@@ -50,7 +49,7 @@ public class Facilities {
 	/**
 	 * Obtiene el identificador de la instalación.
 	 * 
-	 * @return ID de la instalación.
+	 * @return El ID de la instalación.
 	 */
 	public int getIdFacilities() {
 		return idFacilities;
@@ -59,7 +58,7 @@ public class Facilities {
 	/**
 	 * Establece el identificador de la instalación.
 	 * 
-	 * @param idFacilities Nuevo ID de la instalación.
+	 * @param idFacilities El nuevo ID de la instalación.
 	 */
 	public void setIdFacilities(int idFacilities) {
 		this.idFacilities = idFacilities;
@@ -68,7 +67,7 @@ public class Facilities {
 	/**
 	 * Obtiene el tipo o nombre de la instalación.
 	 * 
-	 * @return Tipo de instalación (e.g., "Wifi", "Piscina").
+	 * @return El tipo de la instalación.
 	 */
 	public String getTypeFacilities() {
 		return typeFacilities;
@@ -77,7 +76,8 @@ public class Facilities {
 	/**
 	 * Establece el tipo o nombre de la instalación.
 	 * 
-	 * @param typeFacilities Tipo de instalación.
+	 * @param typeFacilities El nuevo tipo de instalación (por ejemplo, "piscina",
+	 *                       "WiFi").
 	 */
 	public void setTypeFacilities(String typeFacilities) {
 		this.typeFacilities = typeFacilities;
@@ -86,7 +86,7 @@ public class Facilities {
 	/**
 	 * Indica si la instalación está disponible.
 	 * 
-	 * @return {@code true} si está disponible; {@code false} en caso contrario.
+	 * @return true si la instalación está disponible, false si no.
 	 */
 	public boolean isAvailable() {
 		return available;
@@ -95,16 +95,15 @@ public class Facilities {
 	/**
 	 * Establece la disponibilidad de la instalación.
 	 * 
-	 * @param available {@code true} si está disponible; {@code false} si no.
+	 * @param available El nuevo estado de disponibilidad (true si está disponible,
+	 *                  false si no).
 	 */
 	public void setAvailable(boolean available) {
 		this.available = available;
 	}
 
 	/**
-	 * Devuelve una representación en cadena de la instalación.
-	 * 
-	 * @return Una cadena con los valores de todos los atributos.
+	 * @return Una cadena que representa todos los detalles de la instalación.
 	 */
 	@Override
 	public String toString() {

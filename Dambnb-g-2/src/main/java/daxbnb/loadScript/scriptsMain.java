@@ -15,9 +15,12 @@ import daxbnb.DAO.DBConnection;
  * una conexión con la base de datos, ejecuta el script contenido en el archivo
  * y luego cierra la conexión.
  * 
+ * Ejecuta el script SQL ubicado en scripts/CreateTableBBDD.sql
+ * 
  * @author Alfredo, Jonathan, Diana
  */
 public class scriptsMain {
+
 	/**
 	 * Método principal que se ejecuta al iniciar el programa.
 	 * 
@@ -27,17 +30,16 @@ public class scriptsMain {
 		try {
 			String sql = new String(Files.readAllBytes(Paths.get("scripts/CreateTableBBDD.sql")));
 			DBConnection dbConnection = new DBConnection();
-			Connection connection = dbConnection.connect(); // Abrimos la conexion
-			Statement stmt = connection.createStatement(); // Creamos el statement que se crea a partir de la conexion y
-															// sirve para enviar instruciones SQL
-			stmt.execute(sql);// Aqui ejecutamos el sql con el statement
+			Connection connection = dbConnection.connect(); // Abrimos la conexión
+			Statement stmt = connection.createStatement(); // Creamos el statement a partir de la conexión
+
+			stmt.execute(sql); // Ejecutamos el script SQL
 			System.out.println("Base de datos creada correctamente.");
 
-			dbConnection.closeConnection(connection); // cerramos la conexion
+			dbConnection.closeConnection(connection); // Cerramos la conexión
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
 }

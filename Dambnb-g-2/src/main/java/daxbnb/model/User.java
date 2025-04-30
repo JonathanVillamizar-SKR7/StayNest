@@ -3,29 +3,30 @@ package daxbnb.model;
 import java.util.List;
 
 /**
- * Represents a user of the DaxBnB platform, which may include guests or hosts.
+ * Clase que representa un usuario en el sistema. Contiene información de
+ * contacto y tarjetas de crédito asociadas.
  * 
  * @author Alfredo, Jonathan, Diana
  */
 public class User {
 	private String userName;
 	private int idUser;
-	private long phone;
+	private int phone;
 	private String email;
 	private int passport;
 	private List<CreditCard> creditCard;
 
 	/**
-	 * Constructs a User object with the specified parameters.
+	 * Constructor
 	 * 
-	 * @param userName   the user's full name
-	 * @param idUser     unique identifier for the user
-	 * @param phone      contact phone number
-	 * @param email      email address of the user
-	 * @param passport   passport number
-	 * @param creditCard list of credit cards associated with the user
+	 * @param userName   nombre de usuario
+	 * @param idUser     id único de usuario
+	 * @param phone      número de teléfono
+	 * @param email      correo electrónico
+	 * @param passport   número de pasaporte
+	 * @param creditCard lista de tarjetas de crédito
 	 */
-	public User(String userName, int idUser, long phone, String email, int passport, List<CreditCard> creditCard) {
+	public User(String userName, int idUser, int phone, String email, int passport, List<CreditCard> creditCard) {
 		this.userName = userName;
 		this.idUser = idUser;
 		this.phone = phone;
@@ -35,89 +36,104 @@ public class User {
 	}
 
 	/**
-	 * @return the user's name
+	 * 
+	 * @return nombre de usuario
 	 */
 	public String getUserName() {
 		return userName;
 	}
 
 	/**
-	 * @param userName the user's name to set
+	 * 
+	 * @param userName nombre de usuario
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
 	/**
-	 * @return the user's ID
+	 * 
+	 * @return id de usuario
 	 */
 	public int getIdUser() {
 		return idUser;
 	}
 
 	/**
-	 * @param idUser the user's ID to set
+	 * 
+	 * @param idUser id de usuario
 	 */
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
 
 	/**
-	 * @return the user's phone number
+	 * 
+	 * @return número de teléfono
 	 */
-	public long getPhone() {
+	public int getPhone() {
 		return phone;
 	}
 
 	/**
-	 * @param phone the user's phone number to set
+	 * 
+	 * @param phone número de teléfono
 	 */
-	public void setPhone(long phone) {
+	public void setPhone(int phone) {
 		this.phone = phone;
 	}
 
 	/**
-	 * @return the user's email address
+	 * 
+	 * @return correo electrónico
 	 */
 	public String getEmail() {
 		return email;
 	}
 
 	/**
-	 * @param email the user's email address to set
+	 * 
+	 * @param email correo electrónico
 	 */
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
 	/**
-	 * @return the user's passport number
+	 * 
+	 * @return número de pasaporte
 	 */
 	public int getPassport() {
 		return passport;
 	}
 
 	/**
-	 * @param passport the user's passport number to set
+	 * 
+	 * @param passport número de pasaporte
 	 */
 	public void setPassport(int passport) {
 		this.passport = passport;
 	}
 
 	/**
-	 * @return list of the user's credit cards
+	 * 
+	 * @return lista de tarjetas de crédito
 	 */
 	public List<CreditCard> getCreditCard() {
 		return creditCard;
 	}
 
 	/**
-	 * @param creditCard the list of credit cards to associate with the user
+	 * 
+	 * @param creditCard lista de tarjetas de crédito
 	 */
 	public void setCreditCard(List<CreditCard> creditCard) {
 		this.creditCard = creditCard;
 	}
 
+	/**
+	 * @return Devuelve una representación en texto del objeto.
+	 */
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + ", idUser=" + idUser + ", phone=" + phone + ", email=" + email

@@ -1,12 +1,10 @@
 package daxbnb.model;
 
 /**
- * Represents the different types of housing accommodations available in the
- * DaxBnB platform.
+ * Enum que representa los diferentes tipos de alojamientos disponibles.
  * 
  * @author Alfredo, Jonathan, Diana
  */
 public enum Types {
 	CABIN, TINY_HOME, APARTMENT, COUNTRYSIDE, VILLA;
-
 }

@@ -3,7 +3,7 @@ package daxbnb.model;
 import java.util.Date;
 
 /**
- * Represents a reservation made by a user for a specific housing property.
+ * Clase que representa una reserva de un alojamiento.
  * 
  * @author Alfredo, Jonathan, Diana
  */
@@ -18,15 +18,15 @@ public class Reserve {
 	private int idUser;
 
 	/**
-	 * Constructs a new reservation with the specified details.
+	 * Constructor
 	 * 
-	 * @param idReserva  Unique ID of the reservation.
-	 * @param housing    The housing object reserved.
-	 * @param checkIn    Date of check-in.
-	 * @param checkOut   Date of check-out.
-	 * @param numGuests  Number of guests included in the reservation.
-	 * @param totalPrice Total price of the stay.
-	 * @param idUser     ID of the user who made the reservation.
+	 * @param idReserva  ID de la reserva
+	 * @param housing    Alojamiento reservado
+	 * @param checkIn    Fecha de entrada
+	 * @param checkOut   Fecha de salida
+	 * @param numGuests  Número de huéspedes
+	 * @param totalPrice Precio total de la reserva
+	 * @param idUser     ID del usuario que reserva
 	 */
 	public Reserve(int idReserva, Housing housing, Date checkIn, Date checkOut, int numGuests, double totalPrice,
 			int idUser) {
@@ -40,133 +40,105 @@ public class Reserve {
 	}
 
 	/**
-	 * Gets the reservation ID.
-	 * 
-	 * @return Reservation ID.
+	 * @return ID de la reserva
 	 */
 	public int getIdReserva() {
 		return idReserva;
 	}
 
 	/**
-	 * Sets the reservation ID.
-	 * 
-	 * @param idReserva New reservation ID.
+	 * @param idReserva ID de la reserva
 	 */
 	public void setIdReserva(int idReserva) {
 		this.idReserva = idReserva;
 	}
 
 	/**
-	 * Returns the reserved housing object.
-	 * 
-	 * @return Reserved housing.
+	 * @return Alojamiento reservado
 	 */
 	public Housing getHousing() {
 		return housing;
 	}
 
 	/**
-	 * Sets the housing to be reserved.
-	 * 
-	 * @param housing New housing object.
+	 * @param housing Alojamiento reservado
 	 */
 	public void setHousing(Housing housing) {
 		this.housing = housing;
 	}
 
 	/**
-	 * Gets the check-in date.
-	 * 
-	 * @return Check-in date.
+	 * @return Fecha de entrada
 	 */
 	public Date getCheckIn() {
 		return checkIn;
 	}
 
 	/**
-	 * Sets the check-in date.
-	 * 
-	 * @param checkIn New check-in date.
+	 * @param checkIn Fecha de entrada
 	 */
 	public void setCheckIn(Date checkIn) {
 		this.checkIn = checkIn;
 	}
 
 	/**
-	 * Gets the check-out date.
-	 * 
-	 * @return Check-out date.
+	 * @return Fecha de salida
 	 */
 	public Date getCheckOut() {
 		return checkOut;
 	}
 
 	/**
-	 * Sets the check-out date.
-	 * 
-	 * @param checkOut New check-out date.
+	 * @param checkOut Fecha de salida
 	 */
 	public void setCheckOut(Date checkOut) {
 		this.checkOut = checkOut;
 	}
 
 	/**
-	 * Returns the number of guests.
-	 * 
-	 * @return Number of guests.
+	 * @return Número de huéspedes
 	 */
 	public int getNumGuests() {
 		return numGuests;
 	}
 
 	/**
-	 * Sets the number of guests.
-	 * 
-	 * @param numGuests New number of guests.
+	 * @param numGuests Número de huéspedes
 	 */
 	public void setNumGuests(int numGuests) {
 		this.numGuests = numGuests;
 	}
 
 	/**
-	 * Gets the total price of the reservation.
-	 * 
-	 * @return Total price.
+	 * @return Precio total
 	 */
 	public double getTotalPrice() {
 		return totalPrice;
 	}
 
 	/**
-	 * Sets the total price of the reservation.
-	 * 
-	 * @param totalPrice New total price.
+	 * @param totalPrice Precio total
 	 */
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 
 	/**
-	 * Gets the ID of the user who made the reservation.
-	 * 
-	 * @return User ID.
+	 * @return ID del usuario
 	 */
 	public int getIdUser() {
 		return idUser;
 	}
 
 	/**
-	 * Sets the ID of the user who made the reservation.
-	 * 
-	 * @param idUser New user ID.
+	 * @param idUser ID del usuario
 	 */
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
 
 	/**
-	 * Returns a string representation of the reservation.
+	 * @return Representación en texto del objeto Reserve.
 	 */
 	@Override
 	public String toString() {

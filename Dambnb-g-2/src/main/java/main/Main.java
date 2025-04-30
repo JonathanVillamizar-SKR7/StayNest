@@ -1,13 +1,18 @@
 package main;
 
 import java.sql.Connection;
+
 import java.sql.SQLException;
 import java.util.List;
 
 import daxbnb.DAO.DBConnection;
 
 /**
+<<<<<<< HEAD
  * Entry point for the DaxBnB application.
+=======
+ * Clase principal que prueba la conexión a la base de datos.
+>>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
  * 
  * @author Alfredo, Jonathan, Diana
  */
