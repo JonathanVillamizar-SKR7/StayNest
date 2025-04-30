@@ -5,12 +5,12 @@ import java.util.List;
 public class User {
 	private String userName;
 	private int idUser;
-	private int phone;
+	private long phone;
 	private String email;
 	private int passport;
 	private List<CreditCard> creditCard;
 	
-	public User(String userName, int idUser, int phone, String email, int passport, List<CreditCard> creditCard) {
+	public User(String userName, int idUser, long phone, String email, int passport, List<CreditCard> creditCard) {
 		this.userName = userName;
 		this.idUser = idUser;
 		this.phone = phone;
@@ -35,7 +35,7 @@ public class User {
 		this.idUser = idUser;
 	}
 
-	public int getPhone() {
+	public long getPhone() {
 		return phone;
 	}
 
