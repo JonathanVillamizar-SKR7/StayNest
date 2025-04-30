@@ -30,12 +30,13 @@ public class loadDemoData {
 		}
 	}
 
-	private static void loadTypes(Connection connection) throws Exception {
+	private static int loadTypes(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Types.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
 		String line = "";
 		line = reader.readLine();
 		line = reader.readLine();
+		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
 			int idType = Integer.parseInt(fields[0]);
@@ -43,20 +44,22 @@ public class loadDemoData {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, idType);
 			ps.setString(2, fields[1]);
-			ps.executeUpdate();
+			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
 		}
 		System.out.println("-Datos types ingresados");
 		reader.close();
+		return result;
 	}
 
-	private static void loadHousing(Connection connection) throws Exception {
+	private static int loadHousing(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Housing.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
 		String line = "";
 		line = reader.readLine();
 		line = reader.readLine();
+		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
 			int idHouse = Integer.parseInt(fields[0]);
@@ -77,20 +80,22 @@ public class loadDemoData {
 			ps.setInt(7, numBath);
 			ps.setInt(8, idType);
 			ps.setDouble(9, price);
-			ps.executeUpdate();
+			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
 		}
 		System.out.println("-Datos Housing ingresados");
 		reader.close();
+		return result;
 	}
 
-	public static void loadDetails(Connection connection) throws Exception {
+	public static int loadDetails(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Details.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
 		String line = "";
 		line = reader.readLine();
 		line = reader.readLine();
+		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
 			String sql = "INSERT INTO Details (userName,password,userType,userDescription) VALUES ( ?, ?, ?, ?)";
@@ -99,20 +104,22 @@ public class loadDemoData {
 			ps.setString(2, fields[1]);
 			ps.setString(3, fields[2]);
 			ps.setString(4, fields[3]);
-			ps.executeUpdate();
+			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
 		}
 		System.out.println("-Datos Details ingresados");
 		reader.close();
+		return result;
 	}
 
-	public static void loadUser(Connection connection) throws Exception {
+	public static int loadUser(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/User.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
 		String line = "";
 		line = reader.readLine();
 		line = reader.readLine();
+		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
 			int idUser = Integer.parseInt(fields[0]);
@@ -125,20 +132,22 @@ public class loadDemoData {
 			ps.setLong(3, phone);
 			ps.setString(4, fields[3]);
 			ps.setInt(5, passport);
-			ps.executeUpdate();
+			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
 		}
 		System.out.println("-Datos User ingresados");
 		reader.close();
+		return result;
 	}
 
-	public static void loadCreditCard(Connection connection) throws Exception {
+	public static int loadCreditCard(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/CreditCards.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
 		String line = "";
 		line = reader.readLine();
 		line = reader.readLine();
+		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
 			int idCreditCard = Integer.parseInt(fields[0]);
@@ -156,20 +165,22 @@ public class loadDemoData {
 			ps.setDate(4, expirationDate);
 			ps.setInt(5, cvv);
 			ps.setInt(6, idUser);
-			ps.executeUpdate();
+			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
 		}
 		System.out.println("-Datos CreditCard ingresados");
 		reader.close();
+		return result;
 	}
 
-	public static void loadReserve(Connection connection) throws Exception {
+	public static int loadReserve(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Reserve.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
 		String line = "";
 		line = reader.readLine();
 		line = reader.readLine();
+		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
 			int idReserve = Integer.parseInt(fields[0]);
@@ -193,20 +204,22 @@ public class loadDemoData {
 			ps.setDate(6, checkOut);
 			ps.setInt(7, numGuests);
 			ps.setDouble(8, totalPrice);
-			ps.executeUpdate();
+			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
 		}
 		System.out.println("-Datos Reserve ingresados");
 		reader.close();
+		return result;
 	}
 
-	public static void loadImages(Connection connection) throws Exception {
+	public static int loadImages(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Images.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
 		String line = "";
 		line = reader.readLine();
 		line = reader.readLine();
+		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
 			int idImage = Integer.parseInt(fields[0]);
@@ -214,20 +227,22 @@ public class loadDemoData {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, idImage);
 			ps.setString(2, fields[1]);
-			ps.executeUpdate();
+			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
 		}
 		System.out.println("-Datos Image ingresados");
 		reader.close();
+		return result;
 	}
 
-	public static void loadFacilities(Connection connection) throws Exception {
+	public static int loadFacilities(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Facility.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
 		String line = "";
 		line = reader.readLine();
 		line = reader.readLine();
+		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
 			int idFacility = Integer.parseInt(fields[0]);
@@ -235,20 +250,22 @@ public class loadDemoData {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, idFacility);
 			ps.setString(2, fields[1]);
-			ps.executeUpdate();
+			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
 		}
 		System.out.println("-Datos Facilities ingresados");
 		reader.close();
+		return result;
 	}
 
-	public static void loadHousingFacilities(Connection connection) throws Exception {
+	public static int loadHousingFacilities(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/HousingFacilities.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
 		String line = "";
 		line = reader.readLine();
 		line = reader.readLine();
+		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
 			int idHouse = Integer.parseInt(fields[0]);
@@ -262,11 +279,12 @@ public class loadDemoData {
 			ps.setBoolean(3, available);
 			ps.setString(4, fields[3]);
 			ps.setInt(5, idImage);
-			ps.executeUpdate();
+			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
 		}
 		System.out.println("-Datos HousingFacilities ingresados");
 		reader.close();
+		return result;
 	}
 }
