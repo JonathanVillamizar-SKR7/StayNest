@@ -6,7 +6,17 @@ import java.util.List;
 
 import daxbnb.DAO.DBConnection;
 
+/**
+ * Entry point for the DaxBnB application.
+ * 
+ * @author Alfredo, Jonathan, Diana
+ */
 public class Main {
+	/**
+	 * Main method that attempts to connect to and disconnect from the database.
+	 * 
+	 * @param args command-line arguments (not used)
+	 */
 	public static void main(String[] args) {
 		DBConnection db = new DBConnection();
 		Connection connection = null;
