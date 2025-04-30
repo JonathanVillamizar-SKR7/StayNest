@@ -1,4 +1,5 @@
 # Ignorar configuraciones locales de Eclipse
+.classpath
 .project
 .settings/
 
