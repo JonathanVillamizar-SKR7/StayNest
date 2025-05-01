@@ -1,13 +1,4 @@
--- Borrar si existen
-drop table HousingFacilities;
-drop table Facilities;
-drop table Reserves;
-drop table Housing;
-drop table Images;
-drop table Types;
-drop table Details;
-drop table CreditCards;
-drop table Users;
+
 -- Tabla de imágenes
 CREATE TABLE Images (
     idImage INT PRIMARY KEY,
