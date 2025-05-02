@@ -4,6 +4,7 @@ import java.sql.Date;
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Representa una tarjeta de crédito asociada a un usuario.
 =======
  * Clase que representa una tarjeta de crédito. Contiene información relevante
@@ -44,6 +45,41 @@ public class CreditCard {
 	 * @param cvv            Código de seguridad de la tarjeta.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 * @param creditCardNum  Número de la tarjeta de crédito.
+=======
+ * Representa una tarjeta de crédito asociada a un usuario.
+ * 
+ * @author Alfredo,Jonathan,Diana
+ */
+public class CreditCard {
+
+	/** Nombre de usuario al que pertenece la tarjeta. */
+	private String userName;
+
+	/** Identificador único de la tarjeta de crédito. */
+	private int idCreditCard;
+
+	/** Nombre del titular de la tarjeta de crédito. */
+	private String cardHolderName;
+
+	/** Fecha de expiración de la tarjeta de crédito. */
+	private Date expiration;
+
+	/** Código de verificación de la tarjeta (CVV). */
+	private int cvv;
+
+	/** Número de la tarjeta de crédito. */
+	private long creditCardNum;
+
+	/**
+	 * Constructor con todos los campos.
+	 * 
+	 * @param userName       Nombre de usuario
+	 * @param idCreditCard   ID de la tarjeta
+	 * @param cardHolderName Nombre del titular
+	 * @param expiration     Fecha de expiración
+	 * @param cvv            Código CVV
+	 * @param creditCardNum  Número de tarjeta
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	 */
 	public CreditCard(String userName, int idCreditCard, String cardHolderName, Date expiration, int cvv,
 			long creditCardNum) {
@@ -55,6 +91,7 @@ public class CreditCard {
 		this.creditCardNum = creditCardNum;
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Obtiene el nombre del usuario asociado a la tarjeta.
 	 * 
@@ -64,10 +101,14 @@ public class CreditCard {
 	 * @return El nombre del usuario.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @return Nombre de usuario */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public String getUserName() {
 		return userName;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Establece el nombre del usuario asociado a la tarjeta.
@@ -78,10 +119,14 @@ public class CreditCard {
 	 * @param userName El nombre del usuario.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @param userName Nuevo nombre de usuario */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Obtiene el identificador único de la tarjeta de crédito.
@@ -92,10 +137,14 @@ public class CreditCard {
 	 * @return El ID único de la tarjeta de crédito.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @return ID de la tarjeta de crédito */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public int getIdCreditCard() {
 		return idCreditCard;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Establece el identificador único de la tarjeta de crédito.
@@ -106,10 +155,14 @@ public class CreditCard {
 	 * @param idCreditCard El ID único de la tarjeta de crédito.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @param idCreditCard Nuevo ID de la tarjeta */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public void setIdCreditCard(int idCreditCard) {
 		this.idCreditCard = idCreditCard;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Obtiene el nombre del titular de la tarjeta.
@@ -120,10 +173,14 @@ public class CreditCard {
 	 * @return El nombre del titular de la tarjeta.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @return Nombre del titular */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public String getCardHolderName() {
 		return cardHolderName;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Establece el nombre del titular de la tarjeta.
@@ -134,10 +191,14 @@ public class CreditCard {
 	 * @param cardHolderName El nombre del titular de la tarjeta.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @param cardHolderName Nuevo nombre del titular */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public void setCardHolderName(String cardHolderName) {
 		this.cardHolderName = cardHolderName;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Obtiene la fecha de expiración de la tarjeta.
@@ -148,10 +209,14 @@ public class CreditCard {
 	 * @return La fecha de vencimiento de la tarjeta.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @return Fecha de expiración */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public Date getExpiration() {
 		return expiration;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Establece la fecha de expiración de la tarjeta.
@@ -162,10 +227,14 @@ public class CreditCard {
 	 * @param expiration La fecha de vencimiento de la tarjeta.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @param expiration Nueva fecha de expiración */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public void setExpiration(Date expiration) {
 		this.expiration = expiration;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Obtiene el código de seguridad (CVV) de la tarjeta.
@@ -176,10 +245,14 @@ public class CreditCard {
 	 * @return El código de seguridad (CVV) de la tarjeta.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @return Código CVV */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public int getCvv() {
 		return cvv;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Establece el código de seguridad (CVV) de la tarjeta.
@@ -190,16 +263,23 @@ public class CreditCard {
 	 * @param cvv El código de seguridad (CVV) de la tarjeta.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @param cvv Nuevo código CVV */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public void setCvv(int cvv) {
 		this.cvv = cvv;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Obtiene el número de la tarjeta de crédito.
 	 * 
 	 * @return Número de tarjeta.
 	 */
+=======
+	/** @return Número de la tarjeta de crédito */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public long getCreditCardNum() {
 =======
 	 * 
@@ -210,6 +290,7 @@ public class CreditCard {
 		return creditCardNum;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Establece el número de la tarjeta de crédito.
@@ -220,10 +301,14 @@ public class CreditCard {
 	 * @param creditCardNum El número de la tarjeta de crédito.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @param creditCardNum Nuevo número de tarjeta */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public void setCreditCardNum(int creditCardNum) {
 		this.creditCardNum = creditCardNum;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Devuelve una representación en cadena de la tarjeta de crédito.
@@ -234,6 +319,9 @@ public class CreditCard {
 	 *         crédito
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @return Representación en cadena de la tarjeta */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	@Override
 
 	public String toString() {
@@ -242,6 +330,9 @@ public class CreditCard {
 				+ "]";
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 89d4511 (JavaDoc 5.02)
 }
 =======
 

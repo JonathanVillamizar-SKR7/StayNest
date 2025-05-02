@@ -4,16 +4,21 @@ import java.util.List;
 
 /**
 <<<<<<< HEAD
+<<<<<<< HEAD
  * Representa los detalles adicionales de un usuario, extendiendo la clase
  * {@link User}.
 =======
  * Clase que representa los detalles de un usuario.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
+=======
+ * Usuario con detalles extra.
+>>>>>>> 89d4511 (JavaDoc 5.02)
  * 
  * @author Alfredo, Jonathan, Diana
  */
 public class Details extends User {
 
+<<<<<<< HEAD
 	// Prueba de Diana, git push primera vez
 	private String password;
 	private String userType;
@@ -46,6 +51,29 @@ public class Details extends User {
 	 * @param userType        Tipo de usuario.
 	 * @param userDescription Descripción del usuario.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
+=======
+	/** Contraseña. */
+	private String password;
+
+	/** Tipo de usuario. */
+	private String userType;
+
+	/** Descripción. */
+	private String userDescription;
+
+	/**
+	 * Constructor con todos los campos.
+	 * 
+	 * @param userName        Nombre
+	 * @param idUser          ID
+	 * @param phone           Teléfono
+	 * @param email           Correo
+	 * @param passport        Pasaporte
+	 * @param creditCard      Tarjetas
+	 * @param password        Contraseña
+	 * @param userType        Tipo
+	 * @param userDescription Descripción
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	 */
 	public Details(String userName, int idUser, int phone, String email, int passport, List<CreditCard> creditCard,
 			String password, String userType, String userDescription) {
@@ -55,6 +83,7 @@ public class Details extends User {
 		this.userDescription = userDescription;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Obtiene la contraseña del usuario.
@@ -65,10 +94,14 @@ public class Details extends User {
 	 * @return La contraseña del usuario.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @return Contraseña */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public String getPassword() {
 		return password;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Establece la contraseña del usuario.
@@ -79,10 +112,14 @@ public class Details extends User {
 	 * @param password La nueva contraseña del usuario.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @param password Nueva contraseña */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Obtiene el tipo de usuario (e.g., "admin", "cliente").
@@ -93,10 +130,14 @@ public class Details extends User {
 	 * @return El tipo de usuario.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @return Tipo de usuario */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public String getUserType() {
 		return userType;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Establece el tipo de usuario.
@@ -110,10 +151,14 @@ public class Details extends User {
 	 */
 
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
+=======
+	/** @param userType Nuevo tipo */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Obtiene la descripción del usuario.
@@ -124,10 +169,14 @@ public class Details extends User {
 	 * @return La descripción del usuario.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @return Descripción */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public String getUserDescription() {
 		return userDescription;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Establece la descripción del usuario.
@@ -138,10 +187,14 @@ public class Details extends User {
 	 * @param userDescription La nueva descripción del usuario.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @param userDescription Nueva descripción */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	public void setUserDescription(String userDescription) {
 		this.userDescription = userDescription;
 	}
 
+<<<<<<< HEAD
 	/**
 <<<<<<< HEAD
 	 * Devuelve una representación en cadena del objeto {@code Details}, incluyendo
@@ -152,12 +205,18 @@ public class Details extends User {
 	 * @return Una cadena que representa todos los detalles del usuario.
 >>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
 	 */
+=======
+	/** @return Datos como texto */
+>>>>>>> 89d4511 (JavaDoc 5.02)
 	@Override
 	public String toString() {
 		return "Details [password=" + password + ", userType=" + userType + ", userDescription=" + userDescription
 				+ ", toString()=" + super.toString() + "]";
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 89d4511 (JavaDoc 5.02)
 }
 =======
 
