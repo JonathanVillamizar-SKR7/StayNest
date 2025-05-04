@@ -1,6 +1,24 @@
+<<<<<<< HEAD
+﻿idCreditCard;cardHolderName;creditCardNumber;expirationDate;cvv;idUser....
+1;Admin User;4369505627370175;26/01/2026;551;1....
+2;Francesco Virgolini;4666097128827326;01/08/2028;144;2....
+3;Natasha Kiev;4371979161070215;01/05/2026;834;3....
+....;;;;;
+....;;;;;
+....;;;;;
+....;;;;;
+....;;;;;
+....;;;;;
+....;;;;;
+=======
 ﻿idCreditCard;cardHolderName;creditCardNumber;expirationDate;cvv;idUser
-1;Juan Pérez;4532737890123450;30/09/2026;123;1
-2;María González;5196081234567890;31/12/2025;456;2
-3;Luis Ramírez;6011123456789010;30/06/2027;789;3
-4; Carla Fernández;375987654321001;31/10/2025;321;4
-5;Rodrigo Salinas;4000123412341230;31/03/2026;654;5
+1;Admin User;4369505627370175;26/01/2026;551;1
+2;Francesco Virgolini;4666097128827326;01/08/2028;144;2
+3;Natasha Kiev;4371979161070215;01/05/2026;834;3
+
+
+
+
+
+
+>>>>>>> 62e552e (Datos de csv cambiados 02)

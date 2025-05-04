@@ -1,7 +1,19 @@
+<<<<<<< HEAD
+﻿idUser;userName;phone;email;passport.
+1;admin_user;687550711;admin@stayapp.com;85019795.
+2;Francesco_Vergolini;693266457;Fran@example.com;72725747.
+3;Natasha_Kiev;675822906;Natasha@example.com;90830697.
+.;;;;
+.;;;;
+.;;;;
+.;;;;
+.;;;;
+.;;;;
+=======
 ﻿idUser;userName;phone;email;passport
-1;jlopez;34671234567;jlopez@gmail.com;54321098
-2;mvalenzuela;34983456123;mvalenzue@gmail.com;64532178
-3;admin01;34678900112;admin01@gmail.com;71234589
-4;cfernandez;34660123456;cfernande@gmail.com;55667788
-5;rsalinas;34673456789;rsalinas@gmail.com;66778899
-6;mgutierrez;34673456789;mgutierrez@gmail.com;66778899
+1;admin_user;687550711;admin@stayapp.com;85019795
+2;Francesco_Vergolini;693266457;Fran@example.com;72725747
+3;Natasha_Kiev;675822906;Natasha@example.com;90830697
+
+
+>>>>>>> 62e552e (Datos de csv cambiados 02)

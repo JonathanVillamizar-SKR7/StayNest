@@ -1,5 +1,22 @@
 ﻿idFacility;typeFacility
-1;Kitchen
-2;Free parking on premises
-3;Private patio or balcony
-4;Pets allowed
+1;Private patio
+2;WiFi
+3;TV
+4;Washer
+5;Air conditioning
+6;Dedicated workspace
+7;Kitchen
+8;Free Parking
+9;Pool
+10;Hot tub
+11;Fireplace
+12;Gym
+13;Balcony
+<<<<<<< HEAD
+14;Pet-friendly
+15;Security system
+;
+=======
+14;Pet friendly
+15;Security system
+>>>>>>> 62e552e (Datos de csv cambiados 02)

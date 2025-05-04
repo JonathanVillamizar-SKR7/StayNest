@@ -1,7 +1,14 @@
 ﻿userName;password;userType;userDescription
-jlopez;pass1234;user;Customer User
-mvalenzuela;hola5678;user;Customer User
-admin01;admin2024;admin;Administrador principal
-cfernandez;clave789;user;Customer User
-rsalinas;secretpass;user;Customer User
-mgutierrez;contraword;user;Customer User
+<<<<<<< HEAD
+admin_user;password123;admin;Admin User Account
+Francesco_Vergolini;password123;client;Client User Account
+Natasha_Kiev;password123;client;Client User Account
+;;;
+;;;
+;;;
+=======
+adminuser;password123;admin;Admin User Account
+FVirgolini;password123;client;Client User Account
+NataKiev;password123;client;Client User Account
+
+>>>>>>> 62e552e (Datos de csv cambiados 02)
