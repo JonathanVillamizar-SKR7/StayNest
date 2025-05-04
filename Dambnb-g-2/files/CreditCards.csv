@@ -1,24 +1,4 @@
-idCreditCard;cardHolderName;creditCardNumber;expirationDate;cvv;idUser,,,,
-1;Admin User;4369505627370175;26/01/2026;551;1,,,,
-2;Francesco Virgolini;4666097128827326;01/08/2028;144;2,,,,
-3;Natasha Kiev;4371979161070215;01/05/2026;834;3,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
->>>>>>> 62e552e (Datos de csv cambiados 02),,,,
+idCreditCard;cardHolderName;creditCardNumber;expirationDate;cvv;idUser
+1;Admin User;4369505627370175;26/01/2026;551;1
+2;Francesco Virgolini;4666097128827326;01/08/2028;144;2
+3;Natasha Kiev;4371979161070215;01/05/2026;834;3
