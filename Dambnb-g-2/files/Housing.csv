@@ -1,35 +1,16 @@
-<<<<<<< HEAD
-idHouse;name;location;numGuest;numBedroom;numBed;numBath;idType;price
-1;Countryside Stay #1;Stewartmouth. Germany;6;2;1;1;4;112.99
-2;Countryside Stay #2;North Jasonport. Germany;5;3;1;3;4;228.99
-3;Tiny home Stay #3;Hawkinsstad. Portugal;3;1;2;3;2;163.99
-4;Countryside Stay #4;Arnoldfurt. USA;3;3;1;3;4;189.99
-5;Tiny home Stay #5;Jeremiahtown. Germany;1;4;5;1;2;105.99
-6;Cabin Stay #6;South Beverlyview. France;2;2;1;2;1;195.99
-7;Villa Stay #7;Port James. Portugal;3;1;1;3;5;87.99
-8;Apartment Stay #8;Jeannetown. Germany;2;2;3;2;3;177.99
-9;Apartment Stay #9;Transide. Germany;3;4;5;3;3;179.99
-10;Apartment Stay #10;Thomasview. USA;3;4;4;1;3;99.99
-11;Cabin Stay #11;South Jenniferburgh. Germany;5;1;2;1;1;133.99
-12;Apartment Stay #12;Aliciaburgh. USA;5;1;1;1;3;190.99
-13;Cabin Stay #13;New Christopher. USA;4;3;4;1;1;136.99
-14;Countryside Stay #14;Lake Robertborough. USA;3;3;4;3;4;148.99
-15;Apartment Stay #15;Bryantview. Portugal;2;4;4;2;3;119.99
-=======
-idHouse;name;location;numGuest;numBedroom;numBed;numBath;idType;price,
-1;Countryside Stay 1;Stewartmouth,Germany;6;2;1;1;4;112.99
-2;Countryside Stay 2;North Jasonport,Germany;5;3;1;3;4;228.99
-3;Tiny home Stay 3;Hawkinsstad,Portugal;3;1;2;3;2;163.99
-4;Countryside Stay 4;Arnoldfurt ,USA;3;3;1;3;4;189.99
-5;Tiny home Stay 5;Jeremiahtown,Germany;1;4;5;1;2;105.99
-6;Cabin Stay 6;South Beverlyview,France;2;2;1;2;1;195.99
-7;Villa Stay 7;Port James,Portugal;3;1;1;3;5;87.99
-8;Apartment Stay 8;Jeannetown,Germany;2;2;3;2;3;177.99
-9;Apartment Stay 9;Transide,Germany;3;4;5;3;3;179.99
-10;Apartment Stay 10;Thomasview,USA;3;4;4;1;3;99.99
-11;Cabin Stay 11;South Jenniferburgh,Germany;5;1;2;1;1;133.99
-12;Apartment Stay 12;Aliciaburgh,USA;5;1;1;1;3;190.99
-13;Cabin Stay 13;New Christopher,USA;4;3;4;1;1;136.99
-14;Countryside Stay 14;Lake Robertborough,USA;3;3;4;3;4;148.99
-15;Apartment Stay 15;Bryantview,Portugal;2;4;4;2;3;119.99
->>>>>>> 62e552e (Datos de csv cambiados 02)
+idHouse;name;location;numGuest;numBedroom;numBed;numBath;idType;price,,,,,,,,,
+1;Countryside Stay 1;Stewartmouth,Germany;6;2;1;1;4;112.99,,,,,,,,
+2;Countryside Stay 2;North Jasonport,Germany;5;3;1;3;4;228.99,,,,,,,,
+3;Tiny home Stay 3;Hawkinsstad,Portugal;3;1;2;3;2;163.99,,,,,,,,
+4;Countryside Stay 4;Arnoldfurt ,USA;3;3;1;3;4;189.99,,,,,,,,
+5;Tiny home Stay 5;Jeremiahtown,Germany;1;4;5;1;2;105.99,,,,,,,,
+6;Cabin Stay 6;South Beverlyview,France;2;2;1;2;1;195.99,,,,,,,,
+7;Villa Stay 7;Port James,Portugal;3;1;1;3;5;87.99,,,,,,,,
+8;Apartment Stay 8;Jeannetown,Germany;2;2;3;2;3;177.99,,,,,,,,
+9;Apartment Stay 9;Transide,Germany;3;4;5;3;3;179.99,,,,,,,,
+10;Apartment Stay 10;Thomasview,USA;3;4;4;1;3;99.99,,,,,,,,
+11;Cabin Stay 11;South Jenniferburgh,Germany;5;1;2;1;1;133.99,,,,,,,,
+12;Apartment Stay 12;Aliciaburgh,USA;5;1;1;1;3;190.99,,,,,,,,
+13;Cabin Stay 13;New Christopher,USA;4;3;4;1;1;136.99,,,,,,,,
+14;Countryside Stay 14;Lake Robertborough,USA;3;3;4;3;4;148.99,,,,,,,,
+15;Apartment Stay 15;Bryantview,Portugal;2;4;4;2;3;119.99,,,,,,,,

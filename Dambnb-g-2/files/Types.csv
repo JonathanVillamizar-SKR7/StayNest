@@ -1,15 +1,6 @@
-<<<<<<< HEAD
-﻿idType;type.
-1;Cabin.
-2;Tiny home.
-3;Apartment.
-4;Countryside.
-5;Villa.
-=======
-﻿idType;Type
+idType;Type
 1;Cabin
 2;Tiny home
 3;Apartment
 4;Countryside
 5;Villa
->>>>>>> 62e552e (Datos de csv cambiados 02)
