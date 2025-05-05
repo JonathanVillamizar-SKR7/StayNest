@@ -1,6 +1,6 @@
-idReserve;idHouse;idUser;name;checkIn;checkOut;numGuests;totalPrice
-1;1;2;Weekend Countryside Escape;10/05/2025;12/05/2025;2;225.98
-2;3;3;Tiny Home Summer Stay;01/07/2025;07/07/2025;3;983.94
-3;5;3;Rustic Tiny Vacation;15/06/2025;18/06/2025;1;317.97
-4;2;1;Group Countryside Retreat;05/08/2025;12/08/2025;5;1602.93
-5;4;2;Countryside Business Break;20/05/2025;22/05/2025;1;379.98
+idReserve;idUser;name;checkIn;checkOut;numGuests;totalPrice
+1;2;Weekend Countryside Escape;10/05/2025;12/05/2025;2;225.98
+2;3;Tiny Home Summer Stay;01/07/2025;07/07/2025;3;983.94
+3;3;Rustic Tiny Vacation;15/06/2025;18/06/2025;1;317.97
+4;1;Group Countryside Retreat;05/08/2025;12/08/2025;5;1602.93
+5;2;Countryside Business Break;20/05/2025;22/05/2025;1;379.98
