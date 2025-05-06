@@ -5,6 +5,14 @@ import java.util.List;
 import daxbnb.DAO.HousingDAO;
 import daxbnb.model.Housing;
 
+/**
+ * Clase de prueba para acceder y mostrar todos los registros de viviendas desde
+ * la base de datos.
+ * 
+ * Utiliza {@link HousingDAO} para obtener una lista de objetos {@link Housing}.
+ * 
+ * @author Alfredo, Jonathan, Diana
+ */
 public class HousingDAOMain {
 	public static void main(String[] args) {
 		HousingDAO housingDAO = new HousingDAO();
