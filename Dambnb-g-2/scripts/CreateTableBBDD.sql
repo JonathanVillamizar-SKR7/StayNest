@@ -42,7 +42,7 @@ CREATE TABLE CreditCards (
 
 -- Tabla de viviendas
 CREATE TABLE Housing (
-    idHouse INT PRIMARY KEY,
+    idHouse INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
     location VARCHAR(100),
     numGuest INT,

@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"daxbnb.DAO"},{"l":"daxbnb.loadData"},{"l":"daxbnb.loadScript"},{"l":"daxbnb.model"}];updateSearchResults();
