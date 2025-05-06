@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import daxbnb.DAO.DBConnection;
+<<<<<<< HEAD
 import daxbnb.model.Facilities;
 import daxbnb.model.Housing;
 import daxbnb.model.Images;
@@ -28,11 +29,29 @@ public class HousingDAO {
 	/**
 	 * Constructs a new HousingDAO and initializes the database connection manager.
 	 */
+=======
+import daxbnb.model.Housing;
+
+/**
+ * Gestiona operaciones de base de datos para viviendas.
+ * 
+ * @author Alfredo, Jonathan, Diana
+ */
+public class HousingDAO {
+	/** Conexión a la base de datos. */
+	private DBConnection db;
+
+	/**
+	 * Constructor que inicializa la conexión.
+	 */
+
+>>>>>>> 09e51f5682343e54753144ba76038887edffc7fc
 	public HousingDAO() {
 		db = new DBConnection();
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Retrieves all housing records from the database
 	 * 
 	 * @return a list of {@link Housing} objects retrieved from the database
@@ -42,6 +61,18 @@ public class HousingDAO {
 	public List<Housing> selectAll() throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_ALL);
+=======
+	 * Obtiene todas las viviendas de la base de datos.
+	 * 
+	 * @return lista de viviendas
+	 * @throws SQLException           si hay error en la consulta
+	 * @throws ClassNotFoundException si no se encuentra el driver
+	 */
+	public List<Housing> selectAll() throws SQLException, ClassNotFoundException {
+		Connection connection = db.connect();
+		String sentence = "SELECT * FROM Housing";
+		PreparedStatement ps = connection.prepareStatement(sentence);
+>>>>>>> 09e51f5682343e54753144ba76038887edffc7fc
 		ResultSet resultSet = ps.executeQuery();
 		List<Housing> housings = new ArrayList<>();
 
@@ -64,6 +95,7 @@ public class HousingDAO {
 	}
 
 	/**
+<<<<<<< HEAD
 	 * Retrieves a single {@link Housing} object from the database based on the
 	 * given type ID.
 	 * 
@@ -89,10 +121,24 @@ public class HousingDAO {
 		}
 		resultSet.close();
 		db.closeConnection(connection);
+=======
+	 * Busca una vivienda según id, nombre y tipo.
+	 * 
+	 * @param idHouse
+	 * @param name
+	 * @param idType
+	 * @return vivienda encontrada o null
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+
+	public Housing selectHousing(int idHouse, String name, int idType) throws SQLException, ClassNotFoundException {
+>>>>>>> 09e51f5682343e54753144ba76038887edffc7fc
 		return null;
 
 	}
 
+<<<<<<< HEAD
 	public Housing selectHousingByBedroom(int numBedroom) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_BEDROOM);
@@ -142,4 +188,6 @@ public class HousingDAO {
 		return generateId;
 	}
 
+=======
+>>>>>>> 09e51f5682343e54753144ba76038887edffc7fc
 }
