@@ -8,3 +8,6 @@
 
 # Ignorar archivos SQL
 *.sql
+
+#Ignorar la carpeta jars
+/jars/
