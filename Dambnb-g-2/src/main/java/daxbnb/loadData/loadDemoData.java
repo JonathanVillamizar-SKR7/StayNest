@@ -61,22 +61,26 @@ public class loadDemoData {
 		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
-			int numGuest = Integer.parseInt(fields[3]);
-			int numBedroom = Integer.parseInt(fields[4]);
-			int numBed = Integer.parseInt(fields[5]);
-			int numBath = Integer.parseInt(fields[6]);
-			int idType = Integer.parseInt(fields[7]);
-			double price = Double.parseDouble(fields[8].trim().replace(",", "."));
+			String name = fields[0];
+			String location = fields[1];
+			int numGuest = Integer.parseInt(fields[2]);
+			int numBedroom = Integer.parseInt(fields[3]);
+			int numBed = Integer.parseInt(fields[4]);
+			int numBath = Integer.parseInt(fields[5]);
+			int idType = Integer.parseInt(fields[6]);
+			double price = Double.parseDouble(fields[7].trim().replace(",", "."));
+
 			String sql = "INSERT INTO Housing (name,location,numGuest,numBedroom,numBed,numBath,idType,price) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, fields[0]); // name
-			ps.setString(2, fields[1]); // location
-			ps.setInt(3, Integer.parseInt(fields[2])); // numGuest
-			ps.setInt(4, Integer.parseInt(fields[3])); // numBedroom
-			ps.setInt(5, Integer.parseInt(fields[4])); // numBed
-			ps.setInt(6, Integer.parseInt(fields[5])); // numBath
-			ps.setInt(7, Integer.parseInt(fields[6])); // idType
-			ps.setDouble(8, Double.parseDouble(fields[7].trim().replace(",", "."))); // price
+			ps.setString(1, name);
+			ps.setString(2, location);
+			ps.setInt(3, numGuest);
+			ps.setInt(4, numBedroom);
+			ps.setInt(5, numBed);
+			ps.setInt(6, numBath);
+			ps.setInt(7, idType);
+			ps.setDouble(8, price);
+
 			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
