@@ -8,20 +8,15 @@ import java.util.List;
 import daxbnb.DAO.DBConnection;
 
 /**
-<<<<<<< HEAD
- * Entry point for the DaxBnB application.
-=======
+ * 
+ * 
  * Clase principal que prueba la conexión a la base de datos.
->>>>>>> 5ae4eac9714f5f85d2991e8f2558e33b32651612
+ * 
  * 
  * @author Alfredo, Jonathan, Diana
  */
 public class Main {
-	/**
-	 * Main method that attempts to connect to and disconnect from the database.
-	 * 
-	 * @param args command-line arguments (not used)
-	 */
+
 	public static void main(String[] args) {
 		DBConnection db = new DBConnection();
 		Connection connection = null;
