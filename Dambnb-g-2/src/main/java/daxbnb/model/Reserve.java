@@ -64,7 +64,7 @@ public class Reserve {
 		this.housing = housing;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		this.numeroGuests = numeroGuests;
+		this.numGuests = numeroGuests;
 		this.totalPrice = totalPrice;
 		this.idUser = idUser;
 	}
@@ -144,15 +144,15 @@ public class Reserve {
 	/** 
 	 * @return Número de huéspedes 
 	 */
-	public int getNumeroGuests() {
-		return numeroGuests;
+	public int getNumGuests() {
+		return numGuests;
 	}
 
 	/** 
-	 * @param numeroGuests Nuevo número de huéspedes
+	 * @param numGuests Nuevo número de huéspedes
 	 */
-	public void setNumeroGuests(int numeroGuests) {
-		this.numeroGuests = numeroGuests;
+	public void setNumGuests(int numeroGuests) {
+		this.numGuests = numeroGuests;
 	}
 
 	/** 
