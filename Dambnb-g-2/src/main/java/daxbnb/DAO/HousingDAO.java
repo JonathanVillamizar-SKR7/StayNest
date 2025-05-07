@@ -16,6 +16,8 @@ import daxbnb.model.Images;
 /**
  * Data Access Object (DAO) for the Housing table. Provides methods to retrieve
  * housing data from the database.
+ * 
+ * @author Alfredo, Jonathan, Diana
  */
 public class HousingDAO {
 	private static final String SELECT_ALL = "SELECT * FROM Housing";
@@ -114,8 +116,8 @@ public class HousingDAO {
 
 	}
 
-	public int insertHousing(String name, String location, int numGuest, int numBedroom, int numBed,
-			int numBath, int idType, double price, List<Images> images, List<Facilities> facilities)
+	public int insertHousing(String name, String location, int numGuest, int numBedroom, int numBed, int numBath,
+			int idType, double price, List<Images> images, List<Facilities> facilities)
 			throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(INSERT_HOUSING, Statement.RETURN_GENERATED_KEYS);
@@ -127,12 +129,12 @@ public class HousingDAO {
 		ps.setInt(6, numBath);
 		ps.setInt(7, idType);
 		ps.setDouble(8, price);
-		
+
 		int affectedRows = ps.executeUpdate();
 		if (affectedRows == 0) {
 			throw new SQLException("No se pudo insertar la vivienda");
 		}
-		
+
 		int generateId = -1;
 		ResultSet generateKeys = ps.getGeneratedKeys();
 		if (generateKeys.next()) {
