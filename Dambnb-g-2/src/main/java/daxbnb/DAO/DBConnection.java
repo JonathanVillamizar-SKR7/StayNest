@@ -11,19 +11,24 @@ import java.sql.SQLException;
  * 
  * @author Alfredo, Jonathan, Diana
  * 
- * 
- * @author Alfredo, Jonathan, Diana
- * 
  */
 public class DBConnection {
-	/** URL de la base de datos. */
+	/** 
+	 * URL de la base de datos.
+	  */
 	public static final String URL_DB = "jdbc:mysql://localhost:3307/mydb?allowMultiQueries=true";
-	/** Usuario de la base de datos. */
+	/** 
+	 * Usuario de la base de datos. 
+	 */
 	public static final String USER = "user";
 
-	/** Contraseña del usuario. */
+	/** 
+	 * Contraseña del usuario. 
+	 */
 	public static final String PASSWORD = "userpass";
-	/** Clase del driver JDBC. */
+	/** 
+	 * Clase del driver JDBC. 
+	 */
 	public static final String CLASS_NAME = "com.mysql.cj.jdbc.Driver";
 
 	/**
@@ -57,8 +62,6 @@ public class DBConnection {
 	 * 
 	 * @param connection el objeto {@link Connection} que se desea cerrar
 	 * @throws SQLException si ocurre un error al cerrar la conexión
-	 * 
-	 * 
 	 */
 	public void closeConnection(Connection connection) throws SQLException {
 		System.out.println("CERRANDO CONEXIÓN");

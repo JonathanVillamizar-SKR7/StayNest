@@ -53,7 +53,7 @@ public class Reserve {
 	 * @param housing      Alojamiento
 	 * @param checkIn      Fecha de entrada
 	 * @param checkOut     Fecha de salida
-	 * @param numeroGuests Número de huéspedes
+	 * @param numGuests    Número de huéspedes
 	 * @param totalPrice   Precio total
 	 * @param idUser       ID del usuario
 	 */
@@ -64,7 +64,7 @@ public class Reserve {
 		this.housing = housing;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
-		this.numGuests = numeroGuests;
+		this.numGuests = numGuests;
 		this.totalPrice = totalPrice;
 		this.idUser = idUser;
 	}
@@ -151,8 +151,8 @@ public class Reserve {
 	/** 
 	 * @param numGuests Nuevo número de huéspedes
 	 */
-	public void setNumGuests(int numeroGuests) {
-		this.numGuests = numeroGuests;
+	public void setNumGuests(int numGuests) {
+		this.numGuests = numGuests;
 	}
 
 	/** 
