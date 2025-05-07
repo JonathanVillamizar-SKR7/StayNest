@@ -75,7 +75,7 @@ CREATE TABLE HousingFacilities (
 
 -- Tabla de reservas
 CREATE TABLE Reserves (
-    idReserve INT PRIMARY KEY,
+    idReserve INT AUTO_INCREMENT PRIMARY KEY,
     idHouse INT,
     idUser INT,
     name VARCHAR(100),

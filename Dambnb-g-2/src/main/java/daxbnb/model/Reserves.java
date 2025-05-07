@@ -2,7 +2,7 @@ package daxbnb.model;
 
 import java.util.Date;
 
-public class Reserve {
+public class Reserves {
 
 	private int idReserva;
 	private Housing housing;
@@ -12,7 +12,7 @@ public class Reserve {
 	private double totalPrice;
 	private int idUser;
 	
-	public Reserve(int idReserva, Housing housing, Date checkIn, Date checkOut, int numGuests, double totalPrice,
+	public Reserves(int idReserva, Housing housing, Date checkIn, Date checkOut, int numGuests, double totalPrice,
 			int idUser) {
 		this.idReserva = idReserva;
 		this.housing = housing;
