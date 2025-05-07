@@ -9,9 +9,7 @@ import daxbnb.DAO.DBConnection;
 
 /**
  * 
- * 
  * Clase principal que prueba la conexión a la base de datos.
- * 
  * 
  * @author Alfredo, Jonathan, Diana
  */

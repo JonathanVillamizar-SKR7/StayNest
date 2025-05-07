@@ -12,37 +12,57 @@ import java.util.List;
  */
 public class Housing {
 
-	/** ID del alojamiento. */
+	/**
+	 * ID del alojamiento.
+	 */
 	private int idHouse;
 
-	/** Nombre. */
+	/**
+	 * Nombre.
+	 */
 	private String name;
 
-	/** Ubicación. */
+	/**
+	 * Ubicación.
+	 */
 	private String location;
 
-	/** Número de huéspedes. */
+	/**
+	 * Número de huéspedes.
+	 */
 	private int numGuest;
 
-	/** Número de dormitorios. */
+	/**
+	 * Número de dormitorios.
+	 */
 	private int numBedroom;
 
 	/** Número de camas. */
 	private int numBed;
 
-	/** Número de baños. */
+	/**
+	 * Número de baños.
+	 */
 	private int numBath;
 
-	/** Tipo de alojamiento (ID). */
+	/**
+	 * Tipo de alojamiento (ID).
+	 */
 	private int idType;
 
-	/** Precio por noche. */
+	/**
+	 * Precio por noche.
+	 */
 	private double price;
 
-	/** Lista de imágenes. */
+	/**
+	 * Lista de imágenes.
+	 */
 	private List<Images> images;
 
-	/** Lista de facilidades. */
+	/**
+	 * Lista de facilidades.
+	 */
 	private List<Facilities> facilities;
 
 	/**
@@ -78,9 +98,7 @@ public class Housing {
 	}
 
 	/**
-	 * 
 	 * @return ID único del alojamiento.
-	 * 
 	 */
 
 	public int getIdHouse() {
@@ -88,8 +106,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param idHouse Establece el ID del alojamiento.
 	 */
 	public void setIdHouse(int idHouse) {
@@ -97,8 +113,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @return Nombre del alojamiento.
 	 */
 	public String getName() {
@@ -106,8 +120,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param name Nombre del alojamiento.
 	 */
 
@@ -116,8 +128,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @return Ubicación del alojamiento.
 	 */
 	public String getLocation() {
@@ -125,8 +135,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param location Nueva ubicación del alojamiento.
 	 */
 	public void setLocation(String location) {
@@ -134,8 +142,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @return Número máximo de huéspedes.
 	 */
 
@@ -144,8 +150,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param numGuest Número de huéspedes que puede recibir el alojamiento.
 	 */
 	public void setNumGuest(int numGuest) {
@@ -153,8 +157,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @return Número de habitaciones.
 	 */
 	public int getNumBedroom() {
@@ -162,8 +164,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param numBedroom Número de habitaciones disponibles.
 	 */
 
@@ -182,7 +182,6 @@ public class Housing {
 
 	/**
 	 * 
-	 * 
 	 * @param numBed Número de camas en el alojamiento.
 	 */
 	public void setNumBed(int numBed) {
@@ -190,16 +189,13 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @return Número de baños.
-	 * 
-	 *         public int getNumBath() { return numBath; }
-	 * 
-	 * 
-	 *         /**
-	 * 
-	 * 
+	 */
+	public int getNumBath() {
+		return numBath;
+	}
+
+	/**
 	 * @param numBath Número de baños disponibles.
 	 */
 	public void setNumBath(int numBath) {
@@ -207,8 +203,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @return Identificador del tipo de alojamiento.
 	 */
 	public int getIdType() {
@@ -216,8 +210,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param idType Nuevo tipo de alojamiento.
 	 */
 	public void setIdType(int idType) {
@@ -225,8 +217,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @return Precio por noche.
 	 */
 	public double getPrice() {
@@ -234,8 +224,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param price Precio actualizado del alojamiento.
 	 */
 	public void setPrice(double price) {
@@ -243,8 +231,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @return Lista de imágenes del alojamiento.
 	 */
 	public List<Images> getImages() {
@@ -252,7 +238,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
 	 * @param images Lista actualizada de imágenes.
 	 * 
 	 */
@@ -261,8 +246,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @return Lista de facilidades o servicios del alojamiento.
 	 */
 	public List<Facilities> getFacilities() {
@@ -270,8 +253,6 @@ public class Housing {
 	}
 
 	/**
-	 * 
-	 * 
 	 * @param facilities Lista actualizada de facilidades.
 	 */
 	public void setFacilities(List<Facilities> facilities) {

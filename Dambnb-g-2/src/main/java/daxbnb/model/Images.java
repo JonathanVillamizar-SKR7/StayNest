@@ -8,11 +8,15 @@ package daxbnb.model;
  */
 public class Images {
 
-	/** ID de la imagen. */
+	/**
+	 * ID de la imagen.
+	 */
 
 	private int idImage;
 
-	/** Ruta de la imagen (identificador o código). */
+	/**
+	 * Ruta de la imagen (identificador o código).
+	 */
 	private int imgRoute;
 
 	/**

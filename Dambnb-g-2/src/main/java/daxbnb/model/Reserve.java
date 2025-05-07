@@ -11,25 +11,39 @@ import java.util.Date;
  */
 public class Reserve {
 
-	/** ID de la reserva. */
+	/** 
+	 * ID de la reserva. 
+	 */
 	private int idReserva;
 
-	/** Alojamiento reservado. */
+	/** 
+	 * Alojamiento reservado. 
+	 */
 	private Housing housing;
 
-	/** Fecha de entrada (check-in). */
+	/** 
+	 * Fecha de entrada (check-in). 
+	 */
 	private Date checkIn;
 
-	/** Fecha de salida (check-out). */
+	/** 
+	 * Fecha de salida (check-out).
+	  */
 	private Date checkOut;
 
-	/** Número de huéspedes. */
-	private int numeroGuests;
+	/** 
+	 * Número de huéspedes.
+	  */
+	private int numGuests;
 
-	/** Precio total de la reserva. */
+	/** 
+	 * Precio total de la reserva.
+	 */
 	private double totalPrice;
 
-	/** ID del usuario que realiza la reserva. */
+	/** 
+	 * ID del usuario que realiza la reserva.
+	 */
 	private int idUser;
 
 	/**
@@ -43,7 +57,7 @@ public class Reserve {
 	 * @param totalPrice   Precio total
 	 * @param idUser       ID del usuario
 	 */
-	public Reserve(int idReserva, Housing housing, Date checkIn, Date checkOut, int numeroGuests, double totalPrice,
+	public Reserve(int idReserva, Housing housing, Date checkIn, Date checkOut, int numGuests, double totalPrice,
 
 			int idUser) {
 		this.idReserva = idReserva;
@@ -127,18 +141,24 @@ public class Reserve {
 	}
 
 
-	/** @return Número de huéspedes */
+	/** 
+	 * @return Número de huéspedes 
+	 */
 	public int getNumeroGuests() {
 		return numeroGuests;
 	}
 
-	/** @param numeroGuests Nuevo número de huéspedes */
+	/** 
+	 * @param numeroGuests Nuevo número de huéspedes
+	 */
 	public void setNumeroGuests(int numeroGuests) {
 		this.numeroGuests = numeroGuests;
 	}
 
-	/** @return Precio total de la reserva */
->>>>>>> 89d4511 (JavaDoc 5.02)
+	/** 
+	 * @return Precio total de la reserva 
+	 */
+>
 	public double getTotalPrice() {
 		return totalPrice;
 	}
@@ -179,7 +199,7 @@ public class Reserve {
 	@Override
 	public String toString() {
 		return "Reserve [idReserva=" + idReserva + ", housing=" + housing + ", checkIn=" + checkIn + ", checkOut="
-				+ checkOut + ", numeroGuests=" + numeroGuests + ", totalPrice=" + totalPrice + ", idUser=" + idUser
+				+ checkOut + ", numGuests=" + numeroGuests + ", totalPrice=" + totalPrice + ", idUser=" + idUser
 				+ "]";
 	}
 }

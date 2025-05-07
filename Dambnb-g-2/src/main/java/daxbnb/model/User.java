@@ -12,23 +12,35 @@ import java.util.List;
  */
 public class User {
 
-	/** Nombre de usuario. */
+	/**
+	 * Nombre de usuario.
+	 */
 	private String userName;
 
-	/** ID del usuario. */
+	/**
+	 * ID del usuario.
+	 */
 	private int idUser;
 
-	/** Número de teléfono. */
+	/**
+	 * Número de teléfono.
+	 */
 	private long phone;
 
-	/** Correo electrónico. */
+	/**
+	 * Correo electrónico.
+	 */
 
 	private String email;
 
-	/** Número de pasaporte. */
+	/**
+	 * Número de pasaporte.
+	 */
 	private int passport;
 
-	/** Lista de tarjetas de crédito. */
+	/**
+	 * Lista de tarjetas de crédito.
+	 */
 	private List<CreditCard> creditCard;
 
 	/**
@@ -52,24 +64,32 @@ public class User {
 		this.creditCard = creditCard;
 	}
 
-	/** @return Nombre de usuario */
+	/**
+	 * @return Nombre de usuario
+	 */
 	public String getUserName() {
 		return userName;
 	}
 
-	/** @param userName Nuevo nombre */
+	/**
+	 * @param userName Nuevo nombre
+	 */
 
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
-	/** @return ID del usuario */
+	/**
+	 * @return ID del usuario
+	 */
 
 	public int getIdUser() {
 		return idUser;
 	}
 
-	/** @param idUser Nuevo ID */
+	/**
+	 * @param idUser Nuevo ID
+	 */
 
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
@@ -100,7 +120,9 @@ public class User {
 		return email;
 	}
 
-	/** @param email Nuevo correo */
+	/**
+	 * @param email Nuevo correo
+	 */
 
 	public void setEmail(String email) {
 		this.email = email;
@@ -108,31 +130,41 @@ public class User {
 
 	<
 
-	/** @return Pasaporte */
+	/** 
+	 * @return Pasaporte 
+	 */
 
 	public int getPassport() {
 		return passport;
 	}
 
-	/** @param passport Nuevo pasaporte */
+	/**
+	 * @param passport Nuevo pasaporte
+	 */
 
 	public void setPassport(int passport) {
 		this.passport = passport;
 	}
 
-	/** @return Lista de tarjetas */
+	/**
+	 * @return Lista de tarjetas
+	 */
 
 	public List<CreditCard> getCreditCard() {
 		return creditCard;
 	}
 
-	/** @param creditCard Nueva lista de tarjetas */
+	/**
+	 * @param creditCard Nueva lista de tarjetas
+	 */
 
 	public void setCreditCard(List<CreditCard> creditCard) {
 		this.creditCard = creditCard;
 	}
 
-	/** @return Datos del usuario como texto */
+	/**
+	 * @return Datos del usuario como texto
+	 */
 
 	@Override
 	public String toString() {

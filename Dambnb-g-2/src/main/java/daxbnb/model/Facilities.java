@@ -10,16 +10,24 @@ package daxbnb.model;
  */
 public class Facilities {
 
-	/** ID de la casa. */
+	/**
+	 * ID de la casa.
+	 */
 	private int idHouse;
 
-	/** ID de la instalación. */
+	/**
+	 * ID de la instalación.
+	 */
 	private int idFacilities;
 
-	/** Tipo de instalación. */
+	/**
+	 * Tipo de instalación.
+	 */
 	private String typeFacilities;
 
-	/** Disponible o no. */
+	/**
+	 * Disponible o no.
+	 */
 	private boolean available;
 
 	/**
