@@ -99,7 +99,7 @@ public class User {
 	 * 
 	 * @return número de teléfono
 	 */
-	public int getPhone() {
+	public long getPhone() {
 		return phone;
 	}
 
@@ -107,7 +107,7 @@ public class User {
 	 * 
 	 * @param phone número de teléfono
 	 */
-	public void setPhone(int phone) {
+	public void setPhone(long phone) {
 		this.phone = phone;
 	}
 
@@ -115,7 +115,6 @@ public class User {
 	 * 
 	 * @return correo electrónico
 	 */
-
 	public String getEmail() {
 		return email;
 	}
@@ -123,17 +122,13 @@ public class User {
 	/**
 	 * @param email Nuevo correo
 	 */
-
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	<
-
-	/** 
-	 * @return Pasaporte 
+	/**
+	 * @return Pasaporte
 	 */
-
 	public int getPassport() {
 		return passport;
 	}
@@ -141,7 +136,6 @@ public class User {
 	/**
 	 * @param passport Nuevo pasaporte
 	 */
-
 	public void setPassport(int passport) {
 		this.passport = passport;
 	}
@@ -149,7 +143,6 @@ public class User {
 	/**
 	 * @return Lista de tarjetas
 	 */
-
 	public List<CreditCard> getCreditCard() {
 		return creditCard;
 	}
@@ -157,7 +150,6 @@ public class User {
 	/**
 	 * @param creditCard Nueva lista de tarjetas
 	 */
-
 	public void setCreditCard(List<CreditCard> creditCard) {
 		this.creditCard = creditCard;
 	}
@@ -165,7 +157,6 @@ public class User {
 	/**
 	 * @return Datos del usuario como texto
 	 */
-
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + ", idUser=" + idUser + ", phone=" + phone + ", email=" + email

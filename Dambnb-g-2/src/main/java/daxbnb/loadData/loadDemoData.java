@@ -162,16 +162,15 @@ public class loadDemoData {
 		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
-			int idUser = Integer.parseInt(fields[0]);
-			long phone = Long.parseLong(fields[2]);
-			int passport = Integer.parseInt(fields[4]);
-			String sql = "INSERT INTO Users (idUser,userName,phone,email,passport) VALUES ( ?, ? , ?, ?, ?)";
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setInt(1, idUser);
-			ps.setString(2, fields[1]);
-			ps.setLong(3, phone);
-			ps.setString(4, fields[3]);
-			ps.setInt(5, passport);
+			long phone = Long.parseLong(fields[1]);
+			int passport = Integer.parseInt(fields[3]);
+			String sql = "INSERT INTO Users (userName, phone, email, passport) VALUES (?, ?, ?, ?)";
+			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, fields[0]);
+			ps.setLong(2, phone);
+			ps.setString(3, fields[2]);
+			ps.setInt(4, passport);
+
 			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
@@ -197,21 +196,19 @@ public class loadDemoData {
 		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
-			int idCreditCard = Integer.parseInt(fields[0]);
-			long creditCardNumber = Long.parseLong(fields[2]);
+			long creditCardNumber = Long.parseLong(fields[1]);
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			Date parsed = sdf.parse(fields[3]);
+			Date parsed = sdf.parse(fields[2]);
 			java.sql.Date expirationDate = new java.sql.Date(parsed.getTime());
-			int cvv = Integer.parseInt(fields[4]);
-			int idUser = Integer.parseInt(fields[5]);
-			String sql = "INSERT INTO CreditCards (idCreditCard,cardHolderName,creditCardNumber,expirationDate,cvv,idUser) VALUES ( ?, ?, ?, ?, ?, ?)";
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setInt(1, idCreditCard);
-			ps.setString(2, fields[1]);
-			ps.setLong(3, creditCardNumber);
-			ps.setDate(4, expirationDate);
-			ps.setInt(5, cvv);
-			ps.setInt(6, idUser);
+			int cvv = Integer.parseInt(fields[3]);
+			int idUser = Integer.parseInt(fields[4]);
+			String sql = "INSERT INTO CreditCards (cardHolderName, creditCardNumber, expirationDate, cvv, idUser) VALUES (?, ?, ?, ?, ?)";
+			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			ps.setString(1, fields[0]);
+			ps.setLong(2, creditCardNumber);
+			ps.setDate(3, expirationDate);
+			ps.setInt(4, cvv);
+			ps.setInt(5, idUser);
 			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
@@ -236,27 +233,34 @@ public class loadDemoData {
 		line = reader.readLine();
 		line = reader.readLine();
 		int result = 0;
+
 		while (line != null) {
 			String fields[] = line.split(";");
+
 			int idHouse = Integer.parseInt(fields[0]);
 			int idUser = Integer.parseInt(fields[1]);
+			String nameH = fields[2];
+			// Parseo de fechas
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Date parsed = sdf.parse(fields[3]);
 			java.sql.Date checkIn = new java.sql.Date(parsed.getTime());
-			SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
-			Date parsed2 = sdf2.parse(fields[4]);
+
+			Date parsed2 = sdf.parse(fields[4]);
 			java.sql.Date checkOut = new java.sql.Date(parsed2.getTime());
+
 			int numGuests = Integer.parseInt(fields[5]);
 			double totalPrice = Double.parseDouble(fields[6]);
-			String sql = "INSERT INTO Reserves (idHouse,idUser,name,checkIn,checkOut,numGuests,totalPrice) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)";
-			PreparedStatement ps = connection.prepareStatement(sql);
+
+			String sql = "INSERT INTO Reserves (idHouse, idUser, nameH, checkIn, checkOut, numGuests, totalPrice) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setInt(1, idHouse);
 			ps.setInt(2, idUser);
-			ps.setString(3, fields[3]);
+			ps.setString(3, nameH);
 			ps.setDate(4, checkIn);
 			ps.setDate(5, checkOut);
 			ps.setInt(6, numGuests);
 			ps.setDouble(7, totalPrice);
+
 			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
@@ -310,15 +314,20 @@ public class loadDemoData {
 		line = reader.readLine();
 		line = reader.readLine();
 		int result = 0;
+
 		while (line != null) {
 			String fields[] = line.split(";");
-			int idFacility = Integer.parseInt(fields[0]);
-			String sql = "INSERT INTO Facilities (idFacility,typeFacility) VALUES ( ?, ?)";
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setInt(1, idFacility);
-			ps.setString(2, fields[1]);
-			result = ps.executeUpdate();
-			ps.close();
+
+			if (fields.length > 0 && !fields[0].isEmpty()) {
+				String typeFacility = fields[0];
+				String sql = "INSERT INTO Facilities (typeFacility) VALUES (?)";
+				PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+				ps.setString(1, typeFacility);
+
+				result = ps.executeUpdate();
+				ps.close();
+
+			}
 			line = reader.readLine();
 		}
 		System.out.println("-Datos Facilities ingresados");
