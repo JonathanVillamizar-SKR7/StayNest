@@ -6,15 +6,24 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
+import java.sql.Statement;
 import java.util.Date;
 
 import daxbnb.DAO.DBConnection;
 
+/**
+ * 
+ * Clase encargada de cargar datos de demostración desde archivos CSV a la base
+ * de datos para propósitos de prueba o desarrollo.
+ * 
+ * @author Alfredo, Jonathan, Diana
+ */
 public class loadDemoData {
 	public static void main(String[] args) {
 		try {
 			DBConnection dbConnection = new DBConnection();
 			Connection connection = dbConnection.connect();
+
 			loadTypes(connection);
 			loadHousing(connection);
 			loadUser(connection);
@@ -24,11 +33,20 @@ public class loadDemoData {
 			loadImages(connection);
 			loadFacilities(connection);
 			loadHousingFacilities(connection);
+
+			dbConnection.closeConnection(connection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * Carga datos a la tabla Types.
+	 * 
+	 * @param connection
+	 * @return Resultado de la última inserción.
+	 * @throws Exception
+	 */
 	private static int loadTypes(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Types.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
@@ -52,6 +70,13 @@ public class loadDemoData {
 		return result;
 	}
 
+	/**
+	 * Carga datos a la tabla Housing.
+	 * 
+	 * @param connection
+	 * @return Resultado de la última inserción.
+	 * @throws Exception
+	 */
 	private static int loadHousing(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Housing.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
@@ -90,6 +115,13 @@ public class loadDemoData {
 		return result;
 	}
 
+	/**
+	 * Carga datos a la tabla Details.
+	 * 
+	 * @param connection
+	 * @return Resultado de la última inserción.
+	 * @throws Exception
+	 */
 	public static int loadDetails(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Details.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
@@ -114,6 +146,13 @@ public class loadDemoData {
 		return result;
 	}
 
+	/**
+	 * Carga datos a la tabla Users.
+	 * 
+	 * @param connection
+	 * @return Resultado de la última inserción.
+	 * @throws Exception
+	 */
 	public static int loadUser(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/User.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
@@ -142,6 +181,13 @@ public class loadDemoData {
 		return result;
 	}
 
+	/**
+	 * Carga datos a la tabla CreditCards.
+	 * 
+	 * @param connection
+	 * @return Resultado de la última inserción.
+	 * @throws Exception
+	 */
 	public static int loadCreditCard(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/CreditCards.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
@@ -175,6 +221,14 @@ public class loadDemoData {
 		return result;
 	}
 
+	/**
+	 * 
+	 * Carga datos a la tabla Reserves.
+	 * 
+	 * @param connection
+	 * @return Resultado de la última inserción.
+	 * @throws Exception
+	 */
 	public static int loadReserve(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Reserve.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
@@ -212,6 +266,13 @@ public class loadDemoData {
 		return result;
 	}
 
+	/**
+	 * Carga datos a la tabla Images.
+	 * 
+	 * @param connection
+	 * @return Resultado de la última inserción.
+	 * @throws Exception
+	 */
 	public static int loadImages(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Images.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
@@ -235,6 +296,13 @@ public class loadDemoData {
 		return result;
 	}
 
+	/**
+	 * Carga datos a la tabla Facilities.
+	 * 
+	 * @param connection
+	 * @return Resultado de la última inserción.
+	 * @throws Exception
+	 */
 	public static int loadFacilities(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/Facility.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
@@ -258,6 +326,13 @@ public class loadDemoData {
 		return result;
 	}
 
+	/**
+	 * Carga datos a la tabla HousingFacilities.
+	 * 
+	 * @param connection
+	 * @return Resultado de la última inserción.
+	 * @throws Exception
+	 */
 	public static int loadHousingFacilities(Connection connection) throws Exception {
 		FileReader fr = new FileReader(Paths.get("files/HousingFacilities.csv").toFile());
 		BufferedReader reader = new BufferedReader(fr);
@@ -286,4 +361,5 @@ public class loadDemoData {
 		reader.close();
 		return result;
 	}
+
 }

@@ -28,20 +28,21 @@ public class ReservesDAO {
 
 	private DBConnection db;
 
-	 /**
-     * Constructor que inicializa la conexión con la base de datos.
-     */
+	/**
+	 * Constructor que inicializa la conexión con la base de datos.
+	 */
 	public ReservesDAO() {
 		db = new DBConnection();
 	}
 
-	  /**
-     * Selecciona todas las reservas de la base de datos.
-     * 
-     * @return Lista de objetos Reserves con todas las reservas registradas.
-     * @throws SQLException si ocurre un error al ejecutar la consulta SQL.
-     * @throws ClassNotFoundException si la clase de conexión no se encuentra.
-     */
+	/**
+	 * Selecciona todas las reservas de la base de datos.
+	 * 
+	 * @return Lista de objetos Reserves con todas las reservas registradas.
+	 * @throws SQLException           si ocurre un error al ejecutar la consulta
+	 *                                SQL.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
+	 */
 	public List<Reserves> selectAll() throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_ALL);
@@ -54,6 +55,7 @@ public class ReservesDAO {
 			int idReserve = resultSet.getInt("idReserve");
 			int idHouse = resultSet.getInt("idHouse");
 			int idUser = resultSet.getInt("idUser");
+			String nameH = resultSet.getString("name");
 			int numGuests = resultSet.getInt("numGuests");
 			double totalPrice = resultSet.getDouble("totalPrice");
 			java.util.Date checkIn = resultSet.getDate("checkIn");
@@ -61,7 +63,8 @@ public class ReservesDAO {
 
 			Housing housing = housingDAO.selectById(idHouse);
 
-			Reserves reserve = new Reserves(idReserve, housing, checkIn, checkOut, numGuests, totalPrice, idUser);
+			Reserves reserve = new Reserves(idReserve, housing, idUser, nameH, checkIn, checkOut, numGuests,
+					totalPrice);
 			reservesList.add(reserve);
 		}
 		resultSet.close();
@@ -69,14 +72,15 @@ public class ReservesDAO {
 		return reservesList;
 	}
 
-	  /**
-     * Selecciona una reserva específica por el ID de la vivienda.
-     * 
-     * @param idHouse ID de la vivienda.
-     * @return Objeto Reserves correspondiente al ID proporcionado.
-     * @throws SQLException si ocurre un error al ejecutar la consulta SQL.
-     * @throws ClassNotFoundException si la clase de conexión no se encuentra.
-     */
+	/**
+	 * Selecciona una reserva específica por el ID de la vivienda.
+	 * 
+	 * @param idHouse ID de la vivienda.
+	 * @return Objeto Reserves correspondiente al ID proporcionado.
+	 * @throws SQLException           si ocurre un error al ejecutar la consulta
+	 *                                SQL.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
+	 */
 	public Reserves selectByIdHouse(int idHouse) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_IDHOUSE);
@@ -89,6 +93,7 @@ public class ReservesDAO {
 		if (resultSet.next()) {
 			int idReserve = resultSet.getInt("idReserve");
 			int idUser = resultSet.getInt("idUser");
+			String nameH = resultSet.getString("name");
 			int numGuests = resultSet.getInt("numGuests");
 			double totalPrice = resultSet.getDouble("totalPrice");
 			java.util.Date checkIn = resultSet.getDate("checkIn");
@@ -96,21 +101,22 @@ public class ReservesDAO {
 
 			Housing housing = housingDAO.selectById(idHouse);
 
-			reserve = new Reserves(idReserve, housing, checkIn, checkOut, numGuests, totalPrice, idUser);
+			reserve = new Reserves(idReserve, housing, idUser, nameH, checkIn, checkOut, numGuests, totalPrice);
 		}
 		resultSet.close();
 		db.closeConnection(connection);
 		return reserve;
 	}
 
-	   /**
-     * Selecciona todas las reservas de un usuario por su ID.
-     * 
-     * @param idUser ID del usuario.
-     * @return Lista de reservas asociadas al usuario.
-     * @throws SQLException si ocurre un error al ejecutar la consulta SQL.
-     * @throws ClassNotFoundException si la clase de conexión no se encuentra.
-     */
+	/**
+	 * Selecciona todas las reservas de un usuario por su ID.
+	 * 
+	 * @param idUser ID del usuario.
+	 * @return Lista de reservas asociadas al usuario.
+	 * @throws SQLException           si ocurre un error al ejecutar la consulta
+	 *                                SQL.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
+	 */
 	public List<Reserves> selectByIdUser(int idUser) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_IDUSER);
@@ -123,14 +129,15 @@ public class ReservesDAO {
 		while (resultSet.next()) {
 			int idReserve = resultSet.getInt("idReserve");
 			int idHouse = resultSet.getInt("idHouse");
+			String nameH = resultSet.getString("name");
 			int numGuests = resultSet.getInt("numGuests");
 			double totalPrice = resultSet.getDouble("totalPrice");
 			java.util.Date checkIn = resultSet.getDate("checkIn");
 			java.util.Date checkOut = resultSet.getDate("checkOut");
 
 			Housing housing = housingDAO.selectById(idHouse);
-
-			Reserves reserve = new Reserves(idReserve, housing, checkIn, checkOut, numGuests, totalPrice, idUser);
+			Reserves reserve = new Reserves(idReserve, housing, idUser, nameH, checkIn, checkOut, numGuests,
+					totalPrice);
 			reserveList.add(reserve);
 		}
 		resultSet.close();
@@ -138,20 +145,20 @@ public class ReservesDAO {
 		return reserveList;
 	}
 
-	   /**
-     * Inserta una nueva reserva en la base de datos.
-     * 
-     * @param idHouse ID de la vivienda.
-     * @param idUser ID del usuario.
-     * @param name Nombre de la reserva.
-     * @param numGuests Número de huéspedes.
-     * @param totalPrice Precio total de la reserva.
-     * @param checkIn Fecha de entrada.
-     * @param checkOut Fecha de salida.
-     * @return El ID generado de la nueva reserva.
-     * @throws SQLException si ocurre un error al ejecutar la inserción.
-     * @throws ClassNotFoundException si la clase de conexión no se encuentra.
-     */
+	/**
+	 * Inserta una nueva reserva en la base de datos.
+	 * 
+	 * @param idHouse    ID de la vivienda.
+	 * @param idUser     ID del usuario.
+	 * @param name       Nombre de la reserva.
+	 * @param numGuests  Número de huéspedes.
+	 * @param totalPrice Precio total de la reserva.
+	 * @param checkIn    Fecha de entrada.
+	 * @param checkOut   Fecha de salida.
+	 * @return El ID generado de la nueva reserva.
+	 * @throws SQLException           si ocurre un error al ejecutar la inserción.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
+	 */
 	public int insertReserve(int idHouse, int idUser, String name, int numGuests, double totalPrice,
 			java.util.Date checkIn, java.util.Date checkOut) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
@@ -179,21 +186,22 @@ public class ReservesDAO {
 
 	}
 
-    /**
-     * Actualiza una reserva existente en la base de datos.
-     * 
-     * @param idReserve ID de la reserva a actualizar.
-     * @param idHouse ID de la vivienda.
-     * @param idUser ID del usuario.
-     * @param name Nombre de la reserva.
-     * @param numGuests Número de huéspedes.
-     * @param checkIn Fecha de entrada.
-     * @param checkOut Fecha de salida.
-     * @param totalPrice Precio total de la reserva.
-     * @return El número de filas afectadas por la actualización.
-     * @throws SQLException si ocurre un error al ejecutar la actualización.
-     * @throws ClassNotFoundException si la clase de conexión no se encuentra.
-     */
+	/**
+	 * Actualiza una reserva existente en la base de datos.
+	 * 
+	 * @param idReserve  ID de la reserva a actualizar.
+	 * @param idHouse    ID de la vivienda.
+	 * @param idUser     ID del usuario.
+	 * @param name       Nombre de la reserva.
+	 * @param numGuests  Número de huéspedes.
+	 * @param checkIn    Fecha de entrada.
+	 * @param checkOut   Fecha de salida.
+	 * @param totalPrice Precio total de la reserva.
+	 * @return El número de filas afectadas por la actualización.
+	 * @throws SQLException           si ocurre un error al ejecutar la
+	 *                                actualización.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
+	 */
 	public int updateReserve(int idReserve, int idHouse, int idUser, String name, int numGuests, java.util.Date checkIn,
 			java.util.Date checkOut, double totalPrice) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
@@ -211,14 +219,14 @@ public class ReservesDAO {
 		return result;
 	}
 
-	  /**
-     * Elimina una reserva de la base de datos.
-     * 
-     * @param idReserve ID de la reserva a eliminar.
-     * @return El número de filas afectadas por la eliminación.
-     * @throws SQLException si ocurre un error al ejecutar la eliminación.
-     * @throws ClassNotFoundException si la clase de conexión no se encuentra.
-     */
+	/**
+	 * Elimina una reserva de la base de datos.
+	 * 
+	 * @param idReserve ID de la reserva a eliminar.
+	 * @return El número de filas afectadas por la eliminación.
+	 * @throws SQLException           si ocurre un error al ejecutar la eliminación.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
+	 */
 	public int deleteReserve(int idReserve) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(DELETE_RESERVES);

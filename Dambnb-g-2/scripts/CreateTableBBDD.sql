@@ -13,7 +13,7 @@ CREATE TABLE Types (
 
 -- Tabla de usuarios
 CREATE TABLE Users (
-    idUser INT PRIMARY KEY,
+    idUser INT AUTO_INCREMENT PRIMARY KEY,
     userName VARCHAR(100) UNIQUE,
     phone BIGINT,
     email VARCHAR(100),
@@ -31,7 +31,7 @@ CREATE TABLE Details (
 
 -- Tarjetas de crédito
 CREATE TABLE CreditCards (
-    idCreditCard INT PRIMARY KEY,
+    idCreditCard INT AUTO_INCREMENT PRIMARY KEY,
     cardHolderName VARCHAR(100),
     creditCardNumber BIGINT,
     expirationDate DATE,
@@ -56,7 +56,7 @@ CREATE TABLE Housing (
 
 -- Tabla de facilidades generales
 CREATE TABLE Facilities (
-    idFacility INT PRIMARY KEY,
+    idFacility INT AUTO_INCREMENT PRIMARY KEY,
     typeFacility VARCHAR(100)
 );
 
@@ -78,7 +78,7 @@ CREATE TABLE Reserves (
     idReserve INT AUTO_INCREMENT PRIMARY KEY,
     idHouse INT,
     idUser INT,
-    name VARCHAR(100),
+    nameH VARCHAR(100),
     checkIn DATE,
     checkOut DATE,
     numGuests INT,

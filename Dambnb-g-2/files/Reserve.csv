@@ -1,4 +1,4 @@
-idHouse;idUser;name;checkIn;checkOut;numGuests;totalPrice
+idHouse;idUser;nameH;checkIn;checkOut;numGuests;totalPrice
 1;2;Weekend Countryside Escape;10/05/2025;12/05/2025;2;225.98
 3;3;Tiny Home Summer Stay;01/07/2025;07/07/2025;3;983.94
 5;3;Rustic Tiny Vacation;15/06/2025;18/06/2025;1;317.97
