@@ -1,4 +1,4 @@
-idUser;userName;phone;email;passport
-1;admin_user;687550711;admin@stayapp.com;85019795
-2;Francesco_Vergolini;693266457;Fran@example.com;72725747
-3;Natasha_Kiev;675822906;Natasha@example.com;90830697
+userName;phone;email;passport
+admin_user;687550711;admin@stayapp.com;85019795
+Francesco_Vergolini;693266457;Fran@example.com;72725747
+Natasha_Kiev;675822906;Natasha@example.com;90830697
