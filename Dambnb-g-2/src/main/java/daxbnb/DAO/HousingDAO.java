@@ -9,9 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import daxbnb.DAO.DBConnection;
-import daxbnb.model.Facilities;
 import daxbnb.model.Housing;
-import daxbnb.model.Images;
 import daxbnb.model.Types;
 
 /**
@@ -89,18 +87,18 @@ public class HousingDAO {
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_ID);
 		ps.setInt(1, idHouse);
 		ResultSet rs = ps.executeQuery();
-		
+
 		TypesDAO typesDAO = new TypesDAO(); // 🔄 Instancia del DAO
 		Housing housing = null;
-		
+
 		if (rs.next()) {
 			// 🔄 Obtenemos el objeto Types del DAO
 			Types type = typesDAO.selectById(rs.getInt("idType"));
 
 			// 🔄 Construimos el objeto Housing
 			housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
-					rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"),
-					type, rs.getDouble("price"), new ArrayList<>(), // imágenes
+					rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
+					rs.getDouble("price"), new ArrayList<>(), // imágenes
 					new ArrayList<>() // facilidades
 			);
 		}
@@ -133,8 +131,8 @@ public class HousingDAO {
 				Types type = typesDAO.selectById(rs.getInt("idType"));
 
 				Housing housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
-						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"),
-						type, rs.getDouble("price"), new ArrayList<>(), // imágenes
+						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
+						rs.getDouble("price"), new ArrayList<>(), // imágenes
 						new ArrayList<>() // facilidades
 				);
 				return housing;
@@ -167,8 +165,8 @@ public class HousingDAO {
 				// 🔄 Obtenemos el objeto Types
 				Types type = typesDAO.selectById(rs.getInt("idType"));
 				Housing housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
-						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"),
-						type, rs.getDouble("price"), new ArrayList<>(), // imágenes
+						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
+						rs.getDouble("price"), new ArrayList<>(), // imágenes
 						new ArrayList<>() // facilidades
 				);
 				return housing;
@@ -178,4 +176,69 @@ public class HousingDAO {
 		db.closeConnection(connection);
 		return null;
 	}
+
+	public int insertHousing(String name, String location, int numGuest, int numBedroom, int numBed, int numBath,
+			int idType, double price) throws SQLException, ClassNotFoundException {
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(INSERT_HOUSING, Statement.RETURN_GENERATED_KEYS);
+		ps.setString(1, name);
+		ps.setString(2, location);
+		ps.setInt(3, numGuest);
+		ps.setInt(4, numBedroom);
+		ps.setInt(5, numBed);
+		ps.setInt(6, numBath);
+		ps.setInt(7, idType);
+		ps.setDouble(8, price);
+
+		int affectedRows = ps.executeUpdate();
+		if (affectedRows == 0) {
+			throw new SQLException("No se pudo insertar la vivienda");
+		}
+
+		int generatedId = -1;
+		ResultSet generatedKeys = ps.getGeneratedKeys();
+		if (generatedKeys.next()) {
+			generatedId = generatedKeys.getInt(1);
+		}
+		ps.close();
+		db.closeConnection(connection);
+		return generatedId;
+	}
+
+	/**
+	 * Actualiza una vivienda existente en la base de datos.
+	 */
+	public int updateHousing(int idHouse, String name, String location, int numGuest, int numBedroom, int numBed,
+			int numBath, int idType, double price) throws SQLException, ClassNotFoundException {
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(UPDATE_HOUSING);
+		ps.setString(1, name);
+		ps.setString(2, location);
+		ps.setInt(3, numGuest);
+		ps.setInt(4, numBedroom);
+		ps.setInt(5, numBed);
+		ps.setInt(6, numBath);
+		ps.setInt(7, idType);
+		ps.setDouble(8, price);
+		ps.setInt(9, idHouse);
+
+		int result = ps.executeUpdate();
+		ps.close();
+		db.closeConnection(connection);
+		return result;
+	}
+
+	/**
+	 * Elimina una vivienda de la base de datos.
+	 */
+	public int deleteHousing(int idHouse) throws SQLException, ClassNotFoundException {
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(DELETE_HOUSING);
+		ps.setInt(1, idHouse);
+		int result = ps.executeUpdate();
+		ps.close();
+		db.closeConnection(connection);
+		return result;
+	}
+
 }
