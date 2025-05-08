@@ -48,7 +48,7 @@ public class Housing {
 	/**
 	 * Tipo de alojamiento (ID).
 	 */
-	private int idType;
+	private Types idType;
 
 	/**
 	 * Precio por noche.
@@ -83,7 +83,7 @@ public class Housing {
 	 * 
 	 */
 	public Housing(int idHouse, String name, String location, int numGuest, int numBedroom, int numBed, int numBath,
-			int idType, double price, List<Images> images, List<Facilities> facilities) {
+			Types idType, double price, List<Images> images, List<Facilities> facilities) {
 		this.idHouse = idHouse;
 		this.name = name;
 		this.location = location;
@@ -205,14 +205,14 @@ public class Housing {
 	/**
 	 * @return Identificador del tipo de alojamiento.
 	 */
-	public int getIdType() {
+	public Types getIdType() {
 		return idType;
 	}
 
 	/**
 	 * @param idType Nuevo tipo de alojamiento.
 	 */
-	public void setIdType(int idType) {
+	public void setIdType(Types idType) {
 		this.idType = idType;
 	}
 

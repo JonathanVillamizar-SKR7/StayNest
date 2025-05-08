@@ -56,7 +56,7 @@ public class CreditCard {
 		this.idCreditCard = idCreditCard;
 		this.cardHolderName = cardHolderName;
 		this.expiration = expiration;
-		this.cvv = cvv;
+		this.setCvv(cvv); // Validación
 		this.creditCardNum = creditCardNum;
 	}
 
@@ -64,9 +64,7 @@ public class CreditCard {
 	 * Obtiene el nombre del usuario asociado a la tarjeta.
 	 * 
 	 * @return El nombre del usuario.
-	 * 
 	 */
-
 	public String getUserName() {
 		return userName;
 	}
@@ -85,7 +83,6 @@ public class CreditCard {
 	 * 
 	 * @return ID de la tarjeta.
 	 */
-
 	public int getIdCreditCard() {
 		return idCreditCard;
 	}
@@ -95,7 +92,6 @@ public class CreditCard {
 	 * 
 	 * @param idCreditCard ID de la tarjeta.
 	 */
-
 	public void setIdCreditCard(int idCreditCard) {
 		this.idCreditCard = idCreditCard;
 	}
@@ -105,7 +101,6 @@ public class CreditCard {
 	 * 
 	 * @return Nombre del titular.
 	 */
-
 	public String getCardHolderName() {
 		return cardHolderName;
 	}
@@ -124,7 +119,6 @@ public class CreditCard {
 	 * 
 	 * @return Fecha de expiración.
 	 */
-
 	public Date getExpiration() {
 		return expiration;
 	}
@@ -134,7 +128,6 @@ public class CreditCard {
 	 * 
 	 * @param expiration Fecha de expiración.
 	 */
-
 	public void setExpiration(Date expiration) {
 		this.expiration = expiration;
 	}
@@ -144,7 +137,6 @@ public class CreditCard {
 	 * 
 	 * @return CVV de la tarjeta.
 	 */
-
 	public int getCvv() {
 		return cvv;
 	}
@@ -154,9 +146,12 @@ public class CreditCard {
 	 * 
 	 * @param cvv CVV de la tarjeta.
 	 */
-
 	public void setCvv(int cvv) {
-		this.cvv = cvv;
+		if (cvv >= 100 && cvv <= 9999) {
+			this.cvv = cvv;
+		} else {
+			throw new IllegalArgumentException("El CVV debe tener entre 3 y 4 dígitos.");
+		}
 	}
 
 	/**
@@ -164,15 +159,7 @@ public class CreditCard {
 	 * 
 	 * @return Número de tarjeta.
 	 */
-
 	public long getCreditCardNum() {
-
-	/**
-	 * 
-	 * @return El número de la tarjeta de crédito.
-	 */
-	public int getCreditCardNum() {
-
 		return creditCardNum;
 	}
 
@@ -181,8 +168,7 @@ public class CreditCard {
 	 * 
 	 * @param creditCardNum Número de tarjeta.
 	 */
-
-	public void setCreditCardNum(int creditCardNum) {
+	public void setCreditCardNum(long creditCardNum) {
 		this.creditCardNum = creditCardNum;
 	}
 
@@ -192,11 +178,9 @@ public class CreditCard {
 	 * @return Cadena con la información de la tarjeta.
 	 */
 	@Override
-
 	public String toString() {
 		return "CreditCard [userName=" + userName + ", idCreditCard=" + idCreditCard + ", cardHolderName="
 				+ cardHolderName + ", expiration=" + expiration + ", cvv=" + cvv + ", creditCardNum=" + creditCardNum
 				+ "]";
 	}
-
 }
