@@ -161,7 +161,6 @@ public class HousingDAO {
 
 	}
 
-
     /**
      * Inserta una nueva vivienda en la base de datos.
      * 
