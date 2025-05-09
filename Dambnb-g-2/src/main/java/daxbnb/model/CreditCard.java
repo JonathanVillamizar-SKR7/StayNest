@@ -12,7 +12,7 @@ public class CreditCard {
 	/**
 	 * Nombre de usuario al que pertenece la tarjeta.
 	 */
-	private String userName;
+	private int idUser;
 
 	/**
 	 * Identificador único de la tarjeta de crédito.
@@ -50,9 +50,9 @@ public class CreditCard {
 	 * @param creditCardNum  Número de tarjeta
 	 * 
 	 */
-	public CreditCard(String userName, int idCreditCard, String cardHolderName, Date expiration, int cvv,
+	public CreditCard(int idUser, int idCreditCard, String cardHolderName, Date expiration, int cvv,
 			long creditCardNum) {
-		this.userName = userName;
+		this.idUser = idUser;
 		this.idCreditCard = idCreditCard;
 		this.cardHolderName = cardHolderName;
 		this.expiration = expiration;
@@ -65,8 +65,8 @@ public class CreditCard {
 	 * 
 	 * @return El nombre del usuario.
 	 */
-	public String getUserName() {
-		return userName;
+	public int getUserName() {
+		return idUser;
 	}
 
 	/**
@@ -74,8 +74,8 @@ public class CreditCard {
 	 * 
 	 * @param userName Nombre del usuario.
 	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setUserName(int idUser) {
+		this.idUser = idUser;
 	}
 
 	/**
@@ -179,7 +179,7 @@ public class CreditCard {
 	 */
 	@Override
 	public String toString() {
-		return "CreditCard [userName=" + userName + ", idCreditCard=" + idCreditCard + ", cardHolderName="
+		return "CreditCard [idUser=" + idUser + ", idCreditCard=" + idCreditCard + ", cardHolderName="
 				+ cardHolderName + ", expiration=" + expiration + ", cvv=" + cvv + ", creditCardNum=" + creditCardNum
 				+ "]";
 	}
