@@ -286,10 +286,10 @@ public class loadDemoData {
 		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
-			int idImage = Integer.parseInt(fields[0]);
+			String idImage = (fields[0]);
 			String sql = "INSERT INTO Images (idImage,imgRoute) VALUES ( ?, ?)";
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setInt(1, idImage);
+			ps.setString(1, idImage);
 			ps.setString(2, fields[1]);
 			result = ps.executeUpdate();
 			ps.close();
@@ -354,14 +354,14 @@ public class loadDemoData {
 			int idHouse = Integer.parseInt(fields[0]);
 			int idFacility = Integer.parseInt(fields[1]);
 			boolean available = Integer.parseInt(fields[2]) == 1;
-			int idImage = Integer.parseInt(fields[4]);
+			String idImage = (fields[4]);
 			String sql = "INSERT INTO HousingFacilities (idHouse,idFacility,available,description,idImage) VALUES ( ?, ?, ?, ?, ?)";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, idHouse);
 			ps.setInt(2, idFacility);
 			ps.setBoolean(3, available);
 			ps.setString(4, fields[3]);
-			ps.setInt(5, idImage);
+			ps.setString(5, idImage);
 			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();

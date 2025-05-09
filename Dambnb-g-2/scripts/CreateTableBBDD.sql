@@ -1,7 +1,7 @@
 
 -- Tabla de imágenes
 CREATE TABLE Images (
-    idImage INT PRIMARY KEY,
+    idImage VARCHAR(20) PRIMARY KEY,
     imgRoute VARCHAR(255)
 );
 
@@ -66,7 +66,7 @@ CREATE TABLE HousingFacilities (
     idFacility INT,
     available BOOLEAN,
     description TEXT,
-    idImage INT,
+    idImage VARCHAR(20),
     PRIMARY KEY (idHouse, idFacility),
     FOREIGN KEY (idHouse) REFERENCES Housing(idHouse),
     FOREIGN KEY (idFacility) REFERENCES Facilities(idFacility),
