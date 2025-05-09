@@ -41,27 +41,27 @@ public class User {
 	/**
 	 * Lista de tarjetas de crédito.
 	 */
-	private List<CreditCard> creditCard;
+	private List<CreditCard> idCreditCard;
 
 	/**
 	 * 
 	 * Constructor con todos los campos.
 	 * 
-	 * @param userName   Nombre de usuario
-	 * @param idUser     ID
-	 * @param phone      Teléfono
-	 * @param email      Correo
-	 * @param passport   Pasaporte
-	 * @param creditCard Lista de tarjetas
+	 * @param userName     Nombre de usuario
+	 * @param idUser       ID
+	 * @param phone        Teléfono
+	 * @param email        Correo
+	 * @param passport     Pasaporte
+	 * @param idCreditCard Lista de tarjetas
 	 */
-	public User(String userName, int idUser, long phone, String email, int passport, List<CreditCard> creditCard) {
+	public User(String userName, int idUser, long phone, String email, int passport, List<CreditCard> idCreditCard) {
 
 		this.userName = userName;
 		this.idUser = idUser;
 		this.phone = phone;
 		this.email = email;
 		this.passport = passport;
-		this.creditCard = creditCard;
+		this.idCreditCard = idCreditCard;
 	}
 
 	/**
@@ -144,14 +144,14 @@ public class User {
 	 * @return Lista de tarjetas
 	 */
 	public List<CreditCard> getCreditCard() {
-		return creditCard;
+		return idCreditCard;
 	}
 
 	/**
 	 * @param creditCard Nueva lista de tarjetas
 	 */
 	public void setCreditCard(List<CreditCard> creditCard) {
-		this.creditCard = creditCard;
+		this.idCreditCard = creditCard;
 	}
 
 	/**
@@ -160,6 +160,6 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + ", idUser=" + idUser + ", phone=" + phone + ", email=" + email
-				+ ", passport=" + passport + ", creditCard=" + creditCard + "]";
+				+ ", passport=" + passport + ", creditCard=" + idCreditCard + "]";
 	}
 }
