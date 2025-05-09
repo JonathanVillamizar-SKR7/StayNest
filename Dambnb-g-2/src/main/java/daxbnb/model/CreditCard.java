@@ -10,7 +10,7 @@ import java.sql.Date;
 public class CreditCard {
 
 	/**
-	 * Nombre de usuario al que pertenece la tarjeta.
+	 * Id de usuario al que pertenece la tarjeta.
 	 */
 	private int idUser;
 
@@ -42,7 +42,7 @@ public class CreditCard {
 	/**
 	 * Constructor con todos los campos.
 	 * 
-	 * @param userName       Nombre de usuario
+	 * @param idUser         ID de usuario
 	 * @param idCreditCard   ID de la tarjeta
 	 * @param cardHolderName Nombre del titular
 	 * @param expiration     Fecha de expiración
@@ -61,18 +61,18 @@ public class CreditCard {
 	}
 
 	/**
-	 * Obtiene el nombre del usuario asociado a la tarjeta.
+	 * Obtiene el id del usuario asociado a la tarjeta.
 	 * 
-	 * @return El nombre del usuario.
+	 * @return El id del usuario.
 	 */
 	public int getIdUser() {
 		return idUser;
 	}
 
 	/**
-	 * Establece el nombre del usuario asociado a la tarjeta.
+	 * Establece el id del usuario asociado a la tarjeta.
 	 * 
-	 * @param userName Nombre del usuario.
+	 * @param idUser id del usuario.
 	 */
 	public void setIdUser(int idUser) {
 		this.idUser = idUser;
