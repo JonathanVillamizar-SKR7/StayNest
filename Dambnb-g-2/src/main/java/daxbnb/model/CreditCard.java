@@ -65,7 +65,7 @@ public class CreditCard {
 	 * 
 	 * @return El nombre del usuario.
 	 */
-	public int getUserName() {
+	public int getIdUser() {
 		return idUser;
 	}
 
@@ -74,7 +74,7 @@ public class CreditCard {
 	 * 
 	 * @param userName Nombre del usuario.
 	 */
-	public void setUserName(int idUser) {
+	public void setIdUser(int idUser) {
 		this.idUser = idUser;
 	}
 
