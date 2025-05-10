@@ -23,7 +23,7 @@ public class ReservesDAO {
 	private static final String SELECT_BY_IDHOUSE = "SELECT * FROM Reserves WHERE idHouse = ?";
 	private static final String SELECT_BY_IDUSER = "SELECT * FROM Reserves WHERE idUser = ?";
 	private static final String INSERT_RESERVES = "INSERT INTO Reserves (idHouse, idUser, name, checkIn, checkOut, numGuests, totalPrice) VALUES (?, ?, ?, ?, ?, ?,?)";
-	private static final String UPDATE_RESERVES = "UPDATE Reserves SET idHouse = ?, idUser = ?, name = ?, checkIn = ?, checkOut = ?, numGuests = ?, totalPrice = ?";
+	private static final String UPDATE_RESERVES = "UPDATE Reserves SET idHouse = ?, idUser = ?, name = ?, checkIn = ?, checkOut = ?, numGuests = ?, totalPrice = ? WHERE idReserve = ?";
 	private static final String DELETE_RESERVES = "DELETE FROM Reserves WHERE idReserve = ?";
 
 	private DBConnection db;
