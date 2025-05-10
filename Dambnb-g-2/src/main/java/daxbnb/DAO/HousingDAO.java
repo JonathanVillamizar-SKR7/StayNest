@@ -94,6 +94,69 @@ public class HousingDAO {
 		return housing;
 	}
 
+	/**
+	 * Selecciona todas las viviendas que coinciden con un tipo específico.
+	 * 
+	 * @param idType ID del tipo de vivienda.
+	 * @return Lista de objetos Housing que corresponden al tipo proporcionado.
+	 * @throws SQLException           si ocurre un error al ejecutar la consulta
+	 *                                SQL.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
+	 */
+	public List<Housing> selectHousingByType(int idType) throws SQLException, ClassNotFoundException {
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(SELECT_BY_TYPE);
+		ps.setInt(1, idType);
+		ResultSet rs = ps.executeQuery();
+		TypesDAO typesDAO = new TypesDAO();
+		List<Housing> housings = new ArrayList<>();
+
+		while (rs.next()) {
+			if (!rs.wasNull()) {
+				Types type = typesDAO.selectById(rs.getInt("idType"));
+				Housing housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
+						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
+						rs.getDouble("price"), new ArrayList<>(), new ArrayList<>());
+				housings.add(housing);
+			}
+		}
+		rs.close();
+		db.closeConnection(connection);
+		return housings;
+	}
+
+	/**
+	 * Selecciona todas las viviendas que coinciden con un número de habitaciones
+	 * específico.
+	 * 
+	 * @param numBedroom Número de habitaciones de la vivienda.
+	 * @return Lista de objetos Housing que corresponden al número de habitaciones
+	 *         proporcionado.
+	 * @throws SQLException           si ocurre un error al ejecutar la consulta
+	 *                                SQL.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
+	 */
+	public List<Housing> selectHousingByBedroom(int numBedroom) throws SQLException, ClassNotFoundException {
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(SELECT_BY_BEDROOM);
+		ps.setInt(1, numBedroom);
+		ResultSet rs = ps.executeQuery();
+		TypesDAO typesDAO = new TypesDAO();
+		List<Housing> housings = new ArrayList<>();
+
+		while (rs.next()) {
+			if (!rs.wasNull()) {
+				Types type = typesDAO.selectById(rs.getInt("idType"));
+				Housing housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
+						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
+						rs.getDouble("price"), new ArrayList<>(), new ArrayList<>());
+				housings.add(housing);
+			}
+		}
+		rs.close();
+		db.closeConnection(connection);
+		return housings;
+	}
 
 	/**
 	 * Inserta una nueva vivienda en la base de datos.

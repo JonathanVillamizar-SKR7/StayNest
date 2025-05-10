@@ -39,11 +39,20 @@ public class Facilities {
 	 * @param typeFacilities Tipo
 	 * @param available      Disponible >
 	 */
-	public Facilities(int idHouse, int idFacilities, String typeFacilities, boolean available) {
+	public Facilities(int idHouse, int idFacilities, String typeFacilities) {
 		this.idHouse = idHouse;
 		this.idFacilities = idFacilities;
 		this.typeFacilities = typeFacilities;
-		this.available = available;
+	}
+	
+	/**
+	 * 
+	 * @param idFacilities ID de la Instalación
+	 * @param typeFacilities Tipo
+	 */
+	public Facilities(int idFacilities, String typeFacilities) {
+		this.idFacilities = idFacilities;
+		this.typeFacilities = typeFacilities;
 	}
 
 	/**

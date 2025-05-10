@@ -50,8 +50,8 @@ public class CreditCard {
 	 * @param creditCardNum  Número de tarjeta
 	 * 
 	 */
-	public CreditCard(int idUser, int idCreditCard, String cardHolderName, Date expiration, int cvv,
-			long creditCardNum) {
+	public CreditCard(int idCreditCard, String cardHolderName, long creditCardNum, Date expiration, int cvv,
+			int idUser) {
 		this.idUser = idUser;
 		this.idCreditCard = idCreditCard;
 		this.cardHolderName = cardHolderName;
@@ -179,8 +179,7 @@ public class CreditCard {
 	 */
 	@Override
 	public String toString() {
-		return "CreditCard [idUser=" + idUser + ", idCreditCard=" + idCreditCard + ", cardHolderName="
-				+ cardHolderName + ", expiration=" + expiration + ", cvv=" + cvv + ", creditCardNum=" + creditCardNum
-				+ "]";
+		return "CreditCard [idUser=" + idUser + ", idCreditCard=" + idCreditCard + ", cardHolderName=" + cardHolderName
+				+ ", expiration=" + expiration + ", cvv=" + cvv + ", creditCardNum=" + creditCardNum + "]";
 	}
 }

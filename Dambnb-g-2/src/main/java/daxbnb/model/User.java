@@ -63,6 +63,15 @@ public class User {
 		this.passport = passport;
 		this.idCreditCard = idCreditCard;
 	}
+	
+	public User(String userName, int idUser, long phone, String email, int passport) {
+
+		this.userName = userName;
+		this.idUser = idUser;
+		this.phone = phone;
+		this.email = email;
+		this.passport = passport;
+	}
 
 	/**
 	 * @return Nombre de usuario
