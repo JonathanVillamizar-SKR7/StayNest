@@ -16,7 +16,7 @@ import daxbnb.DAO.DBConnection;
  * @author Alfredo, Jonathan, Diana
  * 
  */
-public class scriptsMain {
+public class ScriptsMain {
 
 	public static void main(String[] args) {
 		try {

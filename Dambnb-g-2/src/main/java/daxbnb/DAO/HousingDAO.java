@@ -48,21 +48,14 @@ public class HousingDAO {
 		ResultSet resultSet = ps.executeQuery();
 		List<Housing> housings = new ArrayList<>();
 
-		TypesDAO typesDAO = new TypesDAO(); // 🔄 Instancia del DAO para obtener el tipo
-
+		TypesDAO typesDAO = new TypesDAO();
 		while (resultSet.next()) {
 			if (!resultSet.wasNull()) {
-
-				// 🔄 Obtenemos el objeto Types desde el DAO
 				Types types = typesDAO.selectById(resultSet.getInt("idType"));
-
-				// 🔄 Creamos el objeto Housing usando el objeto types (Types)
 				Housing housing = new Housing(resultSet.getInt("idHouse"), resultSet.getString("name"),
 						resultSet.getString("location"), resultSet.getInt("numGuest"), resultSet.getInt("numBedroom"),
 						resultSet.getInt("numBed"), resultSet.getInt("numBath"), types, resultSet.getDouble("price"),
-						new ArrayList<>(), // images
-						new ArrayList<>() // facilities
-				);
+						new ArrayList<>(), new ArrayList<>());
 
 				housings.add(housing);
 			}
@@ -87,22 +80,15 @@ public class HousingDAO {
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_ID);
 		ps.setInt(1, idHouse);
 		ResultSet rs = ps.executeQuery();
-
-		TypesDAO typesDAO = new TypesDAO(); // 🔄 Instancia del DAO
+		TypesDAO typesDAO = new TypesDAO();
 		Housing housing = null;
 
 		if (rs.next()) {
-			// 🔄 Obtenemos el objeto Types del DAO
 			Types type = typesDAO.selectById(rs.getInt("idType"));
-
-			// 🔄 Construimos el objeto Housing
 			housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
 					rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
-					rs.getDouble("price"), new ArrayList<>(), // imágenes
-					new ArrayList<>() // facilidades
-			);
+					rs.getDouble("price"), new ArrayList<>(), new ArrayList<>());
 		}
-
 		rs.close();
 		db.closeConnection(connection);
 		return housing;
@@ -117,66 +103,76 @@ public class HousingDAO {
 	 *                                SQL.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public Housing selectHousingByType(int idType) throws SQLException, ClassNotFoundException {
+	public List<Housing> selectHousingByType(int idType) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_TYPE);
 		ps.setInt(1, idType);
 		ResultSet rs = ps.executeQuery();
-
-		TypesDAO typesDAO = new TypesDAO(); // 🔄 Instancia del DAO
+		TypesDAO typesDAO = new TypesDAO();
+		List<Housing> housings = new ArrayList<>();
 
 		while (rs.next()) {
 			if (!rs.wasNull()) {
-				// 🔄 Obtenemos el objeto Types
 				Types type = typesDAO.selectById(rs.getInt("idType"));
-
 				Housing housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
 						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
-						rs.getDouble("price"), new ArrayList<>(), // imágenes
-						new ArrayList<>() // facilidades
-				);
-				return housing;
+						rs.getDouble("price"), new ArrayList<>(), new ArrayList<>());
+				housings.add(housing);
 			}
 		}
 		rs.close();
 		db.closeConnection(connection);
-		return null;
+		return housings;
 	}
 
 	/**
 	 * Selecciona todas las viviendas que coinciden con un número de habitaciones
 	 * específico.
 	 * 
-	 * @param numBedroom Número de habitaciones.
-	 * @return Lista de objetos Housing que corresponden al número de habitaciones.
+	 * @param numBedroom Número de habitaciones de la vivienda.
+	 * @return Lista de objetos Housing que corresponden al número de habitaciones
+	 *         proporcionado.
 	 * @throws SQLException           si ocurre un error al ejecutar la consulta
 	 *                                SQL.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public Housing selectHousingByBedroom(int numBedroom) throws SQLException, ClassNotFoundException {
+	public List<Housing> selectHousingByBedroom(int numBedroom) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_BEDROOM);
 		ps.setInt(1, numBedroom);
 		ResultSet rs = ps.executeQuery();
-		TypesDAO typesDAO = new TypesDAO(); // 🔄 Instancia del DAO
+		TypesDAO typesDAO = new TypesDAO();
+		List<Housing> housings = new ArrayList<>();
 
 		while (rs.next()) {
 			if (!rs.wasNull()) {
-				// 🔄 Obtenemos el objeto Types
 				Types type = typesDAO.selectById(rs.getInt("idType"));
 				Housing housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
 						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
-						rs.getDouble("price"), new ArrayList<>(), // imágenes
-						new ArrayList<>() // facilidades
-				);
-				return housing;
+						rs.getDouble("price"), new ArrayList<>(), new ArrayList<>());
+				housings.add(housing);
 			}
 		}
 		rs.close();
 		db.closeConnection(connection);
-		return null;
+		return housings;
 	}
 
+	/**
+	 * Inserta una nueva vivienda en la base de datos.
+	 * 
+	 * @param name       Nombre de la vivienda.
+	 * @param location   Ubicación de la vivienda.
+	 * @param numGuest   Número de huéspedes permitidos.
+	 * @param numBedroom Número de habitaciones.
+	 * @param numBed     Número de camas.
+	 * @param numBath    Número de baños.
+	 * @param idType     Tipo de vivienda.
+	 * @param price      Precio por noche.
+	 * @return El ID generado de la nueva vivienda.
+	 * @throws SQLException           si ocurre un error al ejecutar la inserción.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
+	 */
 	public int insertHousing(String name, String location, int numGuest, int numBedroom, int numBed, int numBath,
 			int idType, double price) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
@@ -207,6 +203,20 @@ public class HousingDAO {
 
 	/**
 	 * Actualiza una vivienda existente en la base de datos.
+	 * 
+	 * @param idHouse    ID de la vivienda a actualizar.
+	 * @param name       Nombre de la vivienda.
+	 * @param location   Ubicación de la vivienda.
+	 * @param numGuest   Número de huéspedes permitidos.
+	 * @param numBedroom Número de habitaciones.
+	 * @param numBed     Número de camas.
+	 * @param numBath    Número de baños.
+	 * @param idType     Tipo de vivienda.
+	 * @param price      Precio por noche.
+	 * @return El número de filas afectadas por la actualización.
+	 * @throws SQLException           si ocurre un error al ejecutar la
+	 *                                actualización.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
 	public int updateHousing(int idHouse, String name, String location, int numGuest, int numBedroom, int numBed,
 			int numBath, int idType, double price) throws SQLException, ClassNotFoundException {
@@ -230,6 +240,11 @@ public class HousingDAO {
 
 	/**
 	 * Elimina una vivienda de la base de datos.
+	 * 
+	 * @param idHouse ID de la vivienda a eliminar.
+	 * @return El número de filas afectadas por la eliminación.
+	 * @throws SQLException           si ocurre un error al ejecutar la eliminación.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
 	public int deleteHousing(int idHouse) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
@@ -240,5 +255,4 @@ public class HousingDAO {
 		db.closeConnection(connection);
 		return result;
 	}
-
 }
