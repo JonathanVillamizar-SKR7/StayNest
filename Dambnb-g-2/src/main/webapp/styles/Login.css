@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+header {
+    display: flex;
+    background-color: #F5F3EF;
+    width: auto;
+    height: 82px;
+    justify-content: space-between;
+    align-items: center;
+}
+header .links_header{
+    display: flex;
+    gap: 65px;
+}
+header a{
+        text-decoration: none;
+        color: black;
+}
+main{
+    background-image: url('../img/fondo_Log_sing.png'); 
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
+}
