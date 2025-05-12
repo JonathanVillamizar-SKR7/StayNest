@@ -24,25 +24,26 @@
             </div>
         </header>
         <main>
-
-            <H1>LOG IN</H1>
-            <div class="login">
-                <form action="">
-                    <div>
-                        <input type="email" name="email" id="email" required>
-                        <label for="email">email</label>
-                    </div>
-                    <div>
-                        <input type="password" name="password" id="password" required>
-                        <label for="password">password</label>
-                    </div>
-                    <div>
-                        <button type="submit">LOGIN</button>
-                    </div>
-                    <img class="logo_header" src="<%= request.getContextPath() %>/img/Logo_transparente.png" alt="Logo"
-                        style="width: 577px; height: auto;">
+            <div class="figura">
+                <div class="login">
+                    <form action="">
+                        <H1>LOG IN</H1>
+                        <div>
+                            <input type="email" name="email" id="email" required>
+                            <label for="email">email</label>
+                        </div>
+                        <div>
+                            <input type="password" name="password" id="password" required>
+                            <label for="password">password</label>
+                        </div>
+                        <div>
+                            <button type="submit">LOGIN</button>
+                        </div>
+                        <img class="logo_header" src="<%= request.getContextPath() %>/img/Logo_transparente.png"
+                            alt="Logo" style="width: 577px; height: auto;">
+                    </form>
+                </div>
             </div>
-            </form>
         </main>
         <footer>
         </footer>
