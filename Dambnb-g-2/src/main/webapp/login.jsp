@@ -39,9 +39,11 @@
                         <div class="button_login">
                             <button type="submit">LOGIN</button>
                         </div>
-                        <img class="logo_corner" src="<%= request.getContextPath() %>/img/Logo_transparente.png"
-                            alt="Logo" ">
                     </form>
+                    <div class="logoCorner_content">
+                    <img class="logo_corner" src="<%= request.getContextPath() %>/img/Logo_transparente.png"
+                            alt="Logo" >
+                    </div>
                 </div>
             </div>
         </main>

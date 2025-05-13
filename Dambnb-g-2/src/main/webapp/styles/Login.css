@@ -93,8 +93,13 @@ form {
     padding: 20px;
     color: white;
     width: 50%;
-    height: 100%;
+    height: 45%;
 
+}
+main .logoCorner_content{
+    display: flex;
+    justify-content: right;
+    text-align: right;
 }
 main .logo_corner{
     width: 577px;
