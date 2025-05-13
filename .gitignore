@@ -6,8 +6,6 @@
 # Ignorar archivos YAML
 *.yml
 
-# Ignorar archivos SQL
-*.sql
 
 #Ignorar la carpeta jars
 /jars/
