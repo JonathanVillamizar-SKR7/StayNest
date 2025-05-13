@@ -1,54 +1,68 @@
 @charset "UTF-8";
 
 body {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 header {
-	display: flex;
-	background-color: #F5F3EF;
-	width: auto;
-	height: 82px;
-	justify-content: space-between;
-	align-items: center;
+    display: flex;
+    background-color: #F5F3EF;
+    width: auto;
+    height: 82px;
+    justify-content: space-between;
+    align-items: center;
 }
 
 header .links_header {
-	display: flex;
-	gap: 65px;
+    display: flex;
+    gap: 65px;
 }
 
 header a {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 
 main .figura {
-	width: 100vw;
-	/* 100% del ancho de la ventana */
-	height: 100vh;
-	/* 100% de la altura de la ventana */
-	margin: 0;
-	/* Sin márgenes extra */
-	padding: 0;
-	/* Sin padding extra */
-	overflow: hidden;
-	/* Para evitar scroll extra */
-	background-color: #007b8f;
-	clip-path: polygon(0 0, 25% 0, 125% 100%, 0% 100%);
+    width: 100vw;
+    /* 100% del ancho de la ventana */
+    height: 100vh;
+    /* 100% de la altura de la ventana */
+    margin: 0;
+    /* Sin márgenes extra */
+    padding: 0;
+    /* Sin padding extra */
+    overflow: hidden;
+    /* Para evitar scroll extra */
+    background-color: #007b8f;
+    clip-path: polygon(0 0, 25% 0, 125% 100%, 0% 100%);
 }
 
 main {
-	background-image: url('../img/fondo_Log_sing.png');
-	background-position: center;
-	height: 100vh;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: relative;
-	color: white;
+    background-image: url('../img/fondo_Log_sing.png');
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: white;
 }
 
-form{
+main .login {
+    height: 100%;
+    padding-top: 10%;
+    padding-left: 5%;
+}
+
+form {
+
     display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 20px;
+    color: white;
+    width: 50%;
+    height: 100%;
+   
 }
