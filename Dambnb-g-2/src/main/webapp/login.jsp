@@ -30,11 +30,11 @@
                         <H1>LOG IN</H1>
                         <div>
                             <input type="email" name="email" id="email" required>
-                            <label for="email">email</label>
+                            <label for="email">Email</label>
                         </div>
                         <div>
                             <input type="password" name="password" id="password" required>
-                            <label for="password">password</label>
+                            <label for="password">Password</label>
                         </div>
                         <div>
                             <button type="submit">LOGIN</button>
