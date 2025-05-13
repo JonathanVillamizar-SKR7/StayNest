@@ -36,11 +36,11 @@
                             <input type="password" name="password" id="password" required>
                             <label for="password">Password</label>
                         </div>
-                        <div>
+                        <div class="button_login">
                             <button type="submit">LOGIN</button>
                         </div>
-                        <img class="logo_header" src="<%= request.getContextPath() %>/img/Logo_transparente.png"
-                            alt="Logo" style="width: 577px; height: auto;">
+                        <img class="logo_corner" src="<%= request.getContextPath() %>/img/Logo_transparente.png"
+                            alt="Logo" ">
                     </form>
                 </div>
             </div>
