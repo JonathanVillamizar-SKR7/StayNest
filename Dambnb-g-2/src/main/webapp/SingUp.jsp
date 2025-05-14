@@ -43,7 +43,7 @@
                         <div class="button_singup">
                             <button type="submit">LOGIN</button>
                         </div>
-                        <p>If you have and account &nbsp;<a href=""> log in now</a></p>
+                        <p>If you have and account &nbsp;<a href=""> log in </a>&nbsp; now</p>
                     </form>
                     <div class="logoCorner_content">
                     <img class="logo_corner" src="<%= request.getContextPath() %>/img/Logo_transparente.png"
