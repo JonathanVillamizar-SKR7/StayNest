@@ -96,6 +96,15 @@ form {
     height: 45%;
 
 }
+form p{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+form a{
+    color: #F5F3EF;
+}
+
 main .logoCorner_content{
     display: flex;
     justify-content: right;

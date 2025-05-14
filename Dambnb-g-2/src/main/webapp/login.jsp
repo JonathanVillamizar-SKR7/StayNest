@@ -39,6 +39,7 @@
                         <div class="button_login">
                             <button type="submit">LOGIN</button>
                         </div>
+                        <p>If you don't have and account &nbsp;<a href=""> register now</a></p>
                     </form>
                     <div class="logoCorner_content">
                     <img class="logo_corner" src="<%= request.getContextPath() %>/img/Logo_transparente.png"
