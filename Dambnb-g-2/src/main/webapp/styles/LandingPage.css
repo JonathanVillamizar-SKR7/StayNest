@@ -1,0 +1,8 @@
+@charset "UTF-8";
+:root {
+    --primary-color: rgb(0, 124, 145);
+    --secondary-color: rgb(236, 238, 248); 
+    --accent-color: rgb(76, 206, 238);
+    --dark-color: rgb(51, 51, 51);
+    --warning-color: rgb(255, 0, 0);
+}

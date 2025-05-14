@@ -13,9 +13,10 @@
 
     <body>
         <header>
-            <div class="logo_header">
+            <div class="logo_header"><a href="">
                 <img class="logo_header" src="<%= request.getContextPath() %>/img/Logo_transparente.png" alt="Logo"
                     style="width: 150px; height: auto;">
+                    </a>
             </div>
             <div class="links_header">
                 <a href="">Company</a>
