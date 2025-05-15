@@ -73,12 +73,13 @@ nav {
     padding-right: 3rem;
 }
 
-h2{
+h2 {
     color: var(--accent-color);
     padding-top: 1rem;
     padding-block-end: 3rem;
     height: 2rem;
 }
+
 .logoPortada {
     width: 150px;
     height: 150px;
@@ -89,6 +90,7 @@ h2{
     color: var(--dark-color);
     border-color: transparent;
 }
+
 .card-text {
     color: grey;
     background-color: transparent;
@@ -103,6 +105,7 @@ h2{
     height: 25rem;
     border-radius: 2%;
 }
+
 .info-list {
     height: 100%;
     display: flex;
@@ -130,8 +133,6 @@ h2{
     box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-
-
 .btn:hover {
     background-color: var(--accent-color);
     color: var(--dark-color);
@@ -144,18 +145,18 @@ h2{
 
 footer {
     background-color: var(--primary-color);
-    padding: 2rem 0; /* Adjusted padding for a smaller footer */
+    padding: 2rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 26rem; /* Adjusted height for a smaller footer */
+    height: 26rem;
 }
 
 footer img {
-    margin: 0; /* Ensure no margin between images */
+    margin: 0;
 }
 
 footer .logo {
-    width: 5rem; /* Adjusted logo size */
-    height: auto; /* Maintain aspect ratio */
+    width: 5rem;
+    height: auto;
 }
