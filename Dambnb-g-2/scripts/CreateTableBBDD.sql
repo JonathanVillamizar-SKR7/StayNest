@@ -1,7 +1,6 @@
-
--- Tabla de imágenes
+""-- Tabla de imágenes
 CREATE TABLE Images (
-    idImage VARCHAR(20) PRIMARY KEY,
+    idImage INT AUTO_INCREMENT PRIMARY KEY,
     imgRoute VARCHAR(255)
 );
 
@@ -51,6 +50,8 @@ CREATE TABLE Housing (
     numBath INT,
     idType INT,
     price DOUBLE,
+    description TEXT,
+    available BOOLEAN,
     FOREIGN KEY (idType) REFERENCES Types(idType)
 );
 
@@ -64,12 +65,17 @@ CREATE TABLE Facilities (
 CREATE TABLE HousingFacilities (
     idHouse INT,
     idFacility INT,
-    available BOOLEAN,
-    description TEXT,
-    idImage VARCHAR(20),
     PRIMARY KEY (idHouse, idFacility),
     FOREIGN KEY (idHouse) REFERENCES Housing(idHouse),
-    FOREIGN KEY (idFacility) REFERENCES Facilities(idFacility),
+    FOREIGN KEY (idFacility) REFERENCES Facilities(idFacility)
+);
+
+-- Tabla para las imágenes de las viviendas
+CREATE TABLE HousingImages (
+    idHouse INT,
+    idImage VARCHAR(20),
+    PRIMARY KEY (idHouse, idImage),
+    FOREIGN KEY (idHouse) REFERENCES Housing(idHouse),
     FOREIGN KEY (idImage) REFERENCES Images(idImage)
 );
 
@@ -85,4 +91,4 @@ CREATE TABLE Reserves (
     totalPrice DOUBLE,
     FOREIGN KEY (idHouse) REFERENCES Housing(idHouse),
     FOREIGN KEY (idUser) REFERENCES Users(idUser)
-);
+);""

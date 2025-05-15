@@ -1,116 +1,173 @@
 @charset "UTF-8";
 
-*{
-    font-family: 'Georgia', serif;
+@import
+	url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap')
+	;
+
+:root {
+	--primary-color: rgb(0, 124, 145);
+	--secondary-color: rgb(236, 238, 248);
+	--accent-color: rgb(76, 206, 238);
+	--dark-color: rgb(51, 51, 51);
+	--warning-color: rgb(255, 165, 82);
 }
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
 body {
-    overflow: hidden;
+	background-color: var(--primary-color);
+	font-family: 'Nunito Sans', sans-serif;
+	display: flex;
+	flex-direction: column;
 }
 
-header {
-    display: flex;
-    background-color: #F5F3EF;
-    width: auto;
-    height: 82px;
-    justify-content: space-between;
-    align-items: center;
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: bold;
+	color: var(--accent-color);
+	background-color: white;
 }
 
-header .links_header {
-    display: flex;
-    gap: 65px;
-    margin-right: 2%;
+.Index {
+	font-weight: 700;
+	text-decoration: none;
+	color: var(--accent-color);
+	font-size: 1.2rem;
+	transition: color 0.3s ease;
+}
+
+.Index:hover {
+	color: var(--warning-color);
+}
+
+.User-Icon {
+	width: 4rem;
+}
+
+.menu {
+	gap: 3rem;
+}
+
+.logo {
+	width: 10rem;
 }
 
 header a {
-    text-decoration: none;
-    color: black;
+	text-decoration: none;
+	color: black;
 }
 
 main h1 {
-    
-    font-size: 86px;
-    color: white;
+	font-size: 86px;
+	color: white;
 }
 
 main input {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    border-bottom: 1px solid white;
-    background-color: transparent;
-    color: white;
-    font-size: 16px;
-    outline: none;
+	width: 100%;
+	padding: 10px;
+	border: none;
+	border-bottom: 1px solid white;
+	background-color: transparent;
+	color: white;
+	font-size: 16px;
+	outline: none;
 }
-main .button_login{
-    display: flex;
-    justify-content: center;
-    padding-top: 30px;
+
+main .button_login {
+	display: flex;
+	justify-content: center;
+	padding-top: 30px;
 }
-button{
-    width: 100%; 
-    padding: 10px;
-    background-color: #ffa726;
-    border: none;
-    color: white;
-    font-size: 18px;
-    border-radius: 100px;
-    
+
+button {
+	width: 100%;
+	padding: 10px;
+	background-color: #ffa726;
+	border: none;
+	color: white;
+	font-size: 18px;
+	border-radius: 100px;
 }
+
 main .figura {
-    width: 100vw;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #007b8f;
-    clip-path: polygon(0 0, 25% 0, 125% 100%, 0% 100%);
+	width: 100vw;
+	height: 100vh;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #007b8f;
+	clip-path: polygon(0 0, 25% 0, 125% 100%, 0% 100%);
 }
 
 main {
-    background-image: url('../img/fondo_Log_sing.png');
-    background-position: center;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    color: white;
+	background-image: url('../img/fondo_Log_sing.png');
+	background-position: center;
+	height: 100vh;
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	position: relative;
+	color: white;
 }
 
 main .login {
-    height: 100%;
-    padding-top: 5%;
-    padding-left: 5%;
+	height: 100%;
+	padding-top: 5%;
+	padding-left: 5%;
 }
 
 form {
-
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    padding: 20px;
-    color: white;
-    width: 50%;
-    height: 45%;
-
-}
-form p{
-    display: flex;
-    justify-content: center;
-    text-align: center;
-}
-form a{
-    color: #F5F3EF;
+	display: flex;
+	flex-direction: column;
+	gap: 25px;
+	padding: 20px;
+	color: white;
+	width: 50%;
+	height: 45%;
 }
 
-main .logoCorner_content{
-    display: flex;
-    justify-content: right;
-    text-align: right;
+form p {
+	display: flex;
+	justify-content: center;
+	text-align: center;
 }
-main .logo_corner{
-    width: 577px;
-    height: auto;
+
+form a {
+	color: #F5F3EF;
+}
+
+main .logoCorner_content {
+	display: flex;
+	justify-content: right;
+	text-align: right;
+}
+
+main .logo_corner {
+	width: 5rem;
+	height: auto;
+}
+
+footer {
+	background-color: var(--primary-color);
+	padding: 2rem 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 26rem;
+	margin-top: auto;
+}
+
+footer img {
+	margin: 0;
+}
+
+footer .logo {
+	width: 5rem;
+	height: auto;
 }
