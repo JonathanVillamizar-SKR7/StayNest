@@ -6,3 +6,8 @@
     --dark-color: rgb(51, 51, 51);
     --warning-color: rgb(255, 0, 0);
 }
+.nav-link-custom {
+    font-size: 1.5em;
+    color: #007b8f !important;
+    font-weight: bold; /* Esto es opcional para hacerlo más sólido */
+}
