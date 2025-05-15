@@ -1,16 +1,16 @@
-name;location;numGuest;numBedroom;numBed;numBath;idType;price
-Countryside Stay 1;Stewartmouth,Germany;6;2;1;1;4;112.99
-Countryside Stay 2;North Jasonport,Germany;5;3;1;3;4;228.99
-Tiny home Stay 3;Hawkinsstad,Portugal;3;1;2;3;2;163.99
-Countryside Stay 4;Arnoldfurt ,USA;3;3;1;3;4;189.99
-Tiny home Stay 5;Jeremiahtown,Germany;1;4;5;1;2;105.99
-Cabin Stay 6;South Beverlyview,France;2;2;1;2;1;195.99
-Villa Stay 7;Port James,Portugal;3;1;1;3;5;87.99
-Apartment Stay 8;Jeannetown,Germany;2;2;3;2;3;177.99
-Apartment Stay 9;Transide,Germany;3;4;5;3;3;179.99
-Apartment Stay 10;Thomasview,USA;3;4;4;1;3;99.99
-Cabin Stay 11;South Jenniferburgh,Germany;5;1;2;1;1;133.99
-Apartment Stay 12;Aliciaburgh,USA;5;1;1;1;3;190.99
-Cabin Stay 13;New Christopher,USA;4;3;4;1;1;136.99
-Countryside Stay 14;Lake Robertborough,USA;3;3;4;3;4;148.99
-Apartment Stay 15;Bryantview,Portugal;2;4;4;2;3;119.99
+name;location;numGuest;numBedroom;numBed;numBath;idType;price;description;available
+Countryside Stay 1;Stewartmouth,Germany;6;2;1;1;4;112.99;This charming countryside stay offers a peaceful retreat from the hustle and bustle of city life.;1
+Countryside Stay 2;North Jasonport,Germany;5;3;1;3;4;228.99;Nestled in the heart of the countryside, this beautiful home offers a serene and tranquil getaway.;1
+Tiny home Stay 3;Hawkinsstad,Portugal;3;1;2;3;2;163.99;This tiny home is the perfect blend of modern design and compact luxury.;1
+Countryside Stay 4;Arnoldfurt ,USA;3;3;1;3;4;189.99;This countryside stay offers a peaceful retreat surrounded by nature.;1
+Tiny home Stay 5;Jeremiahtown,Germany;1;4;5;1;2;105.99;This tiny home is both efficient and stylish, offering an ideal stay for solo travelers or couples.;1
+Cabin Stay 6;South Beverlyview,France;2;2;1;2;1;195.99;This cozy cabin is designed for ultimate relaxation and comfort.;1
+Villa Stay 7;Port James,Portugal;3;1;1;3;5;87.99;This luxurious villa is the perfect getaway for those seeking comfort, privacy, and style.;1
+Apartment Stay 8;Jeannetown,Germany;2;2;3;2;3;177.99;Located in the heart of the city, this modern apartment provides the perfect blend of luxury and convenience.;1
+Apartment Stay 9;Transide,Germany;3;4;5;3;3;179.99;This spacious apartment is perfect for families or larger groups.;1
+Apartment Stay 10;Thomasview,USA;3;4;4;1;3;99.99;This apartment offers a great value for those looking for a comfortable and affordable stay.;1
+Cabin Stay 11;South Jenniferburgh,Germany;5;1;2;1;1;133.99;This stylish cabin offers a perfect escape to nature while providing all the modern amenities you need.;1
+Apartment Stay 12;Aliciaburgh,USA;5;1;1;1;3;190.99;This spacious apartment offers a high level of comfort and modern design.;1
+Cabin Stay 13;New Christopher,USA;4;3;4;1;1;136.99;This charming cabin is perfect for those looking to enjoy both comfort and nature.;1
+Countryside Stay 14;Lake Robertborough,USA;3;3;4;3;4;148.99;Located in a beautiful lakeside area, this countryside home offers a perfect escape for those seeking nature.;1
+Apartment Stay 15;Bryantview,Portugal;2;4;4;2;3;119.99;This tiny home is designed to offer an intimate and cozy getaway for couples or solo travelers.;1
