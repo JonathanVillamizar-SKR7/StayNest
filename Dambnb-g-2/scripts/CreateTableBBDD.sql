@@ -1,4 +1,4 @@
-""-- Tabla de imágenes
+-- Tabla de imágenes
 CREATE TABLE Images (
     idImage INT AUTO_INCREMENT PRIMARY KEY,
     imgRoute VARCHAR(255)
@@ -73,7 +73,7 @@ CREATE TABLE HousingFacilities (
 -- Tabla para las imágenes de las viviendas
 CREATE TABLE HousingImages (
     idHouse INT,
-    idImage VARCHAR(20),
+    idImage INT,
     PRIMARY KEY (idHouse, idImage),
     FOREIGN KEY (idHouse) REFERENCES Housing(idHouse),
     FOREIGN KEY (idImage) REFERENCES Images(idImage)
@@ -91,4 +91,4 @@ CREATE TABLE Reserves (
     totalPrice DOUBLE,
     FOREIGN KEY (idHouse) REFERENCES Housing(idHouse),
     FOREIGN KEY (idUser) REFERENCES Users(idUser)
-);""
+);
