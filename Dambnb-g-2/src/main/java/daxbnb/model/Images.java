@@ -17,7 +17,7 @@ public class Images {
 	/**
 	 * Ruta de la imagen (identificador o código).
 	 */
-	private int imgRoute;
+	private String imgRoute;
 
 	/**
 	 * 
@@ -27,8 +27,18 @@ public class Images {
 	 * @param imgRoute Ruta (o código) de la imagen
 	 * 
 	 */
-	public Images(int idImage, int imgRoute) {
+	public Images(int idImage, String imgRoute) {
 		this.idImage = idImage;
+		this.imgRoute = imgRoute;
+	}
+
+	/**
+	 * Constructor con la ruta de la imagen
+	 * 
+	 * @param imgRoute
+	 */
+	public Images(String imgRoute) {
+		super();
 		this.imgRoute = imgRoute;
 	}
 
@@ -52,14 +62,14 @@ public class Images {
 	 * @return Ruta de la imagen
 	 */
 
-	public int getImgRoute() {
+	public String getImgRoute() {
 		return imgRoute;
 	}
 
 	/**
 	 * @param imgRoute Nueva ruta o código
 	 */
-	public void setImgRoute(int imgRoute) {
+	public void setImgRoute(String imgRoute) {
 		this.imgRoute = imgRoute;
 	}
 

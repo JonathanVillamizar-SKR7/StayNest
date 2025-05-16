@@ -20,7 +20,7 @@ import daxbnb.model.Types;
  */
 public class HousingDAO {
 	private static final String SELECT_ALL = "SELECT * FROM Housing";
-	private static final String SELECT_ALL_FACILITY = "select hf.idHouse,f.idFacility, f.typeFacility from Facilities f JOIN HousingFacilities hf ON f.idFacility = hf.idFacilityWHERE hf.idHouse = ?;";
+	private static final String SELECT_ALL_FACILITY = "select hf.idHouse,f.idFacility, f.typeFacility from Facilities f JOIN HousingFacilities hf ON f.idFacility = hf.idFacility WHERE hf.idHouse = ?;";
 	private static final String SELECT_ALL_IMAGES = "SELECT i.imgRoute FROM Housing h INNER JOIN HousingImages hi ON h.idHouse = hi.idHouse INNER JOIN Images i ON hi.idImage = i.idImage WHERE h.idHouse = ?;";
 	private static final String SELECT_BY_ID = "SELECT * FROM Housing WHERE idHouse = ?";
 	private static final String SELECT_BY_TYPE = "SELECT * FROM Housing WHERE idType = ?";
@@ -50,26 +50,51 @@ public class HousingDAO {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_ALL);
 		ResultSet resultSet = ps.executeQuery();
-		Housing house = new Housing();
 		List<Housing> housings = new ArrayList<>();
-		List<Images> images = new ArrayList<>();
-		List<Facilities> facilities = new ArrayList<>();
-		int id = resultSet.getInt("idType");
+		
+		
 		TypesDAO typesDAO = new TypesDAO();
 		while (resultSet.next()) {
 			if (!resultSet.wasNull()) {
+				List<Images> images = new ArrayList<>();
+				List<Facilities> facilities = new ArrayList<>();
+				int id = resultSet.getInt("idHouse");
 				Types types = typesDAO.selectById(resultSet.getInt("idType"));
 				Housing housing = new Housing(resultSet.getInt("idHouse"), resultSet.getString("name"),
 						resultSet.getString("location"), resultSet.getInt("numGuest"), resultSet.getInt("numBedroom"),
 						resultSet.getInt("numBed"), resultSet.getInt("numBath"), types, resultSet.getDouble("price"), 
 						resultSet.getString("description"), resultSet.getBoolean("available"), images, facilities);
 				
+				PreparedStatement ps2 = connection.prepareStatement(SELECT_ALL_FACILITY);
+				ps2.setInt(1, id);
+				ResultSet rs2 = ps2.executeQuery();
+				while(rs2.next()) {
+					if(!rs2.wasNull()) {
+						facilities.add(
+								new Facilities(rs2.getString("typeFacility"))
+								);
+					}
+				}
+				housing.setFacilities(facilities);
 				
+				
+				PreparedStatement ps3 = connection.prepareStatement(SELECT_ALL_IMAGES);
+				ps3.setInt(1, id);
+				ResultSet rs3 = ps3.executeQuery();
+				while(rs3.next()) {
+					if(!rs3.wasNull()) {
+						images.add(
+								new Images(rs3.getString("imgRoute"))
+								);
+					}
+				}
+				housing.setImages(images);
 				housings.add(housing);
 			}
 		}
-		resultSet.close();
+		resultSet.close();	
 		db.closeConnection(connection);
+		housings.stream().forEach(System.out::println);
 		return housings;
 	}
 
