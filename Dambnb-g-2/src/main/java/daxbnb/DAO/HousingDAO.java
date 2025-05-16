@@ -9,7 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import daxbnb.DAO.DBConnection;
+import daxbnb.model.Facilities;
 import daxbnb.model.Housing;
+import daxbnb.model.Images;
 import daxbnb.model.Types;
 
 /**
@@ -18,11 +20,13 @@ import daxbnb.model.Types;
  */
 public class HousingDAO {
 	private static final String SELECT_ALL = "SELECT * FROM Housing";
+	private static final String SELECT_ALL_FACILITY = "select hf.idHouse,f.idFacility, f.typeFacility from Facilities f JOIN HousingFacilities hf ON f.idFacility = hf.idFacilityWHERE hf.idHouse = ?;";
+	private static final String SELECT_ALL_IMAGES = "SELECT i.imgRoute FROM Housing h INNER JOIN HousingImages hi ON h.idHouse = hi.idHouse INNER JOIN Images i ON hi.idImage = i.idImage WHERE h.idHouse = ?;";
 	private static final String SELECT_BY_ID = "SELECT * FROM Housing WHERE idHouse = ?";
 	private static final String SELECT_BY_TYPE = "SELECT * FROM Housing WHERE idType = ?";
 	private static final String SELECT_BY_BEDROOM = "SELECT * FROM Housing WHERE numBedroom = ?";
-	private static final String INSERT_HOUSING = "INSERT INTO Housing (name, location, numGuest, numBedroom, numBed, numBath, idType, price) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_HOUSING = "UPDATE Housing SET name = ?, location = ?, numGuest = ?, numBedroom = ?, numBed = ?, numBath = ?, idType = ?, price = ? WHERE idHouse = ?";
+	private static final String INSERT_HOUSING = "INSERT INTO Housing (name, location, numGuest, numBedroom, numBed, numBath, idType, price, description, available) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String UPDATE_HOUSING = "UPDATE Housing SET name = ?, location = ?, numGuest = ?, numBedroom = ?, numBed = ?, numBath = ?, idType = ?, price = ?, description = ?, available = ? WHERE idHouse = ?";
 	private static final String DELETE_HOUSING = "DELETE FROM Housing WHERE idHouse = ?";
 
 	private DBConnection db;
@@ -46,17 +50,21 @@ public class HousingDAO {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_ALL);
 		ResultSet resultSet = ps.executeQuery();
+		Housing house = new Housing();
 		List<Housing> housings = new ArrayList<>();
-
+		List<Images> images = new ArrayList<>();
+		List<Facilities> facilities = new ArrayList<>();
+		int id = resultSet.getInt("idType");
 		TypesDAO typesDAO = new TypesDAO();
 		while (resultSet.next()) {
 			if (!resultSet.wasNull()) {
 				Types types = typesDAO.selectById(resultSet.getInt("idType"));
 				Housing housing = new Housing(resultSet.getInt("idHouse"), resultSet.getString("name"),
 						resultSet.getString("location"), resultSet.getInt("numGuest"), resultSet.getInt("numBedroom"),
-						resultSet.getInt("numBed"), resultSet.getInt("numBath"), types, resultSet.getDouble("price"),
-						new ArrayList<>(), new ArrayList<>());
-
+						resultSet.getInt("numBed"), resultSet.getInt("numBath"), types, resultSet.getDouble("price"), 
+						resultSet.getString("description"), resultSet.getBoolean("available"), images, facilities);
+				
+				
 				housings.add(housing);
 			}
 		}
@@ -79,6 +87,8 @@ public class HousingDAO {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_ID);
 		ps.setInt(1, idHouse);
+		List<Images> images = new ArrayList<>();
+		List<Facilities> facilities = new ArrayList<>();
 		ResultSet rs = ps.executeQuery();
 		TypesDAO typesDAO = new TypesDAO();
 		Housing housing = null;
@@ -86,8 +96,8 @@ public class HousingDAO {
 		if (rs.next()) {
 			Types type = typesDAO.selectById(rs.getInt("idType"));
 			housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
-					rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
-					rs.getDouble("price"), new ArrayList<>(), new ArrayList<>());
+					rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type, rs.getDouble("price"), 
+					rs.getString("description"), rs.getBoolean("available"), images, facilities);
 		}
 		rs.close();
 		db.closeConnection(connection);
@@ -110,13 +120,14 @@ public class HousingDAO {
 		ResultSet rs = ps.executeQuery();
 		TypesDAO typesDAO = new TypesDAO();
 		List<Housing> housings = new ArrayList<>();
-
+		List<Images> images = new ArrayList<>();
+		List<Facilities> facilities = new ArrayList<>();
 		while (rs.next()) {
 			if (!rs.wasNull()) {
 				Types type = typesDAO.selectById(rs.getInt("idType"));
 				Housing housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
 						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
-						rs.getDouble("price"), new ArrayList<>(), new ArrayList<>());
+						rs.getDouble("price"), rs.getString("description"), rs.getBoolean("available"), images, facilities);
 				housings.add(housing);
 			}
 		}
@@ -143,13 +154,14 @@ public class HousingDAO {
 		ResultSet rs = ps.executeQuery();
 		TypesDAO typesDAO = new TypesDAO();
 		List<Housing> housings = new ArrayList<>();
-
+		List<Images> images = new ArrayList<>();
+		List<Facilities> facilities = new ArrayList<>();
 		while (rs.next()) {
 			if (!rs.wasNull()) {
 				Types type = typesDAO.selectById(rs.getInt("idType"));
 				Housing housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
 						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
-						rs.getDouble("price"), new ArrayList<>(), new ArrayList<>());
+						rs.getDouble("price"), rs.getString("description"), rs.getBoolean("available"), images, facilities);
 				housings.add(housing);
 			}
 		}
@@ -174,7 +186,7 @@ public class HousingDAO {
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
 	public int insertHousing(String name, String location, int numGuest, int numBedroom, int numBed, int numBath,
-			int idType, double price) throws SQLException, ClassNotFoundException {
+			int idType, double price, String description, boolean available) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(INSERT_HOUSING, Statement.RETURN_GENERATED_KEYS);
 		ps.setString(1, name);
@@ -185,6 +197,8 @@ public class HousingDAO {
 		ps.setInt(6, numBath);
 		ps.setInt(7, idType);
 		ps.setDouble(8, price);
+		ps.setString(9, description);
+		ps.setBoolean(10, available);
 
 		int affectedRows = ps.executeUpdate();
 		if (affectedRows == 0) {
@@ -219,7 +233,7 @@ public class HousingDAO {
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
 	public int updateHousing(int idHouse, String name, String location, int numGuest, int numBedroom, int numBed,
-			int numBath, int idType, double price) throws SQLException, ClassNotFoundException {
+			int numBath, int idType, double price, String description,boolean available) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(UPDATE_HOUSING);
 		ps.setString(1, name);
@@ -230,7 +244,9 @@ public class HousingDAO {
 		ps.setInt(6, numBath);
 		ps.setInt(7, idType);
 		ps.setDouble(8, price);
-		ps.setInt(9, idHouse);
+		ps.setString(9, description);
+		ps.setBoolean(10, available);
+		ps.setInt(11, idHouse);
 
 		int result = ps.executeUpdate();
 		ps.close();
