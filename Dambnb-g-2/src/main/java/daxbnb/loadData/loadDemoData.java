@@ -94,8 +94,10 @@ public class loadDemoData {
 			int numBath = Integer.parseInt(fields[5]);
 			int idType = Integer.parseInt(fields[6]);
 			double price = Double.parseDouble(fields[7].trim().replace(",", "."));
+			String description = fields[8];
+			boolean available = Boolean.parseBoolean(fields[9]);
 
-			String sql = "INSERT INTO Housing (name,location,numGuest,numBedroom,numBed,numBath,idType,price) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? )";
+			String sql = "INSERT INTO Housing (name,location,numGuest,numBedroom,numBed,numBath,idType,price,description,available) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, name);
 			ps.setString(2, location);
@@ -105,6 +107,8 @@ public class loadDemoData {
 			ps.setInt(6, numBath);
 			ps.setInt(7, idType);
 			ps.setDouble(8, price);
+			ps.setString(9, description);
+			ps.setBoolean(10, available);
 
 			result = ps.executeUpdate();
 			ps.close();
@@ -286,11 +290,10 @@ public class loadDemoData {
 		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
-			String idImage = (fields[0]);
-			String sql = "INSERT INTO Images (idImage,imgRoute) VALUES ( ?, ?)";
+			String idRoute = (fields[0]);
+			String sql = "INSERT INTO Images (imgRoute) VALUES ( ? )";
 			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, idImage);
-			ps.setString(2, fields[1]);
+			ps.setString(1, idRoute);
 			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
@@ -353,15 +356,12 @@ public class loadDemoData {
 			String fields[] = line.split(";");
 			int idHouse = Integer.parseInt(fields[0]);
 			int idFacility = Integer.parseInt(fields[1]);
-			boolean available = Integer.parseInt(fields[2]) == 1;
-			String idImage = (fields[4]);
-			String sql = "INSERT INTO HousingFacilities (idHouse,idFacility,available,description,idImage) VALUES ( ?, ?, ?, ?, ?)";
+
+			String sql = "INSERT INTO HousingFacilities (idHouse,idFacility) VALUES ( ?, ? )";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setInt(1, idHouse);
 			ps.setInt(2, idFacility);
-			ps.setBoolean(3, available);
-			ps.setString(4, fields[3]);
-			ps.setString(5, idImage);
+
 			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
@@ -371,4 +371,35 @@ public class loadDemoData {
 		return result;
 	}
 
+	/**
+	 * 	Carga datos a la tabla HousingImages
+	 * 
+	 * @param connection
+	 * @return resultado de los cambios
+	 * @throws Exception
+	 */
+	public static int loadHousingImages(Connection connection) throws Exception {
+		FileReader fr = new FileReader(Paths.get("files/HousingImages.csv").toFile());
+		BufferedReader reader = new BufferedReader(fr);
+		String line = "";
+		line = reader.readLine();
+		line = reader.readLine();
+		int result = 0;
+		while (line != null) {
+			String fields[] = line.split(";");
+			int idHouse = Integer.parseInt(fields[0]);
+			int idImage = Integer.parseInt(fields[1]);
+			
+			String sql = "INSERT INTO HousingImages (idHouse,idImage) VALUES ( ?, ? )";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setInt(1, idHouse);
+			ps.setInt(2, idImage);
+			result = ps.executeUpdate();
+			ps.close();
+			line = reader.readLine();
+		}
+		System.out.println("-Datos HousingImages ingresados");
+		reader.close();
+		return result;
+	}
 }
