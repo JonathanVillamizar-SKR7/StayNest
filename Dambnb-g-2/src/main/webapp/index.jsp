@@ -44,11 +44,25 @@
                             <a class="nav-link me-5 nav-link-custom" href="">+3</a>
                         </div>
                         <form class="form-inline d-flex ms-auto">
-                            <input class="form-control mr-sm-2 me-2" type="search" placeholder="Search" aria-label="Search">
+                            <input class="form-control mr-sm-2 me-2" type="search" placeholder="Search"
+                                aria-label="Search">
                             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </div>
                 </nav>
+                <div class="card-deck p-3">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="img/1-1.jpg" alt="Card image cap">
+                        <div class="card-body">
+                            <p class="card-text">Nombre de casa</p>
+                            <p class="card-text">Ubicacion de casa</p>
+                            <br>
+                            <p class="card-text">guest,bedrooms,beds,bath</p>
+                            <br>
+                            <p class="card-text">precio</p>
+                        </div>
+                    </div>
+                </div>
             </main>
 
 
