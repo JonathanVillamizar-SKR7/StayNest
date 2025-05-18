@@ -33,7 +33,8 @@ public class loadDemoData {
 			loadImages(connection);
 			loadFacilities(connection);
 			loadHousingFacilities(connection);
-
+			loadHousingImages(connection);
+			
 			dbConnection.closeConnection(connection);
 		} catch (Exception e) {
 			e.printStackTrace();
