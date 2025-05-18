@@ -94,7 +94,6 @@ public class HousingDAO {
 		}
 		resultSet.close();	
 		db.closeConnection(connection);
-		housings.stream().forEach(System.out::println);
 		return housings;
 	}
 
