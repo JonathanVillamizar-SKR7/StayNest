@@ -99,7 +99,7 @@ public class Facilities {
 
 	@Override
 	public String toString() {
-		return "Facilities [idFacilities=" + idFacilities + ", typeFacilities=" + typeFacilities + "]";
+		return  typeFacilities;
 	}
 
 }

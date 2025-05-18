@@ -78,6 +78,6 @@ public class Images {
 	 */
 	@Override
 	public String toString() {
-		return "Images [idImage=" + idImage + ", imgRoute=" + imgRoute + "]";
+		return  imgRoute;
 	}
 }

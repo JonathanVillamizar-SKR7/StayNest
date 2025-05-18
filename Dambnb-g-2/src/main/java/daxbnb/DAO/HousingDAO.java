@@ -120,9 +120,36 @@ public class HousingDAO {
 
 		if (rs.next()) {
 			Types type = typesDAO.selectById(rs.getInt("idType"));
+			int id = rs.getInt("idHouse");
 			housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
 					rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type, rs.getDouble("price"), 
 					rs.getString("description"), rs.getBoolean("available"), images, facilities);
+			
+			
+			PreparedStatement ps2 = connection.prepareStatement(SELECT_ALL_FACILITY);
+			ps2.setInt(1, id);
+			ResultSet rs2 = ps2.executeQuery();
+			while(rs2.next()) {
+				if(!rs2.wasNull()) {
+					facilities.add(
+							new Facilities(rs2.getString("typeFacility"))
+							);
+				}
+			}
+			housing.setFacilities(facilities);
+			
+			
+			PreparedStatement ps3 = connection.prepareStatement(SELECT_ALL_IMAGES);
+			ps3.setInt(1, id);
+			ResultSet rs3 = ps3.executeQuery();
+			while(rs3.next()) {
+				if(!rs3.wasNull()) {
+					images.add(
+							new Images(rs3.getString("imgRoute"))
+							);
+				}
+			}
+			housing.setImages(images);
 		}
 		rs.close();
 		db.closeConnection(connection);
