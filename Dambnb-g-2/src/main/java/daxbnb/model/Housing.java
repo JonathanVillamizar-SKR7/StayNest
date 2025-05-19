@@ -308,6 +308,6 @@ public class Housing {
 	public String toString() {
 		return "Housing [idHouse=" + idHouse + ", name=" + name + ", location=" + location + ", numGuest=" + numGuest
 				+ ", numBedroom=" + numBedroom + ", numBed=" + numBed + ", numBath=" + numBath + ", idType=" + idType
-				+ ", price=" + price + ", images=" + images + ", facilities=" + facilities + "]";
+				+ ", price=" + price + ", images=" + images + ", facilities=" + facilities + "]\n";
 	}
 }
