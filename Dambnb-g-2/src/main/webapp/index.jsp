@@ -24,7 +24,6 @@
 
 	<%
 	HousingDAO h = new HousingDAO();
-	Housing ho = new Housing();
 	%>
 	<header>
 		<nav class="navbar navbar-expand-lg " style="background-color: white;">
@@ -106,22 +105,6 @@
 				</div>
 			</div>
 		</main>
-
-
-		<%-- Llamar a base de datos para recoger la lista de las casas , es el selectall de
-                                    housingdao --%>
-
-		<%-- Crear tabla y recorrer lista con cada departamento --%>
-
-		<%-- <div>
-                                            <table>
-                                                <% for(housing s : house){ %>
-                                                    <td></td>
-                                            </table>
-
-                                            </div>
-                                            <% %> --%>
-
 	</header>
 </body>
 
