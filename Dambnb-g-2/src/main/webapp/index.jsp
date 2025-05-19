@@ -71,7 +71,8 @@
 						for (Housing f : house) {
 						%>
 						<div class="col-md-4 mb-3">
-							<a href="home.jsp" class="text-decoration-none">
+							<a href="housing.jsp?idHouse=<%=f.getIdHouse()%>"
+								class="text-decoration-none">
 								<div class="card">
 									<img class="card-img-top" src="img/1-1.jpg"
 										alt="Card image cap">

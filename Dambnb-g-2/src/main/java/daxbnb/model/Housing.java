@@ -87,7 +87,7 @@ public class Housing {
 	 * @param price       Precio
 	 * @param description Descripcion
 	 * @param available   Disponible
-	 * @param images	  Lista de imagenes
+	 * @param images      Lista de imagenes
 	 * @param facilities  Lista de facilities
 	 */
 	public Housing(int idHouse, String name, String location, int numGuest, int numBedroom, int numBed, int numBath,

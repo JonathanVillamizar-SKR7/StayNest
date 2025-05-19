@@ -62,24 +62,23 @@ nav {
 }
 
 .logo:hover {
-    filter: brightness(1.2);
-    transition: filter 0.3s ease;
-    color: var(--warning-color);
-    transition: color 0.3s ease;
+	filter: brightness(1.2);
+	transition: filter 0.3s ease;
+	color: var(--warning-color);
+	transition: color 0.3s ease;
 }
+
 .User-Icon:hover {
-    filter: brightness(1.2);
-    transition: filter 0.3s ease;
-    color: var(--warning-color);
-    transition: color 0.3s ease;
+	filter: brightness(1.2);
+	transition: filter 0.3s ease;
+	color: var(--warning-color);
+	transition: color 0.3s ease;
 }
 
 .logo:hover img {
 	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
 		brightness(1.2);
 }
-
-
 
 footer {
 	margin-top: auto;
@@ -113,4 +112,29 @@ footer .logo {
 	width: 100%;
 	border-width: 1.5rem 1rem;
 	text-align: start;
+}
+
+.Offer {
+	border-style: bottom;
+	border-color: var(--warning-color);
+	border-width: 2rem 4rem;
+	border-radius: 0.5rem;
+	background-color: rgb(165, 233, 250);;
+	padding: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.formReserve {
+	border-color: var(--accent-color);
+	border-style: solid;
+	border-radius: 2rem;
+	align-items: center;
+	width: 100%;
+	border-width: 0.1rem 0.1rem;
+	text-align: start;
+	padding: 1rem;
+}
+
+.description {
+	padding-block-end: 2rem;
 }
