@@ -1,13 +1,78 @@
 @charset "UTF-8";
+
+@import
+	url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap')
+	;
+
 :root {
-    --primary-color: rgb(0, 124, 145);
-    --secondary-color: rgb(236, 238, 248); 
-    --accent-color: rgb(76, 206, 238);
-    --dark-color: rgb(51, 51, 51);
-    --warning-color: rgb(255, 0, 0);
+	--primary-color: rgb(0, 124, 145);
+	--secondary-color: rgb(236, 238, 248);
+	--accent-color: rgb(76, 206, 238);
+	--dark-color: rgb(51, 51, 51);
+	--warning-color: rgb(255, 165, 82);
 }
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
 .nav-link-custom {
-    font-size: 1.5em;
-    color: #007b8f !important;
-    font-weight: bold; /* Esto es opcional para hacerlo más sólido */
+	font-size: 1.5em;
+	color: #007b8f !important;
+	font-weight: bold; /* Esto es opcional para hacerlo más sólido */
+	background-color: transparent;
+}
+
+body {
+	background-color: var(--secondary-color);
+	font-family: 'Nunito Sans', sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	/* Ensures footer sticks to the bottom */
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: bold;
+	color: var(--accent-color);
+	background-color: white;
+}
+
+.Index {
+	font-weight: 700;
+	text-decoration: none;
+	color: var(--accent-color);
+	font-size: 1.2rem;
+	transition: color 0.3s ease;
+}
+
+
+.Index:hover {
+	color: var(--warning-color);
+}
+
+.User-Icon {
+	width: 4rem;
+}
+
+.User-Icon:hover {
+	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
+		brightness(1.2);
+}
+
+.menu {
+	gap: 3rem;
+}
+
+.logo {
+	width: 10rem;
+}
+
+.logo:hover img {
+	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
+		brightness(1.2);
 }
