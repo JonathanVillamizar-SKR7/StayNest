@@ -31,6 +31,9 @@
 			String password = request.getParameter("password");
 			User user = uS.selectByEmailandPassword(email, password);
 			if (user != null) {
+				 // Crear la sessió i guardar el nom d'usuari
+                Session session = request.getSession();
+                session.setAttribute("username", username);
 		if (user.getUserType().equals("client")) {
 			response.sendRedirect("index.jsp");
 		}else{

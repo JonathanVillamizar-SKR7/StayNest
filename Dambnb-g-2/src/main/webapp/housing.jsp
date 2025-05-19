@@ -19,13 +19,7 @@
 
 <body>
 	<%
-	HousingDAO h = new HousingDAO();
-	TypesDAO typesDAO = new TypesDAO();
-	HousingFacilityDAO facilityDAO = new HousingFacilityDAO();
-	HousingImagesDAO imagesDAO = new HousingImagesDAO(); 
-	Housing house = h.selectById();
-	List<Facilities> facilities = facilityDAO.selectFacilitiesByHousingId(idHouse);
-	List<Images> images = imagesDAO.selectImagesByHousingId(idHouse);
+    Housing housing = (Housing) session.getAttribute("selectedHousing");
 	%>
 
 	<nav>
@@ -47,10 +41,9 @@
 			<div class="row align-items-center">
 				<div class="col-md-6">
                     <div id="housingCarousel" class="carousel slide" data-bs-ride="carousel">
-                        
-                        <div class="carousel-indicators">
+	                        <div class="carousel-indicators">
                             <%
-                            for (int i = 0; i < images.size(); i++) {
+                            for (int i = 0; i < housing.getImages().size(); i++) {
                             %>
                                 <button type="button" data-bs-target="#housingCarousel" data-bs-slide-to="<%=i%>"
                                     class="<%= (i == 0) ? "active" : "" %>" aria-label="Slide <%=i + 1%>"></button>
@@ -61,16 +54,16 @@
                 
                         <div class="carousel-inner">
                             <% 
-                            if (!images.isEmpty()) {
-                                String firstImagePath = request.getContextPath() + images.get(0).getImgRoute();
+                            if (!housing.getImages().isEmpty()) {
+                                String firstImagePath = request.getContextPath() + housing.getImages().get(0).getImgRoute();
                             %>
                                 <div class="carousel-item active">
                                     <img src="<%=firstImagePath%>" class="d-block w-100 img-fluid rounded image-full" alt="Main Image">
                                 </div>
                             <% 
                             }
-                            for (int i = 1; i < images.size(); i++) {
-                                String imagePath = request.getContextPath() + images.get(i).getImgRoute();
+                            for (int i = 1; i < housing.getImages().size(); i++) {
+                                String imagePath = request.getContextPath() + housing.getImages().get(0).getImgRoute();
                             %>
                                 <div class="carousel-item">
                                     <img src="<%=imagePath%>" class="d-block w-100 img-fluid rounded image-full" alt="Image House">
@@ -103,30 +96,30 @@
 				<div class="col-md-6 d-flex flex-column justify-content-around"
 					style="height: 100%;">
 					<h2 class="align-text-top">
-						<%=house.getName()%>
+						<%=housing.getName()%>
 					</h2>
 					<p class="text-left">
-						<%=house.getLocation()%>
+						<%=housing.getLocation()%>
 					</p>
 					<figcaption class="blockquote-footer">
-						Type of accommodation: <cite title="Source Title text"> <%=house.getIdType()%>
+						Type of accommodation: <cite title="Source Title text"> <%=housing.getIdType()%>
 						</cite>
 					</figcaption>
 					<div class="list">
 						<ul class="nav flex-column">
 							<li class="nav-item"><img src="img/guest.png" width="8%"
-								class="img-fluid" alt=""> <%=house.getNumGuest()%> guest</li>
+								class="img-fluid" alt=""> <%=housing.getNumGuest()%> guest</li>
 							<li class="nav-item"><img src="img/bedroom.png" width="8%"
-								class="img-fluid" alt=""> <%=house.getNumBedroom()%>
+								class="img-fluid" alt=""> <%=housing.getNumBedroom()%>
 								bedroom</li>
 							<li class="nav-item"><img src="img/bed.png" width="8%"
-								class="img-fluid" alt=""> <%=house.getNumBed()%> bed</li>
+								class="img-fluid" alt=""> <%=housing.getNumBed()%> bed</li>
 							<li class="nav-item"><img src="img/bath.png" width="8%"
-								class="img-fluid" alt=""> <%=house.getNumBath()%> bath</li>
+								class="img-fluid" alt=""> <%=housing.getNumBath()%> bath</li>
 						</ul>
 					</div>
 					<div class="textt-left ms-1 mb-4">
-						<li>Price <%=house.getPrice()%> € per night.
+						<li>Price <%=housing.getPrice()%> € per night.
 						</li>
 					</div>
 				</div>
@@ -135,7 +128,7 @@
 			<div class="description col-12 mt-4">
 				<h3>Description</h3>
 				<p>
-					<%=house.getDescription()%>
+					<%=housing.getDescription()%>
 				</p>
 			</div>
 
@@ -144,9 +137,10 @@
 					<h4>Offers</h4>
 					<ul class="Offers nav flex-column">
 						<%
-						for (Facilities f : facilities) {
+						List<Facilities> facilities = housing.getFacilities();						
+						for (Facilities s : facilities) {
 						%>
-						<li class="Offer"><%=f.getTypeFacilities()%></li>
+						<li class="Offer"><%=s.getTypeFacilities()%></li>
 						<%
 						}
 						%>

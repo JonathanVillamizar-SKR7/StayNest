@@ -25,7 +25,7 @@
 	<%
 	HousingDAO h = new HousingDAO();
 	%>
-		<nav>
+	<nav>
 		<div class="logo">
 			<a href="home.jsp"> <img src="img/Logo_right.png" alt="StayNest"
 				class="logo">
@@ -57,49 +57,48 @@
 						class="nav-link me-5 nav-link-custom" href="">+2</a> <a
 						class="nav-link me-5 nav-link-custom" href="">+3</a>
 				</div>
-			</nav>
-			<div class="container-fluid d-flex justify-content-center">
-				<div class="card-deck p-5">
-					<div class="row">
-						<%
-						List<Housing> house = h.selectAll();
-						for (Housing f : house) {
-						%>
-						<div class="col-md-4 mb-3">
-							<a href="housing.jsp?idHouse=<%=f.getIdHouse()%>"
-								class="text-decoration-none">
-								<div class="card">
-									<img class="card-img-top" src="img/1-1.jpg"
-										alt="Card image cap">
-									<div class="card-body">
-										<h3 class="card-title"><%=f.getName()%></h3>
-										<h5 class="card-text text-muted"><%=f.getLocation()%></h5>
-										<br>
-										<h5 class="card-text text-muted"><%=f.getNumGuest()%>
-											guests -
-											<%=f.getNumBedroom()%>
-											bedrooms -
-											<%=f.getNumBed()%>
-											beds -
-											<%=f.getNumBath()%>
-											bath
-										</h5>
-										<br>
-										<h5 class="card-text"><%=f.getPrice()%>
-											€
-										</h5>
-										<span class="stretched-link"></span>
-									</div>
+		</nav>
+		<div class="container-fluid d-flex justify-content-center">
+			<div class="card-deck p-5">
+				<div class="row">
+					<%
+					List<Housing> house = h.selectAll();
+					for (Housing f : house) {
+						session.setAttribute("selectedHousing", f);
+					%>
+					<div class="col-md-4 mb-3">
+						<a href="housing.jsp" class="text-decoration-none">
+							<div class="card">
+								<img class="card-img-top" src="img/1-1.jpg" alt="Card image cap">
+								<div class="card-body">
+									<h3 class="card-title"><%=f.getName()%></h3>
+									<h5 class="card-text text-muted"><%=f.getLocation()%></h5>
+									<br>
+									<h5 class="card-text text-muted"><%=f.getNumGuest()%>
+										guests -
+										<%=f.getNumBedroom()%>
+										bedrooms -
+										<%=f.getNumBed()%>
+										beds -
+										<%=f.getNumBath()%>
+										bath
+									</h5>
+									<br>
+									<h5 class="card-text"><%=f.getPrice()%>
+										€
+									</h5>
+									<span class="stretched-link"></span>
 								</div>
 							</div>
-						</a>
 					</div>
-
-					<%
-					}
-					%>
+					</a>
 				</div>
+
+				<%
+				}
+				%>
 			</div>
+		</div>
 		</div>
 	</main>
 
