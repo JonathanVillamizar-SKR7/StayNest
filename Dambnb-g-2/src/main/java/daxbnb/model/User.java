@@ -108,7 +108,7 @@ public class User {
 		this.email = email;
 		this.passport = passport;
 		this.password = password;
-		UserType = userType;
+		UserType = "client";
 	}
 
 	/**

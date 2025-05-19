@@ -21,6 +21,7 @@ public class UserDAO {
 	private static final String SELECT_ALL = "SELECT * FROM Users";
 	private static final String SELECT_BY_PASSPORT = "SELECT * FROM Users WHERE passport = ?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM Users WHERE email = ?";
+	private static final String SELECT_BY_EMAIL_AND_PASSWORD = "SELECT * FROM Users WHERE email = ? AND password = ?;";
 	private static final String INSERT_USER = "INSERT INTO Users (userName, phone, email, passport, password, userType) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_USER = "UPDATE Users SET userName = ?, phone = ?, email = ?, passport = ? WHERE idUser = ?";
 	private static final String DELETE_USER = "DELETE FROM Users WHERE idUser = ?";
@@ -117,6 +118,25 @@ public class UserDAO {
 		db.closeConnection(connection);
 		return user;
 	}
+	public User selectByEmailandPassword(String email, String password) throws SQLException, ClassNotFoundException{
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(SELECT_BY_EMAIL_AND_PASSWORD);
+		ps.setString(1, email);
+		ps.setString(2, password);
+		ResultSet rs = ps.executeQuery();
+		User user = null;
+		if (rs.next()) {
+			List<CreditCard> creditcards = new ArrayList<>();
+			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("UserType"),
+					rs.getString("userDescription"));
+		}
+		
+		rs.close();
+		db.closeConnection(connection);
+		return user;
+		
+	}
 
 	/**
 	 * Inserta un nuevo usuario en la base de datos.
@@ -130,7 +150,7 @@ public class UserDAO {
 	 *                                SQL.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public int insertUser(String userName, long phone, String email, int passport, String password, String userType, String userDescription)
+	public int insertUser(String userName, long phone, String email, int passport, String password)
 			throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
@@ -139,8 +159,8 @@ public class UserDAO {
 		ps.setString(3, email);
 		ps.setInt(4, passport);
 		ps.setString(5, password);
-		ps.setString(6, userType);
-		ps.setString(7, userDescription);
+		ps.setString(6, "client");
+		
 
 		int affectRows = ps.executeUpdate();
 		if (affectRows == 0) {

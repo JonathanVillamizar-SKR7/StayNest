@@ -5,6 +5,7 @@
 <%@ page import="main.*"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
+<%@page import="javax.servlet.http.HttpSession"%>
 <!DOCTYPE html>
 <html>
 
@@ -24,19 +25,22 @@
 	<%
 	UserDAO uS = new UserDAO();
 	User u = new User();
-	Details d = new Details();
 	if ("POST".equalsIgnoreCase(request.getMethod())) {
 		try {
 			String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            List<User> users = uS.selectAll();
-            for(User a : users){
-            	if (email != a.getEmail() && password != d.getPassword() && userType != null) {
-                    HttpSession session = request.getSession();
-                    session.setAttribute("username", username); 
-            }
+			String password = request.getParameter("password");
+			User user = uS.selectByEmailandPassword(email, password);
+			if (user != null) {
+		if (user.getUserType().equals("client")) {
+			response.sendRedirect("index.jsp");
+		}else{
+			response.sendRedirect("home.jsp");
+		}
+			}else{
+				//tira excepcion personalizada de no existe email y password 
+			}
 		} catch (Exception e) {
-		
+			e.printStackTrace();
 		}
 	}
 	%>
@@ -57,7 +61,7 @@
 	<main>
 		<div class="figura">
 			<div class="login">
-				<form action="">
+				<form method="POST">
 					<H1>LOG IN</H1>
 					<div>
 						<input type="email" name="email" id="email" required> <label
