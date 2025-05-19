@@ -16,17 +16,11 @@ CREATE TABLE Users (
     userName VARCHAR(100) UNIQUE,
     phone BIGINT,
     email VARCHAR(100),
-    passport INT
+    passport INT,
+    password VARCHAR(100),
+    userType VARCHAR(50)
 );
 
--- Detalles de autenticación del usuario
-CREATE TABLE Details (
-    userName VARCHAR(100) PRIMARY KEY,
-    password VARCHAR(100),
-    userType VARCHAR(50),
-    userDescription TEXT,
-    FOREIGN KEY (userName) REFERENCES Users(userName)
-);
 
 -- Tarjetas de crédito
 CREATE TABLE CreditCards (

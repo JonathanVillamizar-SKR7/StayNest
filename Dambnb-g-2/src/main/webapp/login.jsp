@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="daxbnb.DAO.*"%>
+<%@ page import="daxbnb.model.*"%>
+<%@ page import="main.*"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +21,26 @@
 </head>
 
 <body>
+	<%
+	UserDAO uS = new UserDAO();
+	User u = new User();
+	Details d = new Details();
+	if ("POST".equalsIgnoreCase(request.getMethod())) {
+		try {
+			String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            List<User> users = uS.selectAll();
+            for(User a : users){
+            	if (email != a.getEmail() && password != d.getPassword() && userType != null) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("username", username); 
+            }
+		} catch (Exception e) {
+		
+		}
+	}
+	%>
+
 	<nav>
 		<div class="logo">
 			<a href="home.jsp"> <img src="img/Logo_right.png" alt="StayNest"

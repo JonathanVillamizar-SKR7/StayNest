@@ -11,14 +11,7 @@ import java.util.List;
  * 
  */
 public class Details extends User {
-	/**
-	 * Contraseña del usuario.
-	 */
-	private String password;
-	/**
-	 * Tipo de usuario en la aplicación, por ejemplo, "admin", "cliente", etc.
-	 */
-	private String userType;
+
 	/**
 	 * Descripción personalizada del usuario. Puede incluir información adicional
 	 * como intereses o roles.
@@ -39,49 +32,37 @@ public class Details extends User {
 	 * @param userType        Tipo de usuario (por ejemplo, "admin", "cliente").
 	 * @param userDescription Descripción personalizada del usuario.
 	 */
-	public Details(String userName, int idUser, int phone, String email, int passport, List<CreditCard> creditCard,
+	
+
+	/**
+	 * Constructor sin nada
+	 */
+	public Details() {
+		
+	}
+	
+	
+
+	/**
+	 * Details con todos los campos
+	 * 
+	 * @param userName
+	 * @param idUser
+	 * @param phone
+	 * @param email
+	 * @param passport
+	 * @param idCreditCard
+	 * @param password
+	 * @param userType
+	 * @param userDescription
+	 */
+	public Details(String userName, int idUser, long phone, String email, int passport, List<CreditCard> idCreditCard,
 			String password, String userType, String userDescription) {
-		super(userName, idUser, phone, email, passport, creditCard);
-		this.password = password;
-		this.userType = userType;
+		super(userName, idUser, phone, email, passport, idCreditCard, password, userType);
 		this.userDescription = userDescription;
 	}
 
-	/**
-	 * Devuelve la contraseña del usuario.
-	 *
-	 * @return Contraseña.
-	 */
-	public String getPassword() {
-		return password;
-	}
 
-	/**
-	 * Establece la contraseña del usuario.
-	 *
-	 * @param password Nueva contraseña.
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	/**
-	 * Devuelve el tipo de usuario (por ejemplo, "admin", "cliente").
-	 *
-	 * @return Tipo de usuario.
-	 */
-	public String getUserType() {
-		return userType;
-	}
-
-	/**
-	 * Establece el tipo de usuario.
-	 *
-	 * @param userType Tipo de usuario.
-	 */
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
 
 	/**
 	 * Devuelve la descripción personalizada del usuario.
@@ -109,7 +90,7 @@ public class Details extends User {
 	 */
 	@Override
 	public String toString() {
-		return "Details [password=" + password + ", userType=" + userType + ", userDescription=" + userDescription
+		return "Details [userDescription=" + userDescription
 				+ ", toString()=" + super.toString() + "]";
 	}
 }

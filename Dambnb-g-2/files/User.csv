@@ -1,4 +1,6 @@
-userName;phone;email;passport
-admin_user;687550711;admin@stayapp.com;85019795
-Francesco_Virgolini;693266457;Fran@example.com;72725747
-Natasha_Kiev;675822906;Natasha@example.com;90830697
+userName;phone;email;passport;password;userType
+admin_user;687550711;admin@stayapp.com;85019795;password123;admin
+Francesco_Virgolini;693266457;Fran@example.com;72725747;password123;client
+Natasha_Kiev;675822906;Natasha@example.com;90830697;password123;client
+Alfredo;666142123;Alfredo@gmail.com;45678282;12345678;admin
+Jonathan;654453637;Jonathan@gmail.com;56756728;12345678;admin

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import daxbnb.DAO.DBConnection;
+import daxbnb.model.CreditCard;
 import daxbnb.model.User;
 
 /**
@@ -20,7 +21,7 @@ public class UserDAO {
 	private static final String SELECT_ALL = "SELECT * FROM Users";
 	private static final String SELECT_BY_PASSPORT = "SELECT * FROM Users WHERE passport = ?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM Users WHERE email = ?";
-	private static final String INSERT_USER = "INSERT INTO Users (userName, phone, email, passport) VALUES (?, ?, ?, ?)";
+	private static final String INSERT_USER = "INSERT INTO Users (userName, phone, email, passport, password, userType) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_USER = "UPDATE Users SET userName = ?, phone = ?, email = ?, passport = ? WHERE idUser = ?";
 	private static final String DELETE_USER = "DELETE FROM Users WHERE idUser = ?";
 
@@ -46,11 +47,12 @@ public class UserDAO {
 		PreparedStatement ps = connection.prepareStatement(SELECT_ALL);
 		ResultSet rs = ps.executeQuery();
 		List<User> users = new ArrayList<>();
-
+		
 		while (rs.next()) {
 			if (!rs.wasNull()) {
+				List<CreditCard> creditcards = new ArrayList<>();
 				User user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"),
-						rs.getString("email"), rs.getInt("passport"));
+						rs.getString("email"), rs.getInt("passport"), creditcards,rs.getString("password"),rs.getString("userName"));
 				users.add(user);
 			}
 		}
@@ -77,8 +79,9 @@ public class UserDAO {
 		User user = null;
 
 		if (rs.next()) {
-			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
-					rs.getInt("passport"));
+			List<CreditCard> creditcards = new ArrayList<>();
+			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"),
+					rs.getString("email"), rs.getInt("passport"), creditcards,rs.getString("password"),rs.getString("userName"));
 		}
 		rs.close();
 		db.closeConnection(connection);
@@ -103,8 +106,9 @@ public class UserDAO {
 		User user = null;
 
 		if (rs.next()) {
-			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
-					rs.getInt("passport"));
+			List<CreditCard> creditcards = new ArrayList<>();
+			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"),
+					rs.getString("email"), rs.getInt("passport"), creditcards,rs.getString("password"),rs.getString("userName"));
 		}
 		rs.close();
 		db.closeConnection(connection);
@@ -123,7 +127,7 @@ public class UserDAO {
 	 *                                SQL.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public int insertUser(String userName, long phone, String email, int passport)
+	public int insertUser(String userName, long phone, String email, int passport, 	String password, String userType)
 			throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
@@ -131,6 +135,8 @@ public class UserDAO {
 		ps.setLong(2, phone);
 		ps.setString(3, email);
 		ps.setInt(4, passport);
+		ps.setString(5, password);
+		ps.setString(6, userType);
 
 		int affectRows = ps.executeUpdate();
 		if (affectRows == 0) {
@@ -160,7 +166,7 @@ public class UserDAO {
 	 *                                actualización SQL.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public int updateUser(int idUser, String userName, long phone, String email, int passport)
+	public int updateUser(int idUser, String userName, long phone, String email, int passport, String password, String userType)
 			throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(UPDATE_USER);
@@ -168,7 +174,9 @@ public class UserDAO {
 		ps.setLong(2, phone);
 		ps.setString(3, email);
 		ps.setInt(4, passport);
-		ps.setInt(5, idUser);
+		ps.setString(5, password);
+		ps.setString(6, userType);
+		ps.setInt(7, idUser);
 
 		int result = ps.executeUpdate();
 		ps.close();

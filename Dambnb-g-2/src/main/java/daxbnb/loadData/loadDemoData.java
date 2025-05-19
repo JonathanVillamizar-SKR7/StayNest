@@ -136,12 +136,10 @@ public class loadDemoData {
 		int result = 0;
 		while (line != null) {
 			String fields[] = line.split(";");
-			String sql = "INSERT INTO Details (userName,password,userType,userDescription) VALUES ( ?, ?, ?, ?)";
+			String sql = "INSERT INTO Details (userName,userDescription) VALUES ( ?, ?)";
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, fields[0]);
 			ps.setString(2, fields[1]);
-			ps.setString(3, fields[2]);
-			ps.setString(4, fields[3]);
 			result = ps.executeUpdate();
 			ps.close();
 			line = reader.readLine();
