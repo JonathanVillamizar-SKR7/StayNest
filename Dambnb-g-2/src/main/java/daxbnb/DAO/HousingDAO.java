@@ -63,7 +63,7 @@ public class HousingDAO {
 						resultSet.getString("location"), resultSet.getInt("numGuest"), resultSet.getInt("numBedroom"),
 						resultSet.getInt("numBed"), resultSet.getInt("numBath"), types, resultSet.getDouble("price"),
 						resultSet.getString("description"), resultSet.getBoolean("available"), images, facilities);
-
+				
 				PreparedStatement ps2 = connection.prepareStatement(SELECT_ALL_FACILITY);
 				ps2.setInt(1, id);
 				ResultSet rs2 = ps2.executeQuery();

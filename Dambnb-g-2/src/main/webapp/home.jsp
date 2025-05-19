@@ -30,7 +30,6 @@
 			</a>
 		</div>
 	</nav>
-
 	<header>
 		<div class="image-container">
 			<img src="img/portada_home.jpg" alt="PortadaHome"
@@ -164,7 +163,7 @@
 
 
 	<div class="col-12 text-center mt-4">
-		<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega</p>
+		<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega - Diana Kopyv</p>
 	</div>
 </footer>
 
