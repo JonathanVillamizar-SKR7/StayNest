@@ -18,7 +18,8 @@ CREATE TABLE Users (
     email VARCHAR(100),
     passport INT,
     password VARCHAR(100),
-    userType VARCHAR(50)
+    userType VARCHAR(50),
+    userDescription VARCHAR(150)
 );
 
 

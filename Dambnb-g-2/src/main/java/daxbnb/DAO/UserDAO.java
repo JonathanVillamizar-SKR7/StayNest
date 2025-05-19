@@ -47,12 +47,13 @@ public class UserDAO {
 		PreparedStatement ps = connection.prepareStatement(SELECT_ALL);
 		ResultSet rs = ps.executeQuery();
 		List<User> users = new ArrayList<>();
-		
+
 		while (rs.next()) {
 			if (!rs.wasNull()) {
 				List<CreditCard> creditcards = new ArrayList<>();
-				User user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"),
-						rs.getString("email"), rs.getInt("passport"), creditcards,rs.getString("password"),rs.getString("userName"));
+				User user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
+						rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+						rs.getString("userDescription"));
 				users.add(user);
 			}
 		}
@@ -80,8 +81,9 @@ public class UserDAO {
 
 		if (rs.next()) {
 			List<CreditCard> creditcards = new ArrayList<>();
-			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"),
-					rs.getString("email"), rs.getInt("passport"), creditcards,rs.getString("password"),rs.getString("userName"));
+			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+					rs.getString("userDescription"));
 		}
 		rs.close();
 		db.closeConnection(connection);
@@ -107,8 +109,9 @@ public class UserDAO {
 
 		if (rs.next()) {
 			List<CreditCard> creditcards = new ArrayList<>();
-			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"),
-					rs.getString("email"), rs.getInt("passport"), creditcards,rs.getString("password"),rs.getString("userName"));
+			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+					rs.getString("userDescription"));
 		}
 		rs.close();
 		db.closeConnection(connection);
@@ -127,7 +130,7 @@ public class UserDAO {
 	 *                                SQL.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public int insertUser(String userName, long phone, String email, int passport, 	String password, String userType)
+	public int insertUser(String userName, long phone, String email, int passport, String password, String userType, String userDescription)
 			throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
@@ -137,6 +140,7 @@ public class UserDAO {
 		ps.setInt(4, passport);
 		ps.setString(5, password);
 		ps.setString(6, userType);
+		ps.setString(7, userDescription);
 
 		int affectRows = ps.executeUpdate();
 		if (affectRows == 0) {
@@ -166,8 +170,8 @@ public class UserDAO {
 	 *                                actualización SQL.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public int updateUser(int idUser, String userName, long phone, String email, int passport, String password, String userType)
-			throws SQLException, ClassNotFoundException {
+	public int updateUser(int idUser, String userName, long phone, String email, int passport, String password,
+			String userType) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(UPDATE_USER);
 		ps.setString(1, userName);

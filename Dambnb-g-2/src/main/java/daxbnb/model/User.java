@@ -53,10 +53,18 @@ public class User {
 	 */
 	private String UserType;
 	
-	
-	
 	/**
-	 * Contructor con todos los campos
+	 * Descripción personalizada del usuario. Puede incluir información adicional
+	 * como intereses o roles.
+	 */
+	private String userDescription;
+	
+	
+	
+	
+
+	/**
+	 * Constructor con todos los campos
 	 * 
 	 * @param userName
 	 * @param idUser
@@ -66,9 +74,11 @@ public class User {
 	 * @param idCreditCard
 	 * @param password
 	 * @param userType
+	 * @param userDescription
 	 */
 	public User(String userName, int idUser, long phone, String email, int passport, List<CreditCard> idCreditCard,
-			String password, String userType) {
+			String password, String userType, String userDescription) {
+		super();
 		this.userName = userName;
 		this.idUser = idUser;
 		this.phone = phone;
@@ -77,6 +87,7 @@ public class User {
 		this.idCreditCard = idCreditCard;
 		this.password = password;
 		UserType = userType;
+		this.userDescription = userDescription;
 	}
 
 	/**
@@ -196,14 +207,6 @@ public class User {
 		this.idCreditCard = creditCard;
 	}
 
-	/**
-	 * @return Datos del usuario como texto
-	 */
-	@Override
-	public String toString() {
-		return "User [userName=" + userName + ", idUser=" + idUser + ", phone=" + phone + ", email=" + email
-				+ ", passport=" + passport + ", creditCard=" + idCreditCard + "]\n";
-	}
 
 	/**
 	 * @return the password
@@ -232,4 +235,26 @@ public class User {
 	public void setUserType(String userType) {
 		UserType = userType;
 	}
+
+	/**
+	 * @return the userDescription
+	 */
+	public String getUserDescription() {
+		return userDescription;
+	}
+
+	/**
+	 * @param userDescription the userDescription to set
+	 */
+	public void setUserDescription(String userDescription) {
+		this.userDescription = userDescription;
+	}
+
+	@Override
+	public String toString() {
+		return "User [userName=" + userName + ", idUser=" + idUser + ", phone=" + phone + ", email=" + email
+				+ ", passport=" + passport + ", idCreditCard=" + idCreditCard + ", password=" + password + ", UserType="
+				+ UserType + ", userDescription=" + userDescription + "]\n";
+	}
+	
 }

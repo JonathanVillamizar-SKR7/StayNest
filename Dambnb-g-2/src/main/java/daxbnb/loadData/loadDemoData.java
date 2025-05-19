@@ -27,7 +27,6 @@ public class loadDemoData {
 			loadTypes(connection);
 			loadHousing(connection);
 			loadUser(connection);
-			loadDetails(connection);
 			loadCreditCard(connection);
 			loadReserve(connection);
 			loadImages(connection);
@@ -120,34 +119,6 @@ public class loadDemoData {
 		return result;
 	}
 
-	/**
-	 * Carga datos a la tabla Details.
-	 * 
-	 * @param connection
-	 * @return Resultado de la última inserción.
-	 * @throws Exception
-	 */
-	public static int loadDetails(Connection connection) throws Exception {
-		FileReader fr = new FileReader(Paths.get("files/Details.csv").toFile());
-		BufferedReader reader = new BufferedReader(fr);
-		String line = "";
-		line = reader.readLine();
-		line = reader.readLine();
-		int result = 0;
-		while (line != null) {
-			String fields[] = line.split(";");
-			String sql = "INSERT INTO Details (userName,userDescription) VALUES ( ?, ?)";
-			PreparedStatement ps = connection.prepareStatement(sql);
-			ps.setString(1, fields[0]);
-			ps.setString(2, fields[1]);
-			result = ps.executeUpdate();
-			ps.close();
-			line = reader.readLine();
-		}
-		System.out.println("-Datos Details ingresados");
-		reader.close();
-		return result;
-	}
 
 	/**
 	 * Carga datos a la tabla Users.
@@ -167,12 +138,15 @@ public class loadDemoData {
 			String fields[] = line.split(";");
 			long phone = Long.parseLong(fields[1]);
 			int passport = Integer.parseInt(fields[3]);
-			String sql = "INSERT INTO Users (userName, phone, email, passport) VALUES (?, ?, ?, ?)";
+			String sql = "INSERT INTO Users (userName, phone, email, passport, password, userType, userDescription) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, fields[0]);
 			ps.setLong(2, phone);
 			ps.setString(3, fields[2]);
 			ps.setInt(4, passport);
+			ps.setString(5, fields[4]);
+			ps.setString(6, fields[5]);
+			ps.setString(7, fields[6]);
 
 			result = ps.executeUpdate();
 			ps.close();
