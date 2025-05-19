@@ -19,7 +19,9 @@
 
 <body>
 	<%
-    Housing housing = (Housing) session.getAttribute("selectedHousing");
+	HousingDAO h = new HousingDAO();
+	String id = request.getParameter("id");
+	Housing housing = h.selectById(Integer.parseInt(id));
 	%>
 
 	<nav>
@@ -63,7 +65,7 @@
                             <% 
                             }
                             for (int i = 1; i < housing.getImages().size(); i++) {
-                                String imagePath = request.getContextPath() + housing.getImages().get(0).getImgRoute();
+                                String imagePath = request.getContextPath() + housing.getImages().get(i).getImgRoute();
                             %>
                                 <div class="carousel-item">
                                     <img src="<%=imagePath%>" class="d-block w-100 img-fluid rounded image-full" alt="Image House">
