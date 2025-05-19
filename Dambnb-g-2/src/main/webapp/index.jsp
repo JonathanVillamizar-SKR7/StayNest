@@ -57,43 +57,39 @@
 						class="nav-link me-5 nav-link-custom" href="">+2</a> <a
 						class="nav-link me-5 nav-link-custom" href="">+3</a>
 				</div>
-				<form class="form-inline d-flex ms-auto">
-					<input class="form-control mr-sm-2 me-2" type="search"
-						placeholder="Search" aria-label="Search">
-					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				</form>
-			</div>
-		</nav>
-		<div class="container-fluid d-flex justify-content-center">
-			<div class="card-deck p-5">
-				<div class="row">
-				<%--Excepcion personalizada cuando no hay casas--%>
-					<%
-					List<Housing> house = h.selectAll();
-					for (Housing f : house) {
-					%>
-					<div class="col-md-4 mb-3">
-						<a href="home.jsp" class="text-decoration-none">
-							<div class="card">
-								<img class="card-img-top" src="img/1-1.jpg" alt="Card image cap">
-								<div class="card-body">
-									<h3 class="card-title"><%=f.getName()%></h3>
-									<h5 class="card-text text-muted"><%=f.getLocation()%></h5>
-									<br>
-									<h5 class="card-text text-muted"><%=f.getNumGuest()%>
-										guests -
-										<%=f.getNumBedroom()%>
-										bedrooms -
-										<%=f.getNumBed()%>
-										beds -
-										<%=f.getNumBath()%>
-										bath
-									</h5>
-									<br>
-									<h5 class="card-text"><%=f.getPrice()%>
-										€
-									</h5>
-									<span class="stretched-link"></span>
+			</nav>
+			<div class="container-fluid d-flex justify-content-center">
+				<div class="card-deck p-5">
+					<div class="row">
+						<%
+						List<Housing> house = h.selectAll();
+						for (Housing f : house) {
+						%>
+						<div class="col-md-4 mb-3">
+							<a href="housing.jsp?idHouse=<%=f.getIdHouse()%>"
+								class="text-decoration-none">
+								<div class="card">
+									<img class="card-img-top" src="img/1-1.jpg"
+										alt="Card image cap">
+									<div class="card-body">
+										<h3 class="card-title"><%=f.getName()%></h3>
+										<h5 class="card-text text-muted"><%=f.getLocation()%></h5>
+										<br>
+										<h5 class="card-text text-muted"><%=f.getNumGuest()%>
+											guests -
+											<%=f.getNumBedroom()%>
+											bedrooms -
+											<%=f.getNumBed()%>
+											beds -
+											<%=f.getNumBath()%>
+											bath
+										</h5>
+										<br>
+										<h5 class="card-text"><%=f.getPrice()%>
+											€
+										</h5>
+										<span class="stretched-link"></span>
+									</div>
 								</div>
 							</div>
 						</a>
