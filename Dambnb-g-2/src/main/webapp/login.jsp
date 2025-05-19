@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="daxbnb.DAO.*"%>
+<%@ page import="daxbnb.model.*"%>
+<%@ page import="main.*"%>
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.List"%>
+<%@page import="javax.servlet.http.HttpSession"%>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +22,32 @@
 </head>
 
 <body>
+	<%
+	UserDAO uS = new UserDAO();
+	User u = new User();
+	if ("POST".equalsIgnoreCase(request.getMethod())) {
+		try {
+			String email = request.getParameter("email");
+			String password = request.getParameter("password");
+			User user = uS.selectByEmailandPassword(email, password);
+			if (user != null) {
+				 // Crear la sessió i guardar el nom d'usuari
+                Session session = request.getSession();
+                session.setAttribute("username", username);
+		if (user.getUserType().equals("client")) {
+			response.sendRedirect("index.jsp");
+		}else{
+			response.sendRedirect("home.jsp");
+		}
+			}else{
+				//tira excepcion personalizada de no existe email y password 
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	%>
+
 	<nav>
 		<div class="logo">
 			<a href="home.jsp"> <img src="img/Logo_right.png" alt="StayNest"
@@ -32,7 +64,7 @@
 	<main>
 		<div class="figura">
 			<div class="login">
-				<form action="">
+				<form method="POST">
 					<H1>LOG IN</H1>
 					<div>
 						<input type="email" name="email" id="email" required> <label

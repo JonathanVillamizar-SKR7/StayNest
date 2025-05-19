@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import daxbnb.DAO.DBConnection;
+import daxbnb.model.CreditCard;
 import daxbnb.model.User;
 
 /**
@@ -20,7 +21,8 @@ public class UserDAO {
 	private static final String SELECT_ALL = "SELECT * FROM Users";
 	private static final String SELECT_BY_PASSPORT = "SELECT * FROM Users WHERE passport = ?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM Users WHERE email = ?";
-	private static final String INSERT_USER = "INSERT INTO Users (userName, phone, email, passport) VALUES (?, ?, ?, ?)";
+	private static final String SELECT_BY_EMAIL_AND_PASSWORD = "SELECT * FROM Users WHERE email = ? AND password = ?;";
+	private static final String INSERT_USER = "INSERT INTO Users (userName, phone, email, passport, password, userType) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_USER = "UPDATE Users SET userName = ?, phone = ?, email = ?, passport = ? WHERE idUser = ?";
 	private static final String DELETE_USER = "DELETE FROM Users WHERE idUser = ?";
 
@@ -49,8 +51,10 @@ public class UserDAO {
 
 		while (rs.next()) {
 			if (!rs.wasNull()) {
-				User user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"),
-						rs.getString("email"), rs.getInt("passport"));
+				List<CreditCard> creditcards = new ArrayList<>();
+				User user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
+						rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+						rs.getString("userDescription"));
 				users.add(user);
 			}
 		}
@@ -77,8 +81,10 @@ public class UserDAO {
 		User user = null;
 
 		if (rs.next()) {
+			List<CreditCard> creditcards = new ArrayList<>();
 			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
-					rs.getInt("passport"));
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+					rs.getString("userDescription"));
 		}
 		rs.close();
 		db.closeConnection(connection);
@@ -103,12 +109,33 @@ public class UserDAO {
 		User user = null;
 
 		if (rs.next()) {
+			List<CreditCard> creditcards = new ArrayList<>();
 			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
-					rs.getInt("passport"));
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+					rs.getString("userDescription"));
 		}
 		rs.close();
 		db.closeConnection(connection);
 		return user;
+	}
+	public User selectByEmailandPassword(String email, String password) throws SQLException, ClassNotFoundException{
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(SELECT_BY_EMAIL_AND_PASSWORD);
+		ps.setString(1, email);
+		ps.setString(2, password);
+		ResultSet rs = ps.executeQuery();
+		User user = null;
+		if (rs.next()) {
+			List<CreditCard> creditcards = new ArrayList<>();
+			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("UserType"),
+					rs.getString("userDescription"));
+		}
+		
+		rs.close();
+		db.closeConnection(connection);
+		return user;
+		
 	}
 
 	/**
@@ -123,7 +150,7 @@ public class UserDAO {
 	 *                                SQL.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public int insertUser(String userName, long phone, String email, int passport)
+	public int insertUser(String userName, long phone, String email, int passport, String password)
 			throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(INSERT_USER, Statement.RETURN_GENERATED_KEYS);
@@ -131,6 +158,9 @@ public class UserDAO {
 		ps.setLong(2, phone);
 		ps.setString(3, email);
 		ps.setInt(4, passport);
+		ps.setString(5, password);
+		ps.setString(6, "client");
+		
 
 		int affectRows = ps.executeUpdate();
 		if (affectRows == 0) {
@@ -160,15 +190,17 @@ public class UserDAO {
 	 *                                actualización SQL.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public int updateUser(int idUser, String userName, long phone, String email, int passport)
-			throws SQLException, ClassNotFoundException {
+	public int updateUser(int idUser, String userName, long phone, String email, int passport, String password,
+			String userType) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(UPDATE_USER);
 		ps.setString(1, userName);
 		ps.setLong(2, phone);
 		ps.setString(3, email);
 		ps.setInt(4, passport);
-		ps.setInt(5, idUser);
+		ps.setString(5, password);
+		ps.setString(6, userType);
+		ps.setInt(7, idUser);
 
 		int result = ps.executeUpdate();
 		ps.close();

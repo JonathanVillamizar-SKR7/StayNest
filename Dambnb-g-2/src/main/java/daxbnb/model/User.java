@@ -44,33 +44,77 @@ public class User {
 	private List<CreditCard> idCreditCard;
 
 	/**
-	 * 
-	 * Constructor con todos los campos.
-	 * 
-	 * @param userName     Nombre de usuario
-	 * @param idUser       ID
-	 * @param phone        Teléfono
-	 * @param email        Correo
-	 * @param passport     Pasaporte
-	 * @param idCreditCard Lista de tarjetas
+	 * Contraseña del usuario
 	 */
-	public User(String userName, int idUser, long phone, String email, int passport, List<CreditCard> idCreditCard) {
+	private String password;
+	
+	/**
+	 * Tipo de usuario
+	 */
+	private String UserType;
+	
+	/**
+	 * Descripción personalizada del usuario. Puede incluir información adicional
+	 * como intereses o roles.
+	 */
+	private String userDescription;
+	
+	
+	
+	
 
+	/**
+	 * Constructor con todos los campos
+	 * 
+	 * @param userName
+	 * @param idUser
+	 * @param phone
+	 * @param email
+	 * @param passport
+	 * @param idCreditCard
+	 * @param password
+	 * @param userType
+	 * @param userDescription
+	 */
+	public User(String userName, int idUser, long phone, String email, int passport, List<CreditCard> idCreditCard,
+			String password, String userType, String userDescription) {
+		super();
 		this.userName = userName;
 		this.idUser = idUser;
 		this.phone = phone;
 		this.email = email;
 		this.passport = passport;
 		this.idCreditCard = idCreditCard;
+		this.password = password;
+		UserType = userType;
+		this.userDescription = userDescription;
 	}
-	
-	public User(String userName, int idUser, long phone, String email, int passport) {
 
+	/**
+	 * Constructor sin credit Card
+	 * @param userName
+	 * @param idUser
+	 * @param phone
+	 * @param email
+	 * @param passport
+	 * @param password
+	 * @param userType
+	 */
+	public User(String userName, int idUser, long phone, String email, int passport, String password, String userType) {
+		super();
 		this.userName = userName;
 		this.idUser = idUser;
 		this.phone = phone;
 		this.email = email;
 		this.passport = passport;
+		this.password = password;
+		UserType = "client";
+	}
+
+	/**
+	 * Contructor sin nada
+	 */
+	public User() {
 	}
 
 	/**
@@ -163,12 +207,54 @@ public class User {
 		this.idCreditCard = creditCard;
 	}
 
+
 	/**
-	 * @return Datos del usuario como texto
+	 * @return the password
 	 */
+	public String getPassword() {
+		return password;
+	}
+
+	/**
+	 * @param password the password to set
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @return the userType
+	 */
+	public String getUserType() {
+		return UserType;
+	}
+
+	/**
+	 * @param userType the userType to set
+	 */
+	public void setUserType(String userType) {
+		UserType = userType;
+	}
+
+	/**
+	 * @return the userDescription
+	 */
+	public String getUserDescription() {
+		return userDescription;
+	}
+
+	/**
+	 * @param userDescription the userDescription to set
+	 */
+	public void setUserDescription(String userDescription) {
+		this.userDescription = userDescription;
+	}
+
 	@Override
 	public String toString() {
 		return "User [userName=" + userName + ", idUser=" + idUser + ", phone=" + phone + ", email=" + email
-				+ ", passport=" + passport + ", creditCard=" + idCreditCard + "]";
+				+ ", passport=" + passport + ", idCreditCard=" + idCreditCard + ", password=" + password + ", UserType="
+				+ UserType + ", userDescription=" + userDescription + "]\n";
 	}
+	
 }
