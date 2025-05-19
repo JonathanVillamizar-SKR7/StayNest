@@ -20,7 +20,8 @@ body {
 	font-family: 'Nunito Sans', sans-serif;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between; /* Ensures footer sticks to the bottom */
+	justify-content: space-between;
+	/* Ensures footer sticks to the bottom */
 }
 
 nav {
@@ -48,12 +49,22 @@ nav {
 	width: 4rem;
 }
 
+.User-Icon:hover {
+	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
+		brightness(1.2);
+}
+
 .menu {
 	gap: 3rem;
 }
 
 .logo {
 	width: 10rem;
+}
+
+.logo:hover img {
+	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
+		brightness(1.2);
 }
 
 .image-container {
@@ -76,7 +87,7 @@ nav {
 	left: 0rem;
 	width: 100%;
 	height: 4rem;
-	background-color: rgba(255, 153, 0, 0.5);
+	background-color: rgba(255, 166, 82, 0.822);
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;

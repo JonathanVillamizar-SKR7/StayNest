@@ -16,19 +16,19 @@
 </head>
 
 <body>
-		<nav class="d-flex justify-content-between align-items-center">
-			<div class="logo">
-				<a href="home.jsp"> <img src="img/Logo_right.png" alt="StayNest"
-					class="logo">
-				</a>
-			</div>
-			<div class="menu d-flex align-items-center">
-				<a href="index.jsp" class="Index m-lg-4">STAYS</a> <a
-					href="login.jsp"> <img src="img/user.png" alt="User Icon"
-					class="User-Icon m-4">
-				</a>
-			</div>
-		</nav>
+	<nav>
+		<div class="logo">
+			<a href="home.jsp"> <img src="img/Logo_right.png" alt="StayNest"
+				class="logo">
+			</a>
+		</div>
+		<div class="menu">
+			<a href="index.jsp" class="Index m-lg-4">STAYS</a> <a
+				href="login.jsp"> <img src="img/user.png" alt="User Icon"
+				class="User-Icon m-4">
+			</a>
+		</div>
+	</nav>
 	<main>
 		<div class="figura">
 			<div class="login">
@@ -46,8 +46,8 @@
 						<button type="submit">LOGIN</button>
 					</div>
 					<p>
-						If you don't have and account&nbsp; <a href=""> register</a>&nbsp;
-						now
+						If you don't have and account&nbsp; <a href="SingUp.jsp">
+							register</a>&nbsp; now
 					</p>
 				</form>
 				<div class="logoCorner_content">

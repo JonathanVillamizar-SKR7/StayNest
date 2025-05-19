@@ -1,0 +1,116 @@
+@import
+	url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap')
+	;
+
+:root {
+	--primary-color: rgb(0, 124, 145);
+	--secondary-color: rgb(236, 238, 248);
+	--accent-color: rgb(76, 206, 238);
+	--dark-color: rgb(51, 51, 51);
+	--warning-color: rgb(255, 165, 82);
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+}
+
+body {
+	background-color: var(--secondary-color);
+	font-family: 'Nunito Sans', sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-weight: bold;
+	color: var(--accent-color);
+	background-color: white;
+}
+
+.Index {
+	font-weight: 700;
+	text-decoration: none;
+	color: var(--accent-color);
+	font-size: 1.2rem;
+	transition: color 0.3s ease;
+}
+
+.Index:hover {
+	color: var(--warning-color);
+}
+
+.User-Icon {
+	width: 4rem;
+}
+
+.User-Icon:hover {
+	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
+		brightness(1.2);
+}
+
+.menu {
+	gap: 3rem;
+}
+
+.logo {
+	width: 10rem;
+}
+
+.logo:hover {
+    filter: brightness(1.2);
+    transition: filter 0.3s ease;
+    color: var(--warning-color);
+    transition: color 0.3s ease;
+}
+.User-Icon:hover {
+    filter: brightness(1.2);
+    transition: filter 0.3s ease;
+    color: var(--warning-color);
+    transition: color 0.3s ease;
+}
+
+.logo:hover img {
+	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
+		brightness(1.2);
+}
+
+
+
+footer {
+	margin-top: auto;
+	padding: 2rem 0;
+	background-color: var(--primary-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 26rem;
+}
+
+footer img {
+	margin: 0;
+}
+
+footer .logo {
+	width: 5rem;
+	height: auto;
+}
+
+.list {
+	padding-block-end: 2rem;
+}
+
+.textt-left {
+	border-color: transparent;
+	border-style: solid;
+	border-radius: 0.5rem;
+	align-items: center;
+	background-color: rgba(255, 166, 82, 0.594);;
+	width: 100%;
+	border-width: 1.5rem 1rem;
+	text-align: start;
+}
