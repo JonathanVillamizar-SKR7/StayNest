@@ -24,7 +24,6 @@ body {
 	flex-direction: column;
 }
 
-
 nav {
 	display: flex;
 	justify-content: space-between;
@@ -50,12 +49,26 @@ nav {
 	width: 4rem;
 }
 
+.User-Icon:hover {
+	color: var(--warning-color);
+	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
+		brightness(1.2);
+	
+}
+
 .menu {
 	gap: 3rem;
 }
 
 .logo {
 	width: 10rem;
+}
+
+.logo:hover img {
+	color: var(--warning-color);
+	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
+		brightness(1.2);
+	
 }
 
 header a {
