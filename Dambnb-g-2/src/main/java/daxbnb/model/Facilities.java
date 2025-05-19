@@ -11,11 +11,6 @@ package daxbnb.model;
 public class Facilities {
 
 	/**
-	 * ID de la casa.
-	 */
-	private int idHouse;
-
-	/**
 	 * ID de la instalación.
 	 */
 	private int idFacilities;
@@ -26,28 +21,9 @@ public class Facilities {
 	private String typeFacilities;
 
 	/**
-	 * Disponible o no.
-	 */
-	private boolean available;
-
-	/**
+	 * Constructor con todos los campos
 	 * 
-	 * Constructor con todos los campos.
-	 * 
-	 * @param idHouse        ID de la casa
-	 * @param idFacilities   ID de la instalación
-	 * @param typeFacilities Tipo
-	 * @param available      Disponible >
-	 */
-	public Facilities(int idHouse, int idFacilities, String typeFacilities) {
-		this.idHouse = idHouse;
-		this.idFacilities = idFacilities;
-		this.typeFacilities = typeFacilities;
-	}
-	
-	/**
-	 * 
-	 * @param idFacilities ID de la Instalación
+	 * @param idFacilities   ID de la Instalación
 	 * @param typeFacilities Tipo
 	 */
 	public Facilities(int idFacilities, String typeFacilities) {
@@ -56,24 +32,19 @@ public class Facilities {
 	}
 
 	/**
+	 * Constructor con solo el tipo de facilidad
+	 * 
+	 * @param typeFacilities
+	 */
+	public Facilities(String typeFacilities) {
+		this.typeFacilities = typeFacilities;
+	}
+
+	/**
 	 * Obtiene el identificador de la vivienda asociada.
 	 * 
 	 * @return El ID de la casa.
 	 */
-
-	public int getIdHouse() {
-		return idHouse;
-	}
-
-	/**
-	 * Establece el identificador de la vivienda asociada.
-	 * 
-	 * @param idHouse El nuevo ID de la casa.
-	 */
-
-	public void setIdHouse(int idHouse) {
-		this.idHouse = idHouse;
-	}
 
 	/**
 	 * Obtiene el identificador de la instalación.
@@ -122,29 +93,13 @@ public class Facilities {
 	 * @return true si la instalación está disponible, false si no.
 	 */
 
-	public boolean isAvailable() {
-		return available;
-	}
-
-	/**
-	 * Establece la disponibilidad de la instalación.
-	 * 
-	 * @param available El nuevo estado de disponibilidad (true si está disponible,
-	 *                  false si no).
-	 */
-
-	public void setAvailable(boolean available) {
-		this.available = available;
-	}
-
 	/**
 	 * @return Una cadena que representa todos los detalles de la instalación.
 	 */
 
 	@Override
 	public String toString() {
-		return "Facilities [idHouse=" + idHouse + ", idFacilities=" + idFacilities + ", typeFacilities="
-				+ typeFacilities + ", available=" + available + "]";
+		return  typeFacilities;
 	}
 
 }

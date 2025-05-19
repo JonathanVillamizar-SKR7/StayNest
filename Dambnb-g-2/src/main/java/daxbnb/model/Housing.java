@@ -56,6 +56,16 @@ public class Housing {
 	private double price;
 
 	/**
+	 * Descripcion de la casa
+	 */
+	private String description;
+
+	/**
+	 * Disponibilidad de la casa
+	 */
+	private boolean available;
+
+	/**
 	 * Lista de imágenes.
 	 */
 	private List<Images> images;
@@ -67,23 +77,22 @@ public class Housing {
 
 	/**
 	 * 
-	 * Constructor con todos los campos.
-	 *
-	 * @param idHouse    ID
-	 * @param name       Nombre
-	 * @param location   Ubicación
-	 * @param numGuest   Número de huéspedes
-	 * @param numBedroom Número de dormitorios
-	 * @param numBed     Número de camas
-	 * @param numBath    Número de baños
-	 * @param idType     Tipo (ID)
-	 * @param price      Precio
-	 * @param images     Imágenes
-	 * @param facilities Facilidades
-	 * 
+	 * @param idHouse     ID
+	 * @param name        Nombre * @param location Ubicación
+	 * @param numGuest    Número de huéspedes
+	 * @param numBedroom  Número de dormitorios
+	 * @param numBed      Número de camas
+	 * @param numBath     Número de baños
+	 * @param idType      Tipo (ID)
+	 * @param price       Precio
+	 * @param description Descripcion
+	 * @param available   Disponible
+	 * @param images	  Lista de imagenes
+	 * @param facilities  Lista de facilities
 	 */
 	public Housing(int idHouse, String name, String location, int numGuest, int numBedroom, int numBed, int numBath,
-			Types idType, double price, List<Images> images, List<Facilities> facilities) {
+			Types idType, double price, String description, boolean available, List<Images> images,
+			List<Facilities> facilities) {
 		this.idHouse = idHouse;
 		this.name = name;
 		this.location = location;
@@ -93,8 +102,14 @@ public class Housing {
 		this.numBath = numBath;
 		this.idType = idType;
 		this.price = price;
+		this.description = description;
+		this.available = available;
 		this.images = images;
 		this.facilities = facilities;
+	}
+
+	public Housing() {
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -243,6 +258,30 @@ public class Housing {
 	 */
 	public void setImages(List<Images> images) {
 		this.images = images;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	/**
+	 * 
+	 * @return available
+	 */
+	public boolean isAvailable() {
+		return available;
+	}
+
+	/**
+	 * 
+	 * @param available
+	 */
+	public void setAvailable(boolean available) {
+		this.available = available;
 	}
 
 	/**
