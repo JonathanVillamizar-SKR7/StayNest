@@ -5,7 +5,6 @@
 <%@ page import="main.*"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.util.List"%>
-<%@page import="javax.servlet.http.HttpSession"%>
 <!DOCTYPE html>
 <html>
 
@@ -30,9 +29,8 @@
 			String email = request.getParameter("email");
 			String password = request.getParameter("password");
 			User user = uS.selectByEmailandPassword(email, password);
+			String username = user.getUserName();
 			if (user != null) {
-		// Crear la sessió i guardar el nom d'usuari
-		Session session = request.getSession();
 		session.setAttribute("username", username);
 		if (user.getUserType().equals("client")) {
 			response.sendRedirect("index.jsp");
@@ -94,39 +92,51 @@
 		</div>
 	</main>
 </body>
-<footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
-		<div class="col mb-3">
-			<a href="home.jsp" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-				<img src="img/logo_white.png" width="60%" alt="">
-			</a>
-		</div>
-		<div class="col mb-3"></div>
-		<div class="col mb-3">
-			<h5 id="footer-title">About & Support</h5>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="aboutUs.jsp" class="nav-link p-0 text-muted">About Us</a></li>
-				<li class="nav-item mb-3"><a href="contactUs.jsp" class="nav-link p-0 text-muted">Contact Us</a></li>
-				<li class="nav-item mb-3"><a href="FAQ.jsp" class="nav-link p-0 text-muted">FAQ</a></li>
-			</ul>
-		</div>
-		<div class="col mb-3">
-			<h5 id="footer-title">Explore</h5>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Countryside Retreats</a></li>
-				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Apartment Stays</a></li>
-				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Cabin Getaways</a></li>
-			</ul>
-		</div>
-		<div class="col mb-3">
-			<h5 id="footer-title">Policies & Security</h5>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="privacyPolicy.jsp" class="nav-link p-0 text-muted">Privacy Policy</a></li>
-				<li class="nav-item mb-3"><a href="term&conditions.jsp" class="nav-link p-0 text-muted">Term & Conditions</a></li>
-				<li class="nav-item mb-3"><a href="refund.jsp" class="nav-link p-0 text-muted">Refund & Cancellation Policy</a></li>
-			</ul>
-		</div>
-		<div class="col-12 text-center mt-4">
-			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega - Diana Kopyv</p>
-		</div>
-	</footer>
+<footer
+	class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+	<div class="col mb-3">
+		<a href="home.jsp"
+			class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+			<img src="img/logo_white.png" width="60%" alt="">
+		</a>
+	</div>
+	<div class="col mb-3"></div>
+	<div class="col mb-3">
+		<h5 id="footer-title">About & Support</h5>
+		<ul class="nav flex-column">
+			<li class="nav-item mb-3"><a href="aboutUs.jsp"
+				class="nav-link p-0 text-muted">About Us</a></li>
+			<li class="nav-item mb-3"><a href="contactUs.jsp"
+				class="nav-link p-0 text-muted">Contact Us</a></li>
+			<li class="nav-item mb-3"><a href="FAQ.jsp"
+				class="nav-link p-0 text-muted">FAQ</a></li>
+		</ul>
+	</div>
+	<div class="col mb-3">
+		<h5 id="footer-title">Explore</h5>
+		<ul class="nav flex-column">
+			<li class="nav-item mb-3"><a href="#"
+				class="nav-link p-0 text-muted">Countryside Retreats</a></li>
+			<li class="nav-item mb-3"><a href="#"
+				class="nav-link p-0 text-muted">Apartment Stays</a></li>
+			<li class="nav-item mb-3"><a href="#"
+				class="nav-link p-0 text-muted">Cabin Getaways</a></li>
+		</ul>
+	</div>
+	<div class="col mb-3">
+		<h5 id="footer-title">Policies & Security</h5>
+		<ul class="nav flex-column">
+			<li class="nav-item mb-3"><a href="privacyPolicy.jsp"
+				class="nav-link p-0 text-muted">Privacy Policy</a></li>
+			<li class="nav-item mb-3"><a href="term&conditions.jsp"
+				class="nav-link p-0 text-muted">Term & Conditions</a></li>
+			<li class="nav-item mb-3"><a href="refund.jsp"
+				class="nav-link p-0 text-muted">Refund & Cancellation Policy</a></li>
+		</ul>
+	</div>
+	<div class="col-12 text-center mt-4">
+		<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega -
+			Diana Kopyv</p>
+	</div>
+</footer>
 </html>
