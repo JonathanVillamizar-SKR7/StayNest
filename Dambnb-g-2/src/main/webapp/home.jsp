@@ -45,7 +45,7 @@
 
 	<main>
 		<div class="container">
-			<h2>Featured houses</h2>
+			<h2 class="fw-bold">Featured houses</h2>
 			<div class="row">
 				<div class="col-lg-4">
 					<div class="card my-3 ">
@@ -92,7 +92,7 @@
 			<div class="row align-items-center">
 				<div class="col-md-6 d-flex flex-column justify-content-around"
 					style="height: 100%;">
-					<h2 class="text mb-4">Book with us</h2>
+					<h2 class="text mb-4 fw-bold">Book with us</h2>
 					<ul class="list-unstyled info-list">
 						<li>
 							<h5 class="fw-bold">Flexible cancellation</h5>

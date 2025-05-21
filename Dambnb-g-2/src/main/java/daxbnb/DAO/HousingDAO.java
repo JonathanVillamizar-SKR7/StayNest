@@ -63,7 +63,7 @@ public class HousingDAO {
 						resultSet.getString("location"), resultSet.getInt("numGuest"), resultSet.getInt("numBedroom"),
 						resultSet.getInt("numBed"), resultSet.getInt("numBath"), types, resultSet.getDouble("price"),
 						resultSet.getString("description"), resultSet.getBoolean("available"), images, facilities);
-				
+
 				PreparedStatement ps2 = connection.prepareStatement(SELECT_ALL_FACILITY);
 				ps2.setInt(1, id);
 				ResultSet rs2 = ps2.executeQuery();
@@ -157,44 +157,45 @@ public class HousingDAO {
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_TYPE);
 		ps.setInt(1, idType);
 		ResultSet rs = ps.executeQuery();
+
 		TypesDAO typesDAO = new TypesDAO();
 		List<Housing> housings = new ArrayList<>();
-		List<Images> images = new ArrayList<>();
-		List<Facilities> facilities = new ArrayList<>();
+
 		while (rs.next()) {
-			if (!rs.wasNull()) {
-				int id = rs.getInt("idHouse");
-				Types type = typesDAO.selectById(rs.getInt("idType"));
-				Housing housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
-						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
-						rs.getDouble("price"), rs.getString("description"), rs.getBoolean("available"), images,
-						facilities);
+			int id = rs.getInt("idHouse");
+			Types type = typesDAO.selectById(rs.getInt("idType"));
 
-				PreparedStatement ps2 = connection.prepareStatement(SELECT_ALL_FACILITY);
-				ps2.setInt(1, id);
-				ResultSet rs2 = ps2.executeQuery();
-				while (rs2.next()) {
-					if (!rs2.wasNull()) {
-						facilities.add(new Facilities(rs2.getString("typeFacility")));
-					}
-				}
-				housing.setFacilities(facilities);
-
-				PreparedStatement ps3 = connection.prepareStatement(SELECT_ALL_IMAGES);
-				ps3.setInt(1, id);
-				ResultSet rs3 = ps3.executeQuery();
-				while (rs3.next()) {
-					if (!rs3.wasNull()) {
-						images.add(new Images(rs3.getString("imgRoute")));
-					}
-				}
-				housing.setImages(images);
-
-				housings.add(housing);
+			List<Facilities> facilities = new ArrayList<>();
+			PreparedStatement ps2 = connection.prepareStatement(SELECT_ALL_FACILITY);
+			ps2.setInt(1, id);
+			ResultSet rs2 = ps2.executeQuery();
+			while (rs2.next()) {
+				facilities.add(new Facilities(rs2.getString("typeFacility")));
 			}
+			rs2.close();
+			ps2.close();
+
+			List<Images> images = new ArrayList<>();
+			PreparedStatement ps3 = connection.prepareStatement(SELECT_ALL_IMAGES);
+			ps3.setInt(1, id);
+			ResultSet rs3 = ps3.executeQuery();
+			while (rs3.next()) {
+				images.add(new Images(rs3.getString("imgRoute")));
+			}
+			rs3.close();
+			ps3.close();
+
+			Housing housing = new Housing(id, rs.getString("name"), rs.getString("location"), rs.getInt("numGuest"),
+					rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type, rs.getDouble("price"),
+					rs.getString("description"), rs.getBoolean("available"), images, facilities);
+
+			housings.add(housing);
 		}
+
 		rs.close();
+		ps.close();
 		db.closeConnection(connection);
+
 		return housings;
 	}
 
@@ -214,44 +215,107 @@ public class HousingDAO {
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_BEDROOM);
 		ps.setInt(1, numBedroom);
 		ResultSet rs = ps.executeQuery();
+
 		TypesDAO typesDAO = new TypesDAO();
 		List<Housing> housings = new ArrayList<>();
-		List<Images> images = new ArrayList<>();
-		List<Facilities> facilities = new ArrayList<>();
+
 		while (rs.next()) {
-			if (!rs.wasNull()) {
-				int id = rs.getInt("idHouse");
-				Types type = typesDAO.selectById(rs.getInt("idType"));
-				Housing housing = new Housing(rs.getInt("idHouse"), rs.getString("name"), rs.getString("location"),
-						rs.getInt("numGuest"), rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type,
-						rs.getDouble("price"), rs.getString("description"), rs.getBoolean("available"), images,
-						facilities);
+			int id = rs.getInt("idHouse");
+			Types type = typesDAO.selectById(rs.getInt("idType"));
 
-				PreparedStatement ps2 = connection.prepareStatement(SELECT_ALL_FACILITY);
-				ps2.setInt(1, id);
-				ResultSet rs2 = ps2.executeQuery();
-				while (rs2.next()) {
-					if (!rs2.wasNull()) {
-						facilities.add(new Facilities(rs2.getString("typeFacility")));
-					}
-				}
-				housing.setFacilities(facilities);
-
-				PreparedStatement ps3 = connection.prepareStatement(SELECT_ALL_IMAGES);
-				ps3.setInt(1, id);
-				ResultSet rs3 = ps3.executeQuery();
-				while (rs3.next()) {
-					if (!rs3.wasNull()) {
-						images.add(new Images(rs3.getString("imgRoute")));
-					}
-				}
-				housing.setImages(images);
-
-				housings.add(housing);
+			List<Facilities> facilities = new ArrayList<>();
+			PreparedStatement ps2 = connection.prepareStatement(SELECT_ALL_FACILITY);
+			ps2.setInt(1, id);
+			ResultSet rs2 = ps2.executeQuery();
+			while (rs2.next()) {
+				facilities.add(new Facilities(rs2.getString("typeFacility")));
 			}
+			rs2.close();
+			ps2.close();
+
+			List<Images> images = new ArrayList<>();
+			PreparedStatement ps3 = connection.prepareStatement(SELECT_ALL_IMAGES);
+			ps3.setInt(1, id);
+			ResultSet rs3 = ps3.executeQuery();
+			while (rs3.next()) {
+				images.add(new Images(rs3.getString("imgRoute")));
+			}
+			rs3.close();
+			ps3.close();
+
+			Housing housing = new Housing(id, rs.getString("name"), rs.getString("location"), rs.getInt("numGuest"),
+					rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type, rs.getDouble("price"),
+					rs.getString("description"), rs.getBoolean("available"), images, facilities);
+
+			housings.add(housing);
 		}
+
 		rs.close();
+		ps.close();
 		db.closeConnection(connection);
+
+		return housings;
+	}
+
+	/**
+	 * Recupera todas las viviendas que tengan un número de habitaciones igual o
+	 * mayor al valor proporcionado.
+	 *
+	 * @param minBedrooms número mínimo de habitaciones que debe tener una vivienda.
+	 * @return Lista de objetos {@link Housing} que cumplen con el criterio de
+	 *         filtro.
+	 * @throws SQLException           si ocurre un error durante la ejecución de las
+	 *                                consultas SQL.
+	 * @throws ClassNotFoundException si no se encuentra la clase de conexión a la
+	 *                                base de datos.
+	 */
+	public List<Housing> selectHousingByBedroomGreaterThanOrEqual(int minBedrooms)
+			throws SQLException, ClassNotFoundException {
+
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement("SELECT * FROM Housing WHERE numBedroom >= ?");
+		ps.setInt(1, minBedrooms);
+		ResultSet rs = ps.executeQuery();
+
+		TypesDAO typesDAO = new TypesDAO();
+		List<Housing> housings = new ArrayList<>();
+
+		while (rs.next()) {
+			int id = rs.getInt("idHouse");
+			Types type = typesDAO.selectById(rs.getInt("idType"));
+
+			List<Facilities> facilities = new ArrayList<>();
+			PreparedStatement ps2 = connection.prepareStatement(SELECT_ALL_FACILITY);
+			ps2.setInt(1, id);
+			ResultSet rs2 = ps2.executeQuery();
+			while (rs2.next()) {
+				facilities.add(new Facilities(rs2.getString("typeFacility")));
+			}
+
+			List<Images> images = new ArrayList<>();
+			PreparedStatement ps3 = connection.prepareStatement(SELECT_ALL_IMAGES);
+			ps3.setInt(1, id);
+			ResultSet rs3 = ps3.executeQuery();
+			while (rs3.next()) {
+				images.add(new Images(rs3.getString("imgRoute")));
+			}
+
+			Housing housing = new Housing(id, rs.getString("name"), rs.getString("location"), rs.getInt("numGuest"),
+					rs.getInt("numBedroom"), rs.getInt("numBed"), rs.getInt("numBath"), type, rs.getDouble("price"),
+					rs.getString("description"), rs.getBoolean("available"), images, facilities);
+
+			housings.add(housing);
+
+			rs2.close();
+			ps2.close();
+			rs3.close();
+			ps3.close();
+		}
+
+		rs.close();
+		ps.close();
+		db.closeConnection(connection);
+
 		return housings;
 	}
 
