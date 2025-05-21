@@ -21,6 +21,7 @@ public class UserDAO {
 	private static final String SELECT_ALL = "SELECT * FROM Users";
 	private static final String SELECT_BY_PASSPORT = "SELECT * FROM Users WHERE passport = ?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM Users WHERE email = ?";
+	private static final String SELECT_BY_USERNAME = "SELECT * FROM Users WHERE userName = ?";
 	private static final String SELECT_BY_EMAIL_AND_PASSWORD = "SELECT * FROM Users WHERE email = ? AND password = ?;";
 	private static final String INSERT_USER = "INSERT INTO Users (userName, phone, email, passport, password, userType) VALUES (?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_USER = "UPDATE Users SET userName = ?, phone = ?, email = ?, passport = ? WHERE idUser = ?";
@@ -118,6 +119,43 @@ public class UserDAO {
 		db.closeConnection(connection);
 		return user;
 	}
+	
+	/**
+	 * Selecciona el usuario por su nombre
+	 * 
+	 * @param userName
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public User selectByUserName(String userName) throws SQLException, ClassNotFoundException {
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(SELECT_BY_USERNAME);
+		ps.setString(1, userName);
+		ResultSet rs = ps.executeQuery();
+
+		User user = null;
+
+		if (rs.next()) {
+			List<CreditCard> creditcards = new ArrayList<>();
+			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+					rs.getString("userDescription"));
+		}
+		rs.close();
+		db.closeConnection(connection);
+		return user;
+	}
+	
+	/**
+	 * Selecciona el usuario por email y contraseña
+	 * 
+	 * @param email
+	 * @param password
+	 * @return
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
 	public User selectByEmailandPassword(String email, String password) throws SQLException, ClassNotFoundException{
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_EMAIL_AND_PASSWORD);
