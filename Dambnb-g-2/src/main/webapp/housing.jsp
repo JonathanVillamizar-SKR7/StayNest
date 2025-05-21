@@ -24,77 +24,88 @@
 	Housing housing = h.selectById(Integer.parseInt(id));
 	%>
 
-	<nav>
-		<div class="logo">
-			<a href="home.jsp"> <img src="img/Logo_right.png" alt="StayNest"
-				class="logo">
-			</a>
-		</div>
-		<div class="menu">
-			<a href="index.jsp" class="Index m-lg-4">STAYS</a> <a
-				href="login.jsp"> <img src="img/user.png" alt="User Icon"
-				class="User-Icon m-4">
-			</a>
-		</div>
-	</nav>
-
-	<main>
+	<header>
+		<nav
+			class="d-flex justify-content-between align-items-center shadow-sm w-100">
+			<div class="logo">
+				<a href="home.jsp"> <img src="img/Logo_right.png" alt="StayNest"
+					class="logo">
+				</a>
+			</div>
+			<div class="menu d-flex align-items-center gap-4">
+				<a href="index.jsp" class="nav-link-custom">STAYS</a> <a
+					href="login.jsp"> <img src="img/user.png" alt="User Icon"
+					class="User-Icon">
+				</a>
+			</div>
+		</nav>
+	</header>
+	<main style="background-color: var(--secundary-color);">
 		<div class="container my-5">
 			<div class="row align-items-center">
 				<div class="col-md-6">
-                    <div id="housingCarousel" class="carousel slide" data-bs-ride="carousel">
-	                        <div class="carousel-indicators">
-                            <%
-                            for (int i = 0; i < housing.getImages().size(); i++) {
-                            %>
-                                <button type="button" data-bs-target="#housingCarousel" data-bs-slide-to="<%=i%>"
-                                    class="<%= (i == 0) ? "active" : "" %>" aria-label="Slide <%=i + 1%>"></button>
-                            <% 
-                            } 
-                            %>
-                        </div>
-                
-                        <div class="carousel-inner">
-                            <% 
-                            if (!housing.getImages().isEmpty()) {
-                                String firstImagePath = request.getContextPath() + housing.getImages().get(0).getImgRoute();
-                            %>
-                                <div class="carousel-item active">
-                                    <img src="<%=firstImagePath%>" class="d-block w-100 img-fluid rounded image-full" alt="Main Image">
-                                </div>
-                            <% 
-                            }
-                            for (int i = 1; i < housing.getImages().size(); i++) {
-                                String imagePath = request.getContextPath() + housing.getImages().get(i).getImgRoute();
-                            %>
-                                <div class="carousel-item">
-                                    <img src="<%=imagePath%>" class="d-block w-100 img-fluid rounded image-full" alt="Image House">
-                                </div>
-                            <% 
-                            } 
-                            %>
-                        </div>
-                
-                        <button class="carousel-control-prev" type="button" data-bs-target="#housingCarousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#housingCarousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                </div>
-                
-                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-                <script>
-                    var myCarousel = document.querySelector('#housingCarousel');
-                    var carousel = new bootstrap.Carousel(myCarousel, {
-                        interval: 3000,
-                        wrap: true
-                    });
-                </script>
-                
+					<div id="housingCarousel" class="carousel slide"
+						data-bs-ride="carousel">
+						<div class="carousel-indicators">
+							<%
+							for (int i = 0; i < housing.getImages().size(); i++) {
+							%>
+							<button type="button" data-bs-target="#housingCarousel"
+								data-bs-slide-to="<%=i%>" class="<%=(i == 0) ? "active" : ""%>"
+								aria-label="Slide <%=i + 1%>"></button>
+							<%
+							}
+							%>
+						</div>
+
+						<div class="carousel-inner">
+							<%
+							if (!housing.getImages().isEmpty()) {
+								String firstImagePath = request.getContextPath() + housing.getImages().get(0).getImgRoute();
+							%>
+							<div class="carousel-item active">
+								<img src="<%=firstImagePath%>"
+									class="d-block w-100 img-fluid rounded image-full"
+									alt="Main Image">
+							</div>
+							<%
+							}
+							for (int i = 1; i < housing.getImages().size(); i++) {
+							String imagePath = request.getContextPath() + housing.getImages().get(i).getImgRoute();
+							%>
+							<div class="carousel-item">
+								<img src="<%=imagePath%>"
+									class="d-block w-100 img-fluid rounded image-full"
+									alt="Image House">
+							</div>
+							<%
+							}
+							%>
+						</div>
+
+						<button class="carousel-control-prev" type="button"
+							data-bs-target="#housingCarousel" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button"
+							data-bs-target="#housingCarousel" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
+					</div>
+				</div>
+
+				<script
+					src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+				<script>
+					var myCarousel = document.querySelector('#housingCarousel');
+					var carousel = new bootstrap.Carousel(myCarousel, {
+						interval : 3000,
+						wrap : true
+					});
+				</script>
+
 				<div class="col-md-6 d-flex flex-column justify-content-around"
 					style="height: 100%;">
 					<h2 class="align-text-top">
@@ -139,7 +150,7 @@
 					<h4>Offers</h4>
 					<ul class="Offers nav flex-column">
 						<%
-						List<Facilities> facilities = housing.getFacilities();						
+						List<Facilities> facilities = housing.getFacilities();
 						for (Facilities s : facilities) {
 						%>
 						<li class="Offer"><%=s.getTypeFacilities()%></li>
@@ -170,56 +181,39 @@
 		</div>
 	</main>
 
-	<footer
-		class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+	<footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
 		<div class="col mb-3">
-			<a href="home.jsp"
-				class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+			<a href="home.jsp" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
 				<img src="img/logo_white.png" width="60%" alt="">
 			</a>
 		</div>
 		<div class="col mb-3"></div>
-
 		<div class="col mb-3">
 			<h5 id="footer-title">About & Support</h5>
 			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">About Us</a></li>
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Contact Us</a></li>
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">FAQ</a></li>
+				<li class="nav-item mb-3"><a href="aboutUs.jsp" class="nav-link p-0 text-muted">About Us</a></li>
+				<li class="nav-item mb-3"><a href="contactUs.jsp" class="nav-link p-0 text-muted">Contact Us</a></li>
+				<li class="nav-item mb-3"><a href="FAQ.jsp" class="nav-link p-0 text-muted">FAQ</a></li>
 			</ul>
 		</div>
-
 		<div class="col mb-3">
 			<h5 id="footer-title">Explore</h5>
 			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Countryside Retreats</a></li>
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Apartment Stays</a></li>
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Cabin Getaways</a></li>
+				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Countryside Retreats</a></li>
+				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Apartment Stays</a></li>
+				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Cabin Getaways</a></li>
 			</ul>
 		</div>
-
 		<div class="col mb-3">
 			<h5 id="footer-title">Policies & Security</h5>
 			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Privacy Policy</a></li>
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Term & Conditions</a></li>
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Refund & Cancellation Policy</a></li>
+				<li class="nav-item mb-3"><a href="privacyPolicy.jsp" class="nav-link p-0 text-muted">Privacy Policy</a></li>
+				<li class="nav-item mb-3"><a href="term&conditions.jsp" class="nav-link p-0 text-muted">Term & Conditions</a></li>
+				<li class="nav-item mb-3"><a href="refund.jsp" class="nav-link p-0 text-muted">Refund & Cancellation Policy</a></li>
 			</ul>
 		</div>
-
-
 		<div class="col-12 text-center mt-4">
-			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega -
-				Diana Kopyv</p>
+			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega - Diana Kopyv</p>
 		</div>
 	</footer>
 </body>
