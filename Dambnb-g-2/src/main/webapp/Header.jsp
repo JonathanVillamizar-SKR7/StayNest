@@ -16,8 +16,10 @@
 <body>
 	<%
 	String username = null;
+	String userType = null;
 	if (session != null) {
 		username = (String) session.getAttribute("username");
+		userType = (String) session.getAttribute("userType");
 	}
 	%>
 	<header>
@@ -29,25 +31,38 @@
 				</a>
 			</div>
 			<%
-			if (username != null) {
+			if (username == null) {
 			%>
 			<div class="menu d-flex align-items-center gap-4">
-				<a href="index.jsp" class="nav-link-custom">STAYS</a> <a
-					href="login.jsp"> <img src="img/user.png" alt="User Icon"
-					class="User-Icon">
+				<a href="index.jsp" class="nav-link-custom">STAYS</a>
+				 <a href="login.jsp"> <img	src="img/user.png" alt="User Icon" class="User-Icon">
+				</a>
+			</div>
+			<%
+			} else {
+			if (userType.equals("client")) {
+			%>
+			<div class="menu d-flex align-items-center gap-4">
+				<span>Welcome <%=username%></span> <a href="index.jsp"
+					class="nav-link-custom">STAYS</a> <a href="userDetails.jsp?username=<%=username%>"> <img
+					src="img/user.png" alt="User Icon" class="User-Icon">
+				</a> <a href="login.jsp"> <img
+					src="img/log_outStayNest.png" alt="User Icon" class="User-Icon">
 				</a>
 			</div>
 			<%
 			} else {
 			%>
 			<div class="menu d-flex align-items-center gap-4">
-				<span>Welcome <%=username%></span>
-				<a href="index.jsp" class="nav-link-custom">STAYS</a> <a
-					href="login.jsp"> <img src="img/log_outStayNest.png" alt="User Icon"
-					class="User-Icon">
+				<span>Welcome <%=username%></span> <a href="index.jsp"
+					class="nav-link-custom">STAYS</a> <a href="userDetails.jsp?username=<%=username%>"> <img
+					src="img/user_admin.png" alt="User Icon" class="User-Icon">
+				</a> <a href="login.jsp"> <img
+					src="img/log_outStayNest.png" alt="User Icon" class="User-Icon">
 				</a>
 			</div>
 			<%
+			}
 			}
 			%>
 		</nav>

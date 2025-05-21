@@ -30,12 +30,15 @@
 			String password = request.getParameter("password");
 			User user = uS.selectByEmailandPassword(email, password);
 			String username = user.getUserName();
+			String userType = user.getUserType();
+			int id = user.getIdUser();
 			if (user != null) {
 		session.setAttribute("username", username);
+		session.setAttribute("userType", userType);
 		if (user.getUserType().equals("client")) {
 			response.sendRedirect("index.jsp");
 		} else {
-			response.sendRedirect("home.jsp");
+			response.sendRedirect("index.jsp");
 		}
 			} else {
 		//tira excepcion personalizada de no existe email y password 

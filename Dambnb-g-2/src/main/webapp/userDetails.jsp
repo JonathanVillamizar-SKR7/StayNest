@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="daxbnb.DAO.*"%>
+<%@ page import="daxbnb.DAO.UserDAO"%>
+<%@ page import="daxbnb.DAO.ReservesDAO"%>
+
 <%@ page import="daxbnb.model.*"%>
 <%@ page import="main.*"%>
 <%@ page import="java.util.ArrayList"%>
@@ -20,16 +22,33 @@
 <title>User Details</title>
 </head>
 <body>
-
+	<%
+	UserDAO userDAO = new UserDAO();
+	ReservesDAO resDAO = new ReservesDAO();
+	String username = null;
+	String userType = null;
+	if (session != null) {
+		username = (String) session.getAttribute("username");
+		out.println(username);
+		System.out.println(username);
+		userType = (String) session.getAttribute("userType");
+	}
+	User user = userDAO.selectByUserName("Alfredo");
+	%>
 	<main>
 		<div class="p-5">
 			<h1>Details</h1>
 			<div class="card" style="width: 100%;">
 				<div class="card-body">
-					<h2 class="card-text">Username:</h2>
-					<h3 class="card-text">Password:</h3>
-					<h3 class="card-text">UserType:</h3>
-					<h3 class="card-text">Description</h3>
+					<h2 class="card-text">
+						Username:<%=user.getUserName()%></h2>
+					<h3 class="card-text">
+						Password:<%=user.getPassword()%></h3>
+					<h3 class="card-text">
+						UserType:<%=user.getUserType()%></h3>
+					<h3 class="card-text">
+						Description:
+						<%=user.getUserDescription()%></h3>
 				</div>
 			</div>
 		</div>
@@ -45,17 +64,25 @@
 					<th scope="col">Total</th>
 				</thead>
 				<%-- Hacer con un for el body --%>
+				<%
+				List<Reserves> reserves = resDAO.selectByIdUser(user.getIdUser());
+				for (Reserves a : reserves) {
+				%>
 				<tbody>
 					<tr>
-						<th scope="row" style="width: 15%;"><img src="img/1-1.jpg" alt="" height="80rem"></th>
-						<td class="align-middle">id</td>
-						<td class="align-middle">asfasfasssssssssfafasasfasfassssssfasfsafasfasfaafs</td>
-						<td class="align-middle">start</td>
-						<td class="align-middle">finish</td>
-						<td class="align-middle">numguest</td>
-						<td class="align-middle">total</td>
+						<th scope="row" style="width: 15%;"><img src="img/1-1.jpg"
+							alt="" height="80rem"></th>
+						<td class="align-middle"><%=a.getHousing().getIdHouse()%></td>
+						<td class="align-middle"><%=a.getHousing().getDescription()%></td>
+						<td class="align-middle"><%=a.getCheckIn()%></td>
+						<td class="align-middle"><%=a.getCheckOut()%></td>
+						<td class="align-middle"><%=a.getNumGuests()%></td>
+						<td class="align-middle"><%=a.getTotalPrice()%></td>
 					</tr>
 				</tbody>
+				<%
+				}
+				%>
 			</table>
 		</div>
 
