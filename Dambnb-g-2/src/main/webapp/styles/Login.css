@@ -15,45 +15,35 @@
 html, body {
 	height: 100%;
 	margin: 0;
-}
-
-body {
-	background-color: var(--primary-color);
+	background-color: var(--secondary-color);
 	font-family: 'Nunito Sans', sans-serif;
-	display: flex;
-	flex-direction: column;
 }
 
-nav {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	font-weight: bold;
-	color: var(--accent-color);
-	background-color: white;
+.logo {
+	width: 10rem;
 }
 
-.Index {
+.nav-link-custom {
+	font-size: 1.2rem;
+	color: var(--primary-color);
 	font-weight: 700;
 	text-decoration: none;
-	color: var(--accent-color);
-	font-size: 1.2rem;
 	transition: color 0.3s ease;
 }
 
-.Index:hover {
+
+.nav-link-custom:hover {
 	color: var(--warning-color);
 }
 
 .User-Icon {
 	width: 4rem;
+	transition: filter 0.3s ease;
 }
 
 .User-Icon:hover {
-	color: var(--warning-color);
 	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
 		brightness(1.2);
-	
 }
 
 .menu {
@@ -65,10 +55,8 @@ nav {
 }
 
 .logo:hover img {
-	color: var(--warning-color);
 	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
 		brightness(1.2);
-	
 }
 
 header a {
@@ -167,13 +155,13 @@ main .logo_corner {
 }
 
 footer {
-	background-color: var(--primary-color);
+	margin-top: auto;
 	padding: 2rem 0;
+	background-color: var(--primary-color);
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: 26rem;
-	margin-top: auto;
 }
 
 footer img {

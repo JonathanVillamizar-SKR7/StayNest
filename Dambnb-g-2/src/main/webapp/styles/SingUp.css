@@ -4,29 +4,58 @@
 	url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&display=swap')
 	;
 
-body {
+:root {
+	--primary-color: rgb(0, 124, 145);
+	--secondary-color: rgb(236, 238, 248);
+	--accent-color: rgb(76, 206, 238);
+	--dark-color: rgb(51, 51, 51);
+	--warning-color: rgb(255, 165, 82);
+}
+
+html, body {
+	height: 100%;
+	margin: 0;
+	background-color: var(--secondary-color);
 	font-family: 'Nunito Sans', sans-serif;
-	overflow: hidden;
 }
 
-header {
-	display: flex;
-	background-color: #F5F3EF;
-	width: auto;
-	height: 82px;
-	justify-content: space-between;
-	align-items: center;
+.logo {
+	width: 10rem;
 }
 
-header .links_header {
-	display: flex;
-	gap: 65px;
-	margin-right: 2%;
-}
-
-header a {
+.nav-link-custom {
+	font-size: 1.2rem;
+	color: var(--primary-color);
+	font-weight: 700;
 	text-decoration: none;
-	color: black;
+	transition: color 0.3s ease;
+}
+
+.nav-link-custom:hover {
+	color: var(--warning-color);
+}
+
+.User-Icon {
+	width: 4rem;
+	transition: filter 0.3s ease;
+}
+
+.User-Icon:hover {
+	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
+		brightness(1.2);
+}
+
+.menu {
+	gap: 3rem;
+}
+
+.logo {
+	width: 10rem;
+}
+
+.logo:hover img {
+	filter: brightness(0.8) sepia(1) hue-rotate(-30deg) saturate(5)
+		brightness(1.2);
 }
 
 main h1 {
@@ -119,5 +148,24 @@ main .logoCorner_content {
 
 main .logo_corner {
 	width: 577px;
+	height: auto;
+}
+
+footer {
+	margin-top: 0;
+	padding: 2rem 0;
+	background-color: var(--primary-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 26rem;
+}
+
+footer img {
+	margin: 0;
+}
+
+footer .logo {
+	width: 5rem;
 	height: auto;
 }

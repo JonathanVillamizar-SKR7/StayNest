@@ -13,29 +13,25 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="styles/SingUp.css">
 <title>Sing Up</title>
-<style>
-    .logo_header:hover {
-        filter: brightness(1.2);
-        transition: filter 0.3s ease;
-    }
-    .logo_header:hover {
-        color: var(--warning-color);
-        transition: color 0.3s ease;
-    }
-</style>
 </head>
 
 <body>
 	<header>
-		<div class="logo_header">
-			<a href="home.jsp"> <img class="logo_header"
-				src="<%=request.getContextPath()%>/img/Logo_transparente.png"
-				alt="Logo" style="width: 150px; height: auto;">
-			</a>
-		</div>
-		<div class="links_header">
-			<a href="">Company</a> <a href="">Legal</a> <a href="">Social</a>
-		</div>
+		<nav
+			class="d-flex justify-content-between align-items-center shadow-sm w-100"
+			style="background-color: white;">
+			<div class="logo">
+				<a href="home.jsp"> <img src="img/Logo_right.png" alt="StayNest"
+					class="logo">
+				</a>
+			</div>
+			<div class="menu d-flex align-items-center gap-4">
+				<a href="index.jsp" class="nav-link-custom">STAYS</a> <a
+					href="login.jsp"> <img src="img/user.png" alt="User Icon"
+					class="User-Icon">
+				</a>
+			</div>
+		</nav>
 	</header>
 	<main>
 		<div class="figura">
@@ -58,7 +54,8 @@
 						<button type="submit">Sing Up</button>
 					</div>
 					<p>
-						If you have and account &nbsp;<a href="login.jsp"> Log in </a>&nbsp; now
+						If you have and account &nbsp;<a href="login.jsp"> Log in </a>&nbsp;
+						now
 					</p>
 				</form>
 				<div class="logoCorner_content">
@@ -69,7 +66,41 @@
 			</div>
 		</div>
 	</main>
-	<footer> </footer>
+<footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+		<div class="col mb-3">
+			<a href="home.jsp" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+				<img src="img/logo_white.png" width="60%" alt="">
+			</a>
+		</div>
+		<div class="col mb-3"></div>
+		<div class="col mb-3">
+			<h5 id="footer-title">About & Support</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-3"><a href="aboutUs.jsp" class="nav-link p-0 text-muted">About Us</a></li>
+				<li class="nav-item mb-3"><a href="contactUs.jsp" class="nav-link p-0 text-muted">Contact Us</a></li>
+				<li class="nav-item mb-3"><a href="FAQ.jsp" class="nav-link p-0 text-muted">FAQ</a></li>
+			</ul>
+		</div>
+		<div class="col mb-3">
+			<h5 id="footer-title">Explore</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Countryside Retreats</a></li>
+				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Apartment Stays</a></li>
+				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Cabin Getaways</a></li>
+			</ul>
+		</div>
+		<div class="col mb-3">
+			<h5 id="footer-title">Policies & Security</h5>
+			<ul class="nav flex-column">
+				<li class="nav-item mb-3"><a href="privacyPolicy.jsp" class="nav-link p-0 text-muted">Privacy Policy</a></li>
+				<li class="nav-item mb-3"><a href="term&conditions.jsp" class="nav-link p-0 text-muted">Term & Conditions</a></li>
+				<li class="nav-item mb-3"><a href="refund.jsp" class="nav-link p-0 text-muted">Refund & Cancellation Policy</a></li>
+			</ul>
+		</div>
+		<div class="col-12 text-center mt-4">
+			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega - Diana Kopyv</p>
+		</div>
+	</footer>
 </body>
 
 </html>
