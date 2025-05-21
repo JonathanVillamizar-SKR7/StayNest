@@ -22,19 +22,20 @@
 <title>User Details</title>
 </head>
 <body>
+	<%@ include file="Header.jsp" %>
 	<%
 	UserDAO userDAO = new UserDAO();
 	ReservesDAO resDAO = new ReservesDAO();
-	String username = null;
-	String userType = null;
+	String userName = null;
+	String usertype = null;
 	if (session != null) {
-		username = (String) session.getAttribute("username");
-		out.println(username);
+		userName = (String) session.getAttribute("username");
 		System.out.println(username);
-		userType = (String) session.getAttribute("userType");
+		usertype = (String) session.getAttribute("userType");
 	}
-	User user = userDAO.selectByUserName("Alfredo");
+	User user = userDAO.selectByUserName(userName);
 	%>
+	
 	<main>
 		<div class="p-5">
 			<h1>Details</h1>
@@ -64,6 +65,8 @@
 					<th scope="col">Total</th>
 				</thead>
 				<%-- Hacer con un for el body --%>
+				
+				<%-- 
 				<%
 				List<Reserves> reserves = resDAO.selectByIdUser(user.getIdUser());
 				for (Reserves a : reserves) {
@@ -83,6 +86,7 @@
 				<%
 				}
 				%>
+				--%>
 			</table>
 		</div>
 
