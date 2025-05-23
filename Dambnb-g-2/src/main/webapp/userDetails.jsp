@@ -27,11 +27,8 @@
 	UserDAO userDAO = new UserDAO();
 	ReservesDAO resDAO = new ReservesDAO();
 	String userName = null;
-	String usertype = null;
 	if (session != null) {
 		userName = (String) session.getAttribute("username");
-		System.out.println(username);
-		usertype = (String) session.getAttribute("userType");
 	}
 	User user = userDAO.selectByUserName(userName);
 	%>
@@ -42,13 +39,13 @@
 			<div class="card" style="width: 100%;">
 				<div class="card-body">
 					<h2 class="card-text">
-						Username:<%=user.getUserName()%></h2>
+						Username:&nbsp;<%=user.getUserName()%></h2>
 					<h3 class="card-text">
-						Password:<%=user.getPassword()%></h3>
+						Password:&nbsp;<%=user.getPassword()%></h3>
 					<h3 class="card-text">
-						UserType:<%=user.getUserType()%></h3>
+						UserType:&nbsp;<%=user.getUserType()%></h3>
 					<h3 class="card-text">
-						Description:
+						Description:&nbsp;
 						<%=user.getUserDescription()%></h3>
 				</div>
 			</div>
