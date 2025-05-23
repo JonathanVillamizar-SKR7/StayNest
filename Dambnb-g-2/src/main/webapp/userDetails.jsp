@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="daxbnb.DAO.UserDAO"%>
 <%@ page import="daxbnb.DAO.ReservesDAO"%>
@@ -63,7 +63,6 @@
 				</thead>
 				<%-- Hacer con un for el body --%>
 				
-				<%-- 
 				<%
 				List<Reserves> reserves = resDAO.selectByIdUser(user.getIdUser());
 				for (Reserves a : reserves) {
@@ -72,18 +71,17 @@
 					<tr>
 						<th scope="row" style="width: 15%;"><img src="img/1-1.jpg"
 							alt="" height="80rem"></th>
-						<td class="align-middle"><%=a.getHousing().getIdHouse()%></td>
+						<td class="align-middle text-center"><%=a.getHousing().getIdHouse()%></td>
 						<td class="align-middle"><%=a.getHousing().getDescription()%></td>
-						<td class="align-middle"><%=a.getCheckIn()%></td>
-						<td class="align-middle"><%=a.getCheckOut()%></td>
-						<td class="align-middle"><%=a.getNumGuests()%></td>
-						<td class="align-middle"><%=a.getTotalPrice()%></td>
+						<td class="align-middle text-center"><%=a.getCheckIn()%></td>
+						<td class="align-middle text-center"><%=a.getCheckOut()%></td>
+						<td class="align-middle text-center"><%=a.getNumGuests()%></td>
+						<td class="align-middle text-center"><%=a.getTotalPrice()%></td>
 					</tr>
 				</tbody>
 				<%
 				}
 				%>
-				--%>
 			</table>
 		</div>
 
