@@ -104,133 +104,102 @@
                                 </nav>
                             </header>
                             <main>
-                                <div class="container">
+                                <div class="container-fluid mt-5">
                                     <div class="row">
-                                        <div class="col-md-2" style="display: flex; flex-direction: column; gap: 0.5rem;">
+                                        <div class="col-lg-2 col-md-3 col-sm-12 mb-3"
+                                            style="display: flex; flex-direction: column; gap: 0.5rem;">
                                             <form method="POST">
-                                                <button name="action" value="list_nest"
-                                                    class="btn btn-primary btn-menu"
-                                                    style="padding: 0.75rem 1.5rem; font-size: 1.1rem;">Nests</button>
+                                                <button name="action" value="list_nest" class="btn btn-primary btn-menu w-100"
+                                                    style="padding: 0.75rem 1.5rem; font-size: 1rem;">Nests</button>
                                             </form>
                                             <form method="POST">
-                                                <button name="action" value="insert_nest"
-                                                    class="btn btn-primary btn-menu"
-                                                    style="padding: 0.75rem 1.5rem; font-size: 1.1rem;">New Nest</button>
+                                                <button name="action" value="insert_nest" class="btn btn-primary btn-menu w-100"
+                                                    style="padding: 0.75rem 1.5rem; font-size: 1rem;">New Nest</button>
                                             </form>
                                             <form method="POST">
-                                                <button name="action" value="list_reserves"
-                                                    class="btn btn-success btn-menu"
-                                                    style="padding: 0.75rem 1.5rem; font-size: 1.1rem;">Reserves</button>
+                                                <button name="action" value="list_reserves" class="btn btn-success btn-menu w-100"
+                                                    style="padding: 0.75rem 1.5rem; font-size: 1rem;">Reserves</button>
                                             </form>
                                             <form method="POST">
-                                                <button name="action" value="insert_reserve"
-                                                    class="btn btn-success btn-menu"
-                                                    style="padding: 0.75rem 1.5rem; font-size: 1.1rem;">New reserve</button>
+                                                <button name="action" value="insert_reserve" class="btn btn-success btn-menu w-100"
+                                                    style="padding: 0.75rem 1.5rem; font-size: 1rem;">New reserve</button>
                                             </form>
                                             <form method="POST">
-                                                <button name="action" value="list_users"
-                                                    class="btn btn-warning btn-menu"
-                                                    style="padding: 0.75rem 1.5rem; font-size: 1.1rem;">Users</button>
+                                                <button name="action" value="list_users" class="btn btn-warning btn-menu w-100"
+                                                    style="padding: 0.75rem 1.5rem; font-size: 1rem;">Users</button>
                                             </form>
                                             <form method="POST">
-                                                <button name="action" value="insert_user"
-                                                    class="btn btn-warning btn-menu"
-                                                    style="padding: 0.75rem 1.5rem; font-size: 1.1rem;">New User</button>
+                                                <button name="action" value="insert_user" class="btn btn-warning btn-menu w-100"
+                                                    style="padding: 0.75rem 1.5rem; font-size: 1rem;">New User</button>
                                             </form>
                                             <form method="POST">
-                                                <button name="action" value="list_facilities"
-                                                    class="btn btn-info btn-menu"
-                                                    style="padding: 0.75rem 1.5rem; font-size: 1.1rem;">House facilities</button>
+                                                <button name="action" value="list_facilities" class="btn btn-info btn-menu w-100"
+                                                    style="padding: 0.75rem 1.5rem; font-size: 1rem;">House facilities</button>
                                             </form>
                                             <form method="POST">
-                                                <button name="action" value="insert_facility"
-                                                    class="btn btn-info btn-menu"
-                                                    style="padding: 0.75rem 1.5rem; font-size: 1.1rem;">New house facility</button>
+                                                <button name="action" value="insert_facility" class="btn btn-info btn-menu w-100"
+                                                    style="padding: 0.75rem 1.5rem; font-size: 1rem;">New house facility</button>
                                             </form>
                                             <form method="POST">
-                                                <button name="action" value="logout"
-                                                    class="btn btn-danger btn-menu"
-                                                    style="padding: 0.75rem 1.5rem; font-size: 1.1rem;">Logout</button>
+                                                <button name="action" value="logout" class="btn btn-danger btn-menu w-100"
+                                                    style="padding: 0.75rem 1.5rem; font-size: 1rem;">Logout</button>
                                             </form>
                                         </div>
-                                        <div class="col-md-10">
+                                        <div class="col-lg-10 col-md-9 col-sm-12">
                                             <div class="card">
                                                 <div class="card-header text-center">
                                                     <h2>NESTS</h2>
                                                 </div>
                                                 <div class="card-body">
-                                                    <table class="table">
-                                                        <thead>
-                                                            <tr>
-                                                                <th>Image</th>
-                                                                <th>ID</th>
-                                                                <th>Name</th>
-                                                                <th>Price</th>
-                                                                <th>Type</th>
-                                                                <th>Guests</th>
-                                                                <th>Bedrooms</th>
-                                                                <th>Bed</th>
-                                                                <th>Bath</th>
-                                                                <th>Options</th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <% for (Housing h : housings) { List<Images> imgs =
-                                                                imgDAO.selectImagesByHousingId(h.getIdHouse());
-                                                                String imagePath = (!imgs.isEmpty()) ?
-                                                                request.getContextPath() + imgs.get(0).getImgRoute() :
-                                                                "img/default.jpg";
-                                                                %>
+                                                    <div class="table-responsive">
+                                                        <table class="table ">
+                                                            <thead>
                                                                 <tr>
-                                                                    <td><img src="<%=imagePath%>" alt="Housing Image">
-                                                                    </td>
+                                                                    <th>Image</th>
+                                                                    <th>ID</th>
+                                                                    <th>Name</th>
+                                                                    <th>Price</th>
+                                                                    <th>Type</th>
+                                                                    <th>Guests</th>
+                                                                    <th>Bedrooms</th>
+                                                                    <th>Bed</th>
+                                                                    <th>Bath</th>
+                                                                    <th>Options</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% for (Housing h : housings) {
+                                                                    List<Images> imgs = imgDAO.selectImagesByHousingId(h.getIdHouse());
+                                                                    String imagePath = (!imgs.isEmpty()) ? request.getContextPath() + imgs.get(0).getImgRoute() : "img/default.jpg"; %>
+                                                                <tr>
+                                                                    <td><img src="<%=imagePath%>" alt="Housing Image"></td>
+                                                                    <td><%=h.getIdHouse()%></td>
+                                                                    <td><%=h.getName()%></td>
+                                                                    <td><%=h.getPrice()%></td>
+                                                                    <td><%=h.getIdType()%></td>
+                                                                    <td><%=h.getNumGuest()%></td>
+                                                                    <td><%=h.getNumBedroom()%></td>
+                                                                    <td><%=h.getNumBed()%></td>
+                                                                    <td><%=h.getNumBath()%></td>
                                                                     <td>
-                                                                        <%=h.getIdHouse()%>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%=h.getName()%>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%=h.getPrice()%>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%=h.getIdType()%>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%=h.getNumGuest()%>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%=h.getNumBedroom()%>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%=h.getNumBed()%>
-                                                                    </td>
-                                                                    <td>
-                                                                        <%=h.getNumBath()%>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div
-                                                                            style=" gap: 0.5rem; align-items: center;">
-                                                                            <button
+                                                                        <button
                                                                                 class="btn btn-warning "
-                                                                                style="width: 40px; height: 40px; padding: 0; margin-right: 0.5rem;">
+                                                                                style="width: 40px; height: 60px; padding: 0; margin-right: 0.5rem;">
                                                                                 <img src="img/edit.png" alt="Edit"
-                                                                                    style="width: 20px; height: 20px;">
+                                                                                    style="width: 30px; height: 30px;">
                                                                             </button>
                                                                             <button
                                                                                 class="btn btn-danger "
-                                                                                style="width: 40px; height: 40px; padding: 0;">
+                                                                                style="width: 40px; height: 60px; padding: 0;">
                                                                                 <img src="img/delete.png" alt="Delete"
-                                                                                    style="width: 20px; height: 20px;">
+                                                                                    style="width: 30px; height: 30px;">
                                                                             </button>
-                                                                        </div>
                                                                     </td>
-
                                                                 </tr>
                                                                 <% } %>
-                                                        </tbody>
-
-                                                    </table>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
