@@ -18,8 +18,6 @@
 
 <body>
 		<%@ include file="Header.jsp" %>
-
-
 	<main>
 		<div class="container">
 			<h2 class="fw-bold">Featured houses</h2>
