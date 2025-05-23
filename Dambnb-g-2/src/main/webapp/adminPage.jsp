@@ -66,32 +66,43 @@
 	<main>
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3">
+				<div class="col-md-2">
 					<form method="POST">
-						<button name="action" value="list"
-							class="btn btn-primary btn-menu">List Stays</button>
+						<button name="action" value="list_nest"
+							class="btn btn-primary btn-menu">Nests</button>
 					</form>
 					<form method="POST">
-						<button name="action" value="insert"
-							class="btn btn-primary btn-menu">Insert new Stay</button>
+						<button name="action" value="insert_nest"
+							class="btn btn-primary btn-menu">New Nest</button>
 					</form>
 					<form method="POST">
-						<button name="action" value="update"
-							class="btn btn-primary btn-menu">Update Stay</button>
+						<button name="action" value="list_reserves"
+							class="btn btn-success btn-menu">Reserves</button>
 					</form>
 					<form method="POST">
-						<button name="action" value="delete"
-							class="btn btn-primary btn-menu">Delete Stay</button>
-					</form>
-					<form method="POST">
+						<button name="action" value="insert_reserve"
+							class="btn btn-success btn-menu">New reserve</button>
+					</form><form method="POST">
+						<button name="action" value="list_users"
+							class="btn btn-warning btn-menu">Users</button>
+					</form><form method="POST">
+						<button name="action" value="insert_user"
+							class="btn btn-warning btn-menu">New User</button>
+					</form><form method="POST">
+						<button name="action" value="list_facilities"
+							class="btn btn-info btn-menu">House facilities</button>
+					</form><form method="POST">
+						<button name="action" value="insert_facility"
+							class="btn btn-info btn-menu">New house facility</button>
+					</form><form method="POST">
 						<button name="action" value="logout"
 							class="btn btn-danger btn-menu">Logout</button>
 					</form>
 				</div>
-				<div class="col-md-9">
+				<div class="col-md-10">
 					<div class="card">
 						<div class="card-header">
-							<h2 class="text-center">HOME</h2>
+							<h2 class="text-center">NESTS</h2>
 						</div>
 						<div class="card-body">
 							<table class="table table-striped table-hover">
@@ -102,6 +113,11 @@
 										<th>Name</th>
 										<th>Price</th>
 										<th>Type</th>
+										<th>Guests</th>
+										<th>Bedrooms</th>
+										<th>Bed</th>
+										<th>Bath</th>
+                                        <th>Options</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -110,12 +126,19 @@
 										List<Images> imgs = imgDAO.selectImagesByHousingId(h.getIdHouse());
 										String imagePath = (!imgs.isEmpty()) ? request.getContextPath() + imgs.get(0).getImgRoute() : "img/default.jpg";
 									%>
-									<tr>
+									<tr style="background-color: var(--secundary-color);">
 										<td><img src="<%=imagePath%>" alt="Housing Image"></td>
 										<td><%=h.getIdHouse()%></td>
 										<td><%=h.getName()%></td>
 										<td><%=h.getPrice()%></td>
 										<td><%=h.getIdType()%></td>
+										<td><%=h.getNumGuest()%></td>
+										<td><%=h.getNumBedroom()%></td>
+										<td><%=h.getNumBed()%></td>
+										<td><%=h.getNumBath()%></td>
+										<td class="btn btn-warning" style="width: 20%; align-items:center; justify-content: center;"><img src="img/edit.png" style="width: 50%;" alt="">										<td class="btn btn-danger" style="width: 20%;align-items:center; justify-content: center;" ><img src="img/delete.png" style="width: 50%;" alt=""></td>
+										</td>
+										
 									</tr>
 									<%
 									}
