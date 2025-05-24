@@ -258,6 +258,108 @@
 						<%
 						}
 						%>
+
+						<%
+						if ("insert_nest".equals(action)) {
+						%>
+						<div class="card-header text-center">
+							<h2>NEW NEST</h2>
+							<form action="">
+								<div class="row mb-3">
+									<label for="newName" class="col-sm-3 col-form-label">New
+										name</label>
+									<div class="col-sm-9">
+										<input type="text" id="newName" class="form-control" required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="Location" class="col-sm-3 col-form-label">Location</label>
+									<div class="col-sm-9">
+										<input type="text" id="Location" class="form-control" required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="numGuest" class="col-sm-3 col-form-label">Number
+										guests</label>
+									<div class="col-sm-9">
+										<input type="number" id="numGuest" class="form-control"
+											required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="numBedroom" class="col-sm-3 col-form-label">Number
+										Bedrooms</label>
+									<div class="col-sm-9">
+										<input type="number" id="numBedroom" class="form-control"
+											required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="numBed" class="col-sm-3 col-form-label">Number
+										Beds</label>
+									<div class="col-sm-9">
+										<input type="number" id="numBed" class="form-control" required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="numBaths" class="col-sm-3 col-form-label">Number
+										Baths</label>
+									<div class="col-sm-9">
+										<input type="number" id="numBaths" class="form-control"
+											required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="idTypes" class="col-sm-3 col-form-label">Id
+										Type</label>
+									<div class="col-sm-9">
+										<input type="number" id="idTypes" class="form-control"
+											required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="price" class="col-sm-3 col-form-label">Price</label>
+									<div class="col-sm-9">
+										<input type="number" id="price" class="form-control" required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="description" class="col-sm-3 col-form-label">Description</label>
+									<div class="col-sm-9">
+										<input type="text" id="description" class="form-control"
+											required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="floatingSelect" class="col-sm-3 col-form-label">Available</label>
+									<div class="col-sm-9">
+										<select class="form-select" id="floatingSelect" required>
+											<option value="1">1</option>
+											<option value="2">2</option>
+										</select>
+									</div>
+								</div>
+
+								<div class="text-center">
+									<button type="submit" class="btn btn-primary w-100">Create
+										Nest</button>
+								</div>
+							</form>
+
+
+						</div>
+						<%
+						}
+						%>
 					</div>
 				</div>
 			</div>
