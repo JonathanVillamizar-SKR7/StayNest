@@ -94,122 +94,28 @@
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
 	List<Housing> housings = housingDAO.selectAll();
 
+	String action = "";
 	if ("POST".equalsIgnoreCase(request.getMethod())) {
 		try {
-			String action = request.getParameter("action");
+			action = request.getParameter("action");
 
 			switch (action) {
 			case "list_nest":
-				<% if ("list_nest".equals(request.getParameter("action"))) { %>
-				<div class="col-lg-10 col-md-9 col-sm-12">
-				    <div class="card">
-				        <div class="card-header text-center">
-				            <h2>NESTS</h2>
-				        </div>
-				        <div class="card-body">
-				            <div class="table-responsive">
-				                <table class="table">
-				                    <thead>
-				                        <tr>
-				                            <th>Image</th>
-				                            <th>ID</th>
-				                            <th>Name</th>
-				                            <th>Price</th>
-				                            <th>Type</th>
-				                            <th>Guests</th>
-				                            <th>Bedrooms</th>
-				                            <th>Bed</th>
-				                            <th>Bath</th>
-				                            <th>Options</th>
-				                        </tr>
-				                    </thead>
-				                    <tbody>
-				                        <% for (Housing h : housings) {
-				                            List<Images> imgs = imgDAO.selectImagesByHousingId(h.getIdHouse());
-				                            String imagePath = (!imgs.isEmpty()) ? request.getContextPath() + imgs.get(0).getImgRoute() : "img/default.jpg"; %>
-				                        <tr>
-				                            <td><img src="<%=imagePath%>" alt="Housing Image"></td>
-				                            <td><%=h.getIdHouse()%></td>
-				                            <td><%=h.getName()%></td>
-				                            <td><%=h.getPrice()%></td>
-				                            <td><%=h.getIdType()%></td>
-				                            <td><%=h.getNumGuest()%></td>
-				                            <td><%=h.getNumBedroom()%></td>
-				                            <td><%=h.getNumBed()%></td>
-				                            <td><%=h.getNumBath()%></td>
-				                            <td>
-				                                <form method="POST" style="display: inline;">
-				                                    <input type="hidden" name="houseId" value="<%=h.getIdHouse()%>">
-				                                    <button type="submit" name="action" value="edit_house" class="btn btn-warning">
-				                                        <img src="img/edit.png" alt="Edit" style="width: 30px; height: 30px;">
-				                                    </button>
-				                                </form>
-				                                <form method="POST" style="display: inline;">
-				                                    <input type="hidden" name="houseId" value="<%=h.getIdHouse()%>">
-				                                    <button type="submit" name="action" value="delete_house" class="btn btn-danger">
-				                                        <img src="img/delete.png" alt="Delete" style="width: 30px; height: 30px;">
-				                                    </button>
-				                                </form>
-				                            </td>
-				                        </tr>
-				                        <% } %>
-				                    </tbody>
-				                </table>
-				            </div>
-				        </div>
-				    </div>
-				</div>
-				<% } %>
 
 		break;
-
-			case "insert_nest":
-		response.sendRedirect("insertNest.jsp");
-		break;
-
-			case "edit_house":
-		String editId = request.getParameter("houseId");
-		response.sendRedirect("editNest.jsp?id=" + editId);
-		break;
-
 			case "delete_house":
 		String deleteId = request.getParameter("houseId");
-		housingDAO.deleteHousing(Integer.parseInt(deleteId));
-		response.sendRedirect("adminPage.jsp");
-		break;
-
-			case "list_reserves":
-		response.sendRedirect("listReserves.jsp");
-		break;
-
-			case "insert_reserve":
-		response.sendRedirect("insertReserve.jsp");
-		break;
-
-			case "list_users":
-		response.sendRedirect("listUsers.jsp");
-		break;
-
-			case "insert_user":
-		response.sendRedirect("insertUser.jsp");
-		break;
-
-			case "list_facilities":
-		response.sendRedirect("listFacilities.jsp");
-		break;
-
-			case "insert_facility":
-		response.sendRedirect("insertFacility.jsp");
-		break;
-
-			case "logout":
-		response.sendRedirect("index.jsp");
+		if (deleteId != null) {
+			HousingDAO dao = new HousingDAO();
+			dao.deleteHousing(Integer.parseInt(deleteId));
+		}
+		response.sendRedirect("adminPage.jsp?action=list_nest");
 		break;
 
 			default:
 		out.println("<div class='alert alert-warning' role='alert'>Action not found</div>");
-			}
 
+			}
 		} catch (Exception e) {
 			out.println("<div class='alert alert-danger' role='alert'>ERROR: " + e.getMessage() + "</div>");
 		}
@@ -262,6 +168,7 @@
 							class="btn btn-warning btn-menu w-100">New User</button>
 					</form>
 					<form method="POST">
+
 						<button name="action" value="list_facilities"
 							class="btn btn-info btn-menu w-100">House facilities</button>
 					</form>
@@ -274,7 +181,85 @@
 							class="btn btn-danger btn-menu w-100">Logout</button>
 					</form>
 				</div>
-				
+				<div class="col-lg-10 col-md-9 col-sm-12">
+					<div class="card">
+						<%
+						if ("list_nest".equals(action)) {
+						%>
+						<div class="card-header text-center">
+							<h2>NESTS</h2>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Image</th>
+											<th>ID</th>
+											<th>Name</th>
+											<th>Price</th>
+											<th>Type</th>
+											<th>Guests</th>
+											<th>Bedrooms</th>
+											<th>Bed</th>
+											<th>Bath</th>
+											<th>Options</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+										for (Housing h : housings) {
+											List<Images> imgs = imgDAO.selectImagesByHousingId(h.getIdHouse());
+											String imagePath = (!imgs.isEmpty()) ? request.getContextPath() + imgs.get(0).getImgRoute() : "img/default.jpg";
+										%>
+										<tr>
+											<td><img src="<%=imagePath%>" alt="Housing Image"></td>
+											<td><%=h.getIdHouse()%></td>
+											<td><%=h.getName()%></td>
+											<td><%=h.getPrice()%></td>
+											<td><%=h.getIdType()%></td>
+											<td><%=h.getNumGuest()%></td>
+											<td><%=h.getNumBedroom()%></td>
+											<td><%=h.getNumBed()%></td>
+											<td><%=h.getNumBath()%></td>
+											<td>
+												<form method="POST" style="display: inline;">
+													<input type="hidden" name="houseId"
+														value="<%=h.getIdHouse()%>">
+													<button type="submit" name="action" value="edit_house"
+														class="btn btn-warning">
+														<img src="img/edit.png" alt="Edit"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+												<form method="POST" style="display: inline;">
+													<input type="hidden" name="houseId"
+														value="<%=h.getIdHouse()%>">
+													<button type="submit" name="action" value="delete_house"
+														class="btn btn-danger">
+														<img src="img/delete.png" alt="Delete"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+											</td>
+										</tr>
+										<%
+										}
+										%>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<%
+						}
+						if ("".equals(action)) {
+						%>
+						<p>sfasdasdasdasdasdasdas</p>
+						<%
+						}
+						%>
+					</div>
+				</div>
 			</div>
 		</div>
 	</main>
