@@ -24,22 +24,8 @@
 	Housing housing = h.selectById(Integer.parseInt(id));
 	%>
 
-	<header>
-		<nav
-			class="d-flex justify-content-between align-items-center shadow-sm w-100">
-			<div class="logo">
-				<a href="home.jsp"> <img src="img/Logo_right.png" alt="StayNest"
-					class="logo">
-				</a>
-			</div>
-			<div class="menu d-flex align-items-center gap-4">
-				<a href="index.jsp" class="nav-link-custom">STAYS</a> <a
-					href="login.jsp"> <img src="img/user.png" alt="User Icon"
-					class="User-Icon">
-				</a>
-			</div>
-		</nav>
-	</header>
+		<%@ include file="Header.jsp" %>
+
 	<main style="background-color: var(--secundary-color);">
 		<div class="container my-5">
 			<div class="row align-items-center">

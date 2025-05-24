@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="daxbnb.DAO.UserDAO"%>
 <%@ page import="daxbnb.DAO.ReservesDAO"%>
@@ -27,11 +27,8 @@
 	UserDAO userDAO = new UserDAO();
 	ReservesDAO resDAO = new ReservesDAO();
 	String userName = null;
-	String usertype = null;
 	if (session != null) {
 		userName = (String) session.getAttribute("username");
-		System.out.println(username);
-		usertype = (String) session.getAttribute("userType");
 	}
 	User user = userDAO.selectByUserName(userName);
 	%>
@@ -42,13 +39,13 @@
 			<div class="card" style="width: 100%;">
 				<div class="card-body">
 					<h2 class="card-text">
-						Username:<%=user.getUserName()%></h2>
+						Username:&nbsp;<%=user.getUserName()%></h2>
 					<h3 class="card-text">
-						Password:<%=user.getPassword()%></h3>
+						Password:&nbsp;<%=user.getPassword()%></h3>
 					<h3 class="card-text">
-						UserType:<%=user.getUserType()%></h3>
+						UserType:&nbsp;<%=user.getUserType()%></h3>
 					<h3 class="card-text">
-						Description:
+						Description:&nbsp;
 						<%=user.getUserDescription()%></h3>
 				</div>
 			</div>
@@ -66,7 +63,6 @@
 				</thead>
 				<%-- Hacer con un for el body --%>
 				
-				<%-- 
 				<%
 				List<Reserves> reserves = resDAO.selectByIdUser(user.getIdUser());
 				for (Reserves a : reserves) {
@@ -75,18 +71,17 @@
 					<tr>
 						<th scope="row" style="width: 15%;"><img src="img/1-1.jpg"
 							alt="" height="80rem"></th>
-						<td class="align-middle"><%=a.getHousing().getIdHouse()%></td>
+						<td class="align-middle text-center"><%=a.getHousing().getIdHouse()%></td>
 						<td class="align-middle"><%=a.getHousing().getDescription()%></td>
-						<td class="align-middle"><%=a.getCheckIn()%></td>
-						<td class="align-middle"><%=a.getCheckOut()%></td>
-						<td class="align-middle"><%=a.getNumGuests()%></td>
-						<td class="align-middle"><%=a.getTotalPrice()%></td>
+						<td class="align-middle text-center"><%=a.getCheckIn()%></td>
+						<td class="align-middle text-center"><%=a.getCheckOut()%></td>
+						<td class="align-middle text-center"><%=a.getNumGuests()%></td>
+						<td class="align-middle text-center"><%=a.getTotalPrice()%></td>
 					</tr>
 				</tbody>
 				<%
 				}
 				%>
-				--%>
 			</table>
 		</div>
 

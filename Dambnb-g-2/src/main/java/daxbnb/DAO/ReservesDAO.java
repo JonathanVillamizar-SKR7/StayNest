@@ -56,7 +56,7 @@ public class ReservesDAO {
 			int idReserve = resultSet.getInt("idReserve");
 			int idHouse = resultSet.getInt("idHouse");
 			int idUser = resultSet.getInt("idUser");
-			String nameH = resultSet.getString("name");
+			String nameH = resultSet.getString("nameH");
 			int numGuests = resultSet.getInt("numGuests");
 			double totalPrice = resultSet.getDouble("totalPrice");
 			java.util.Date checkIn = resultSet.getDate("checkIn");
@@ -94,7 +94,7 @@ public class ReservesDAO {
 		if (resultSet.next()) {
 			int idReserve = resultSet.getInt("idReserve");
 			int idUser = resultSet.getInt("idUser");
-			String nameH = resultSet.getString("name");
+			String nameH = resultSet.getString("nameH");
 			int numGuests = resultSet.getInt("numGuests");
 			double totalPrice = resultSet.getDouble("totalPrice");
 			java.util.Date checkIn = resultSet.getDate("checkIn");
@@ -130,7 +130,7 @@ public class ReservesDAO {
 		while (resultSet.next()) {
 			int idReserve = resultSet.getInt("idReserve");
 			int idHouse = resultSet.getInt("idHouse");
-			String nameH = resultSet.getString("name");
+			String nameH = resultSet.getString("nameH");
 			int numGuests = resultSet.getInt("numGuests");
 			double totalPrice = resultSet.getDouble("totalPrice");
 			java.util.Date checkIn = resultSet.getDate("checkIn");
@@ -160,13 +160,13 @@ public class ReservesDAO {
 	 * @throws SQLException           si ocurre un error al ejecutar la inserción.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public int insertReserve(int idHouse, int idUser, String name, int numGuests, double totalPrice,
+	public int insertReserve(int idHouse, int idUser, String nameH, int numGuests, double totalPrice,
 			java.util.Date checkIn, java.util.Date checkOut) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(INSERT_RESERVES, Statement.RETURN_GENERATED_KEYS);
 		ps.setInt(1, idHouse);
 		ps.setInt(2, idUser);
-		ps.setString(3, name);
+		ps.setString(3, nameH);
 		ps.setDate(4, new java.sql.Date(checkIn.getTime()));
 		ps.setDate(5, new java.sql.Date(checkOut.getTime()));
 		ps.setInt(6, numGuests);
@@ -203,13 +203,13 @@ public class ReservesDAO {
 	 *                                actualización.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public int updateReserve(int idReserve, int idHouse, int idUser, String name, int numGuests, java.util.Date checkIn,
+	public int updateReserve(int idReserve, int idHouse, int idUser, String nameH, int numGuests, java.util.Date checkIn,
 			java.util.Date checkOut, double totalPrice) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(UPDATE_RESERVES);
 		ps.setInt(1, idHouse);
 		ps.setInt(2, idUser);
-		ps.setString(3, name);
+		ps.setString(3, nameH);
 		ps.setDate(4, new java.sql.Date(checkIn.getTime()));
 		ps.setDate(5, new java.sql.Date(checkOut.getTime()));
 		ps.setInt(6, numGuests);

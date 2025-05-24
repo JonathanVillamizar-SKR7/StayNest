@@ -11,17 +11,8 @@
 </head>
 
 <body>
-	<header>
-		<nav class="d-flex justify-content-between align-items-center shadow-sm w-100" style="background-color: white;">
-			<div class="logo">
-				<a href="home.jsp"><img src="img/Logo_right.png" alt="StayNest" class="logo"></a>
-			</div>
-			<div class="menu d-flex align-items-center gap-4">
-				<a href="index.jsp" class="nav-link-custom">STAYS</a>
-				<a href="login.jsp"><img src="img/user.png" alt="User Icon" class="User-Icon"></a>
-			</div>
-		</nav>
-	</header>
+	<%@ include file="Header.jsp" %>
+
 
 	<main class="container my-5">
 		<section>

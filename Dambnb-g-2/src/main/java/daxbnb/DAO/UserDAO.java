@@ -54,7 +54,7 @@ public class UserDAO {
 			if (!rs.wasNull()) {
 				List<CreditCard> creditcards = new ArrayList<>();
 				User user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
-						rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+						rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userType"),
 						rs.getString("userDescription"));
 				users.add(user);
 			}
@@ -84,7 +84,7 @@ public class UserDAO {
 		if (rs.next()) {
 			List<CreditCard> creditcards = new ArrayList<>();
 			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
-					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userType"),
 					rs.getString("userDescription"));
 		}
 		rs.close();
@@ -112,7 +112,7 @@ public class UserDAO {
 		if (rs.next()) {
 			List<CreditCard> creditcards = new ArrayList<>();
 			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
-					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userType"),
 					rs.getString("userDescription"));
 		}
 		rs.close();
@@ -139,7 +139,7 @@ public class UserDAO {
 		if (rs.next()) {
 			List<CreditCard> creditcards = new ArrayList<>();
 			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
-					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userName"),
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userType"),
 					rs.getString("userDescription"));
 		}
 		rs.close();
