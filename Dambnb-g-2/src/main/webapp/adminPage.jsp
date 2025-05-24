@@ -93,7 +93,35 @@
 	HousingDAO housingDAO = new HousingDAO();
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
 	List<Housing> housings = housingDAO.selectAll();
+
+	String action = "";
+	if ("POST".equalsIgnoreCase(request.getMethod())) {
+		try {
+			action = request.getParameter("action");
+
+			switch (action) {
+			case "list_nest":
+
+		break;
+			case "delete_house":
+		String deleteId = request.getParameter("houseId");
+		if (deleteId != null) {
+			HousingDAO dao = new HousingDAO();
+			dao.deleteHousing(Integer.parseInt(deleteId));
+		}
+		response.sendRedirect("adminPage.jsp?action=list_nest");
+		break;
+
+			default:
+		out.println("<div class='alert alert-warning' role='alert'>Action not found</div>");
+
+			}
+		} catch (Exception e) {
+			out.println("<div class='alert alert-danger' role='alert'>ERROR: " + e.getMessage() + "</div>");
+		}
+	}
 	%>
+
 	<header>
 		<nav
 			class="d-flex justify-content-between align-items-center shadow-sm w-100"
@@ -109,6 +137,7 @@
 			</div>
 		</nav>
 	</header>
+
 	<main>
 		<div class="container-fluid mt-5">
 			<div class="row">
@@ -116,72 +145,125 @@
 					style="display: flex; flex-direction: column; gap: 0.5rem;">
 					<form method="POST">
 						<button name="action" value="list_nest"
-							class="btn btn-primary btn-menu w-100"
-							style="padding: 0.75rem 1.5rem; font-size: 1rem;">Nests</button>
+							class="btn btn-primary btn-menu w-100">Nests</button>
 					</form>
 					<form method="POST">
 						<button name="action" value="insert_nest"
-							class="btn btn-primary btn-menu w-100"
-							style="padding: 0.75rem 1.5rem; font-size: 1rem;">New
-							Nest</button>
+							class="btn btn-primary btn-menu w-100">New Nest</button>
 					</form>
 					<form method="POST">
 						<button name="action" value="list_reserves"
-							class="btn btn-success btn-menu w-100"
-							style="padding: 0.75rem 1.5rem; font-size: 1rem;">Reserves</button>
+							class="btn btn-success btn-menu w-100">Reserves</button>
 					</form>
 					<form method="POST">
 						<button name="action" value="insert_reserve"
-							class="btn btn-success btn-menu w-100"
-							style="padding: 0.75rem 1.5rem; font-size: 1rem;">New
-							reserve</button>
+							class="btn btn-success btn-menu w-100">New reserve</button>
 					</form>
 					<form method="POST">
 						<button name="action" value="list_users"
-							class="btn btn-warning btn-menu w-100"
-							style="padding: 0.75rem 1.5rem; font-size: 1rem;">Users</button>
+							class="btn btn-warning btn-menu w-100">Users</button>
 					</form>
 					<form method="POST">
 						<button name="action" value="insert_user"
-							class="btn btn-warning btn-menu w-100"
-							style="padding: 0.75rem 1.5rem; font-size: 1rem;">New
-							User</button>
+							class="btn btn-warning btn-menu w-100">New User</button>
 					</form>
 					<form method="POST">
+
 						<button name="action" value="list_facilities"
-							class="btn btn-info btn-menu w-100"
-							style="padding: 0.75rem 1.5rem; font-size: 1rem;">House
-							facilities</button>
+							class="btn btn-info btn-menu w-100">House facilities</button>
 					</form>
 					<form method="POST">
 						<button name="action" value="insert_facility"
-							class="btn btn-info btn-menu w-100"
-							style="padding: 0.75rem 1.5rem; font-size: 1rem;">New
-							house facility</button>
+							class="btn btn-info btn-menu w-100">New house facility</button>
 					</form>
 					<form method="POST">
 						<button name="action" value="logout"
-							class="btn btn-danger btn-menu w-100"
-							style="padding: 0.75rem 1.5rem; font-size: 1rem;">Logout</button>
+							class="btn btn-danger btn-menu w-100">Logout</button>
 					</form>
 				</div>
 				<div class="col-lg-10 col-md-9 col-sm-12">
 					<div class="card">
+						<%
+						if ("list_nest".equals(action)) {
+						%>
 						<div class="card-header text-center">
-							<h2>NEW NEST</h2>
-							<form action="">
-							<div>
-                                <label for="" class="form-label"></label>
-                                <input type="text" id="" class="form-control"> 
-                            </div>
-							</form>
-
+							<h2>NESTS</h2>
 						</div>
-
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Image</th>
+											<th>ID</th>
+											<th>Name</th>
+											<th>Price</th>
+											<th>Type</th>
+											<th>Guests</th>
+											<th>Bedrooms</th>
+											<th>Bed</th>
+											<th>Bath</th>
+											<th>Options</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+										for (Housing h : housings) {
+											List<Images> imgs = imgDAO.selectImagesByHousingId(h.getIdHouse());
+											String imagePath = (!imgs.isEmpty()) ? request.getContextPath() + imgs.get(0).getImgRoute() : "img/default.jpg";
+										%>
+										<tr>
+											<td><img src="<%=imagePath%>" alt="Housing Image"></td>
+											<td><%=h.getIdHouse()%></td>
+											<td><%=h.getName()%></td>
+											<td><%=h.getPrice()%></td>
+											<td><%=h.getIdType()%></td>
+											<td><%=h.getNumGuest()%></td>
+											<td><%=h.getNumBedroom()%></td>
+											<td><%=h.getNumBed()%></td>
+											<td><%=h.getNumBath()%></td>
+											<td>
+												<form method="POST" style="display: inline;">
+													<input type="hidden" name="houseId"
+														value="<%=h.getIdHouse()%>">
+													<button type="submit" name="action" value="edit_house"
+														class="btn btn-warning">
+														<img src="img/edit.png" alt="Edit"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+												<form method="POST" style="display: inline;">
+													<input type="hidden" name="houseId"
+														value="<%=h.getIdHouse()%>">
+													<button type="submit" name="action" value="delete_house"
+														class="btn btn-danger">
+														<img src="img/delete.png" alt="Delete"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+											</td>
+										</tr>
+										<%
+										}
+										%>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<%
+						}
+						if ("".equals(action)) {
+						%>
+						<p>sfasdasdasdasdasdasdas</p>
+						<%
+						}
+						%>
 					</div>
 				</div>
 			</div>
+		</div>
 	</main>
+
 	<footer
 		class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
 		<div class="col mb-3">
@@ -225,10 +307,8 @@
 			</ul>
 		</div>
 		<div class="col-12 text-center mt-4">
-			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega -
-				Diana Kopyv</p>
+			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega</p>
 		</div>
 	</footer>
 </body>
-
 </html>
