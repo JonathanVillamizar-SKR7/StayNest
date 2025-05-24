@@ -100,6 +100,67 @@
 
 			switch (action) {
 			case "list_nest":
+				<% if ("list_nest".equals(request.getParameter("action"))) { %>
+				<div class="col-lg-10 col-md-9 col-sm-12">
+				    <div class="card">
+				        <div class="card-header text-center">
+				            <h2>NESTS</h2>
+				        </div>
+				        <div class="card-body">
+				            <div class="table-responsive">
+				                <table class="table">
+				                    <thead>
+				                        <tr>
+				                            <th>Image</th>
+				                            <th>ID</th>
+				                            <th>Name</th>
+				                            <th>Price</th>
+				                            <th>Type</th>
+				                            <th>Guests</th>
+				                            <th>Bedrooms</th>
+				                            <th>Bed</th>
+				                            <th>Bath</th>
+				                            <th>Options</th>
+				                        </tr>
+				                    </thead>
+				                    <tbody>
+				                        <% for (Housing h : housings) {
+				                            List<Images> imgs = imgDAO.selectImagesByHousingId(h.getIdHouse());
+				                            String imagePath = (!imgs.isEmpty()) ? request.getContextPath() + imgs.get(0).getImgRoute() : "img/default.jpg"; %>
+				                        <tr>
+				                            <td><img src="<%=imagePath%>" alt="Housing Image"></td>
+				                            <td><%=h.getIdHouse()%></td>
+				                            <td><%=h.getName()%></td>
+				                            <td><%=h.getPrice()%></td>
+				                            <td><%=h.getIdType()%></td>
+				                            <td><%=h.getNumGuest()%></td>
+				                            <td><%=h.getNumBedroom()%></td>
+				                            <td><%=h.getNumBed()%></td>
+				                            <td><%=h.getNumBath()%></td>
+				                            <td>
+				                                <form method="POST" style="display: inline;">
+				                                    <input type="hidden" name="houseId" value="<%=h.getIdHouse()%>">
+				                                    <button type="submit" name="action" value="edit_house" class="btn btn-warning">
+				                                        <img src="img/edit.png" alt="Edit" style="width: 30px; height: 30px;">
+				                                    </button>
+				                                </form>
+				                                <form method="POST" style="display: inline;">
+				                                    <input type="hidden" name="houseId" value="<%=h.getIdHouse()%>">
+				                                    <button type="submit" name="action" value="delete_house" class="btn btn-danger">
+				                                        <img src="img/delete.png" alt="Delete" style="width: 30px; height: 30px;">
+				                                    </button>
+				                                </form>
+				                            </td>
+				                        </tr>
+				                        <% } %>
+				                    </tbody>
+				                </table>
+				            </div>
+				        </div>
+				    </div>
+				</div>
+				<% } %>
+
 		break;
 
 			case "insert_nest":
@@ -213,74 +274,7 @@
 							class="btn btn-danger btn-menu w-100">Logout</button>
 					</form>
 				</div>
-				<div class="col-lg-10 col-md-9 col-sm-12">
-					<div class="card">
-						<div class="card-header text-center">
-							<h2>NESTS</h2>
-						</div>
-						<div class="card-body">
-							<div class="table-responsive">
-								<table class="table">
-									<thead>
-										<tr>
-											<th>Image</th>
-											<th>ID</th>
-											<th>Name</th>
-											<th>Price</th>
-											<th>Type</th>
-											<th>Guests</th>
-											<th>Bedrooms</th>
-											<th>Bed</th>
-											<th>Bath</th>
-											<th>Options</th>
-										</tr>
-									</thead>
-									<tbody>
-										<%
-										for (Housing h : housings) {
-											List<Images> imgs = imgDAO.selectImagesByHousingId(h.getIdHouse());
-											String imagePath = (!imgs.isEmpty()) ? request.getContextPath() + imgs.get(0).getImgRoute() : "img/default.jpg";
-										%>
-										<tr>
-											<td><img src="<%=imagePath%>" alt="Housing Image"></td>
-											<td><%=h.getIdHouse()%></td>
-											<td><%=h.getName()%></td>
-											<td><%=h.getPrice()%></td>
-											<td><%=h.getIdType()%></td>
-											<td><%=h.getNumGuest()%></td>
-											<td><%=h.getNumBedroom()%></td>
-											<td><%=h.getNumBed()%></td>
-											<td><%=h.getNumBath()%></td>
-											<td>
-												<form method="POST" style="display: inline;">
-													<input type="hidden" name="houseId"
-														value="<%=h.getIdHouse()%>">
-													<button type="submit" name="action" value="edit_house"
-														class="btn btn-warning">
-														<img src="img/edit.png" alt="Edit"
-															style="width: 30px; height: 30px;">
-													</button>
-												</form>
-												<form method="POST" style="display: inline;">
-													<input type="hidden" name="houseId"
-														value="<%=h.getIdHouse()%>">
-													<button type="submit" name="action" value="delete_house"
-														class="btn btn-danger">
-														<img src="img/delete.png" alt="Delete"
-															style="width: 30px; height: 30px;">
-													</button>
-												</form>
-											</td>
-										</tr>
-										<%
-										}
-										%>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	</main>
