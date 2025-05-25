@@ -287,14 +287,14 @@
 									<label for="newName" class="col-sm-3 col-form-label">New
 										name</label>
 									<div class="col-sm-9">
-										<input type="text" id="newName" class="form-control" required>
+										<input type="text" id="newName" name="newName" class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="newLocation" class="col-sm-3 col-form-label">Location</label>
 									<div class="col-sm-9">
-										<input type="text" id="newLocation" class="form-control"
+										<input type="text" id="newLocation" name="newLocation" class="form-control"
 											required>
 									</div>
 								</div>
@@ -303,7 +303,7 @@
 									<label for="numGuest" class="col-sm-3 col-form-label">Number
 										guests</label>
 									<div class="col-sm-9">
-										<input type="number" id="numGuest" class="form-control"
+										<input type="number" id="numGuest" name="numGuest" class="form-control"
 											required>
 									</div>
 								</div>
@@ -312,7 +312,7 @@
 									<label for="numBedroom" class="col-sm-3 col-form-label">Number
 										Bedrooms</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBedroom" class="form-control"
+										<input type="number" id="numBedroom" name="numBedroom" class="form-control"
 											required>
 									</div>
 								</div>
@@ -321,7 +321,7 @@
 									<label for="numBed" class="col-sm-3 col-form-label">Number
 										Beds</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBed" class="form-control" required>
+										<input type="number" id="numBed" name="numBed" class="form-control" required>
 									</div>
 								</div>
 
@@ -329,7 +329,7 @@
 									<label for="numBaths" class="col-sm-3 col-form-label">Number
 										Baths</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBaths" class="form-control"
+										<input type="number" id="numBaths" name="numBaths" class="form-control"
 											required>
 									</div>
 								</div>
@@ -338,7 +338,7 @@
 									<label for="idTypes" class="col-sm-3 col-form-label">Id
 										Type</label>
 									<div class="col-sm-9">
-										<input type="number" id="idTypes" class="form-control"
+										<input type="number" id="idTypes" name="idTypes" class="form-control"
 											required>
 									</div>
 								</div>
@@ -346,14 +346,14 @@
 								<div class="row mb-3">
 									<label for="price" class="col-sm-3 col-form-label">Price</label>
 									<div class="col-sm-9">
-										<input type="number" id="price" class="form-control" required>
+										<input type="number" id="price" name="price" class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="description" class="col-sm-3 col-form-label">Description</label>
 									<div class="col-sm-9">
-										<input type="text" id="description" class="form-control"
+										<input type="text" id="description" name="description" class="form-control"
 											required>
 									</div>
 								</div>
@@ -361,7 +361,7 @@
 								<div class="row mb-3">
 									<label for="available" class="col-sm-3 col-form-label">Available</label>
 									<div class="col-sm-9">
-										<select class="form-select" id="available" required>
+										<select class="form-select" id="available" name="available" required>
 											<option value="1">1</option>
 											<option value="2">2</option>
 										</select>

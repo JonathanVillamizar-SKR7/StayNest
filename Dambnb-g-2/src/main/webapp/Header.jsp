@@ -55,7 +55,7 @@
 			%>
 			<div class="menu d-flex align-items-center gap-4">
 				<span>Welcome <%=username%></span> <a href="index.jsp"
-					class="nav-link-custom">STAYS</a> <a href="userDetails.jsp?username=<%=username%>"> <img
+					class="nav-link-custom">STAYS</a> <a href="adminPage.jsp?username=<%=username%>"> <img
 					src="img/user_admin.png" alt="User Icon" class="User-Icon">
 				</a> <a href="login.jsp"> <img
 					src="img/log_outStayNest.png" alt="User Icon" class="User-Icon">
