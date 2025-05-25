@@ -93,6 +93,8 @@
 	HousingDAO housingDAO = new HousingDAO();
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
 	List<Housing> housings = housingDAO.selectAll();
+	String successMessage = null;
+	String errorMessage = null;
 
 	String action = "";
 	if ("POST".equalsIgnoreCase(request.getMethod())) {
@@ -103,6 +105,24 @@
 			case "list_nest":
 
 		break;
+			case "insert_nest":
+		break;
+			case "submit_insert_nest":
+		String newName = request.getParameter("newName");
+		String newLocation = request.getParameter("newLocation");
+		int numGuest = Integer.parseInt(request.getParameter("numGuest"));
+		int numBedroom = Integer.parseInt(request.getParameter("numBedroom"));
+		int numBed = Integer.parseInt(request.getParameter("numBed"));
+		int numBath = Integer.parseInt(request.getParameter("numBaths"));
+		int idType = Integer.parseInt(request.getParameter("idTypes"));
+		double price = Double.parseDouble(request.getParameter("price"));
+		String description = request.getParameter("description");
+		boolean available = Boolean.parseBoolean(request.getParameter("available"));
+		housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
+				description, available);
+	    successMessage = "Nest added successfully!";
+		break;
+
 			case "delete_house":
 		String deleteId = request.getParameter("houseId");
 		if (deleteId != null) {
@@ -113,11 +133,12 @@
 		break;
 
 			default:
+		errorMessage = "Action not found";
 		out.println("<div class='alert alert-warning' role='alert'>Action not found</div>");
 
 			}
 		} catch (Exception e) {
-			out.println("<div class='alert alert-danger' role='alert'>ERROR: " + e.getMessage() + "</div>");
+			errorMessage = "Error adding nest: " + e.getMessage();
 		}
 	}
 	%>
@@ -182,6 +203,26 @@
 					</form>
 				</div>
 				<div class="col-lg-10 col-md-9 col-sm-12">
+					<%
+					if (successMessage != null) {
+					%>
+					<div class="alert alert-success text-center" role="alert">
+						<%=successMessage%>
+					</div>
+					<%
+					}
+					%>
+
+					<%
+					if (errorMessage != null) {
+					%>
+					<div class="alert alert-danger text-center" role="alert">
+						<%=errorMessage%>
+					</div>
+					<%
+					}
+					%>
+
 					<div class="card">
 						<%
 						if ("list_nest".equals(action)) {
@@ -264,19 +305,22 @@
 						%>
 						<div class="card-header text-center">
 							<h2>NEW NEST</h2>
-							<form action="">
+							<form method="post">
+								<input type="hidden" value="submit_insert_nest" name="action" />
 								<div class="row mb-3">
 									<label for="newName" class="col-sm-3 col-form-label">New
 										name</label>
 									<div class="col-sm-9">
-										<input type="text" id="newName" class="form-control" required>
+										<input type="text" id="newName" name="newName"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label for="Location" class="col-sm-3 col-form-label">Location</label>
+									<label for="newLocation" class="col-sm-3 col-form-label">Location</label>
 									<div class="col-sm-9">
-										<input type="text" id="Location" class="form-control" required>
+										<input type="text" id="newLocation" name="newLocation"
+											class="form-control" required>
 									</div>
 								</div>
 
@@ -284,8 +328,8 @@
 									<label for="numGuest" class="col-sm-3 col-form-label">Number
 										guests</label>
 									<div class="col-sm-9">
-										<input type="number" id="numGuest" class="form-control"
-											required>
+										<input type="number" id="numGuest" name="numGuest"
+											class="form-control" required>
 									</div>
 								</div>
 
@@ -293,8 +337,8 @@
 									<label for="numBedroom" class="col-sm-3 col-form-label">Number
 										Bedrooms</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBedroom" class="form-control"
-											required>
+										<input type="number" id="numBedroom" name="numBedroom"
+											class="form-control" required>
 									</div>
 								</div>
 
@@ -302,7 +346,8 @@
 									<label for="numBed" class="col-sm-3 col-form-label">Number
 										Beds</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBed" class="form-control" required>
+										<input type="number" id="numBed" name="numBed"
+											class="form-control" required>
 									</div>
 								</div>
 
@@ -310,8 +355,8 @@
 									<label for="numBaths" class="col-sm-3 col-form-label">Number
 										Baths</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBaths" class="form-control"
-											required>
+										<input type="number" id="numBaths" name="numBaths"
+											class="form-control" required>
 									</div>
 								</div>
 
@@ -319,30 +364,32 @@
 									<label for="idTypes" class="col-sm-3 col-form-label">Id
 										Type</label>
 									<div class="col-sm-9">
-										<input type="number" id="idTypes" class="form-control"
-											required>
+										<input type="number" id="idTypes" name="idTypes"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="price" class="col-sm-3 col-form-label">Price</label>
 									<div class="col-sm-9">
-										<input type="number" id="price" class="form-control" required>
+										<input type="number" id="price" name="price"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="description" class="col-sm-3 col-form-label">Description</label>
 									<div class="col-sm-9">
-										<input type="text" id="description" class="form-control"
-											required>
+										<input type="text" id="description" name="description"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label for="floatingSelect" class="col-sm-3 col-form-label">Available</label>
+									<label for="available" class="col-sm-3 col-form-label">Available</label>
 									<div class="col-sm-9">
-										<select class="form-select" id="floatingSelect" required>
+										<select class="form-select" id="available" name="available"
+											required>
 											<option value="1">1</option>
 											<option value="2">2</option>
 										</select>
