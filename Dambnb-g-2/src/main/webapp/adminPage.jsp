@@ -103,6 +103,23 @@
 			case "list_nest":
 
 		break;
+			case "insert_nest":
+				break;
+			case "submit_insert_nest":
+		String newName = request.getParameter("newName");
+		String newLocation = request.getParameter("newLocation");
+		int numGuest = Integer.parseInt(request.getParameter("numGuest"));
+		int numBedroom = Integer.parseInt(request.getParameter("numBedroom"));
+		int numBed = Integer.parseInt(request.getParameter("numBed"));
+		int numBath = Integer.parseInt(request.getParameter("numBaths"));
+		int idType = Integer.parseInt(request.getParameter("idTypes"));
+		double price = Double.parseDouble(request.getParameter("price"));
+		String description = request.getParameter("description");
+		boolean available = Boolean.parseBoolean(request.getParameter("available"));
+		housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
+				description, available);
+		break;
+
 			case "delete_house":
 		String deleteId = request.getParameter("houseId");
 		if (deleteId != null) {
@@ -264,7 +281,8 @@
 						%>
 						<div class="card-header text-center">
 							<h2>NEW NEST</h2>
-							<form action="">
+							<form method="post">
+								<input type="hidden" value="submit_insert_nest" name="action" />
 								<div class="row mb-3">
 									<label for="newName" class="col-sm-3 col-form-label">New
 										name</label>
@@ -274,9 +292,10 @@
 								</div>
 
 								<div class="row mb-3">
-									<label for="Location" class="col-sm-3 col-form-label">Location</label>
+									<label for="newLocation" class="col-sm-3 col-form-label">Location</label>
 									<div class="col-sm-9">
-										<input type="text" id="Location" class="form-control" required>
+										<input type="text" id="newLocation" class="form-control"
+											required>
 									</div>
 								</div>
 
@@ -340,9 +359,9 @@
 								</div>
 
 								<div class="row mb-3">
-									<label for="floatingSelect" class="col-sm-3 col-form-label">Available</label>
+									<label for="available" class="col-sm-3 col-form-label">Available</label>
 									<div class="col-sm-9">
-										<select class="form-select" id="floatingSelect" required>
+										<select class="form-select" id="available" required>
 											<option value="1">1</option>
 											<option value="2">2</option>
 										</select>
