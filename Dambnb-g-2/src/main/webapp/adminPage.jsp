@@ -93,6 +93,8 @@
 	HousingDAO housingDAO = new HousingDAO();
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
 	List<Housing> housings = housingDAO.selectAll();
+	String successMessage = null;
+	String errorMessage = null;
 
 	String action = "";
 	if ("POST".equalsIgnoreCase(request.getMethod())) {
@@ -104,7 +106,7 @@
 
 		break;
 			case "insert_nest":
-				break;
+		break;
 			case "submit_insert_nest":
 		String newName = request.getParameter("newName");
 		String newLocation = request.getParameter("newLocation");
@@ -118,6 +120,7 @@
 		boolean available = Boolean.parseBoolean(request.getParameter("available"));
 		housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
 				description, available);
+	    successMessage = "Nest added successfully!";
 		break;
 
 			case "delete_house":
@@ -130,11 +133,12 @@
 		break;
 
 			default:
+		errorMessage = "Action not found";
 		out.println("<div class='alert alert-warning' role='alert'>Action not found</div>");
 
 			}
 		} catch (Exception e) {
-			out.println("<div class='alert alert-danger' role='alert'>ERROR: " + e.getMessage() + "</div>");
+			errorMessage = "Error adding nest: " + e.getMessage();
 		}
 	}
 	%>
@@ -199,6 +203,26 @@
 					</form>
 				</div>
 				<div class="col-lg-10 col-md-9 col-sm-12">
+					<%
+					if (successMessage != null) {
+					%>
+					<div class="alert alert-success text-center" role="alert">
+						<%=successMessage%>
+					</div>
+					<%
+					}
+					%>
+
+					<%
+					if (errorMessage != null) {
+					%>
+					<div class="alert alert-danger text-center" role="alert">
+						<%=errorMessage%>
+					</div>
+					<%
+					}
+					%>
+
 					<div class="card">
 						<%
 						if ("list_nest".equals(action)) {
@@ -287,15 +311,16 @@
 									<label for="newName" class="col-sm-3 col-form-label">New
 										name</label>
 									<div class="col-sm-9">
-										<input type="text" id="newName" name="newName" class="form-control" required>
+										<input type="text" id="newName" name="newName"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="newLocation" class="col-sm-3 col-form-label">Location</label>
 									<div class="col-sm-9">
-										<input type="text" id="newLocation" name="newLocation" class="form-control"
-											required>
+										<input type="text" id="newLocation" name="newLocation"
+											class="form-control" required>
 									</div>
 								</div>
 
@@ -303,8 +328,8 @@
 									<label for="numGuest" class="col-sm-3 col-form-label">Number
 										guests</label>
 									<div class="col-sm-9">
-										<input type="number" id="numGuest" name="numGuest" class="form-control"
-											required>
+										<input type="number" id="numGuest" name="numGuest"
+											class="form-control" required>
 									</div>
 								</div>
 
@@ -312,8 +337,8 @@
 									<label for="numBedroom" class="col-sm-3 col-form-label">Number
 										Bedrooms</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBedroom" name="numBedroom" class="form-control"
-											required>
+										<input type="number" id="numBedroom" name="numBedroom"
+											class="form-control" required>
 									</div>
 								</div>
 
@@ -321,7 +346,8 @@
 									<label for="numBed" class="col-sm-3 col-form-label">Number
 										Beds</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBed" name="numBed" class="form-control" required>
+										<input type="number" id="numBed" name="numBed"
+											class="form-control" required>
 									</div>
 								</div>
 
@@ -329,8 +355,8 @@
 									<label for="numBaths" class="col-sm-3 col-form-label">Number
 										Baths</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBaths" name="numBaths" class="form-control"
-											required>
+										<input type="number" id="numBaths" name="numBaths"
+											class="form-control" required>
 									</div>
 								</div>
 
@@ -338,30 +364,32 @@
 									<label for="idTypes" class="col-sm-3 col-form-label">Id
 										Type</label>
 									<div class="col-sm-9">
-										<input type="number" id="idTypes" name="idTypes" class="form-control"
-											required>
+										<input type="number" id="idTypes" name="idTypes"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="price" class="col-sm-3 col-form-label">Price</label>
 									<div class="col-sm-9">
-										<input type="number" id="price" name="price" class="form-control" required>
+										<input type="number" id="price" name="price"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="description" class="col-sm-3 col-form-label">Description</label>
 									<div class="col-sm-9">
-										<input type="text" id="description" name="description" class="form-control"
-											required>
+										<input type="text" id="description" name="description"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="available" class="col-sm-3 col-form-label">Available</label>
 									<div class="col-sm-9">
-										<select class="form-select" id="available" name="available" required>
+										<select class="form-select" id="available" name="available"
+											required>
 											<option value="1">1</option>
 											<option value="2">2</option>
 										</select>
