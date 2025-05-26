@@ -426,7 +426,8 @@
 						</div>
 						<%
 						}
-
+						%>
+						<%
 						if ("edit_house".equals(action)) {
 						%>
 						<div class="card-header text-center">
