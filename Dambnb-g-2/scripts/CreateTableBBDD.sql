@@ -31,7 +31,7 @@ CREATE TABLE CreditCards (
     expirationDate DATE,
     cvv INT,
     idUser INT,
-    FOREIGN KEY (idUser) REFERENCES Users(idUser)
+    FOREIGN KEY (idUser) REFERENCES Users(idUser) ON DELETE CASCADE
 );
 
 -- Tabla de viviendas
@@ -47,7 +47,7 @@ CREATE TABLE Housing (
     price DOUBLE,
     description TEXT,
     available BOOLEAN,
-    FOREIGN KEY (idType) REFERENCES Types(idType)
+    FOREIGN KEY (idType) REFERENCES Types(idType) ON DELETE CASCADE
 );
 
 -- Tabla de facilidades generales
@@ -61,8 +61,8 @@ CREATE TABLE HousingFacilities (
     idHouse INT,
     idFacility INT,
     PRIMARY KEY (idHouse, idFacility),
-    FOREIGN KEY (idHouse) REFERENCES Housing(idHouse),
-    FOREIGN KEY (idFacility) REFERENCES Facilities(idFacility)
+    FOREIGN KEY (idHouse) REFERENCES Housing(idHouse) ON DELETE CASCADE,
+    FOREIGN KEY (idFacility) REFERENCES Facilities(idFacility) ON DELETE CASCADE
 );
 
 -- Tabla para las imágenes de las viviendas
@@ -70,8 +70,8 @@ CREATE TABLE HousingImages (
     idHouse INT,
     idImage INT,
     PRIMARY KEY (idHouse, idImage),
-    FOREIGN KEY (idHouse) REFERENCES Housing(idHouse),
-    FOREIGN KEY (idImage) REFERENCES Images(idImage)
+    FOREIGN KEY (idHouse) REFERENCES Housing(idHouse) ON DELETE CASCADE,
+    FOREIGN KEY (idImage) REFERENCES Images(idImage) ON DELETE CASCADE
 );
 
 -- Tabla de reservas
@@ -84,6 +84,6 @@ CREATE TABLE Reserves (
     checkOut DATE,
     numGuests INT,
     totalPrice DOUBLE,
-    FOREIGN KEY (idHouse) REFERENCES Housing(idHouse),
-    FOREIGN KEY (idUser) REFERENCES Users(idUser)
+    FOREIGN KEY (idHouse) REFERENCES Housing(idHouse) ON DELETE CASCADE,
+    FOREIGN KEY (idUser) REFERENCES Users(idUser) ON DELETE CASCADE
 );
