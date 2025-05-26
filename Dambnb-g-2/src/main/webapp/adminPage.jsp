@@ -95,14 +95,15 @@
 	}
 </script>
 
-
 </head>
 
 <body>
 	<%
 	HousingDAO housingDAO = new HousingDAO();
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
+	UserDAO userDAO = new UserDAO();
 	List<Housing> housings = housingDAO.selectAll();
+	List<User> users = userDAO.selectAll();
 	String successMessage = null;
 	String errorMessage = null;
 
@@ -150,6 +151,17 @@
 				description, available);
 		successMessage = "Nest added successfully!";
 		break;
+			case "list_users":
+
+		break;
+			case "delete_house":
+		String deleteId = request.getParameter("houseId");
+		if (deleteId != null) {
+			HousingDAO dao = new HousingDAO();
+			dao.deleteHousing(Integer.parseInt(deleteId));
+		}
+		successMessage = "Nest deleted successfully!";
+		break;
 
 			default:
 		errorMessage = "Action not found";
@@ -162,22 +174,7 @@
 	}
 	%>
 
-
-	<header>
-		<nav
-			class="d-flex justify-content-between align-items-center shadow-sm w-100"
-			style="background-color: white;">
-			<div class="logo">
-				<a href="home.jsp"><img src="img/Logo_right.png" alt="StayNest"
-					class="logo"></a>
-			</div>
-			<div class="menu d-flex align-items-center gap-4">
-				<a href="index.jsp" class="nav-link-custom">STAYS</a> <a
-					href="login.jsp"><img src="img/user.png" alt="User Icon"
-					class="User-Icon"></a>
-			</div>
-		</nav>
-	</header>
+	<%@ include file="Header.jsp"%>
 
 	<main>
 		<div class="container-fluid mt-5">
@@ -233,6 +230,9 @@
 					%>
 					<div class="alert alert-success text-center" role="alert">
 						<%=successMessage%>
+						<%
+						response.sendRedirect("adminPage.jsp?action=list_nest");
+						%>
 					</div>
 					<%
 					}
@@ -320,7 +320,6 @@
 						</div>
 						<%
 						}
-
 						if ("insert_nest".equals(action)) {
 						%>
 						<div class="card-header text-center">
@@ -388,6 +387,19 @@
 											class="form-control" required>
 									</div>
 								</div>
+								<div class="row mb-3">
+									<label for="idTypes" class="col-sm-3 col-form-label">Available</label>
+									<div class="col-sm-9">
+										<select class="form-select" id="idTypes" name="idTypes"
+											required>
+											<option value="1">Cabin</option>
+											<option value="2">Tiny home</option>
+											<option value="3">Apartment</option>
+											<option value="4">Countryside</option>
+											<option value="5">Villa</option>
+										</select>
+									</div>
+								</div>
 
 								<div class="row mb-3">
 									<label for="price" class="col-sm-3 col-form-label">Price</label>
@@ -410,8 +422,8 @@
 									<div class="col-sm-9">
 										<select class="form-select" id="available" name="available"
 											required>
-											<option value="1">Disponible</option>
-											<option value="2">No disponible</option>
+											<option value="1">Available</option>
+											<option value="2">No Available</option>
 										</select>
 									</div>
 								</div>
@@ -527,6 +539,69 @@
 									Nest</button>
 							</div>
 						</form>
+						<%
+						}
+						%>
+						<%
+						if ("list_users".equals(action)) {
+						%>
+						<div class="card-header text-center">
+							<h2>USERS</h2>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Username</th>
+											<th>Password</th>
+											<th>Phone</th>
+											<th>Email</th>
+											<th>Passport</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+										for (Housing h : housings) {
+										%>
+										<tr>
+											<td><%=h.getIdHouse()%></td>
+											<td><%=h.getName()%></td>
+											<td><%=h.getPrice()%></td>
+											<td><%=h.getIdType()%></td>
+											<td><%=h.getNumGuest()%></td>
+											<td><%=h.getNumBedroom()%></td>
+											<td><%=h.getNumBed()%></td>
+											<td><%=h.getNumBath()%></td>
+											<td>
+												<form method="POST" style="display: inline;">
+													<input type="hidden" name="houseId"
+														value="<%=h.getIdHouse()%>">
+													<button type="submit" name="action" value="edit_house"
+														class="btn btn-warning">
+														<img src="img/edit.png" alt="Edit"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+												<form method="POST" style="display: inline;"
+													onsubmit="return confirmDelete();">
+													<input type="hidden" name="houseId"
+														value="<%=h.getIdHouse()%>">
+													<button type="submit" name="action" value="delete_house"
+														class="btn btn-danger">
+														<img src="img/delete.png" alt="Delete"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+											</td>
+										</tr>
+										<%
+										}
+										%>
+									</tbody>
+								</table>
+							</div>
+						</div>
 						<%
 						}
 						%>
