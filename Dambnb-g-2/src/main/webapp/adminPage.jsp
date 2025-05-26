@@ -163,13 +163,33 @@
 		int idType = Integer.parseInt(request.getParameter("idTypes"));
 		double price = Double.parseDouble(request.getParameter("price"));
 		String description = request.getParameter("description");
-		boolean available = Boolean.parseBoolean(request.getParameter("available"));
+		boolean available = "1".equals(request.getParameter("Available"));
 		housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
 				description, available);
 		successMessage = "Nest added successfully!";
 		break;
 			case "list_users":
 
+		break;
+		case "insert_user":
+		break;
+			case "submit_insert_user":
+				String userName = request.getParameter("userName");
+				long phone =  Long.parseLong(request.getParameter("userName"));
+				String email = request.getParameter("Email");
+				int passport = Integer.parseInt(request.getParameter("Passport"));
+				String password = request.getParameter("Passport");
+				
+				userDAO.insertUser(userName, phone, email, passport, password);
+				successMessage = "User added successfully!";
+		break;
+			case "delete_user":
+		String deleteUser = request.getParameter("userId");
+		if (deleteUser != null) {
+			HousingDAO dao = new HousingDAO();
+			dao.deleteHousing(Integer.parseInt(deleteUser));
+		}
+		successMessage = "Nest deleted successfully!";
 		break;
 
 			default:
@@ -543,6 +563,7 @@
 								<table class="table">
 									<thead>
 										<tr>
+											<th>idUser</th>
 											<th>Username</th>
 											<th>Password</th>
 											<th>Phone</th>
@@ -552,21 +573,19 @@
 									</thead>
 									<tbody>
 										<%
-										for (Housing h : housings) {
+										for (User u : users) {
 										%>
 										<tr>
-											<td><%=h.getIdHouse()%></td>
-											<td><%=h.getName()%></td>
-											<td><%=h.getPrice()%></td>
-											<td><%=h.getIdType()%></td>
-											<td><%=h.getNumGuest()%></td>
-											<td><%=h.getNumBedroom()%></td>
-											<td><%=h.getNumBed()%></td>
-											<td><%=h.getNumBath()%></td>
+											<td><%=u.getIdUser()%></td>
+											<td><%=u.getUserName()%></td>
+											<td><%=u.getPassword()%></td>
+											<td><%=u.getPhone()%></td>
+											<td><%=u.getEmail()%></td>
+											<td><%=u.getPassport()%></td>
 											<td>
 												<form method="POST" style="display: inline;">
-													<input type="hidden" name="houseId"
-														value="<%=h.getIdHouse()%>">
+													<input type="hidden" name="userId"
+														value="<%=u.getIdUser()%>">
 													<button type="submit" name="action" value="edit_house"
 														class="btn btn-warning">
 														<img src="img/edit.png" alt="Edit"
@@ -576,7 +595,7 @@
 												<form method="POST" style="display: inline;"
 													onsubmit="return confirmDelete();">
 													<input type="hidden" name="houseId"
-														value="<%=h.getIdHouse()%>">
+														value="<%=u.getIdUser()%>">
 													<button type="submit" name="action" value="delete_house"
 														class="btn btn-danger">
 														<img src="img/delete.png" alt="Delete"
@@ -595,10 +614,71 @@
 						<%
 						}
 						%>
+						<%
+						if ("insert_user".equals(action)) {
+						%>
+						<div class="card">
+							<div class="card-header text-center">
+								<h2>NEW USER</h2>
+								<form method="post">
+							<input type="hidden" value="submit_insert_user" name="action" />
+									<div class="row mb-3">
+										<label for="newuserName" class="col-sm-3 col-form-label">New
+											userName</label>
+										<div class="col-sm-9">
+											<input type="text" id="newuserName" name="newuserName"
+												class="form-control" required>
+										</div>
+									</div>
+
+									<div class="row mb-3">
+										<label for="Phone" class="col-sm-3 col-form-label">Phone</label>
+										<div class="col-sm-9">
+											<input type="number" id="Phone" name="Phone"
+												class="form-control" required>
+										</div>
+									</div>
+
+									<div class="row mb-3">
+										<label for="Email" class="col-sm-3 col-form-label">Email</label>
+										<div class="col-sm-9">
+											<input type="text" id="Email" name="Email"
+												class="form-control" required>
+										</div>
+									</div>
+
+									<div class="row mb-3">
+										<label for="Passport" class="col-sm-3 col-form-label">Passport</label>
+										<div class="col-sm-9">
+											<input type="number" id="Passport" name="Passport"
+												class="form-control" required>
+										</div>
+									</div>
+
+									<div class="row mb-3">
+										<label for="Password" class="col-sm-3 col-form-label">Password</label>
+										<div class="col-sm-9">
+											<input type="text" id="Password" name="Password"
+												class="form-control" required>
+										</div>
+									</div>
+
+									<div class="text-center">
+										<button type="submit" class="btn btn-primary w-100">Create
+											User</button>
+									</div>
+								</form>
+
+
+							</div>
+							<%
+							}
+							%>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+			</div>
 	</main>
 
 	<footer

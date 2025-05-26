@@ -93,6 +93,7 @@
 	<%
 	HousingDAO housingDAO = new HousingDAO();
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
+	UserDAO userDAO = new UserDAO();
 	List<Housing> housings = housingDAO.selectAll();
 	%>
 	<header>
@@ -169,95 +170,58 @@
 				<div class="col-lg-10 col-md-9 col-sm-12">
 					<div class="card">
 						<div class="card-header text-center">
-							<h2>NEW NEST</h2>
+							<h2>NEW USER</h2>
 							<form action="">
 								<div class="row mb-3">
-									<label for="newName" class="col-sm-3 col-form-label">New
-										name</label>
+									<label for="newuserName" class="col-sm-3 col-form-label">New userName</label>
 									<div class="col-sm-9">
-										<input type="text" id="newName" class="form-control" required>
+										<input type="text" id="newuserName" name="newuserName" class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label for="Location" class="col-sm-3 col-form-label">Location</label>
+									<label for="Phone" class="col-sm-3 col-form-label">Phone</label>
 									<div class="col-sm-9">
-										<input type="text" id="Location" class="form-control" required>
+										<input type="text" id="Phone" name="Phone" class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label for="numGuest" class="col-sm-3 col-form-label">Number
-										guests</label>
+									<label for="Email" class="col-sm-3 col-form-label">Email</label>
 									<div class="col-sm-9">
-										<input type="number" id="numGuest" class="form-control"
+										<input type="number" id="Email" name="Email" class="form-control"
 											required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label for="numBedroom" class="col-sm-3 col-form-label">Number
-										Bedrooms</label>
+									<label for="Ppassport" class="col-sm-3 col-form-label">Passport</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBedroom" class="form-control"
+										<input type="number" id="passport" name="passport" class="form-control"
 											required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label for="numBed" class="col-sm-3 col-form-label">Number
-										Beds</label>
+									<label for="password" class="col-sm-3 col-form-label">Password</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBed" class="form-control" required>
+										<input type="number" id="password" name="password" class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label for="numBaths" class="col-sm-3 col-form-label">Number
-										Baths</label>
+									<label for="isType" class="col-sm-3 col-form-label">User Type</label>
 									<div class="col-sm-9">
-										<input type="number" id="numBaths" class="form-control"
-											required>
-									</div>
-								</div>
-
-								<div class="row mb-3">
-									<label for="idTypes" class="col-sm-3 col-form-label">Id
-										Type</label>
-									<div class="col-sm-9">
-										<input type="number" id="idTypes" class="form-control"
-											required>
-									</div>
-								</div>
-
-								<div class="row mb-3">
-									<label for="price" class="col-sm-3 col-form-label">Price</label>
-									<div class="col-sm-9">
-										<input type="number" id="price" class="form-control" required>
-									</div>
-								</div>
-
-								<div class="row mb-3">
-									<label for="description" class="col-sm-3 col-form-label">Description</label>
-									<div class="col-sm-9">
-										<input type="text" id="description" class="form-control"
-											required>
-									</div>
-								</div>
-
-								<div class="row mb-3">
-									<label for="floatingSelect" class="col-sm-3 col-form-label">Available</label>
-									<div class="col-sm-9">
-										<select class="form-select" id="floatingSelect" required>
-											<option value="1">1</option>
-											<option value="2">2</option>
+										<select class="form-select" id="isType" name="isType" required>
+											<option value="client">Client</option>
+											<option value="admin">Admin</option>
 										</select>
 									</div>
 								</div>
 
 								<div class="text-center">
 									<button type="submit" class="btn btn-primary w-100">Create
-										Nest</button>
+										User</button>
 								</div>
 							</form>
 
@@ -267,7 +231,8 @@
 					</div>
 				</div>
 			</div>
-			
+		</div>
+
 	</main>
 	<footer
 		class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
