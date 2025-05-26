@@ -157,11 +157,11 @@
 		case "insert_user":
 		break;
 			case "submit_insert_user":
-				String userName = request.getParameter("userName");
-				long phone =  Long.parseLong(request.getParameter("userName"));
+				String userName = request.getParameter("newuserName");
+				long phone =  Long.parseLong(request.getParameter("Phone"));
 				String email = request.getParameter("Email");
 				int passport = Integer.parseInt(request.getParameter("Passport"));
-				String password = request.getParameter("Passport");
+				String password = request.getParameter("Password");
 				
 				userDAO.insertUser(userName, phone, email, passport, password);
 				successMessage = "User added successfully!";
@@ -169,10 +169,10 @@
 			case "delete_user":
 		String deleteUser = request.getParameter("userId");
 		if (deleteUser != null) {
-			HousingDAO dao = new HousingDAO();
-			dao.deleteHousing(Integer.parseInt(deleteUser));
+			UserDAO dao = new UserDAO();
+			dao.deleteUser(Integer.parseInt(deleteUser));
 		}
-		successMessage = "Nest deleted successfully!";
+		successMessage = "User deleted successfully!";
 		break;
 
 			default:
@@ -242,9 +242,6 @@
 					%>
 					<div class="alert alert-success text-center" role="alert">
 						<%=successMessage%>
-						<%
-						response.sendRedirect("adminPage.jsp?action=list_nest");
-						%>
 					</div>
 					<%
 					}
@@ -580,7 +577,7 @@
 												<form method="POST" style="display: inline;">
 													<input type="hidden" name="userId"
 														value="<%=u.getIdUser()%>">
-													<button type="submit" name="action" value="edit_house"
+													<button type="submit" name="action" value="edit_user"
 														class="btn btn-warning">
 														<img src="img/edit.png" alt="Edit"
 															style="width: 30px; height: 30px;">
@@ -588,9 +585,9 @@
 												</form>
 												<form method="POST" style="display: inline;"
 													onsubmit="return confirmDelete();">
-													<input type="hidden" name="houseId"
+													<input type="hidden" name="userId"
 														value="<%=u.getIdUser()%>">
-													<button type="submit" name="action" value="delete_house"
+													<button type="submit" name="action" value="delete_user"
 														class="btn btn-danger">
 														<img src="img/delete.png" alt="Delete"
 															style="width: 30px; height: 30px;">
@@ -636,7 +633,7 @@
 									<div class="row mb-3">
 										<label for="Email" class="col-sm-3 col-form-label">Email</label>
 										<div class="col-sm-9">
-											<input type="text" id="Email" name="Email"
+											<input type="email" id="Email" name="Email"
 												class="form-control" required>
 										</div>
 									</div>
