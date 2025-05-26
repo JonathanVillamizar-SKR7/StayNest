@@ -392,17 +392,9 @@
 								</div>
 
 								<div class="row mb-3">
-									<label for="idTypes" class="col-sm-3 col-form-label">Id
-										Type</label>
+									<label for="idTypes" class="col-sm-3 col-form-label">Types</label>
 									<div class="col-sm-9">
-										<input type="number" id="idTypes" name="idTypes"
-											class="form-control" required>
-									</div>
-								</div>
-								<div class="row mb-3">
-									<label for="Available" class="col-sm-3 col-form-label">Available</label>
-									<div class="col-sm-9">
-										<select class="form-select" id="Available" name="Available"
+										<select class="form-select" id="idTypes" name="isTypes"
 											required>
 											<option value="1">Cabin</option>
 											<option value="2">Tiny home</option>
