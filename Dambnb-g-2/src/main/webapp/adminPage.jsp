@@ -154,11 +154,11 @@
 			case "list_users":
 
 		break;
-			case "delete_house":
-		String deleteId = request.getParameter("houseId");
-		if (deleteId != null) {
+			case "delete_user":
+		String deleteUser = request.getParameter("userId");
+		if (deleteUser != null) {
 			HousingDAO dao = new HousingDAO();
-			dao.deleteHousing(Integer.parseInt(deleteId));
+			dao.deleteHousing(Integer.parseInt(deleteUser));
 		}
 		successMessage = "Nest deleted successfully!";
 		break;
@@ -553,6 +553,7 @@
 								<table class="table">
 									<thead>
 										<tr>
+											<th>idUser</th>
 											<th>Username</th>
 											<th>Password</th>
 											<th>Phone</th>
@@ -562,21 +563,19 @@
 									</thead>
 									<tbody>
 										<%
-										for (Housing h : housings) {
+										for (User u : users) {
 										%>
 										<tr>
-											<td><%=h.getIdHouse()%></td>
-											<td><%=h.getName()%></td>
-											<td><%=h.getPrice()%></td>
-											<td><%=h.getIdType()%></td>
-											<td><%=h.getNumGuest()%></td>
-											<td><%=h.getNumBedroom()%></td>
-											<td><%=h.getNumBed()%></td>
-											<td><%=h.getNumBath()%></td>
+											<td><%=u.getIdUser()%></td>
+											<td><%=u.getUserName()%></td>
+											<td><%=u.getPassword()%></td>
+											<td><%=u.getPhone()%></td>
+											<td><%=u.getEmail()%></td>
+											<td><%=u.getPassport()%></td>
 											<td>
 												<form method="POST" style="display: inline;">
-													<input type="hidden" name="houseId"
-														value="<%=h.getIdHouse()%>">
+													<input type="hidden" name="userId"
+														value="<%=u.getIdUser()%>">
 													<button type="submit" name="action" value="edit_house"
 														class="btn btn-warning">
 														<img src="img/edit.png" alt="Edit"
@@ -586,7 +585,7 @@
 												<form method="POST" style="display: inline;"
 													onsubmit="return confirmDelete();">
 													<input type="hidden" name="houseId"
-														value="<%=h.getIdHouse()%>">
+														value="<%=u.getIdUser()%>">
 													<button type="submit" name="action" value="delete_house"
 														class="btn btn-danger">
 														<img src="img/delete.png" alt="Delete"
