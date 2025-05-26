@@ -84,6 +84,8 @@
 
 .btn {
 	padding: 0;
+	width: 4rem;
+	height: 3rem;
 }
 </style>
 
@@ -116,6 +118,24 @@
 		break;
 			case "insert_nest":
 		break;
+
+			case "delete_house":
+		String deleteId = request.getParameter("houseId");
+		if (deleteId != null) {
+			HousingDAO dao = new HousingDAO();
+			dao.deleteHousing(Integer.parseInt(deleteId));
+		}
+		successMessage = "Nest deleted successfully!";
+		break;
+
+			case "edit_house":
+
+		break;
+
+			case "submit_edit_house":
+
+		break;
+
 			case "submit_insert_nest":
 		String newName = request.getParameter("newName");
 		String newLocation = request.getParameter("newLocation");
@@ -164,6 +184,7 @@
 					<form method="POST">
 						<button name="action" value="list_nest"
 							class="btn btn-primary btn-menu w-100">Nests</button>
+
 					</form>
 					<form method="POST">
 						<button name="action" value="insert_nest"
@@ -195,8 +216,12 @@
 							class="btn btn-info btn-menu w-100">New house facility</button>
 					</form>
 					<form method="POST">
+						<button name="action" value="housing_images"
+							class="btn btn-danger btn-menu w-100">Nests Images</button>
+					</form>
+					<form method="POST">
 						<button name="action" value="logout"
-							class="btn btn-danger btn-menu w-100">Logout</button>
+							class="btn btn-outline-danger btn-menu w-100">Logout</button>
 					</form>
 				</div>
 				<div class="col-lg-10 col-md-9 col-sm-12">
@@ -223,12 +248,13 @@
 					}
 					%>
 
+
 					<div class="card">
 						<%
 						if ("list_nest".equals(action) || "".equals(action)) {
 						%>
 						<div class="card-header text-center">
-							<h2>NESTS</h2>
+							<h2 style="color: var(--primary-color)">NESTS</h2>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -257,7 +283,7 @@
 											<td><img src="<%=imagePath%>" alt="Housing Image"></td>
 											<td><%=h.getIdHouse()%></td>
 											<td><%=h.getName()%></td>
-											<td><%=h.getPrice()%></td>
+											<td><%=h.getPrice()%>€</td>
 											<td><%=h.getIdType()%></td>
 											<td><%=h.getNumGuest()%></td>
 											<td><%=h.getNumBedroom()%></td>
@@ -294,12 +320,10 @@
 						</div>
 						<%
 						}
-						%>
-						<%
 						if ("insert_nest".equals(action)) {
 						%>
 						<div class="card-header text-center">
-							<h2>NEW NEST</h2>
+							<h2 style="color: var(--primary-color)">NEW NEST</h2>
 							<form method="post">
 								<input type="hidden" value="submit_insert_nest" name="action" />
 								<div class="row mb-3">
@@ -412,6 +436,109 @@
 
 
 						</div>
+						<%
+						}
+
+						if ("edit_house".equals(action)) {
+						%>
+						<div class="card-header text-center">
+							<h2 style="color: var(--primary-color)">EDIT NEST</h2>
+						</div>
+						<form method="post">
+							<input type="hidden" value="submit_edit_house" name="action" />
+							<div class="row mb-3">
+								<label for="editName" class="col-sm-3 col-form-label">Name</label>
+								<div class="col-sm-9">
+									<input type="text" id="editName" name="editName"
+										placeholder="${h.name}" class="form-control" required>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="newLocation" class="col-sm-3 col-form-label">Location</label>
+								<div class="col-sm-9">
+									<input type="text" id="newLocation" name="newLocation"
+										class="form-control" required>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="numGuest" class="col-sm-3 col-form-label">Number
+									guests</label>
+								<div class="col-sm-9">
+									<input type="number" id="numGuest" name="numGuest"
+										class="form-control" required>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="numBedroom" class="col-sm-3 col-form-label">Number
+									Bedrooms</label>
+								<div class="col-sm-9">
+									<input type="number" id="numBedroom" name="numBedroom"
+										class="form-control" required>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="numBed" class="col-sm-3 col-form-label">Number
+									Beds</label>
+								<div class="col-sm-9">
+									<input type="number" id="numBed" name="numBed"
+										class="form-control" required>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="numBaths" class="col-sm-3 col-form-label">Number
+									Baths</label>
+								<div class="col-sm-9">
+									<input type="number" id="numBaths" name="numBaths"
+										class="form-control" required>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="idTypes" class="col-sm-3 col-form-label">Id
+									Type</label>
+								<div class="col-sm-9">
+									<input type="number" id="idTypes" name="idTypes"
+										class="form-control" required>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="price" class="col-sm-3 col-form-label">Price</label>
+								<div class="col-sm-9">
+									<input type="number" id="price" name="price"
+										class="form-control" required>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="description" class="col-sm-3 col-form-label">Description</label>
+								<div class="col-sm-9">
+									<input type="text" id="description" name="description"
+										class="form-control" required>
+								</div>
+							</div>
+
+							<div class="row mb-3">
+								<label for="available" class="col-sm-3 col-form-label">Available</label>
+								<div class="col-sm-9">
+									<select class="form-select" id="available" name="available"
+										required>
+										<option value="1">Disponible</option>
+										<option value="2">No disponible</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary w-100">Create
+									Nest</button>
+							</div>
+						</form>
 						<%
 						}
 						%>
