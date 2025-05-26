@@ -410,8 +410,8 @@
 									<div class="col-sm-9">
 										<select class="form-select" id="available" name="available"
 											required>
-											<option value="1">Disponible</option>
-											<option value="2">No disponible</option>
+											<option value="1">Available</option>
+											<option value="2"></option>
 										</select>
 									</div>
 								</div>
@@ -428,6 +428,9 @@
 						}
 
 						if ("edit_house".equals(action)) {
+							int houseId = Integer.parseInt(request.getParameter("houseId"));
+							Housing h = housingDAO.selectById(houseId);
+
 						%>
 						<div class="card-header text-center">
 							<h2 style="color: var(--primary-color)">EDIT NEST</h2>
@@ -438,7 +441,7 @@
 								<label for="editName" class="col-sm-3 col-form-label">Name</label>
 								<div class="col-sm-9">
 									<input type="text" id="editName" name="editName"
-										placeholder="${h.name}" class="form-control" required>
+										value="<%= h.getIdHouse() %>"  class="form-control" required>
 								</div>
 							</div>
 
