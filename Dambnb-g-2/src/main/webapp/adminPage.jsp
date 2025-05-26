@@ -116,8 +116,6 @@
 			case "list_nest":
 
 		break;
-			case "insert_nest":
-		break;
 
 			case "delete_house":
 		String deleteId = request.getParameter("houseId");
@@ -132,8 +130,27 @@
 
 		break;
 
-			case "submit_edit_house":
+			case "submit_edit_house": {
+		int idHouse = Integer.parseInt(request.getParameter("houseId"));
+		String name = request.getParameter("editName");
+		String location = request.getParameter("editLocation");
+		int numGuest = Integer.parseInt(request.getParameter("editGuests"));
+		int numBedroom = Integer.parseInt(request.getParameter("editBedrooms"));
+		int numBed = Integer.parseInt(request.getParameter("editBed"));
+		int numBath = Integer.parseInt(request.getParameter("editBath"));
+		int idType = Integer.parseInt(request.getParameter("editType"));
+		double price = Double.parseDouble(request.getParameter("editPrice"));
+		String description = request.getParameter("editDescription");
 
+		boolean available = request.getParameter("available").equals("1");
+
+		housingDAO.updateHousing(idHouse, name, location, numGuest, numBedroom, numBed, numBath, idType, price,
+				description, available);
+
+		successMessage = "Nest updated successfully!";
+		break;
+			}
+			case "insert_nest":
 		break;
 
 			case "submit_insert_nest":
@@ -153,14 +170,6 @@
 		break;
 			case "list_users":
 
-		break;
-			case "delete_house":
-		String deleteId = request.getParameter("houseId");
-		if (deleteId != null) {
-			HousingDAO dao = new HousingDAO();
-			dao.deleteHousing(Integer.parseInt(deleteId));
-		}
-		successMessage = "Nest deleted successfully!";
 		break;
 
 			default:
@@ -379,18 +388,11 @@
 									</div>
 								</div>
 
+
 								<div class="row mb-3">
-									<label for="idTypes" class="col-sm-3 col-form-label">Id
-										Type</label>
+									<label for="idTypes" class="col-sm-3 col-form-label">Types</label>
 									<div class="col-sm-9">
-										<input type="number" id="idTypes" name="idTypes"
-											class="form-control" required>
-									</div>
-								</div>
-								<div class="row mb-3">
-									<label for="idTypes" class="col-sm-3 col-form-label">Available</label>
-									<div class="col-sm-9">
-										<select class="form-select" id="idTypes" name="idTypes"
+										<select class="form-select" id="idTypes" name="isTypes"
 											required>
 											<option value="1">Cabin</option>
 											<option value="2">Tiny home</option>
@@ -440,105 +442,90 @@
 						}
 
 						if ("edit_house".equals(action)) {
-							int houseId = Integer.parseInt(request.getParameter("houseId"));
-							Housing h = housingDAO.selectById(houseId);
-
+						int houseId = Integer.parseInt(request.getParameter("houseId"));
+						Housing h = housingDAO.selectById(houseId);
 						%>
 						<div class="card-header text-center">
 							<h2 style="color: var(--primary-color)">EDIT NEST</h2>
 						</div>
 						<form method="post">
 							<input type="hidden" value="submit_edit_house" name="action" />
+							<input type="hidden" name="houseId" value="<%=h.getIdHouse()%>" />
+
 							<div class="row mb-3">
 								<label for="editName" class="col-sm-3 col-form-label">Name</label>
 								<div class="col-sm-9">
 									<input type="text" id="editName" name="editName"
-										value="<%= h.getIdHouse() %>"  class="form-control" required>
+										value="<%=h.getName()%>" class="form-control" required>
 								</div>
 							</div>
-
 							<div class="row mb-3">
-								<label for="newLocation" class="col-sm-3 col-form-label">Location</label>
+								<label for="editLocation" class="col-sm-3 col-form-label">Location</label>
 								<div class="col-sm-9">
-									<input type="text" id="newLocation" name="newLocation"
+									<input type="text" id="editLocation"
+										value="<%=h.getLocation()%>" name="editLocation"
 										class="form-control" required>
 								</div>
 							</div>
-
 							<div class="row mb-3">
-								<label for="numGuest" class="col-sm-3 col-form-label">Number
-									guests</label>
+								<label for="editType" class="col-sm-3 col-form-label">Type</label>
 								<div class="col-sm-9">
-									<input type="number" id="numGuest" name="numGuest"
+									<input type="number" id="editType" value="<%=h.getIdType()%>"
+										name="editType" class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editPrice" class="col-sm-3 col-form-label">Price</label>
+								<div class="col-sm-9">
+									<input type="text" id="editPrice" value="<%=h.getPrice()%>"
+										name="editPrice" class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editGuests" class="col-sm-3 col-form-label">Number
+									of Guests</label>
+								<div class="col-sm-9">
+									<input type="number" id="editGuests"
+										value="<%=h.getNumGuest()%>" name="editGuests"
 										class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editBedrooms" class="col-sm-3 col-form-label">Number
+									of Bedrooms</label>
+								<div class="col-sm-9">
+									<input type="number" id="editBedrooms" name="editBedrooms"
+										value="<%=h.getNumBedroom()%>" class="form-control" required>
 								</div>
 							</div>
 
 							<div class="row mb-3">
-								<label for="numBedroom" class="col-sm-3 col-form-label">Number
-									Bedrooms</label>
+								<label for="editBed" class="col-sm-3 col-form-label">Number
+									of Beds</label>
 								<div class="col-sm-9">
-									<input type="number" id="numBedroom" name="numBedroom"
-										class="form-control" required>
+									<input type="number" id="editBed" value="<%=h.getNumBed()%>"
+										name="editBed" class="form-control" required>
 								</div>
 							</div>
-
 							<div class="row mb-3">
-								<label for="numBed" class="col-sm-3 col-form-label">Number
-									Beds</label>
+								<label for="editBath" class="col-sm-3 col-form-label">Number
+									of Baths</label>
 								<div class="col-sm-9">
-									<input type="number" id="numBed" name="numBed"
-										class="form-control" required>
+									<input type="number" id="editBath" name="editBath"
+										value="<%=h.getNumBath()%>" class="form-control" required>
 								</div>
 							</div>
-
 							<div class="row mb-3">
-								<label for="numBaths" class="col-sm-3 col-form-label">Number
-									Baths</label>
+								<label for="editDescription" class="col-sm-3 col-form-label">Description</label>
 								<div class="col-sm-9">
-									<input type="number" id="numBaths" name="numBaths"
+									<input type="text" id="editDescription"
+										value="<%=h.getDescription()%>" name="editDescription"
 										class="form-control" required>
-								</div>
-							</div>
-
-							<div class="row mb-3">
-								<label for="idTypes" class="col-sm-3 col-form-label">Id
-									Type</label>
-								<div class="col-sm-9">
-									<input type="number" id="idTypes" name="idTypes"
-										class="form-control" required>
-								</div>
-							</div>
-
-							<div class="row mb-3">
-								<label for="price" class="col-sm-3 col-form-label">Price</label>
-								<div class="col-sm-9">
-									<input type="number" id="price" name="price"
-										class="form-control" required>
-								</div>
-							</div>
-
-							<div class="row mb-3">
-								<label for="description" class="col-sm-3 col-form-label">Description</label>
-								<div class="col-sm-9">
-									<input type="text" id="description" name="description"
-										class="form-control" required>
-								</div>
-							</div>
-
-							<div class="row mb-3">
-								<label for="available" class="col-sm-3 col-form-label">Available</label>
-								<div class="col-sm-9">
-									<select class="form-select" id="available" name="available"
-										required>
-										<option value="1">Disponible</option>
-										<option value="2">No disponible</option>
-									</select>
 								</div>
 							</div>
 
 							<div class="text-center">
-								<button type="submit" class="btn btn-primary w-100">Create
+								<button type="submit" class="btn btn-primary w-100">Update
 									Nest</button>
 							</div>
 						</form>
