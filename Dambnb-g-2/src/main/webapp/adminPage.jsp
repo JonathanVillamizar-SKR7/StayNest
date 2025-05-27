@@ -112,8 +112,10 @@ body {
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
 	UserDAO userDAO = new UserDAO();
 	ReservesDAO reservesDAO = new ReservesDAO();
+	FacilityDAO facilitiesDAO = new FacilityDAO();
 	List<Housing> housings = housingDAO.selectAll();
 	List<User> users = userDAO.selectAll();
+	List<Facilities> facilities = facilitiesDAO.selectAll();
 	List<Reserves> reserves = reservesDAO.selectAll();
 	String successMessage = null;
 	String errorMessage = null;
@@ -184,11 +186,11 @@ body {
 			case "insert_user":
 		break;
 			case "submit_insert_user":
-		String userName = request.getParameter("userName");
-		long phone = Long.parseLong(request.getParameter("userName"));
+		String userName = request.getParameter("newuserName");
+		long phone = Long.parseLong(request.getParameter("Phone"));
 		String email = request.getParameter("Email");
 		int passport = Integer.parseInt(request.getParameter("Passport"));
-		String password = request.getParameter("Passport");
+		String password = request.getParameter("Password");
 
 		userDAO.insertUser(userName, phone, email, passport, password);
 		successMessage = "User added successfully!";
@@ -196,10 +198,24 @@ body {
 			case "delete_user":
 		String deleteUser = request.getParameter("userId");
 		if (deleteUser != null) {
-			HousingDAO dao = new HousingDAO();
-			dao.deleteHousing(Integer.parseInt(deleteUser));
+			UserDAO dao = new UserDAO();
+			dao.deleteUser(Integer.parseInt(deleteUser));
 		}
-		successMessage = "Nest deleted successfully!";
+		successMessage = "User deleted successfully!";
+		break;
+
+			case "list_facilities":
+
+		break;
+
+			case "insert_facility":
+
+		break;
+
+			case "submit_insert_facility":
+		String newFacility = request.getParameter("typeFacility");
+		facilitiesDAO.insertFacility(newFacility);
+		successMessage = "Facility added successfully!";
 		break;
 
 			case "list_reserves":
@@ -319,8 +335,6 @@ body {
 					<%
 					}
 					%>
-
-
 					<div class="card">
 						<%
 						if ("list_nest".equals(action) || "".equals(action)) {
@@ -498,12 +512,9 @@ body {
 										Nest</button>
 								</div>
 							</form>
-
-
 						</div>
 						<%
 						}
-
 						if ("edit_house".equals(action)) {
 						int houseId = Integer.parseInt(request.getParameter("houseId"));
 						Housing h = housingDAO.selectById(houseId);
@@ -775,7 +786,7 @@ body {
 												<form method="POST" style="display: inline;">
 													<input type="hidden" name="userId"
 														value="<%=u.getIdUser()%>">
-													<button type="submit" name="action" value="edit_house"
+													<button type="submit" name="action" value="edit_user"
 														class="btn btn-warning">
 														<img src="img/edit.png" alt="Edit"
 															style="width: 30px; height: 30px;">
@@ -783,9 +794,9 @@ body {
 												</form>
 												<form method="POST" style="display: inline;"
 													onsubmit="return confirmDelete();">
-													<input type="hidden" name="houseId"
+													<input type="hidden" name="userId"
 														value="<%=u.getIdUser()%>">
-													<button type="submit" name="action" value="delete_house"
+													<button type="submit" name="action" value="delete_user"
 														class="btn btn-danger">
 														<img src="img/delete.png" alt="Delete"
 															style="width: 30px; height: 30px;">
@@ -831,7 +842,7 @@ body {
 									<div class="row mb-3">
 										<label for="Email" class="col-sm-3 col-form-label">Email</label>
 										<div class="col-sm-9">
-											<input type="text" id="Email" name="Email"
+											<input type="email" id="Email" name="Email"
 												class="form-control" required>
 										</div>
 									</div>
@@ -857,8 +868,87 @@ body {
 											User</button>
 									</div>
 								</form>
-
-
+							</div>
+							<%
+							}
+							%>
+						</div>
+						<%
+						if ("list_facilities".equals(action)) {
+						%>
+						<div class="card-header text-center">
+							<h2 style="color: var(--primary-color)">FACILITIES</h2>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Id Facility</th>
+											<th>Type Facility</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+										for (Facilities f : facilities) {
+										%>
+										<tr>
+											<td><%=f.getIdFacilities()%></td>
+											<td><%=f.getTypeFacilities()%></td>
+											<td>
+												<form method="POST" style="display: inline;">
+													<input type="hidden" name="facilityId"
+														value="<%=f.getIdFacilities()%>">
+													<button type="submit" name="action" value="edit_facility"
+														class="btn btn-warning">
+														<img src="img/edit.png" alt="Edit"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+												<form method="POST" style="display: inline;"
+													onsubmit="return confirmDelete();">
+													<input type="hidden" name="facilityId"
+														value="<%=f.getIdFacilities()%>">
+													<button type="submit" name="action" value="delete_facility"
+														class="btn btn-danger">
+														<img src="img/delete.png" alt="Delete"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+											</td>
+										</tr>
+										<%
+										}
+										%>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<%
+						}
+						%>
+						<%
+						if ("insert_facility".equals(action)) {
+						%>
+						<div class="card">
+							<div class="card-header text-center">
+								<h2>NEW FACILITY</h2>
+								<form method="post">
+									<input type="hidden" value="submit_insert_facility"
+										name="action" />
+									<div class="row mb-3">
+										<label for="typeFacility" class="col-sm-3 col-form-label">New
+											Facility</label>
+										<div class="col-sm-9">
+											<input type="text" id="typeFacility" name="typeFacility"
+												class="form-control" required>
+										</div>
+									</div>
+									<div class="text-center">
+										<button type="submit" class="btn btn-primary w-100">Create
+											Facility</button>
+									</div>
+								</form>
 							</div>
 							<%
 							}
