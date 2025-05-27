@@ -712,7 +712,8 @@ body {
 						</div>
 						<form method="post">
 							<input type="hidden" value="submit_edit_reserve" name="action" />
-							<input type="hidden" name="idReserve" value="<%=r.getIdReserva()%>" />
+							<input type="hidden" name="idReserve"
+								value="<%=r.getIdReserva()%>" />
 
 							<div class="row mb-3">
 								<label for="editNameR" class="col-sm-3 col-form-label">Name</label>
