@@ -77,13 +77,13 @@ CREATE TABLE HousingImages (
 -- Tabla de reservas
 CREATE TABLE Reserves (
     idReserve INT AUTO_INCREMENT PRIMARY KEY,
-    idHouse INT,
-    idUser INT,
+    idHouse INT NULL,
+    idUser INT NOT NULL,
     nameH VARCHAR(100),
     checkIn DATE,
     checkOut DATE,
     numGuests INT,
     totalPrice DOUBLE,
-    FOREIGN KEY (idHouse) REFERENCES Housing(idHouse) ON DELETE CASCADE,
+    FOREIGN KEY (idHouse) REFERENCES Housing(idHouse) ON DELETE SET NULL,
     FOREIGN KEY (idUser) REFERENCES Users(idUser) ON DELETE CASCADE
 );

@@ -66,7 +66,7 @@ public class Reserves {
 		this.idReserva = idReserva;
 		this.housing = housing;
 		this.idUser = idUser;
-		this.nameH = nameH; // <-- falta este atributo en tu clase
+		this.nameH = nameH; 
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.numGuests = numGuests;
