@@ -102,8 +102,10 @@
 	HousingDAO housingDAO = new HousingDAO();
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
 	UserDAO userDAO = new UserDAO();
+	FacilityDAO facilitiesDAO = new FacilityDAO();
 	List<Housing> housings = housingDAO.selectAll();
 	List<User> users = userDAO.selectAll();
+	List<Facilities> facilities = facilitiesDAO.selectAll();
 	String successMessage = null;
 	String errorMessage = null;
 
@@ -173,6 +175,10 @@
 			dao.deleteUser(Integer.parseInt(deleteUser));
 		}
 		successMessage = "User deleted successfully!";
+		break;
+
+		case "list_facilities":
+		
 		break;
 
 			default:
@@ -665,7 +671,58 @@
 							<%
 							}
 							%>
+							
 						</div>
+						<%if("list_facilities".equals(action)){%>
+							<div class="card-header text-center">
+							<h2 style="color: var(--primary-color)">NESTS</h2>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>Id Facility</th>
+											<th>Type Facility</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+										for (Facilities f : facilities) {
+										%>
+										<tr>
+											<td><%=f.getIdFacilities()%></td>
+											<td><%=f.getTypeFacilities()%></td>
+											<td>
+												<form method="POST" style="display: inline;">
+													<input type="hidden" name="facilityId"
+														value="<%=f.getIdFacilities()%>">
+													<button type="submit" name="action" value="edit_facility"
+														class="btn btn-warning">
+														<img src="img/edit.png" alt="Edit"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+												<form method="POST" style="display: inline;"
+													onsubmit="return confirmDelete();">
+													<input type="hidden" name="facilityId"
+														value="<%=f.getIdFacilities()%>">
+													<button type="submit" name="action" value="delete_facility"
+														class="btn btn-danger">
+														<img src="img/delete.png" alt="Delete"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+											</td>
+										</tr>
+										<%
+										}
+										%>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<%}%>
 					</div>
 				</div>
 			</div>
