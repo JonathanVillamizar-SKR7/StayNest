@@ -19,12 +19,12 @@ import daxbnb.model.Reserves;
  */
 public class ReservesDAO {
 
-	private static final String SELECT_ALL = "SELECT * FROM Reserves";
+	private static final String SELECT_ALL = "SELECT * FROM Reserves";	
+	private static final String SELECT_BY_ID= "SELECT * FROM Reserves WHERE idReserve = ?";
 	private static final String SELECT_BY_IDHOUSE = "SELECT * FROM Reserves WHERE idHouse = ?";
 	private static final String SELECT_BY_IDUSER = "SELECT * FROM Reserves WHERE idUser = ?";
-	private static final String SELECT_BY_USERNAME = "SELECT * FROM Users WHERE userName = ?";
-	private static final String INSERT_RESERVES = "INSERT INTO Reserves (idHouse, idUser, name, checkIn, checkOut, numGuests, totalPrice) VALUES (?, ?, ?, ?, ?, ?,?)";
-	private static final String UPDATE_RESERVES = "UPDATE Reserves SET idHouse = ?, idUser = ?, name = ?, checkIn = ?, checkOut = ?, numGuests = ?, totalPrice = ? WHERE idReserve = ?";
+	private static final String INSERT_RESERVES = "INSERT INTO Reserves (idHouse, idUser, nameH, checkIn, checkOut, numGuests, totalPrice) VALUES (?, ?, ?, ?, ?, ?,?)";
+	private static final String UPDATE_RESERVES = "UPDATE Reserves SET idHouse = ?, idUser = ?, nameH = ?, checkIn = ?, checkOut = ?, numGuests = ?, totalPrice = ? WHERE idReserve = ?";
 	private static final String DELETE_RESERVES = "DELETE FROM Reserves WHERE idReserve = ?";
 
 	private DBConnection db;
@@ -54,7 +54,7 @@ public class ReservesDAO {
 
 		while (resultSet.next()) {
 			int idReserve = resultSet.getInt("idReserve");
-			int idHouse = resultSet.getInt("idHouse");
+			Integer idHouse = resultSet.getInt("idHouse");
 			int idUser = resultSet.getInt("idUser");
 			String nameH = resultSet.getString("nameH");
 			int numGuests = resultSet.getInt("numGuests");
@@ -62,8 +62,10 @@ public class ReservesDAO {
 			java.util.Date checkIn = resultSet.getDate("checkIn");
 			java.util.Date checkOut = resultSet.getDate("checkOut");
 
-			Housing housing = housingDAO.selectById(idHouse);
-
+			Housing housing = null;
+			if (!resultSet.wasNull()) {
+				housing = housingDAO.selectById(idHouse);
+			}
 			Reserves reserve = new Reserves(idReserve, housing, idUser, nameH, checkIn, checkOut, numGuests,
 					totalPrice);
 			reservesList.add(reserve);
@@ -72,6 +74,42 @@ public class ReservesDAO {
 		db.closeConnection(connection);
 		return reservesList;
 	}
+	
+	public Reserves selectById(int idReserve) throws SQLException, ClassNotFoundException {
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(SELECT_BY_ID);
+		ps.setInt(1, idReserve);
+		ResultSet resultSet = ps.executeQuery();
+
+		Reserves reserve = null;
+		HousingDAO housingDAO = new HousingDAO();
+
+		if (resultSet.next()) {
+			Integer idHouse = resultSet.getInt("idHouse");
+			Housing housing = null;
+			if (!resultSet.wasNull()) {
+				housing = housingDAO.selectById(idHouse);
+			}
+			int idUser = resultSet.getInt("idUser");
+			String nameH = resultSet.getString("nameH");
+			int numGuests = resultSet.getInt("numGuests");
+			double totalPrice = resultSet.getDouble("totalPrice");
+			java.util.Date checkIn = resultSet.getDate("checkIn");
+			java.util.Date checkOut = resultSet.getDate("checkOut");
+
+			reserve = new Reserves(idReserve, housing, idUser, nameH, checkIn, checkOut, numGuests, totalPrice);
+		}
+		resultSet.close();
+		db.closeConnection(connection);
+		return reserve;
+	}
+
+	public double calcularPrecioTotal(java.util.Date checkIn, java.util.Date checkOut, double precioPorNoche) {
+	    long lapso = checkOut.getTime() - checkIn.getTime();
+	    long noches = lapso / (1000 * 60 * 60 * 24);
+	    return noches * precioPorNoche;
+	}
+
 
 	/**
 	 * Selecciona una reserva específica por el ID de la vivienda.
@@ -203,8 +241,9 @@ public class ReservesDAO {
 	 *                                actualización.
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
-	public int updateReserve(int idReserve, int idHouse, int idUser, String nameH, int numGuests, java.util.Date checkIn,
-			java.util.Date checkOut, double totalPrice) throws SQLException, ClassNotFoundException {
+	public int updateReserve(int idReserve, int idHouse, int idUser, String nameH, int numGuests,
+			java.util.Date checkIn, java.util.Date checkOut, double totalPrice)
+			throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(UPDATE_RESERVES);
 		ps.setInt(1, idHouse);
