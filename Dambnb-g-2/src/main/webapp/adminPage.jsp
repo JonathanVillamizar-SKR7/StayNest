@@ -156,17 +156,17 @@
 			case "list_users":
 
 		break;
-		case "insert_user":
+			case "insert_user":
 		break;
 			case "submit_insert_user":
-				String userName = request.getParameter("newuserName");
-				long phone =  Long.parseLong(request.getParameter("Phone"));
-				String email = request.getParameter("Email");
-				int passport = Integer.parseInt(request.getParameter("Passport"));
-				String password = request.getParameter("Password");
-				
-				userDAO.insertUser(userName, phone, email, passport, password);
-				successMessage = "User added successfully!";
+		String userName = request.getParameter("newuserName");
+		long phone = Long.parseLong(request.getParameter("Phone"));
+		String email = request.getParameter("Email");
+		int passport = Integer.parseInt(request.getParameter("Passport"));
+		String password = request.getParameter("Password");
+
+		userDAO.insertUser(userName, phone, email, passport, password);
+		successMessage = "User added successfully!";
 		break;
 			case "delete_user":
 		String deleteUser = request.getParameter("userId");
@@ -177,8 +177,18 @@
 		successMessage = "User deleted successfully!";
 		break;
 
-		case "list_facilities":
-		
+			case "list_facilities":
+
+		break;
+
+			case "insert_facility":
+
+		break;
+
+			case "submit_insert_facility":
+		String newFacility = request.getParameter("typeFacility");
+		facilitiesDAO.insertFacility(newFacility);
+		successMessage = "Facility added successfully!";
 		break;
 
 			default:
@@ -262,8 +272,6 @@
 					<%
 					}
 					%>
-
-
 					<div class="card">
 						<%
 						if ("list_nest".equals(action) || "".equals(action)) {
@@ -440,12 +448,9 @@
 										Nest</button>
 								</div>
 							</form>
-
-
 						</div>
 						<%
 						}
-
 						if ("edit_house".equals(action)) {
 						%>
 						<div class="card-header text-center">
@@ -618,7 +623,7 @@
 							<div class="card-header text-center">
 								<h2>NEW USER</h2>
 								<form method="post">
-							<input type="hidden" value="submit_insert_user" name="action" />
+									<input type="hidden" value="submit_insert_user" name="action" />
 									<div class="row mb-3">
 										<label for="newuserName" class="col-sm-3 col-form-label">New
 											userName</label>
@@ -665,17 +670,16 @@
 											User</button>
 									</div>
 								</form>
-
-
 							</div>
 							<%
 							}
 							%>
-							
 						</div>
-						<%if("list_facilities".equals(action)){%>
-							<div class="card-header text-center">
-							<h2 style="color: var(--primary-color)">NESTS</h2>
+						<%
+						if ("list_facilities".equals(action)) {
+						%>
+						<div class="card-header text-center">
+							<h2 style="color: var(--primary-color)">FACILITIES</h2>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -722,11 +726,40 @@
 								</table>
 							</div>
 						</div>
-						<%}%>
+						<%
+						}
+						%>
+						<%
+						if ("insert_facility".equals(action)) {
+						%>
+						<div class="card">
+							<div class="card-header text-center">
+								<h2>NEW FACILITY</h2>
+								<form method="post">
+									<input type="hidden" value="submit_insert_facility"
+										name="action" />
+									<div class="row mb-3">
+										<label for="typeFacility" class="col-sm-3 col-form-label">New
+											Facility</label>
+										<div class="col-sm-9">
+											<input type="text" id="typeFacility" name="typeFacility"
+												class="form-control" required>
+										</div>
+									</div>
+									<div class="text-center">
+										<button type="submit" class="btn btn-primary w-100">Create
+											Facility</button>
+									</div>
+								</form>
+							</div>
+							<%
+							}
+							%>
+						</div>
 					</div>
 				</div>
 			</div>
-			</div>
+		</div>
 	</main>
 
 	<footer
