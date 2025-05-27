@@ -4,6 +4,12 @@
 <%@ page import="daxbnb.model.*"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
+<%!public double calcularPrecioTotal(java.util.Date checkIn, java.util.Date checkOut, double precioPorNoche) {
+		long diffMillis = checkOut.getTime() - checkIn.getTime();
+		long noches = diffMillis / (1000 * 60 * 60 * 24);
+		return noches * precioPorNoche;
+	}%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -57,7 +63,6 @@
 }
 
 .table tbody tr {
-	background-color: var(--secundary-color);
 	text-align: center;
 	vertical-align: middle;
 	border-radius: 10px;
@@ -87,6 +92,10 @@
 	width: 4rem;
 	height: 3rem;
 }
+
+body {
+	background-color: white;
+}
 </style>
 
 <script>
@@ -102,8 +111,10 @@
 	HousingDAO housingDAO = new HousingDAO();
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
 	UserDAO userDAO = new UserDAO();
+	ReservesDAO reservesDAO = new ReservesDAO();
 	List<Housing> housings = housingDAO.selectAll();
 	List<User> users = userDAO.selectAll();
+	List<Reserves> reserves = reservesDAO.selectAll();
 	String successMessage = null;
 	String errorMessage = null;
 
@@ -115,8 +126,6 @@
 			switch (action) {
 			case "list_nest":
 
-		break;
-			case "insert_nest":
 		break;
 
 			case "delete_house":
@@ -132,8 +141,26 @@
 
 		break;
 
-			case "submit_edit_house":
+			case "submit_edit_house": {
+		int idHouse = Integer.parseInt(request.getParameter("houseId"));
+		String name = request.getParameter("editName");
+		String location = request.getParameter("editLocation");
+		int numGuest = Integer.parseInt(request.getParameter("editGuests"));
+		int numBedroom = Integer.parseInt(request.getParameter("editBedrooms"));
+		int numBed = Integer.parseInt(request.getParameter("editBed"));
+		int numBath = Integer.parseInt(request.getParameter("editBath"));
+		int idType = Integer.parseInt(request.getParameter("editType"));
+		double price = Double.parseDouble(request.getParameter("editPrice"));
+		String description = request.getParameter("editDescription");
+		boolean available = "1".equals(request.getParameter("Available"));
 
+		housingDAO.updateHousing(idHouse, name, location, numGuest, numBedroom, numBed, numBath, idType, price,
+				description, available);
+
+		successMessage = "Nest updated successfully!";
+		break;
+			}
+			case "insert_nest":
 		break;
 
 			case "submit_insert_nest":
@@ -154,23 +181,59 @@
 			case "list_users":
 
 		break;
-		case "insert_user":
+			case "insert_user":
 		break;
 			case "submit_insert_user":
-				String userName = request.getParameter("userName");
-				long phone =  Long.parseLong(request.getParameter("userName"));
-				String email = request.getParameter("Email");
-				int passport = Integer.parseInt(request.getParameter("Passport"));
-				String password = request.getParameter("Passport");
-				
-				userDAO.insertUser(userName, phone, email, passport, password);
-				successMessage = "User added successfully!";
+		String userName = request.getParameter("userName");
+		long phone = Long.parseLong(request.getParameter("userName"));
+		String email = request.getParameter("Email");
+		int passport = Integer.parseInt(request.getParameter("Passport"));
+		String password = request.getParameter("Passport");
+
+		userDAO.insertUser(userName, phone, email, passport, password);
+		successMessage = "User added successfully!";
 		break;
 			case "delete_user":
 		String deleteUser = request.getParameter("userId");
 		if (deleteUser != null) {
 			HousingDAO dao = new HousingDAO();
 			dao.deleteHousing(Integer.parseInt(deleteUser));
+		}
+		successMessage = "Nest deleted successfully!";
+		break;
+
+			case "list_reserves":
+
+		break;
+
+			case "edit_reserve":
+
+		break;
+
+			case "submit_edit_reserve": {
+		int idReserve = Integer.parseInt(request.getParameter("idReserve"));
+		String nameH = request.getParameter("editNameR");
+		int numGuests = Integer.parseInt(request.getParameter("editGuestsR"));
+		java.sql.Date checkIn = java.sql.Date.valueOf(request.getParameter("editCheckIn"));
+		java.sql.Date checkOut = java.sql.Date.valueOf(request.getParameter("editCheckOut"));
+
+		Reserves r = reservesDAO.selectById(idReserve);
+		int idUser = r.getIdUser();
+		int idHouse = (r.getHousing() != null) ? r.getHousing().getIdHouse() : 0;
+		double precioPorNoche = (r.getHousing() != null) ? r.getHousing().getPrice() : 0.0;
+
+		double totalPrice = calcularPrecioTotal(checkIn, checkOut, precioPorNoche);
+
+		reservesDAO.updateReserve(idReserve, idHouse, idUser, nameH, numGuests, checkIn, checkOut, totalPrice);
+		successMessage = "Reserve updated successfully!";
+		break;
+			}
+
+			case "delete_reserve":
+		String deleteReserve = request.getParameter("idReserve");
+		if (deleteReserve != null) {
+			ReservesDAO dao = new ReservesDAO();
+			dao.deleteReserve(Integer.parseInt(deleteReserve));
 		}
 		successMessage = "Nest deleted successfully!";
 		break;
@@ -242,9 +305,6 @@
 					%>
 					<div class="alert alert-success text-center" role="alert">
 						<%=successMessage%>
-						<%
-						response.sendRedirect("adminPage.jsp?action=list_nest");
-						%>
 					</div>
 					<%
 					}
@@ -391,6 +451,7 @@
 									</div>
 								</div>
 
+
 								<div class="row mb-3">
 									<label for="idTypes" class="col-sm-3 col-form-label">Types</label>
 									<div class="col-sm-9">
@@ -444,85 +505,90 @@
 						}
 
 						if ("edit_house".equals(action)) {
+						int houseId = Integer.parseInt(request.getParameter("houseId"));
+						Housing h = housingDAO.selectById(houseId);
 						%>
 						<div class="card-header text-center">
 							<h2 style="color: var(--primary-color)">EDIT NEST</h2>
 						</div>
 						<form method="post">
 							<input type="hidden" value="submit_edit_house" name="action" />
+							<input type="hidden" name="houseId" value="<%=h.getIdHouse()%>" />
+
 							<div class="row mb-3">
 								<label for="editName" class="col-sm-3 col-form-label">Name</label>
 								<div class="col-sm-9">
 									<input type="text" id="editName" name="editName"
-										placeholder="${h.name}" class="form-control" required>
+										value="<%=h.getName()%>" class="form-control" required>
 								</div>
 							</div>
-
 							<div class="row mb-3">
-								<label for="newLocation" class="col-sm-3 col-form-label">Location</label>
+								<label for="editLocation" class="col-sm-3 col-form-label">Location</label>
 								<div class="col-sm-9">
-									<input type="text" id="newLocation" name="newLocation"
+									<input type="text" id="editLocation"
+										value="<%=h.getLocation()%>" name="editLocation"
 										class="form-control" required>
 								</div>
 							</div>
-
 							<div class="row mb-3">
-								<label for="numGuest" class="col-sm-3 col-form-label">Number
-									guests</label>
+								<label for="editType" class="col-sm-3 col-form-label">Types</label>
 								<div class="col-sm-9">
-									<input type="number" id="numGuest" name="numGuest"
+									<select id="editType" value="<%=h.getIdType()%>"
+										name="editType" class="form-select" required>
+										<option value="1">Cabin</option>
+										<option value="2">Tiny home</option>
+										<option value="3">Apartment</option>
+										<option value="4">Countryside</option>
+										<option value="5">Villa</option>
+									</select>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editPrice" class="col-sm-3 col-form-label">Price</label>
+								<div class="col-sm-9">
+									<input type="text" id="editPrice" value="<%=h.getPrice()%>"
+										name="editPrice" class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editGuests" class="col-sm-3 col-form-label">Number
+									of Guests</label>
+								<div class="col-sm-9">
+									<input type="number" id="editGuests"
+										value="<%=h.getNumGuest()%>" name="editGuests"
 										class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editBedrooms" class="col-sm-3 col-form-label">Number
+									of Bedrooms</label>
+								<div class="col-sm-9">
+									<input type="number" id="editBedrooms" name="editBedrooms"
+										value="<%=h.getNumBedroom()%>" class="form-control" required>
 								</div>
 							</div>
 
 							<div class="row mb-3">
-								<label for="numBedroom" class="col-sm-3 col-form-label">Number
-									Bedrooms</label>
+								<label for="editBed" class="col-sm-3 col-form-label">Number
+									of Beds</label>
 								<div class="col-sm-9">
-									<input type="number" id="numBedroom" name="numBedroom"
-										class="form-control" required>
+									<input type="number" id="editBed" value="<%=h.getNumBed()%>"
+										name="editBed" class="form-control" required>
 								</div>
 							</div>
-
 							<div class="row mb-3">
-								<label for="numBed" class="col-sm-3 col-form-label">Number
-									Beds</label>
+								<label for="editBath" class="col-sm-3 col-form-label">Number
+									of Baths</label>
 								<div class="col-sm-9">
-									<input type="number" id="numBed" name="numBed"
-										class="form-control" required>
+									<input type="number" id="editBath" name="editBath"
+										value="<%=h.getNumBath()%>" class="form-control" required>
 								</div>
 							</div>
-
 							<div class="row mb-3">
-								<label for="numBaths" class="col-sm-3 col-form-label">Number
-									Baths</label>
+								<label for="editDescription" class="col-sm-3 col-form-label">Description</label>
 								<div class="col-sm-9">
-									<input type="number" id="numBaths" name="numBaths"
-										class="form-control" required>
-								</div>
-							</div>
-
-							<div class="row mb-3">
-								<label for="idTypes" class="col-sm-3 col-form-label">Id
-									Type</label>
-								<div class="col-sm-9">
-									<input type="number" id="idTypes" name="idTypes"
-										class="form-control" required>
-								</div>
-							</div>
-
-							<div class="row mb-3">
-								<label for="price" class="col-sm-3 col-form-label">Price</label>
-								<div class="col-sm-9">
-									<input type="number" id="price" name="price"
-										class="form-control" required>
-								</div>
-							</div>
-
-							<div class="row mb-3">
-								<label for="description" class="col-sm-3 col-form-label">Description</label>
-								<div class="col-sm-9">
-									<input type="text" id="description" name="description"
+									<input type="text" id="editDescription"
+										value="<%=h.getDescription()%>" name="editDescription"
 										class="form-control" required>
 								</div>
 							</div>
@@ -532,21 +598,150 @@
 								<div class="col-sm-9">
 									<select class="form-select" id="available" name="available"
 										required>
-										<option value="1">Disponible</option>
-										<option value="2">No disponible</option>
+										<option value="1"
+											<%if (h.isAvailable())
+	out.print("selected");%>>Available</option>
+										<option value="0"
+											<%if (!h.isAvailable())
+	out.print("selected");%>>Not
+											available</option>
 									</select>
 								</div>
 							</div>
 
 							<div class="text-center">
-								<button type="submit" class="btn btn-primary w-100">Create
+								<button type="submit" class="btn btn-primary w-100">Update
 									Nest</button>
 							</div>
+
 						</form>
 						<%
 						}
 						%>
 						<%
+						if ("list_reserves".equals(action)) {
+						%>
+						<div class="card-header text-center">
+							<h2 style="color: var(--primary-color)">Reserves</h2>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>ID</th>
+											<th>Image</th>
+											<th>Name</th>
+											<th>User</th>
+											<th>Start</th>
+											<th>Finish</th>
+											<th>Guests</th>
+											<th>Total</th>
+										</tr>
+									</thead>
+									<tbody>
+										<%
+										for (Reserves r : reserves) {
+											Housing h = r.getHousing();
+											String imagePath = "img/not_available.jpg"; // imagen genérica por defecto
+
+											if (h != null) {
+												List<Images> imgs = imgDAO.selectImagesByHousingId(h.getIdHouse());
+												if (!imgs.isEmpty()) {
+											imagePath = request.getContextPath() + imgs.get(0).getImgRoute();
+												}
+											}
+										%>
+										<tr>
+											<td><%=r.getIdReserva()%></td>
+											<td><img src="<%=imagePath%>" alt="Housing Image"></td>
+											<td><%=r.getNameH()%></td>
+											<td><%=r.getIdUser()%></td>
+											<td><%=r.getCheckIn()%></td>
+											<td><%=r.getCheckOut()%></td>
+											<td><%=r.getNumGuests()%></td>
+											<td><%=r.getTotalPrice()%>€</td>
+											<td>
+												<form method="POST" style="display: inline;">
+													<input type="hidden" name="idReserve"
+														value="<%=r.getIdReserva()%>">
+													<button type="submit" name="action" value="edit_reserve"
+														class="btn btn-warning">
+														<img src="img/edit.png" alt="Edit"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+												<form method="POST" style="display: inline;"
+													onsubmit="return confirmDelete();">
+													<input type="hidden" name="idReserve"
+														value="<%=r.getIdReserva()%>">
+													<button type="submit" name="action" value="delete_reserve"
+														class="btn btn-danger">
+														<img src="img/delete.png" alt="Delete"
+															style="width: 30px; height: 30px;">
+													</button>
+												</form>
+											</td>
+										</tr>
+										<%
+										}
+										%>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<%
+						}
+						if ("edit_reserve".equals(action)) {
+						int idReserve = Integer.parseInt(request.getParameter("idReserve"));
+						Reserves r = reservesDAO.selectById(idReserve);
+						%>
+						<div class="card-header text-center">
+							<h2 style="color: var(--primary-color)">EDIT RESERVE</h2>
+						</div>
+						<form method="post">
+							<input type="hidden" value="submit_edit_reserve" name="action" />
+							<input type="hidden" name="idReserve" value="<%=r.getIdReserva()%>" />
+
+							<div class="row mb-3">
+								<label for="editNameR" class="col-sm-3 col-form-label">Name</label>
+								<div class="col-sm-9">
+									<input type="text" id="editNameR" name="editNameR"
+										value="<%=r.getNameH()%>" class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editCheckIn" class="col-sm-3 col-form-label">CheckIn</label>
+								<div class="col-sm-9">
+									<input type="date" id="editCheckIn" value="<%=r.getCheckIn()%>"
+										name="editCheckIn" class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editCheckOut" class="col-sm-3 col-form-label">CheckOut</label>
+								<div class="col-sm-9">
+									<input type="date" id="editCheckOut"
+										value="<%=r.getCheckOut()%>" name="editCheckOut"
+										class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editGuestsR" class="col-sm-3 col-form-label">Guests</label>
+								<div class="col-sm-9">
+									<input type="number" id="editGuestsR"
+										value="<%=r.getNumGuests()%>" name="editGuestsR"
+										class="form-control" required>
+								</div>
+							</div>
+
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary w-100">Update
+									Reserve</button>
+							</div>
+
+						</form>
+						<%
+						}
 						if ("list_users".equals(action)) {
 						%>
 						<div class="card-header text-center">
@@ -615,7 +810,7 @@
 							<div class="card-header text-center">
 								<h2>NEW USER</h2>
 								<form method="post">
-							<input type="hidden" value="submit_insert_user" name="action" />
+									<input type="hidden" value="submit_insert_user" name="action" />
 									<div class="row mb-3">
 										<label for="newuserName" class="col-sm-3 col-form-label">New
 											userName</label>
@@ -672,7 +867,7 @@
 					</div>
 				</div>
 			</div>
-			</div>
+		</div>
 	</main>
 
 	<footer
