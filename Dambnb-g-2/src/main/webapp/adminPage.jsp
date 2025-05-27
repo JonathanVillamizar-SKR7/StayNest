@@ -4,6 +4,7 @@
 <%@ page import="daxbnb.model.*"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
+
 <%!public double calcularPrecioTotal(java.util.Date checkIn, java.util.Date checkOut, double precioPorNoche) {
 		long diffMillis = checkOut.getTime() - checkIn.getTime();
 		long noches = diffMillis / (1000 * 60 * 60 * 24);
@@ -195,6 +196,7 @@ body {
 		userDAO.insertUser(userName, phone, email, passport, password);
 		successMessage = "User added successfully!";
 		break;
+
 			case "delete_user":
 		String deleteUser = request.getParameter("userId");
 		if (deleteUser != null) {
@@ -206,6 +208,28 @@ body {
 
 			case "list_facilities":
 
+		break;
+
+			case "delete_facility":
+		String deleteFacility = request.getParameter("facilityId");
+		if (deleteFacility != null) {
+			FacilityDAO dao = new FacilityDAO();
+			dao.deleteFacility(Integer.parseInt(deleteFacility));
+		}
+		successMessage = "Facility deleted successfully!";
+		break;
+
+			case "edit_facility":
+
+		break;
+
+			case "submit_edit_facility":
+		int idFacility = Integer.parseInt(request.getParameter("facilityId"));
+		String typeFacility = request.getParameter("editTypeF");
+
+		facilitiesDAO.updateFacility(idFacility, typeFacility);
+
+		successMessage = "Facility updated successfully!";
 		break;
 
 			case "insert_facility":
@@ -252,6 +276,24 @@ body {
 			dao.deleteReserve(Integer.parseInt(deleteReserve));
 		}
 		successMessage = "Nest deleted successfully!";
+		break;
+
+			case "edit_user":
+		break;
+
+			case "submit_edit_user":
+		int idUser = Integer.parseInt(request.getParameter("idUser"));
+		String userNamee = request.getParameter("editUserName");
+		String passwordd = request.getParameter("editPassword");
+		long phonee = Long.parseLong(request.getParameter("editPhone"));
+		String emaill = request.getParameter("editEmail");
+		int passportt = Integer.parseInt(request.getParameter("editPassport"));
+		String userType = request.getParameter("editUserType");
+
+		userDAO.updateUser(idUser, userNamee, phonee, emaill, passportt, passwordd, userType);
+
+		successMessage = "User updated successfully!";
+
 		break;
 
 			default:
@@ -307,10 +349,6 @@ body {
 							class="btn btn-info btn-menu w-100">New house facility</button>
 					</form>
 					<form method="POST">
-						<button name="action" value="housing_images"
-							class="btn btn-danger btn-menu w-100">Nests Images</button>
-					</form>
-					<form method="POST">
 						<button name="action" value="logout"
 							class="btn btn-outline-danger btn-menu w-100">Logout</button>
 					</form>
@@ -320,7 +358,7 @@ body {
 					if (successMessage != null) {
 					%>
 					<div class="alert alert-success text-center" role="alert">
-						<%=successMessage%>
+						<%=successMessage %>
 					</div>
 					<%
 					}
@@ -330,7 +368,7 @@ body {
 					if (errorMessage != null) {
 					%>
 					<div class="alert alert-danger text-center" role="alert">
-						<%=errorMessage%>
+						<%=errorMessage %>
 					</div>
 					<%
 					}
@@ -356,7 +394,6 @@ body {
 											<th>Bedrooms</th>
 											<th>Bed</th>
 											<th>Bath</th>
-											<th>Options</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -814,6 +851,75 @@ body {
 						</div>
 						<%
 						}
+						if ("edit_user".equals(action)) {
+						int idUser = Integer.parseInt(request.getParameter("idUser"));
+						User u = userDAO.selectById(idUser);
+						%>
+						<div class="card-header text-center">
+							<h2 style="color: var(--primary-color)">EDIT USER</h2>
+						</div>
+						<form method="post">
+							<input type="hidden" value="submit_edit_user" name="action" /> <input
+								type="hidden" name="idUser" value="<%=u.getIdUser()%>" />
+
+							<div class="row mb-3">
+								<label for="editUserName" class="col-sm-3 col-form-label">User
+									Name</label>
+								<div class="col-sm-9">
+									<input type="text" id="editUserName" name="editUserName"
+										value="<%=u.getUserName()%>" class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editPassword" class="col-sm-3 col-form-label">Password</label>
+								<div class="col-sm-9">
+									<input type="password" id="editPassword" name="editPassword"
+										value="<%=u.getPassword()%>" class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editPhone" class="col-sm-3 col-form-label">Phone</label>
+								<div class="col-sm-9">
+									<input type="tel" id="editPhone" name="editPhone"
+										value="<%=u.getPhone()%>" class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editEmail" class="col-sm-3 col-form-label">Email</label>
+								<div class="col-sm-9">
+									<input type="email" id="editEmail" name="editEmail"
+										value="<%=u.getEmail()%>" class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editPassport" class="col-sm-3 col-form-label">Passport</label>
+								<div class="col-sm-9">
+									<input type="text" id="editPassport" name="editPassport"
+										value="<%=u.getPassport()%>" class="form-control" required>
+								</div>
+							</div>
+							<div class="row mb-3">
+								<label for="editUserType" class="col-sm-3 col-form-label">User
+									Type</label>
+								<div class="col-sm-9">
+									<select id="editUserType" name="editUserType"
+										class="form-select" required>
+										<option value="client"
+											<%="client".equals(u.getUserType()) ? "selected" : ""%>>Client</option>
+										<option value="admin"
+											<%="admin".equals(u.getUserType()) ? "selected" : ""%>>Admin</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary w-100">Update
+									User</button>
+							</div>
+
+						</form>
+						<%
+						}
 						%>
 						<%
 						if ("insert_user".equals(action)) {
@@ -927,6 +1033,37 @@ body {
 						</div>
 						<%
 						}
+						if ("edit_facility".equals(action)) {
+						int facilityId = Integer.parseInt(request.getParameter("facilityId"));
+						Facilities f = facilitiesDAO.selectById(facilityId);
+						%>
+						<div class="card-header text-center">
+							<h2 style="color: var(--primary-color)">EDIT FACILITY</h2>
+						</div>
+						<form method="post">
+							<input type="hidden" value="submit_edit_facility" name="action" />
+							<input type="hidden" name="facilityId"
+								value="<%=f.getIdFacilities()%>" />
+
+							<div class="row mb-3">
+								<label for="editTypeF" class="col-sm-3 col-form-label">Type
+									Facility</label>
+								<div class="col-sm-9">
+									<input type="text" id="editTypeF" name="editTypeF"
+										value="<%=f.getTypeFacilities()%>" class="form-control"
+										required>
+								</div>
+							</div>
+
+
+							<div class="text-center">
+								<button type="submit" class="btn btn-primary w-100">Update
+									Facility</button>
+							</div>
+
+						</form>
+						<%
+						}
 						%>
 						<%
 						if ("insert_facility".equals(action)) {
@@ -948,7 +1085,7 @@ body {
 									<div class="text-center">
 										<button type="submit" class="btn btn-primary w-100">Create
 											Facility</button>
-											
+
 									</div>
 								</form>
 							</div>
