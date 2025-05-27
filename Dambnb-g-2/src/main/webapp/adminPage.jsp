@@ -947,6 +947,7 @@ body {
 									<div class="text-center">
 										<button type="submit" class="btn btn-primary w-100">Create
 											Facility</button>
+											
 									</div>
 								</form>
 							</div>
