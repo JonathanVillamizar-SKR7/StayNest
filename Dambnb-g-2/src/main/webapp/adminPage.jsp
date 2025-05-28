@@ -191,8 +191,8 @@ body {
 		double price = Double.parseDouble(request.getParameter("price"));
 		String description = request.getParameter("description");
 		boolean available = "1".equals(request.getParameter("Available"));
-		int newHousing = housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
-				description, available);
+		int newHousing = housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath,
+				idType, price, description, available);
 		successMessage = "Nest added successfully!";
 		break;
 			case "list_users":
@@ -803,7 +803,7 @@ body {
 											<td><%=r.getIdReserva()%></td>
 											<td><img src="<%=imagePath%>" alt="Housing Image"></td>
 											<td><%=r.getNameH()%></td>
-											<td><%=r.getIdUser()%></td>
+											<td><%=(r.getIdUser() != null) ? r.getIdUser() : "Deleted"%></td>
 											<td><%=r.getCheckIn()%></td>
 											<td><%=r.getCheckOut()%></td>
 											<td><%=r.getNumGuests()%></td>

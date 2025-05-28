@@ -20,7 +20,7 @@ import daxbnb.model.CreditCard;
 public class CreditCardsDAO {
 
 	private static final String SELECT_ALL = "SELECT * FROM CreditCards";
-	private static final String SELECT_BY_IDUSER = "SELECT * FROM CreditCards WHERE passport = ?";
+	private static final String SELECT_BY_IDUSER = "SELECT * FROM CreditCards WHERE idUser = ?";
 	private static final String INSERT_CREDITCARD = "INSERT INTO CreditCards (cardHolderName, creditCardNumber, expirationDate, cvv, idUser) VALUES (?, ?, ?, ?, ?)";
 	private static final String UPDATE_CREDITCARD = "UPDATE CreditCards SET cardHolderName = ?, creditCardNumber = ?, expirationDate = ?, cvv = ?, idUser = ? WHERE idCreditCard = ?";
 	private static final String DELETE_CREDITCARD = "DELETE FROM CreditCards WHERE idCreditCard = ?";
