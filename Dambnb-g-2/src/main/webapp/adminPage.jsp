@@ -124,6 +124,7 @@ body {
 	UserDAO userDAO = new UserDAO();
 	ReservesDAO reservesDAO = new ReservesDAO();
 	FacilityDAO facilitiesDAO = new FacilityDAO();
+	ImagesDAO imagesDAO = new ImagesDAO();
 	HousingImagesDAO housingImagesDAO = new HousingImagesDAO();
 	HousingFacilityDAO housingFacilityDAO = new HousingFacilityDAO();
 	List<Housing> housings = housingDAO.selectAll();
@@ -179,7 +180,7 @@ body {
 		break;
 
 			case "submit_insert_nest":
-		ImagesDAO imagesDAO = new ImagesDAO();
+		
 		String image = request.getParameter("image");
 		String newName = request.getParameter("newName");
 		String newLocation = request.getParameter("newLocation");
