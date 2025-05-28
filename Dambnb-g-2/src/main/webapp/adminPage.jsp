@@ -153,7 +153,23 @@ body {
 			successMessage = "Nest deleted successfully!";
 			break;
 
-		case "edit_house":
+			case "submit_insert_nest":
+		String image = request.getParameter("image");
+		String newName = request.getParameter("newName");
+		String newLocation = request.getParameter("newLocation");
+		int numGuest = Integer.parseInt(request.getParameter("numGuest"));
+		int numBedroom = Integer.parseInt(request.getParameter("numBedroom"));
+		int numBed = Integer.parseInt(request.getParameter("numBed"));
+		int numBath = Integer.parseInt(request.getParameter("numBaths"));
+		int idType = Integer.parseInt(request.getParameter("idTypes"));
+		double price = Double.parseDouble(request.getParameter("price"));
+		String description = request.getParameter("description");
+		boolean available = "1".equals(request.getParameter("Available"));
+		int newHousing = housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath,
+				idType, price, description, available);
+		successMessage = "Nest added successfully!";
+		break;
+			case "list_users":
 
 			break;
 
@@ -825,7 +841,7 @@ body {
 											<td><%=r.getIdReserva()%></td>
 											<td><img src="<%=imagePath%>" alt="Housing Image"></td>
 											<td><%=r.getNameH()%></td>
-											<td><%=r.getIdUser()%></td>
+											<td><%=(r.getIdUser() != null) ? r.getIdUser() : "Deleted"%></td>
 											<td><%=r.getCheckIn()%></td>
 											<td><%=r.getCheckOut()%></td>
 											<td><%=r.getNumGuests()%></td>

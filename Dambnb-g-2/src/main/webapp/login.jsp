@@ -35,6 +35,8 @@
 			if (user != null) {
 		session.setAttribute("username", username);
 		session.setAttribute("userType", userType);
+		session.setAttribute("idUser", id);
+
 		if (user.getUserType().equals("client")) {
 			response.sendRedirect("index.jsp");
 		} else {
