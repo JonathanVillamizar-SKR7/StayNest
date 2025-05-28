@@ -75,7 +75,6 @@
 }
 
 .table tbody tr td:last-child {
-	display: flex;
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
@@ -103,7 +102,19 @@ body {
 	function confirmDelete() {
 		return confirm("Are you sure you want to delete this nest?");
 	}
-</script>
+	
+	  function togglePassword(id) {
+	    const span = document.getElementById("pass-" + id);
+	    const hiddenInput = document.getElementById("real-pass-" + id);
+
+	    if (span.innerText.includes("*")) {
+	      span.innerText = hiddenInput.value;
+	    } else {
+	      span.innerText = "*".repeat(hiddenInput.value.length);
+	    }
+	  }
+	</script>
+
 
 </head>
 
@@ -246,6 +257,27 @@ body {
 
 		break;
 
+			case "insert_reserve":
+
+		break;
+
+			case "submit_insert_reserve": {
+		int idUser = Integer.parseInt(request.getParameter("idUser"));
+		int idHouse = Integer.parseInt(request.getParameter("idHouse"));
+		String nameH = request.getParameter("editNameR");
+		int numGuests = Integer.parseInt(request.getParameter("editGuestsR"));
+		java.sql.Date checkIn = java.sql.Date.valueOf(request.getParameter("editCheckIn"));
+		java.sql.Date checkOut = java.sql.Date.valueOf(request.getParameter("editCheckOut"));
+
+		Housing selectedHousing = housingDAO.selectById(idHouse);
+		double pricePerNight = selectedHousing.getPrice();
+		double totalPrice = calcularPrecioTotal(checkIn, checkOut, pricePerNight);
+
+		reservesDAO.insertReserve(idHouse, idUser, nameH, numGuests, totalPrice, checkIn, checkOut);
+		successMessage = "Reserve added successfully!";
+		break;
+			}
+
 			case "edit_reserve":
 
 		break;
@@ -282,7 +314,7 @@ body {
 		break;
 
 			case "submit_edit_user":
-		int idUser = Integer.parseInt(request.getParameter("idUser"));
+		int idUser = Integer.parseInt(request.getParameter("userId"));
 		String userNamee = request.getParameter("editUserName");
 		String passwordd = request.getParameter("editPassword");
 		long phonee = Long.parseLong(request.getParameter("editPhone"));
@@ -358,7 +390,7 @@ body {
 					if (successMessage != null) {
 					%>
 					<div class="alert alert-success text-center" role="alert">
-						<%=successMessage %>
+						<%=successMessage%>
 					</div>
 					<%
 					}
@@ -368,7 +400,7 @@ body {
 					if (errorMessage != null) {
 					%>
 					<div class="alert alert-danger text-center" role="alert">
-						<%=errorMessage %>
+						<%=errorMessage%>
 					</div>
 					<%
 					}
@@ -394,6 +426,7 @@ body {
 											<th>Bedrooms</th>
 											<th>Bed</th>
 											<th>Bath</th>
+											<th></th>
 										</tr>
 									</thead>
 									<tbody>
@@ -506,7 +539,7 @@ body {
 								<div class="row mb-3">
 									<label for="idTypes" class="col-sm-3 col-form-label">Types</label>
 									<div class="col-sm-9">
-										<select class="form-select" id="idTypes" name="isTypes"
+										<select class="form-select" id="idTypes" name="idTypes"
 											required>
 											<option value="1">Cabin</option>
 											<option value="2">Tiny home</option>
@@ -740,9 +773,11 @@ body {
 						</div>
 						<%
 						}
+						%>
+						<%
 						if ("edit_reserve".equals(action)) {
-						int idReserve = Integer.parseInt(request.getParameter("idReserve"));
-						Reserves r = reservesDAO.selectById(idReserve);
+							int idReserve = Integer.parseInt(request.getParameter("idReserve"));
+							Reserves r = reservesDAO.selectById(idReserve);
 						%>
 						<div class="card-header text-center">
 							<h2 style="color: var(--primary-color)">EDIT RESERVE</h2>
@@ -816,20 +851,26 @@ body {
 										<tr>
 											<td><%=u.getIdUser()%></td>
 											<td><%=u.getUserName()%></td>
-											<td><%=u.getPassword()%></td>
+											<td><span class="password-mask"
+												id="pass-<%=u.getIdUser()%>">********</span> <input
+												type="hidden" id="real-pass-<%=u.getIdUser()%>"
+												value="<%=u.getPassword()%>">
+												<button type="button" style="width: 1rem; height: 1rem;"
+													onclick="togglePassword(<%=u.getIdUser()%>)"
+													class="btn btn-sm btn-secondary">👁</button></td>
 											<td><%=u.getPhone()%></td>
 											<td><%=u.getEmail()%></td>
 											<td><%=u.getPassport()%></td>
 											<td>
 												<form method="POST" style="display: inline;">
-													<input type="hidden" name="userId"
-														value="<%=u.getIdUser()%>">
 													<button type="submit" name="action" value="edit_user"
-														class="btn btn-warning">
+														class="btn btn-warning"
+														formaction="adminPage.jsp?userId=<%=u.getIdUser()%>">
 														<img src="img/edit.png" alt="Edit"
 															style="width: 30px; height: 30px;">
 													</button>
 												</form>
+
 												<form method="POST" style="display: inline;"
 													onsubmit="return confirmDelete();">
 													<input type="hidden" name="userId"
@@ -852,15 +893,15 @@ body {
 						<%
 						}
 						if ("edit_user".equals(action)) {
-						int idUser = Integer.parseInt(request.getParameter("idUser"));
-						User u = userDAO.selectById(idUser);
+						int userId = Integer.parseInt(request.getParameter("userId"));
+						User u = userDAO.selectById(userId);
 						%>
 						<div class="card-header text-center">
 							<h2 style="color: var(--primary-color)">EDIT USER</h2>
 						</div>
 						<form method="post">
 							<input type="hidden" value="submit_edit_user" name="action" /> <input
-								type="hidden" name="idUser" value="<%=u.getIdUser()%>" />
+								type="hidden" name="userId" value="<%=u.getIdUser()%>" />
 
 							<div class="row mb-3">
 								<label for="editUserName" class="col-sm-3 col-form-label">User
@@ -922,6 +963,91 @@ body {
 						}
 						%>
 						<%
+						if ("insert_reserve".equals(action)) {
+						%>
+						<div class="card-header text-center">
+							<h2>NEW RESERVE</h2>
+
+							<form method="post">
+								<input type="hidden" value="submit_insert_reserve" name="action" />
+
+								<div class="row mb-3">
+									<label for="idUser" class="col-sm-3 col-form-label">User</label>
+									<div class="col-sm-9">
+										<select id="idUser" name="idUser" class="form-select" required>
+											<option disabled selected value="">Select user</option>
+											<%
+											for (User u : users) {
+											%>
+											<option value="<%=u.getIdUser()%>"><%=u.getUserName()%></option>
+											<%
+											}
+											%>
+										</select>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="idHouse" class="col-sm-3 col-form-label">Housing</label>
+									<div class="col-sm-9">
+										<select id="idHouse" name="idHouse" class="form-select"
+											required>
+											<option disabled selected value="">Select nest</option>
+											<%
+											for (Housing h : housings) {
+											%>
+											<option value="<%=h.getIdHouse()%>"><%=h.getName()%></option>
+											<%
+											}
+											%>
+										</select>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="editNameR" class="col-sm-3 col-form-label">Name</label>
+									<div class="col-sm-9">
+										<input type="text" id="editNameR" name="editNameR"
+											class="form-control" required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="editCheckIn" class="col-sm-3 col-form-label">Check
+										In</label>
+									<div class="col-sm-9">
+										<input type="date" id="editCheckIn" name="editCheckIn"
+											class="form-control" required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="editCheckOut" class="col-sm-3 col-form-label">Check
+										Out</label>
+									<div class="col-sm-9">
+										<input type="date" id="editCheckOut" name="editCheckOut"
+											class="form-control" required>
+									</div>
+								</div>
+
+								<div class="row mb-3">
+									<label for="editGuestsR" class="col-sm-3 col-form-label">Guests</label>
+									<div class="col-sm-9">
+										<input type="number" id="editGuestsR" name="editGuestsR"
+											class="form-control" required>
+									</div>
+								</div>
+
+								<div class="text-center">
+									<button type="submit" class="btn btn-primary w-100">Create
+										Reserve</button>
+								</div>
+							</form>
+						</div>
+
+
+						<%
+						}
 						if ("insert_user".equals(action)) {
 						%>
 						<div class="card">

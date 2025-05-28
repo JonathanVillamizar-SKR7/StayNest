@@ -25,7 +25,7 @@ public class UserDAO {
 	private static final String SELECT_BY_USERNAME = "SELECT * FROM Users WHERE userName = ?";
 	private static final String SELECT_BY_EMAIL_AND_PASSWORD = "SELECT * FROM Users WHERE email = ? AND password = ?;";
 	private static final String INSERT_USER = "INSERT INTO Users (userName, phone, email, passport, password, userType) VALUES (?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_USER = "UPDATE Users SET userName = ?, phone = ?, email = ?, passport = ? WHERE idUser = ?";
+	private static final String UPDATE_USER = "UPDATE Users SET userName = ?, phone = ?, email = ?, passport = ?, password = ?, userType = ? WHERE idUser = ?";
 	private static final String DELETE_USER = "DELETE FROM Users WHERE idUser = ?";
 
 	private DBConnection db;
