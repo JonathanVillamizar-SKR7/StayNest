@@ -1,9 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="daxbnb.DAO.*"%>
 <%@ page import="daxbnb.model.*"%>
-<%@ page import="java.util.List"%>
-<%@ page import="java.util.ArrayList"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.io.File"%>
 
 <%!public double calcularPrecioTotal(java.util.Date checkIn, java.util.Date checkOut, double precioPorNoche) {
 		long diffMillis = checkOut.getTime() - checkIn.getTime();
@@ -172,7 +171,7 @@ body {
 
 		housingDAO.updateHousing(idHouse, name, location, numGuest, numBedroom, numBed, numBath, idType, price,
 				description, available);
-
+	
 		successMessage = "Nest updated successfully!";
 		break;
 			}
@@ -180,6 +179,7 @@ body {
 		break;
 
 			case "submit_insert_nest":
+		ImagesDAO imagesDAO = new ImagesDAO();
 		String image = request.getParameter("image");
 		String newName = request.getParameter("newName");
 		String newLocation = request.getParameter("newLocation");
@@ -193,6 +193,8 @@ body {
 		boolean available = "1".equals(request.getParameter("Available"));
 		int newHousing = housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
 				description, available);
+		int newImage = imagesDAO.insertImage(image);
+		housingImagesDAO.insertImage(newHousing,newImage);
 		successMessage = "Nest added successfully!";
 		break;
 			case "list_users":
@@ -483,7 +485,7 @@ body {
 						%>
 						<div class="card-header text-center">
 							<h2 style="color: var(--primary-color)">NEW NEST</h2>
-							<form method="post">
+							<form method="post" enctype="multipart/form-data">
 								<input type="hidden" value="submit_insert_nest" name="action" />
 
 								<div class="row mb-3">
