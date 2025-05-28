@@ -179,7 +179,7 @@ body {
 		double price = Double.parseDouble(request.getParameter("price"));
 		String description = request.getParameter("description");
 		boolean available = "1".equals(request.getParameter("Available"));
-		housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
+		int newHousing = housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
 				description, available);
 		successMessage = "Nest added successfully!";
 		break;
@@ -482,7 +482,7 @@ body {
 								<div class="row mb-3">
 									<label for="idTypes" class="col-sm-3 col-form-label">Types</label>
 									<div class="col-sm-9">
-										<select class="form-select" id="idTypes" name="isTypes"
+										<select class="form-select" id="idTypes" name="idTypes"
 											required>
 											<option value="1">Cabin</option>
 											<option value="2">Tiny home</option>
