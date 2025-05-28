@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="daxbnb.DAO.*"%>
 <%@ page import="daxbnb.model.*"%>
-<%@ page import="java.util.List"%>
-<%@ page import="java.util.Comparator" %>
+<%@ page import="java.util.*"%>
+<%@ page import="java.util.Comparator"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,8 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="styles/Index.css">
@@ -38,37 +39,48 @@
 	} else if (idTypeParam != null) {
 		int idType = Integer.parseInt(idTypeParam);
 		houses = h.selectHousingByType(idType);
-	}else {
+	} else {
 		houses = h.selectAll();
 	}
-	
-	if (sortParam != null){
-		if(sortParam.equals("name")){
+	String searchParam = request.getParameter("search");
+	if (searchParam != null && !searchParam.trim().isEmpty()) {
+		List<Housing> finded = new ArrayList<>();
+		for (Housing house : houses) {
+			if (house.getName().toLowerCase().contains(searchParam.toLowerCase())
+			|| house.getLocation().toLowerCase().contains(searchParam.toLowerCase())) {
+		finded.add(house);
+			}
+		}
+		houses = finded;
+	}
+
+	if (sortParam != null) {
+		if (sortParam.equals("name")) {
 			Comparator<Housing> ordenarPorNombre = new Comparator<Housing>() {
-			    @Override
-			    public int compare(Housing h1, Housing h2) {
-			        return h1.getName().compareTo(h2.getName());
-			    }
+		@Override
+		public int compare(Housing h1, Housing h2) {
+			return h1.getName().compareTo(h2.getName());
+		}
 			};
 			houses.sort(ordenarPorNombre);
-		}if(sortParam.equals("price")){
+		}
+		if (sortParam.equals("price")) {
 			Comparator<Housing> ordenarPorPrecio = new Comparator<Housing>() {
-			    @Override
-			    public int compare(Housing h1, Housing h2) {
-			    	return Double.compare(h1.getPrice(), h2.getPrice());
-			    }
+		@Override
+		public int compare(Housing h1, Housing h2) {
+			return Double.compare(h1.getPrice(), h2.getPrice());
+		}
 			};
 			houses.sort(ordenarPorPrecio);
 		}
 	}
-
-
 	%>
 
-	<%@ include file="Header.jsp" %>
+	<%@ include file="Header.jsp"%>
 
 	<main style="background-color: white;">
-		<nav class="navbar navbar-expand-lg justify-content-center py-5 shadow-sm"
+		<nav
+			class="navbar navbar-expand-lg justify-content-center py-5 shadow-sm"
 			style="background-color: white;">
 			<a class="nav-link me-5 nav-link-custom" href="index.jsp">ALL</a> <a
 				class="nav-link me-5 nav-link-custom" href="index.jsp?idType=1">CABIN</a>
@@ -94,15 +106,14 @@
 						href="index.jsp?minBedrooms=3">3+</a>
 				</div>
 				<div class="d-flex align-items-center gap-2 ms-auto me-3">
-					<a href="index.jsp?sort=name" class="btn nav-link-custom">
-						<i class="bi bi-sort-alpha-down"></i> Sort by name
-					</a>
-					<a href="index.jsp?sort=price" class="btn nav-link-custom">
-						<i class="bi bi-sort-numeric-down"></i> Sort by price
+					<a href="index.jsp?sort=name" class="btn nav-link-custom"> <i
+						class="bi bi-sort-alpha-down"></i> Sort by name
+					</a> <a href="index.jsp?sort=price" class="btn nav-link-custom"> <i
+						class="bi bi-sort-numeric-down"></i> Sort by price
 					</a>
 				</div>
 				<form class="form-inline d-flex">
-					<input class="form-control mr-sm-2 me-2" type="search"
+					<input class="form-control mr-sm-2 me-2" type="search" name="search"
 						placeholder="Search" aria-label="Search">
 					<button class="btn Search my-2 my-sm-0"
 						style="color: var(--warning-color); background-color: var(--primary-color);"
@@ -123,9 +134,11 @@
 					<div class="col-lg-6 col-xl-4 mb-3">
 						<a href="housing.jsp?id=<%=f.getIdHouse()%>"
 							class="text-decoration-none">
-							<div class="card h-100" style="background-color: white; border-color: transparent;">
-								<img class="card-img-top" style="height: 400px; object-fit: cover;"
-									src="<%=firstImg%>" alt="Card image cap">
+							<div class="card h-100"
+								style="background-color: white; border-color: transparent;">
+								<img class="card-img-top"
+									style="height: 400px; object-fit: cover;" src="<%=firstImg%>"
+									alt="Card image cap">
 								<div class="card-body">
 									<h3 class="card-title"><%=f.getName()%></h3>
 									<h5 class="card-text text-muted"><%=f.getLocation()%></h5>
