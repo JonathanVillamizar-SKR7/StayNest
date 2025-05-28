@@ -3,7 +3,7 @@
 <%@ page import="daxbnb.DAO.*"%>
 <%@ page import="daxbnb.model.*"%>
 <%@ page import="java.util.List"%>
-<%@ page import="java.util.Collections"%>
+<%@ page import="java.util.Comparator" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,10 +38,28 @@
 	} else if (idTypeParam != null) {
 		int idType = Integer.parseInt(idTypeParam);
 		houses = h.selectHousingByType(idType);
-	} else if (sortParam){
-		
 	}else {
 		houses = h.selectAll();
+	}
+	
+	if (sortParam != null){
+		if(sortParam.equals("name")){
+			Comparator<Housing> ordenarPorNombre = new Comparator<Housing>() {
+			    @Override
+			    public int compare(Housing h1, Housing h2) {
+			        return h1.getName().compareTo(h2.getName());
+			    }
+			};
+			houses.sort(ordenarPorNombre);
+		}if(sortParam.equals("price")){
+			Comparator<Housing> ordenarPorPrecio = new Comparator<Housing>() {
+			    @Override
+			    public int compare(Housing h1, Housing h2) {
+			    	return Double.compare(h1.getPrice(), h2.getPrice());
+			    }
+			};
+			houses.sort(ordenarPorPrecio);
+		}
 	}
 
 
