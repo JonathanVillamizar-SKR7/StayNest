@@ -46,7 +46,7 @@
 				<span>Welcome <%=username%></span> <a href="index.jsp"
 					class="nav-link-custom">STAYS</a> <a href="userDetails.jsp?username=<%=username%>"> <img
 					src="img/user.png" alt="User Icon" class="User-Icon">
-				</a> <a href="login.jsp"> <img
+				</a> <a href="logOut.jsp"> <img
 					src="img/log_outStayNest.png" alt="User Icon" class="User-Icon">
 				</a>
 			</div>
@@ -57,7 +57,7 @@
 				<span>Welcome <%=username%></span> <a href="index.jsp"
 					class="nav-link-custom">STAYS</a> <a href="adminPage.jsp?username=<%=username%>"> <img
 					src="img/user_admin.png" alt="User Icon" class="User-Icon">
-				</a> <a href="login.jsp"> <img
+				</a> <a href="logOut.jsp"> <img
 					src="img/log_outStayNest.png" alt="User Icon" class="User-Icon">
 				</a>
 			</div>

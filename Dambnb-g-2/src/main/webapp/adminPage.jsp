@@ -125,6 +125,8 @@ body {
 	UserDAO userDAO = new UserDAO();
 	ReservesDAO reservesDAO = new ReservesDAO();
 	FacilityDAO facilitiesDAO = new FacilityDAO();
+	HousingImagesDAO housingImagesDAO = new HousingImagesDAO();
+	HousingFacilityDAO housingFacilityDAO = new HousingFacilityDAO();
 	List<Housing> housings = housingDAO.selectAll();
 	List<User> users = userDAO.selectAll();
 	List<Facilities> facilities = facilitiesDAO.selectAll();
@@ -178,6 +180,7 @@ body {
 		break;
 
 			case "submit_insert_nest":
+		String image = request.getParameter("image");
 		String newName = request.getParameter("newName");
 		String newLocation = request.getParameter("newLocation");
 		int numGuest = Integer.parseInt(request.getParameter("numGuest"));
@@ -188,7 +191,7 @@ body {
 		double price = Double.parseDouble(request.getParameter("price"));
 		String description = request.getParameter("description");
 		boolean available = "1".equals(request.getParameter("Available"));
-		housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
+		int newHousing = housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
 				description, available);
 		successMessage = "Nest added successfully!";
 		break;
@@ -482,6 +485,16 @@ body {
 							<h2 style="color: var(--primary-color)">NEW NEST</h2>
 							<form method="post">
 								<input type="hidden" value="submit_insert_nest" name="action" />
+
+								<div class="row mb-3">
+									<label for="image" class="col-sm-3 col-form-label">Insert
+										Image</label>
+									<div class="col-sm-9">
+										<input class="form-control" type="file" id="image"
+											name="image" multiple required>
+									</div>
+								</div>
+
 								<div class="row mb-3">
 									<label for="newName" class="col-sm-3 col-form-label">New
 										name</label>
@@ -546,6 +559,59 @@ body {
 											<option value="3">Apartment</option>
 											<option value="4">Countryside</option>
 											<option value="5">Villa</option>
+										</select>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="facilities1" class="col-sm-3 col-form-label">Facilities</label>
+									<div class="col-sm-9">
+										<select class="form-select" id="facilities1"
+											name="facilities1" required>
+											<%
+											FacilityDAO facilityDAO = new FacilityDAO();
+											List<Facilities> facilityList = facilityDAO.selectAll();
+											for (Facilities facility : facilityList) {
+											%>
+											<option value="<%=facility.getIdFacilities()%>">
+												<%=facility.getTypeFacilities()%>
+											</option>
+											<%
+											}
+											%>
+										</select>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="facilities2" class="col-sm-3 col-form-label">Facilities</label>
+									<div class="col-sm-9">
+										<select class="form-select" id="facilities2"
+											name="facilities2" required>
+											<%
+											for (Facilities facility : facilityList) {
+											%>
+											<option value="<%=facility.getIdFacilities()%>">
+												<%=facility.getTypeFacilities()%>
+											</option>
+											<%
+											}
+											%>
+										</select>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<label for="facilities3" class="col-sm-3 col-form-label">Facilities</label>
+									<div class="col-sm-9">
+										<select class="form-select" id="facilities3"
+											name="facilities3" required>
+											<%
+											for (Facilities facility : facilityList) {
+											%>
+											<option value="<%=facility.getIdFacilities()%>">
+												<%=facility.getTypeFacilities()%>
+											</option>
+											<%
+											}
+											%>
 										</select>
 									</div>
 								</div>

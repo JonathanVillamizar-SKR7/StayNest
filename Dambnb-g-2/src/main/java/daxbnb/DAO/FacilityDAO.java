@@ -34,7 +34,7 @@ public class FacilityDAO {
 	}
 
 	/**
-	 * Selecciona todas las instalaciones registradas en la base de datos.
+	 * Selecciona todas las Facilities registradas en la base de datos.
 	 * 
 	 * @return Lista de objetos Facilities con todas las instalaciones encontradas.
 	 * @throws SQLException           si ocurre un error al ejecutar la consulta
@@ -59,7 +59,7 @@ public class FacilityDAO {
 	}
 
 	/**
-	 * Selecciona una instalación específica por su ID.
+	 * Selecciona una Facilitie específica por su ID.
 	 * 
 	 * @param idFacility ID de la instalación a buscar.
 	 * @return Objeto Facilities correspondiente al ID proporcionado, o null si no
@@ -85,7 +85,7 @@ public class FacilityDAO {
 	}
 
 	/**
-	 * Inserta una nueva instalación en la base de datos.
+	 * Inserta una nueva Facilitie en la base de datos.
 	 * 
 	 * @param typeFacility Tipo de la instalación.
 	 * @return El ID generado de la nueva instalación.
@@ -114,7 +114,7 @@ public class FacilityDAO {
 	}
 
 	/**
-	 * Actualiza una instalación existente en la base de datos.
+	 * Actualiza una Facilitie existente en la base de datos.
 	 * 
 	 * @param idFacility   ID de la instalación a actualizar.
 	 * @param typeFacility Nuevo tipo de instalación.
@@ -136,7 +136,7 @@ public class FacilityDAO {
 	}
 
 	/**
-	 * Elimina una instalación de la base de datos.
+	 * Elimina una Facilitie de la base de datos.
 	 * 
 	 * @param idFacility ID de la instalación a eliminar.
 	 * @return El número de filas afectadas por la eliminación.
