@@ -19,12 +19,13 @@ import daxbnb.model.User;
 public class UserDAO {
 
 	private static final String SELECT_ALL = "SELECT * FROM Users";
+	private static final String SELECT_BY_ID = "SELECT * FROM Users WHERE idUser = ?";
 	private static final String SELECT_BY_PASSPORT = "SELECT * FROM Users WHERE passport = ?";
 	private static final String SELECT_BY_EMAIL = "SELECT * FROM Users WHERE email = ?";
 	private static final String SELECT_BY_USERNAME = "SELECT * FROM Users WHERE userName = ?";
 	private static final String SELECT_BY_EMAIL_AND_PASSWORD = "SELECT * FROM Users WHERE email = ? AND password = ?;";
 	private static final String INSERT_USER = "INSERT INTO Users (userName, phone, email, passport, password, userType) VALUES (?, ?, ?, ?, ?, ?)";
-	private static final String UPDATE_USER = "UPDATE Users SET userName = ?, phone = ?, email = ?, passport = ? WHERE idUser = ?";
+	private static final String UPDATE_USER = "UPDATE Users SET userName = ?, phone = ?, email = ?, passport = ?, password = ?, userType = ? WHERE idUser = ?";
 	private static final String DELETE_USER = "DELETE FROM Users WHERE idUser = ?";
 
 	private DBConnection db;
@@ -53,15 +54,44 @@ public class UserDAO {
 		while (rs.next()) {
 			if (!rs.wasNull()) {
 				List<CreditCard> creditcards = new ArrayList<>();
-				User user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
-						rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userType"),
-						rs.getString("userDescription"));
+				User user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"),
+						rs.getString("email"), rs.getInt("passport"), creditcards, rs.getString("password"),
+						rs.getString("userType"), rs.getString("userDescription"));
 				users.add(user);
 			}
 		}
 		rs.close();
 		db.closeConnection(connection);
 		return users;
+	}
+
+	/**
+	 * Selecciona un usuario específico por su ID.
+	 *
+	 * @param idUser El ID del usuario a buscar.
+	 * @return Un objeto User si se encuentra; de lo contrario, {@code null}.
+	 * @throws SQLException           si ocurre un error al ejecutar la consulta
+	 *                                SQL.
+	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
+	 */
+	public User selectById(int idUser) throws SQLException, ClassNotFoundException {
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(SELECT_BY_ID);
+		ps.setInt(1, idUser);
+		ResultSet rs = ps.executeQuery();
+
+		User user = null;
+		if (rs.next()) {
+			List<CreditCard> creditcards = new ArrayList<>();
+			user = new User(rs.getString("userName"), rs.getInt("idUser"), rs.getLong("phone"), rs.getString("email"),
+					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("userType"),
+					rs.getString("userDescription"));
+		}
+
+		rs.close();
+		ps.close();
+		db.closeConnection(connection);
+		return user;
 	}
 
 	/**
@@ -119,7 +149,7 @@ public class UserDAO {
 		db.closeConnection(connection);
 		return user;
 	}
-	
+
 	/**
 	 * Selecciona el usuario por su nombre
 	 * 
@@ -146,7 +176,7 @@ public class UserDAO {
 		db.closeConnection(connection);
 		return user;
 	}
-	
+
 	/**
 	 * Selecciona el usuario por email y contraseña
 	 * 
@@ -156,7 +186,7 @@ public class UserDAO {
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
-	public User selectByEmailandPassword(String email, String password) throws SQLException, ClassNotFoundException{
+	public User selectByEmailandPassword(String email, String password) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_EMAIL_AND_PASSWORD);
 		ps.setString(1, email);
@@ -169,11 +199,11 @@ public class UserDAO {
 					rs.getInt("passport"), creditcards, rs.getString("password"), rs.getString("UserType"),
 					rs.getString("userDescription"));
 		}
-		
+
 		rs.close();
 		db.closeConnection(connection);
 		return user;
-		
+
 	}
 
 	/**
@@ -198,7 +228,6 @@ public class UserDAO {
 		ps.setInt(4, passport);
 		ps.setString(5, password);
 		ps.setString(6, "client");
-		
 
 		int affectRows = ps.executeUpdate();
 		if (affectRows == 0) {
