@@ -47,7 +47,7 @@ public class Reserves {
 	/**
 	 * ID del usuario que realiza la reserva.
 	 */
-	private int idUser;
+	private Integer idUser;
 
 	/**
 	 * Constructor completo para inicializar una reserva.
@@ -55,18 +55,29 @@ public class Reserves {
 	 * @param idReserva  ID de la reserva.
 	 * @param housing    Objeto Housing relacionado con la reserva.
 	 * @param idUser     ID del usuario que realiza la reserva.
-	 * @param nameH		 Nombre de la casa que se hará la reserva.
+	 * @param nameH      Nombre de la casa que se hará la reserva.
 	 * @param checkIn    Fecha de entrada.
 	 * @param checkOut   Fecha de salida.
 	 * @param numGuests  Número de huéspedes.
 	 * @param totalPrice Precio total de la reserva.
 	 */
-	public Reserves(int idReserva, Housing housing, int idUser, String nameH, Date checkIn, Date checkOut, int numGuests,
-			double totalPrice) {
+	public Reserves(int idReserva, Housing housing, Integer idUser, String nameH, Date checkIn, Date checkOut,
+			int numGuests, double totalPrice) {
 		this.idReserva = idReserva;
 		this.housing = housing;
 		this.idUser = idUser;
-		this.nameH = nameH; 
+		this.nameH = nameH;
+		this.checkIn = checkIn;
+		this.checkOut = checkOut;
+		this.numGuests = numGuests;
+		this.totalPrice = totalPrice;
+	}
+
+	public Reserves(Housing housing, Integer idUser, String nameH, Date checkIn, Date checkOut, int numGuests,
+			double totalPrice) {
+		this.housing = housing;
+		this.idUser = idUser;
+		this.nameH = nameH;
 		this.checkIn = checkIn;
 		this.checkOut = checkOut;
 		this.numGuests = numGuests;
@@ -101,7 +112,6 @@ public class Reserves {
 		this.housing = housing;
 	}
 
-	
 	/**
 	 * 
 	 * @return nombre de la casa que se reserva
@@ -177,14 +187,14 @@ public class Reserves {
 	/**
 	 * @return ID del usuario
 	 */
-	public int getIdUser() {
+	public Integer getIdUser() {
 		return idUser;
 	}
 
 	/**
 	 * @param idUser ID del usuario
 	 */
-	public void setIdUser(int idUser) {
+	public void setIdUser(Integer idUser) {
 		this.idUser = idUser;
 	}
 

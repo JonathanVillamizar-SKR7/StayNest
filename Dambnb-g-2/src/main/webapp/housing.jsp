@@ -24,7 +24,7 @@
 	Housing housing = h.selectById(Integer.parseInt(id));
 	%>
 
-		<%@ include file="Header.jsp" %>
+	<%@ include file="Header.jsp"%>
 
 	<main style="background-color: var(--secundary-color);">
 		<div class="container my-5">
@@ -145,31 +145,63 @@
 						%>
 					</ul>
 				</div>
-				<div class="formReserve col-6">
+				<div class="formReserve col-12 col-md-6">
 					<h4>Reserve:</h4>
-					<div class="mb-3">
-						<label for="Check-In" class="form-label">Check-In</label> <input
-							type="date" class="form-control" id="formReserve"
-							placeholder="dd/mm/aaaa">
-					</div>
-					<div class="mb-3">
-						<label for="Check-Out" class="form-label">Check-Out</label> <input
-							type="date" class="form-control" id="formReserve"
-							placeholder="dd/mm/aaaa">
-					</div>
-					<div class="mb-3">
-						<label for="guest" class="form-label">Guests</label> <input
-							type="number" class="form-control" id="formReserve"
-							placeholder="Number of guests">
-					</div>
+					<form id="reserveForm" action="reserve.jsp" method="get">
+						<div class="mb-3">
+							<label for="checkIn" class="form-label">Check-In</label> <input
+								type="date" class="form-control" id="checkIn" name="checkIn"
+								required>
+						</div>
+						<div class="mb-3">
+							<label for="checkOut" class="form-label">Check-Out</label> <input
+								type="date" class="form-control" id="checkOut" name="checkOut"
+								required>
+						</div>
+						<div class="mb-3">
+							<label for="guests" class="form-label">Guests</label> <input
+								type="number" class="form-control" id="guests" name="guests"
+								min="1" required>
+						</div>
+						<input type="hidden" name="id" value="<%=housing.getIdHouse()%>">
+						<button type="submit" class="btn btn-primary w-100">Continue
+							Reservation</button>
+					</form>
+					<div id="loginAlert" class="alert alert-warning mt-3 d-none"
+						role="alert">You must log in to continue with the
+						reservation.</div>
 				</div>
+
+				<%
+				boolean isLoggedIn = (session.getAttribute("username") != null);
+				%>
+				<script>
+					document
+							.getElementById('reserveForm')
+							.addEventListener(
+									'submit',
+									function(e) {
+										var isLoggedIn =
+				<%=isLoggedIn%>
+					;
+										if (!isLoggedIn) {
+											e.preventDefault();
+											document
+													.getElementById('loginAlert').classList
+													.remove('d-none');
+										}
+									});
+				</script>
+
 			</div>
 		</div>
 	</main>
 
-	<footer class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
+	<footer
+		class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
 		<div class="col mb-3">
-			<a href="home.jsp" class="d-flex align-items-center mb-3 link-dark text-decoration-none">
+			<a href="home.jsp"
+				class="d-flex align-items-center mb-3 link-dark text-decoration-none">
 				<img src="img/logo_white.png" width="60%" alt="">
 			</a>
 		</div>
@@ -177,29 +209,39 @@
 		<div class="col mb-3">
 			<h5 id="footer-title">About & Support</h5>
 			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="aboutUs.jsp" class="nav-link p-0 text-muted">About Us</a></li>
-				<li class="nav-item mb-3"><a href="contactUs.jsp" class="nav-link p-0 text-muted">Contact Us</a></li>
-				<li class="nav-item mb-3"><a href="FAQ.jsp" class="nav-link p-0 text-muted">FAQ</a></li>
+				<li class="nav-item mb-3"><a href="aboutUs.jsp"
+					class="nav-link p-0 text-muted">About Us</a></li>
+				<li class="nav-item mb-3"><a href="contactUs.jsp"
+					class="nav-link p-0 text-muted">Contact Us</a></li>
+				<li class="nav-item mb-3"><a href="FAQ.jsp"
+					class="nav-link p-0 text-muted">FAQ</a></li>
 			</ul>
 		</div>
 		<div class="col mb-3">
 			<h5 id="footer-title">Explore</h5>
 			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Countryside Retreats</a></li>
-				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Apartment Stays</a></li>
-				<li class="nav-item mb-3"><a href="#" class="nav-link p-0 text-muted">Cabin Getaways</a></li>
+				<li class="nav-item mb-3"><a href="#"
+					class="nav-link p-0 text-muted">Countryside Retreats</a></li>
+				<li class="nav-item mb-3"><a href="#"
+					class="nav-link p-0 text-muted">Apartment Stays</a></li>
+				<li class="nav-item mb-3"><a href="#"
+					class="nav-link p-0 text-muted">Cabin Getaways</a></li>
 			</ul>
 		</div>
 		<div class="col mb-3">
 			<h5 id="footer-title">Policies & Security</h5>
 			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="privacyPolicy.jsp" class="nav-link p-0 text-muted">Privacy Policy</a></li>
-				<li class="nav-item mb-3"><a href="term&conditions.jsp" class="nav-link p-0 text-muted">Term & Conditions</a></li>
-				<li class="nav-item mb-3"><a href="refund.jsp" class="nav-link p-0 text-muted">Refund & Cancellation Policy</a></li>
+				<li class="nav-item mb-3"><a href="privacyPolicy.jsp"
+					class="nav-link p-0 text-muted">Privacy Policy</a></li>
+				<li class="nav-item mb-3"><a href="term&conditions.jsp"
+					class="nav-link p-0 text-muted">Term & Conditions</a></li>
+				<li class="nav-item mb-3"><a href="refund.jsp"
+					class="nav-link p-0 text-muted">Refund & Cancellation Policy</a></li>
 			</ul>
 		</div>
 		<div class="col-12 text-center mt-4">
-			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega - Diana Kopyv</p>
+			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega -
+				Diana Kopyv</p>
 		</div>
 	</footer>
 </body>
