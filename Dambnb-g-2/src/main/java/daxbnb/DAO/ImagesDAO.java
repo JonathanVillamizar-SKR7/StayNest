@@ -8,19 +8,15 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import daxbnb.DAO.DBConnection;
-import daxbnb.model.Facilities;
-import daxbnb.model.Housing;
 import daxbnb.model.Images;
-import daxbnb.model.Types;
 
 public class ImagesDAO {
 
 	private static final String SELECT_ALL = "SELECT * FROM Images";
 	private static final String SELECT_BY_ID = "SELECT * FROM Images where idImage = ?";
 	private static final String INSERT_IMAGE = "INSERT INTO Images (imgRoute) VALUES (?)";
-	private static final String UPDATE_FACILITY = "UPDATE Images SET imgRoute = ? WHERE idImage = ?";
-	private static final String DELETE_FACILITY = "DELETE FROM Images WHERE idImage = ?";
+	private static final String UPDATE_IMAGE = "UPDATE Images SET imgRoute = ? WHERE idImage = ?";
+	private static final String DELETE_IMAGE = "DELETE FROM Images WHERE idImage = ?";
 	private DBConnection db;
 	
 	/**
@@ -81,10 +77,10 @@ public class ImagesDAO {
 	}
 	
 	/**
-	 * Inserta una nueva Imagen a la base de datos
+	 * Inserta una nueva Imagen a la base de datos.
 	 * 
-	 * @param imgRoute
-	 * @return
+	 * @param imgRoute  Ruta de imagen a insertar.
+	 * @return El número de filas afectadas por la actualización.
 	 * @throws SQLException
 	 * @throws ClassNotFoundException
 	 */
@@ -105,5 +101,46 @@ public class ImagesDAO {
 		db.closeConnection(connection);
 		return generateId;
 	}
+	
+	/**
+	 * Actualiza una Imagen existente en la base de datos
+	 * 
+	 * @param idImage    Id de la imagen a actualizar
+	 * @param imgRoute   Nueva ruta a actualizar
+	 * @return El número de filas afectadas por la eliminación.
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public int updateImage(int idImage, String imgRoute) throws SQLException,ClassNotFoundException{
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(UPDATE_IMAGE);
+		ps.setString(1, imgRoute);
+		ps.setInt(2, idImage);
+
+		int result = ps.executeUpdate();
+		ps.close();
+		db.closeConnection(connection);
+		return result;
+	}
+	
+	/**
+	 * Elimina una imagen de la base de datos.
+	 * 
+	 * @param idImage I
+	 * @return El número de filas afectadas por la actualización.
+	 * @throws SQLException
+	 * @throws ClassNotFoundException
+	 */
+	public int deleteImage(int idImage) throws SQLException,ClassNotFoundException{
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(DELETE_IMAGE);
+		ps.setInt(1, idImage);
+		int result = ps.executeUpdate();
+		ps.close();
+		db.closeConnection(connection);
+		return result;
+	}
+	
+	
 	
 }
