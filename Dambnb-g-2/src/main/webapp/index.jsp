@@ -3,6 +3,7 @@
 <%@ page import="daxbnb.DAO.*"%>
 <%@ page import="daxbnb.model.*"%>
 <%@ page import="java.util.List"%>
+<%@ page import="java.util.Collections"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="styles/Index.css">
@@ -22,10 +24,10 @@
 	HousingDAO h = new HousingDAO();
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
 	List<Housing> houses;
-
 	String minBedroomsParam = request.getParameter("minBedrooms");
 	String bedroomParam = request.getParameter("numBedroom");
 	String idTypeParam = request.getParameter("idType");
+	String sortParam = request.getParameter("sort");
 
 	if (minBedroomsParam != null) {
 		int minBedrooms = Integer.parseInt(minBedroomsParam);
@@ -36,9 +38,13 @@
 	} else if (idTypeParam != null) {
 		int idType = Integer.parseInt(idTypeParam);
 		houses = h.selectHousingByType(idType);
-	} else {
+	} else if (sortParam){
+		
+	}else {
 		houses = h.selectAll();
 	}
+
+
 	%>
 
 	<%@ include file="Header.jsp" %>
@@ -69,7 +75,15 @@
 						class="nav-link me-5 nav-link-custom"
 						href="index.jsp?minBedrooms=3">3+</a>
 				</div>
-				<form class="form-inline d-flex ms-auto">
+				<div class="d-flex align-items-center gap-2 ms-auto me-3">
+					<a href="index.jsp?sort=name" class="btn nav-link-custom">
+						<i class="bi bi-sort-alpha-down"></i> Sort by name
+					</a>
+					<a href="index.jsp?sort=price" class="btn nav-link-custom">
+						<i class="bi bi-sort-numeric-down"></i> Sort by price
+					</a>
+				</div>
+				<form class="form-inline d-flex">
 					<input class="form-control mr-sm-2 me-2" type="search"
 						placeholder="Search" aria-label="Search">
 					<button class="btn Search my-2 my-sm-0"
@@ -91,8 +105,7 @@
 					<div class="col-lg-6 col-xl-4 mb-3">
 						<a href="housing.jsp?id=<%=f.getIdHouse()%>"
 							class="text-decoration-none">
-							<div class="card h-100"
-								style="background-color: white; border-color: transparent;">
+							<div class="card h-100" style="background-color: white; border-color: transparent;">
 								<img class="card-img-top" style="height: 400px; object-fit: cover;"
 									src="<%=firstImg%>" alt="Card image cap">
 								<div class="card-body">

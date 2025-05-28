@@ -119,230 +119,249 @@ body {
 
 <body>
 	<%
-	HousingDAO housingDAO = new HousingDAO();
-	HousingImagesDAO imgDAO = new HousingImagesDAO();
-	UserDAO userDAO = new UserDAO();
-	ReservesDAO reservesDAO = new ReservesDAO();
-	FacilityDAO facilitiesDAO = new FacilityDAO();
-	ImagesDAO imagesDAO = new ImagesDAO();
-	HousingImagesDAO housingImagesDAO = new HousingImagesDAO();
-	HousingFacilityDAO housingFacilityDAO = new HousingFacilityDAO();
-	List<Housing> housings = housingDAO.selectAll();
-	List<User> users = userDAO.selectAll();
-	List<Facilities> facilities = facilitiesDAO.selectAll();
-	List<Reserves> reserves = reservesDAO.selectAll();
-	String successMessage = null;
-	String errorMessage = null;
+		HousingDAO housingDAO = new HousingDAO();
+		HousingImagesDAO imgDAO = new HousingImagesDAO();
+		UserDAO userDAO = new UserDAO();
+		ReservesDAO reservesDAO = new ReservesDAO();
+		FacilityDAO facilitiesDAO = new FacilityDAO();
+		ImagesDAO imagesDAO = new ImagesDAO();
+		HousingImagesDAO housingImagesDAO = new HousingImagesDAO();
+		HousingFacilityDAO housingFacilityDAO = new HousingFacilityDAO();
+		List<Housing> housings = housingDAO.selectAll();
+		List<User> users = userDAO.selectAll();
+		List<Facilities> facilities = facilitiesDAO.selectAll();
+		List<Reserves> reserves = reservesDAO.selectAll();
+		String successMessage = null;
+		String errorMessage = null;
 
-	String action = "";
-	if ("POST".equalsIgnoreCase(request.getMethod())) {
-		try {
-			action = request.getParameter("action");
+		String action = "";
+		if ("POST".equalsIgnoreCase(request.getMethod())) {
+			try {
+		action = request.getParameter("action");
 
-			switch (action) {
-			case "list_nest":
+		switch (action) {
+		case "list_nest":
 
-		break;
+			break;
 
-			case "delete_house":
-		String deleteId = request.getParameter("houseId");
-		if (deleteId != null) {
-			HousingDAO dao = new HousingDAO();
-			dao.deleteHousing(Integer.parseInt(deleteId));
-		}
-		successMessage = "Nest deleted successfully!";
-		break;
-
-			case "edit_house":
-
-		break;
-
-			case "submit_edit_house": {
-		int idHouse = Integer.parseInt(request.getParameter("houseId"));
-		String name = request.getParameter("editName");
-		String location = request.getParameter("editLocation");
-		int numGuest = Integer.parseInt(request.getParameter("editGuests"));
-		int numBedroom = Integer.parseInt(request.getParameter("editBedrooms"));
-		int numBed = Integer.parseInt(request.getParameter("editBed"));
-		int numBath = Integer.parseInt(request.getParameter("editBath"));
-		int idType = Integer.parseInt(request.getParameter("editType"));
-		double price = Double.parseDouble(request.getParameter("editPrice"));
-		String description = request.getParameter("editDescription");
-		boolean available = "1".equals(request.getParameter("Available"));
-
-		housingDAO.updateHousing(idHouse, name, location, numGuest, numBedroom, numBed, numBath, idType, price,
-				description, available);
-	
-		successMessage = "Nest updated successfully!";
-		break;
+		case "delete_house":
+			String deleteId = request.getParameter("houseId");
+			if (deleteId != null) {
+		HousingDAO dao = new HousingDAO();
+		dao.deleteHousing(Integer.parseInt(deleteId));
 			}
-			case "insert_nest":
-		break;
+			successMessage = "Nest deleted successfully!";
+			break;
 
-			case "submit_insert_nest":
+		case "edit_house":
+
+			break;
+
+		case "submit_edit_house": {
+			int idHouse = Integer.parseInt(request.getParameter("houseId"));
+			String name = request.getParameter("editName");
+			String location = request.getParameter("editLocation");
+			int numGuest = Integer.parseInt(request.getParameter("editGuests"));
+			int numBedroom = Integer.parseInt(request.getParameter("editBedrooms"));
+			int numBed = Integer.parseInt(request.getParameter("editBed"));
+			int numBath = Integer.parseInt(request.getParameter("editBath"));
+			int idType = Integer.parseInt(request.getParameter("editType"));
+			double price = Double.parseDouble(request.getParameter("editPrice"));
+			String description = request.getParameter("editDescription");
+			boolean available = "1".equals(request.getParameter("Available"));
+
+			housingDAO.updateHousing(idHouse, name, location, numGuest, numBedroom, numBed, numBath, idType, price,
+			description, available);
 		
-		String image = request.getParameter("image");
-		String newName = request.getParameter("newName");
-		String newLocation = request.getParameter("newLocation");
-		int numGuest = Integer.parseInt(request.getParameter("numGuest"));
-		int numBedroom = Integer.parseInt(request.getParameter("numBedroom"));
-		int numBed = Integer.parseInt(request.getParameter("numBed"));
-		int numBath = Integer.parseInt(request.getParameter("numBaths"));
-		int idType = Integer.parseInt(request.getParameter("idTypes"));
-		double price = Double.parseDouble(request.getParameter("price"));
-		String description = request.getParameter("description");
-		boolean available = "1".equals(request.getParameter("Available"));
-		int newHousing = housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
-				description, available);
-		int newImage = imagesDAO.insertImage(image);
-		housingImagesDAO.insertImage(newHousing,newImage);
-		successMessage = "Nest added successfully!";
-		break;
-			case "list_users":
-
-		break;
-			case "insert_user":
-		break;
-			case "submit_insert_user":
-		String userName = request.getParameter("newuserName");
-		long phone = Long.parseLong(request.getParameter("Phone"));
-		String email = request.getParameter("Email");
-		int passport = Integer.parseInt(request.getParameter("Passport"));
-		String password = request.getParameter("Password");
-
-		userDAO.insertUser(userName, phone, email, passport, password);
-		successMessage = "User added successfully!";
-		break;
-
-			case "delete_user":
-		String deleteUser = request.getParameter("userId");
-		if (deleteUser != null) {
-			UserDAO dao = new UserDAO();
-			dao.deleteUser(Integer.parseInt(deleteUser));
+			successMessage = "Nest updated successfully!";
+			break;
 		}
-		successMessage = "User deleted successfully!";
-		break;
+		case "insert_nest":
+			break;
 
-			case "list_facilities":
+		case "submit_insert_nest":
+			
+			try{
+			String newName = request.getParameter("newName");
+			String newLocation = request.getParameter("newLocation");
+			int numGuest = Integer.parseInt(request.getParameter("numGuest"));
+			int numBedroom = Integer.parseInt(request.getParameter("numBedroom"));
+			int numBed = Integer.parseInt(request.getParameter("numBed"));
+			int numBath = Integer.parseInt(request.getParameter("numBaths"));
+			int idType = Integer.parseInt(request.getParameter("idTypes"));
+			double price = Double.parseDouble(request.getParameter("price"));
+			String description = request.getParameter("description");
+			boolean available = "1".equals(request.getParameter("Available"));
+			int newHousing = housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath, idType, price,
+			description, available);
 
-		break;
+			String imageUrl = request.getParameter("image");
+			int newImage = imagesDAO.insertImage(imageUrl);
+			housingImagesDAO.insertImage(newHousing,newImage);
+			
+			String[] newFacilities = {
+	            request.getParameter("facilities1"),
+	            request.getParameter("facilities2"),
+	            request.getParameter("facilities3")
+	        };
 
-			case "delete_facility":
-		String deleteFacility = request.getParameter("facilityId");
-		if (deleteFacility != null) {
-			FacilityDAO dao = new FacilityDAO();
-			dao.deleteFacility(Integer.parseInt(deleteFacility));
-		}
-		successMessage = "Facility deleted successfully!";
-		break;
-
-			case "edit_facility":
-
-		break;
-
-			case "submit_edit_facility":
-		int idFacility = Integer.parseInt(request.getParameter("facilityId"));
-		String typeFacility = request.getParameter("editTypeF");
-
-		facilitiesDAO.updateFacility(idFacility, typeFacility);
-
-		successMessage = "Facility updated successfully!";
-		break;
-
-			case "insert_facility":
-
-		break;
-
-			case "submit_insert_facility":
-		String newFacility = request.getParameter("typeFacility");
-		facilitiesDAO.insertFacility(newFacility);
-		successMessage = "Facility added successfully!";
-		break;
-
-			case "list_reserves":
-
-		break;
-
-			case "insert_reserve":
-
-		break;
-
-			case "submit_insert_reserve": {
-		int idUser = Integer.parseInt(request.getParameter("idUser"));
-		int idHouse = Integer.parseInt(request.getParameter("idHouse"));
-		String nameH = request.getParameter("editNameR");
-		int numGuests = Integer.parseInt(request.getParameter("editGuestsR"));
-		java.sql.Date checkIn = java.sql.Date.valueOf(request.getParameter("editCheckIn"));
-		java.sql.Date checkOut = java.sql.Date.valueOf(request.getParameter("editCheckOut"));
-
-		Housing selectedHousing = housingDAO.selectById(idHouse);
-		double pricePerNight = selectedHousing.getPrice();
-		double totalPrice = calcularPrecioTotal(checkIn, checkOut, pricePerNight);
-
-		reservesDAO.insertReserve(idHouse, idUser, nameH, numGuests, totalPrice, checkIn, checkOut);
-		successMessage = "Reserve added successfully!";
-		break;
+	            for (String facilityId : newFacilities) {
+            if (facilityId != null && !facilityId.isEmpty()) {
+                housingFacilityDAO.insertFacility(newHousing, Integer.parseInt(facilityId));
+            }
+        
 			}
-
-			case "edit_reserve":
-
-		break;
-
-			case "submit_edit_reserve": {
-		int idReserve = Integer.parseInt(request.getParameter("idReserve"));
-		String nameH = request.getParameter("editNameR");
-		int numGuests = Integer.parseInt(request.getParameter("editGuestsR"));
-		java.sql.Date checkIn = java.sql.Date.valueOf(request.getParameter("editCheckIn"));
-		java.sql.Date checkOut = java.sql.Date.valueOf(request.getParameter("editCheckOut"));
-
-		Reserves r = reservesDAO.selectById(idReserve);
-		int idUser = r.getIdUser();
-		int idHouse = (r.getHousing() != null) ? r.getHousing().getIdHouse() : 0;
-		double precioPorNoche = (r.getHousing() != null) ? r.getHousing().getPrice() : 0.0;
-
-		double totalPrice = calcularPrecioTotal(checkIn, checkOut, precioPorNoche);
-
-		reservesDAO.updateReserve(idReserve, idHouse, idUser, nameH, numGuests, checkIn, checkOut, totalPrice);
-		successMessage = "Reserve updated successfully!";
-		break;
+			successMessage = "Nest added successfully!";
+			}catch (Exception e){
+		errorMessage = "Error adding nest:"+ e.getMessage();
+		e.printStackTrace();
 			}
+			break;
+		case "list_users":
 
-			case "delete_reserve":
-		String deleteReserve = request.getParameter("idReserve");
-		if (deleteReserve != null) {
-			ReservesDAO dao = new ReservesDAO();
-			dao.deleteReserve(Integer.parseInt(deleteReserve));
-		}
-		successMessage = "Nest deleted successfully!";
-		break;
+			break;
+		case "insert_user":
+			break;
+		case "submit_insert_user":
+			String userName = request.getParameter("newuserName");
+			long phone = Long.parseLong(request.getParameter("Phone"));
+			String email = request.getParameter("Email");
+			int passport = Integer.parseInt(request.getParameter("Passport"));
+			String password = request.getParameter("Password");
 
-			case "edit_user":
-		break;
+			userDAO.insertUser(userName, phone, email, passport, password);
+			successMessage = "User added successfully!";
+			break;
 
-			case "submit_edit_user":
-		int idUser = Integer.parseInt(request.getParameter("userId"));
-		String userNamee = request.getParameter("editUserName");
-		String passwordd = request.getParameter("editPassword");
-		long phonee = Long.parseLong(request.getParameter("editPhone"));
-		String emaill = request.getParameter("editEmail");
-		int passportt = Integer.parseInt(request.getParameter("editPassport"));
-		String userType = request.getParameter("editUserType");
-
-		userDAO.updateUser(idUser, userNamee, phonee, emaill, passportt, passwordd, userType);
-
-		successMessage = "User updated successfully!";
-
-		break;
-
-			default:
-		errorMessage = "Action not found";
-		out.println("<div class='alert alert-warning' role='alert'>Action not found</div>");
-
+		case "delete_user":
+			String deleteUser = request.getParameter("userId");
+			if (deleteUser != null) {
+		UserDAO dao = new UserDAO();
+		dao.deleteUser(Integer.parseInt(deleteUser));
 			}
-		} catch (Exception e) {
-			errorMessage = "Error adding nest: " + e.getMessage();
+			successMessage = "User deleted successfully!";
+			break;
+
+		case "list_facilities":
+
+			break;
+
+		case "delete_facility":
+			String deleteFacility = request.getParameter("facilityId");
+			if (deleteFacility != null) {
+		FacilityDAO dao = new FacilityDAO();
+		dao.deleteFacility(Integer.parseInt(deleteFacility));
+			}
+			successMessage = "Facility deleted successfully!";
+			break;
+
+		case "edit_facility":
+
+			break;
+
+		case "submit_edit_facility":
+			int idFacility = Integer.parseInt(request.getParameter("facilityId"));
+			String typeFacility = request.getParameter("editTypeF");
+
+			facilitiesDAO.updateFacility(idFacility, typeFacility);
+
+			successMessage = "Facility updated successfully!";
+			break;
+
+		case "insert_facility":
+
+			break;
+
+		case "submit_insert_facility":
+			String newFacility = request.getParameter("typeFacility");
+			facilitiesDAO.insertFacility(newFacility);
+			successMessage = "Facility added successfully!";
+			break;
+
+		case "list_reserves":
+
+			break;
+
+		case "insert_reserve":
+
+			break;
+
+		case "submit_insert_reserve": {
+			int idUser = Integer.parseInt(request.getParameter("idUser"));
+			int idHouse = Integer.parseInt(request.getParameter("idHouse"));
+			String nameH = request.getParameter("editNameR");
+			int numGuests = Integer.parseInt(request.getParameter("editGuestsR"));
+			java.sql.Date checkIn = java.sql.Date.valueOf(request.getParameter("editCheckIn"));
+			java.sql.Date checkOut = java.sql.Date.valueOf(request.getParameter("editCheckOut"));
+
+			Housing selectedHousing = housingDAO.selectById(idHouse);
+			double pricePerNight = selectedHousing.getPrice();
+			double totalPrice = calcularPrecioTotal(checkIn, checkOut, pricePerNight);
+
+			reservesDAO.insertReserve(idHouse, idUser, nameH, numGuests, totalPrice, checkIn, checkOut);
+			successMessage = "Reserve added successfully!";
+			break;
 		}
-	}
+
+		case "edit_reserve":
+
+			break;
+
+		case "submit_edit_reserve": {
+			int idReserve = Integer.parseInt(request.getParameter("idReserve"));
+			String nameH = request.getParameter("editNameR");
+			int numGuests = Integer.parseInt(request.getParameter("editGuestsR"));
+			java.sql.Date checkIn = java.sql.Date.valueOf(request.getParameter("editCheckIn"));
+			java.sql.Date checkOut = java.sql.Date.valueOf(request.getParameter("editCheckOut"));
+
+			Reserves r = reservesDAO.selectById(idReserve);
+			int idUser = r.getIdUser();
+			int idHouse = (r.getHousing() != null) ? r.getHousing().getIdHouse() : 0;
+			double precioPorNoche = (r.getHousing() != null) ? r.getHousing().getPrice() : 0.0;
+
+			double totalPrice = calcularPrecioTotal(checkIn, checkOut, precioPorNoche);
+
+			reservesDAO.updateReserve(idReserve, idHouse, idUser, nameH, numGuests, checkIn, checkOut, totalPrice);
+			successMessage = "Reserve updated successfully!";
+			break;
+		}
+
+		case "delete_reserve":
+			String deleteReserve = request.getParameter("idReserve");
+			if (deleteReserve != null) {
+		ReservesDAO dao = new ReservesDAO();
+		dao.deleteReserve(Integer.parseInt(deleteReserve));
+			}
+			successMessage = "Nest deleted successfully!";
+			break;
+
+		case "edit_user":
+			break;
+
+		case "submit_edit_user":
+			int idUser = Integer.parseInt(request.getParameter("userId"));
+			String userNamee = request.getParameter("editUserName");
+			String passwordd = request.getParameter("editPassword");
+			long phonee = Long.parseLong(request.getParameter("editPhone"));
+			String emaill = request.getParameter("editEmail");
+			int passportt = Integer.parseInt(request.getParameter("editPassport"));
+			String userType = request.getParameter("editUserType");
+
+			userDAO.updateUser(idUser, userNamee, phonee, emaill, passportt, passwordd, userType);
+
+			successMessage = "User updated successfully!";
+
+			break;
+
+		default:
+			errorMessage = "Action not found";
+			out.println("<div class='alert alert-warning' role='alert'>Action not found</div>");
+
+		}
+			} catch (Exception e) {
+		errorMessage = "Error adding nest: " + e.getMessage();
+			}
+		}
 	%>
 
 	<%@ include file="Header.jsp"%>
@@ -486,14 +505,14 @@ body {
 						%>
 						<div class="card-header text-center">
 							<h2 style="color: var(--primary-color)">NEW NEST</h2>
-							<form method="post" enctype="multipart/form-data">
+							<form method="post">
 								<input type="hidden" value="submit_insert_nest" name="action" />
 
 								<div class="row mb-3">
 									<label for="image" class="col-sm-3 col-form-label">Insert
 										Image</label>
 									<div class="col-sm-9">
-										<input class="form-control" type="file" id="image"
+										<input class="form-control" type="text" id="image"
 											name="image" multiple required>
 									</div>
 								</div>
