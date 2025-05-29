@@ -93,9 +93,9 @@
 								at StayNest.</p>
 						</li>
 					</ul>
-					<button class="btn btn-warning btn-lg mt-3 custom-button">
-						<a href="index.jsp" class="text-decoration-none"
-							style="color: var(--dark-color);"> Find your Nest 
+					<button class="btn btn-warning btn-lg mt-3 custom-button"
+						style="background-color:"var(--accent-color);">
+						<a href="index.jsp" class="text-decoration-none" style=color:var(--dark-color);"> Find your Nest 
 					</button>
 					</a>
 				</div>
