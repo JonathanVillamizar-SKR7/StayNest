@@ -19,6 +19,7 @@
 </head>
 <body>
 	<%
+	
 	Integer idUserObj = (Integer) session.getAttribute("idUser");
 	if (idUserObj == null) {
 	%>
@@ -31,27 +32,25 @@
 	}
 
 	int idUser = idUserObj;
+
+	// Obtener datos del usuario logueado
+	UserDAO userDAO = new UserDAO();
+	User user = userDAO.selectById(idUser);
+
+	String usernamee = user.getUserName();
+	String passport = String.valueOf(user.getPassport());
+	String email = user.getEmail();
+	String phone = String.valueOf(user.getPhone());
+
 	boolean reservaExitosa = false;
 	String detallesReserva = "";
 
 	if ("POST".equalsIgnoreCase(request.getMethod())) {
 	try {
-		int idHouse = Integer.parseInt(request.getParameter("id"));
+		int idHouse = Integer.parseInt(request.getParameter("idHousing"));
 		String checkInStr = request.getParameter("checkIn");
 		String checkOutStr = request.getParameter("checkOut");
 		int guests = Integer.parseInt(request.getParameter("guests"));
-		String cardExists = request.getParameter("cardExists");
-
-		if ("false".equals(cardExists)) {
-			String cardHolderName = request.getParameter("cardHolderName");
-			long creditCardNum = Long.parseLong(request.getParameter("creditCardNum"));
-			String expirationStr = request.getParameter("expiration") + "-01";
-			int cvv = Integer.parseInt(request.getParameter("cvv"));
-			Date expiration = Date.valueOf(expirationStr);
-
-			CreditCardsDAO cardDAO = new CreditCardsDAO();
-			cardDAO.insertCreditCard(cardHolderName, creditCardNum, expiration, cvv, idUser);
-		}
 
 		Date checkIn = Date.valueOf(checkInStr);
 		Date checkOut = Date.valueOf(checkOutStr);
@@ -63,6 +62,7 @@
 		double totalPrice = noches * pricePerNight;
 
 		ReservesDAO rdao = new ReservesDAO();
+
 		rdao.insertReserve(idUser, housing.getIdHouse(), housing.getName(), guests, totalPrice, checkIn, checkOut);
 
 		reservaExitosa = true;
@@ -84,10 +84,8 @@
 
 	HousingDAO h = new HousingDAO();
 	Housing housing = h.selectById(idHousing);
-
-	CreditCardsDAO cardDAO = new CreditCardsDAO();
-	CreditCard userCard = cardDAO.selectByIdUser(idUser);
 	%>
+
 
 	<%@ include file="Header.jsp"%>
 
@@ -109,8 +107,29 @@
 		%>
 		<h2>Complete Your Reservation</h2>
 		<form method="post" class="row g-3">
-			<input type="hidden" name="id" value="<%=idHousing%>"> <input
-				type="hidden" name="idUser" value="<%=idUser%>">
+			<input type="hidden" name="idHousing" value="<%=idHousing%>">
+			<input type="hidden" name="idUser" value="<%=idUser%>">
+
+			<div class="col-md-6">
+				<label for="username" class="form-label">UserName</label> <input
+					type="text" class="form-control" id="username" name="username"
+					value="<%=usernamee%>" readonly>
+			</div>
+			<div class="col-md-6">
+				<label for="passport" class="form-label">Passport</label> <input
+					type="text" class="form-control" id="passport" name="passport"
+					value="<%=passport%>" readonly>
+			</div>
+			<div class="col-md-6">
+				<label for="email" class="form-label">Email</label> <input
+					type="email" class="form-control" id="email" name="email"
+					value="<%=email%>" readonly>
+			</div>
+			<div class="col-md-6">
+				<label for="phone" class="form-label">Phone</label> <input
+					type="text" class="form-control" id="phone" name="phone"
+					value="<%=phone%>" readonly>
+			</div>
 
 			<div class="col-md-6">
 				<label for="checkIn" class="form-label">Check-In</label> <input
@@ -130,48 +149,13 @@
 					value="<%=guests%>" required>
 			</div>
 
-			<div class="col-md-12">
-				<h4>Credit Card Information</h4>
-				<%
-				if (userCard != null) {
-				%>
-				<p>
-					<strong>Card on File:</strong> **** **** ****
-					<%=String.valueOf(userCard.getCreditCardNum()).substring(12)%></p>
-				<input type="hidden" name="cardExists" value="true">
-				<%
-				} else {
-				%>
-				<input type="hidden" name="cardExists" value="false">
-				<div class="mb-3">
-					<label for="cardHolderName" class="form-label">Card Holder
-						Name</label> <input type="text" class="form-control" id="cardHolderName"
-						name="cardHolderName" required>
-				</div>
-				<div class="mb-3">
-					<label for="creditCardNum" class="form-label">Credit Card
-						Number</label> <input type="text" class="form-control" id="creditCardNum"
-						name="creditCardNum" maxlength="16" required>
-				</div>
-				<div class="mb-3">
-					<label for="expiration" class="form-label">Expiration Date</label>
-					<input type="month" class="form-control" id="expiration"
-						name="expiration" required>
-				</div>
-				<div class="mb-3">
-					<label for="cvv" class="form-label">CVV</label> <input type="text"
-						class="form-control" id="cvv" name="cvv" maxlength="4" required>
-				</div>
-				<%
-				}
-				%>
-			</div>
-
 			<div class="col-12">
 				<button type="submit" class="btn btn-primary w-100">Confirm
 					Reservation</button>
 			</div>
 		</form>
+
+
 		<%
 		}
 		%>
@@ -186,8 +170,7 @@
 			</a>
 		</div>
 		<div class="col-12 text-center mt-4">
-			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega -
-				Diana Kopyv</p>
+			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega</p>
 		</div>
 	</footer>
 </body>
