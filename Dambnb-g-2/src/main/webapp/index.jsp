@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="daxbnb.DAO.*"%>
 <%@ page import="daxbnb.model.*"%>
-<%@ page import="java.util.List"%>
+<%@ page import="java.util.*"%>
+<%@ page import="java.util.Comparator"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,8 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
 	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="stylesheet" href="styles/Index.css">
@@ -22,10 +25,10 @@
 	HousingDAO h = new HousingDAO();
 	HousingImagesDAO imgDAO = new HousingImagesDAO();
 	List<Housing> houses;
-
 	String minBedroomsParam = request.getParameter("minBedrooms");
 	String bedroomParam = request.getParameter("numBedroom");
 	String idTypeParam = request.getParameter("idType");
+	String sortParam = request.getParameter("sort");
 
 	if (minBedroomsParam != null) {
 		int minBedrooms = Integer.parseInt(minBedroomsParam);
@@ -38,6 +41,38 @@
 		houses = h.selectHousingByType(idType);
 	} else {
 		houses = h.selectAll();
+	}
+	String searchParam = request.getParameter("search");
+	if (searchParam != null && !searchParam.trim().isEmpty()) {
+		List<Housing> finded = new ArrayList<>();
+		for (Housing house : houses) {
+			if (house.getName().toLowerCase().contains(searchParam.toLowerCase())
+			|| house.getLocation().toLowerCase().contains(searchParam.toLowerCase())) {
+		finded.add(house);
+			}
+		}
+		houses = finded;
+	}
+
+	if (sortParam != null) {
+		if (sortParam.equals("name")) {
+			Comparator<Housing> ordenarPorNombre = new Comparator<Housing>() {
+		@Override
+		public int compare(Housing h1, Housing h2) {
+			return h1.getName().compareTo(h2.getName());
+		}
+			};
+			houses.sort(ordenarPorNombre);
+		}
+		if (sortParam.equals("price")) {
+			Comparator<Housing> ordenarPorPrecio = new Comparator<Housing>() {
+		@Override
+		public int compare(Housing h1, Housing h2) {
+			return Double.compare(h1.getPrice(), h2.getPrice());
+		}
+			};
+			houses.sort(ordenarPorPrecio);
+		}
 	}
 	%>
 
@@ -70,8 +105,15 @@
 						class="nav-link me-5 nav-link-custom"
 						href="index.jsp?minBedrooms=3">3+</a>
 				</div>
-				<form class="form-inline d-flex ms-auto">
-					<input class="form-control mr-sm-2 me-2" type="search"
+				<div class="d-flex align-items-center gap-2 ms-auto me-3">
+					<a href="index.jsp?sort=name" class="btn nav-link-custom"> <i
+						class="bi bi-sort-alpha-down"></i> Sort by name
+					</a> <a href="index.jsp?sort=price" class="btn nav-link-custom"> <i
+						class="bi bi-sort-numeric-down"></i> Sort by price
+					</a>
+				</div>
+				<form class="form-inline d-flex">
+					<input class="form-control mr-sm-2 me-2" type="search" name="search"
 						placeholder="Search" aria-label="Search">
 					<button class="btn Search my-2 my-sm-0"
 						style="color: var(--warning-color); background-color: var(--primary-color);"
