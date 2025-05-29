@@ -173,44 +173,49 @@
 							<h2>NEW USER</h2>
 							<form action="">
 								<div class="row mb-3">
-									<label for="newuserName" class="col-sm-3 col-form-label">New userName</label>
+									<label for="newuserName" class="col-sm-3 col-form-label">New
+										userName</label>
 									<div class="col-sm-9">
-										<input type="text" id="newuserName" name="newuserName" class="form-control" required>
+										<input type="text" id="newuserName" name="newuserName"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="Phone" class="col-sm-3 col-form-label">Phone</label>
 									<div class="col-sm-9">
-										<input type="text" id="Phone" name="Phone" class="form-control" required>
+										<input type="text" id="Phone" name="Phone"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="Email" class="col-sm-3 col-form-label">Email</label>
 									<div class="col-sm-9">
-										<input type="number" id="Email" name="Email" class="form-control"
-											required>
+										<input type="number" id="Email" name="Email"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="Ppassport" class="col-sm-3 col-form-label">Passport</label>
 									<div class="col-sm-9">
-										<input type="number" id="passport" name="passport" class="form-control"
-											required>
+										<input type="number" id="passport" name="passport"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
 									<label for="password" class="col-sm-3 col-form-label">Password</label>
 									<div class="col-sm-9">
-										<input type="number" id="password" name="password" class="form-control" required>
+										<input type="number" id="password" name="password"
+											class="form-control" required>
 									</div>
 								</div>
 
 								<div class="row mb-3">
-									<label for="isType" class="col-sm-3 col-form-label">User Type</label>
+									<label for="isType" class="col-sm-3 col-form-label">User
+										Type</label>
 									<div class="col-sm-9">
 										<select class="form-select" id="isType" name="isType" required>
 											<option value="client">Client</option>
@@ -234,52 +239,8 @@
 		</div>
 
 	</main>
-	<footer
-		class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
-		<div class="col mb-3">
-			<a href="home.jsp"
-				class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-				<img src="img/logo_white.png" width="60%" alt="">
-			</a>
-		</div>
-		<div class="col mb-3"></div>
-		<div class="col mb-3">
-			<h5 id="footer-title">About & Support</h5>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="aboutUs.jsp"
-					class="nav-link p-0 text-muted">About Us</a></li>
-				<li class="nav-item mb-3"><a href="contactUs.jsp"
-					class="nav-link p-0 text-muted">Contact Us</a></li>
-				<li class="nav-item mb-3"><a href="FAQ.jsp"
-					class="nav-link p-0 text-muted">FAQ</a></li>
-			</ul>
-		</div>
-		<div class="col mb-3">
-			<h5 id="footer-title">Explore</h5>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Countryside Retreats</a></li>
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Apartment Stays</a></li>
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Cabin Getaways</a></li>
-			</ul>
-		</div>
-		<div class="col mb-3">
-			<h5 id="footer-title">Policies & Security</h5>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="privacyPolicy.jsp"
-					class="nav-link p-0 text-muted">Privacy Policy</a></li>
-				<li class="nav-item mb-3"><a href="term&conditions.jsp"
-					class="nav-link p-0 text-muted">Term & Conditions</a></li>
-				<li class="nav-item mb-3"><a href="refund.jsp"
-					class="nav-link p-0 text-muted">Refund & Cancellation Policy</a></li>
-			</ul>
-		</div>
-		<div class="col-12 text-center mt-4">
-			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega</p>
-		</div>
-	</footer>
+	<%@ include file="Footer.jsp"%>
+
 </body>
 
 </html>
