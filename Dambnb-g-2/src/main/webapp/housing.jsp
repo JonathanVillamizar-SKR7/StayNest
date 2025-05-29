@@ -148,16 +148,21 @@
 				<div class="formReserve col-12 col-md-6">
 					<h4>Reserve:</h4>
 					<form id="reserveForm" action="reserve.jsp" method="get">
+						<%
+						String todayStr = java.time.LocalDate.now().toString();
+						%>
+
 						<div class="mb-3">
 							<label for="checkIn" class="form-label">Check-In</label> <input
 								type="date" class="form-control" id="checkIn" name="checkIn"
-								required>
+								min="<%=todayStr%>" required>
 						</div>
 						<div class="mb-3">
 							<label for="checkOut" class="form-label">Check-Out</label> <input
 								type="date" class="form-control" id="checkOut" name="checkOut"
-								required>
+								min="<%=todayStr%>" required>
 						</div>
+
 						<div class="mb-3">
 							<label for="guests" class="form-label">Guests</label> <input
 								type="number" class="form-control" id="guests" name="guests"

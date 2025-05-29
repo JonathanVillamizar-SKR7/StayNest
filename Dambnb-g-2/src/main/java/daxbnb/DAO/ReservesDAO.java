@@ -19,8 +19,8 @@ import daxbnb.model.Reserves;
  */
 public class ReservesDAO {
 
-	private static final String SELECT_ALL = "SELECT * FROM Reserves";	
-	private static final String SELECT_BY_ID= "SELECT * FROM Reserves WHERE idReserve = ?";
+	private static final String SELECT_ALL = "SELECT * FROM Reserves";
+	private static final String SELECT_BY_ID = "SELECT * FROM Reserves WHERE idReserve = ?";
 	private static final String SELECT_BY_IDHOUSE = "SELECT * FROM Reserves WHERE idHouse = ?";
 	private static final String SELECT_BY_IDUSER = "SELECT * FROM Reserves WHERE idUser = ?";
 	private static final String INSERT_RESERVES = "INSERT INTO Reserves (idHouse, idUser, nameH, checkIn, checkOut, numGuests, totalPrice) VALUES (?, ?, ?, ?, ?, ?,?)";
@@ -45,45 +45,45 @@ public class ReservesDAO {
 	 * @throws ClassNotFoundException si la clase de conexión no se encuentra.
 	 */
 	public List<Reserves> selectAll() throws SQLException, ClassNotFoundException {
-	    Connection connection = db.connect();
-	    PreparedStatement ps = connection.prepareStatement(SELECT_ALL);
-	    ResultSet resultSet = ps.executeQuery();
+		Connection connection = db.connect();
+		PreparedStatement ps = connection.prepareStatement(SELECT_ALL);
+		ResultSet resultSet = ps.executeQuery();
 
-	    List<Reserves> reservesList = new ArrayList<>();
-	    HousingDAO housingDAO = new HousingDAO(); // Para buscar Housing por Id
+		List<Reserves> reservesList = new ArrayList<>();
+		HousingDAO housingDAO = new HousingDAO(); // Para buscar Housing por Id
 
-	    while (resultSet.next()) {
-	        int idReserve = resultSet.getInt("idReserve");
-	        
-	        Integer idHouse = resultSet.getInt("idHouse");
-	        if (resultSet.wasNull()) {
-	            idHouse = null;
-	        }
+		while (resultSet.next()) {
+			int idReserve = resultSet.getInt("idReserve");
 
-	        int rawIdUser = resultSet.getInt("idUser");
-	        Integer idUser = resultSet.wasNull() ? null : rawIdUser;
+			Integer idHouse = resultSet.getInt("idHouse");
+			if (resultSet.wasNull()) {
+				idHouse = null;
+			}
 
-	        String nameH = resultSet.getString("nameH");
-	        int numGuests = resultSet.getInt("numGuests");
-	        double totalPrice = resultSet.getDouble("totalPrice");
-	        java.util.Date checkIn = resultSet.getDate("checkIn");
-	        java.util.Date checkOut = resultSet.getDate("checkOut");
+			int rawIdUser = resultSet.getInt("idUser");
+			Integer idUser = resultSet.wasNull() ? null : rawIdUser;
 
-	        Housing housing = null;
-	        if (idHouse != null) {
-	            housing = housingDAO.selectById(idHouse);
-	        }
+			String nameH = resultSet.getString("nameH");
+			int numGuests = resultSet.getInt("numGuests");
+			double totalPrice = resultSet.getDouble("totalPrice");
+			java.util.Date checkIn = resultSet.getDate("checkIn");
+			java.util.Date checkOut = resultSet.getDate("checkOut");
 
-	        Reserves reserve = new Reserves(idReserve, housing, idUser, nameH, checkIn, checkOut, numGuests, totalPrice);
-	        reservesList.add(reserve);
-	    }
+			Housing housing = null;
+			if (idHouse != null) {
+				housing = housingDAO.selectById(idHouse);
+			}
 
-	    resultSet.close();
-	    db.closeConnection(connection);
-	    return reservesList;
+			Reserves reserve = new Reserves(idReserve, housing, idUser, nameH, checkIn, checkOut, numGuests,
+					totalPrice);
+			reservesList.add(reserve);
+		}
+
+		resultSet.close();
+		db.closeConnection(connection);
+		return reservesList;
 	}
 
-	
 	public Reserves selectById(int idReserve) throws SQLException, ClassNotFoundException {
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(SELECT_BY_ID);
@@ -114,11 +114,10 @@ public class ReservesDAO {
 	}
 
 	public double calcularPrecioTotal(java.util.Date checkIn, java.util.Date checkOut, double precioPorNoche) {
-	    long lapso = checkOut.getTime() - checkIn.getTime();
-	    long noches = lapso / (1000 * 60 * 60 * 24);
-	    return noches * precioPorNoche;
+		long lapso = checkOut.getTime() - checkIn.getTime();
+		long noches = lapso / (1000 * 60 * 60 * 24);
+		return noches * precioPorNoche;
 	}
-
 
 	/**
 	 * Selecciona una reserva específica por el ID de la vivienda.
@@ -209,7 +208,7 @@ public class ReservesDAO {
 	 */
 	public int insertReserve(int idHouse, int idUser, String nameH, int numGuests, double totalPrice,
 			java.util.Date checkIn, java.util.Date checkOut) throws SQLException, ClassNotFoundException {
-		
+
 		System.out.println(idHouse);
 		System.out.println(idUser);
 		System.out.println(nameH);
@@ -292,4 +291,25 @@ public class ReservesDAO {
 		db.closeConnection(connection);
 		return result;
 	}
+
+	public boolean existeConflictoDeReserva(int idHouse, Date checkIn, Date checkOut)
+			throws SQLException, ClassNotFoundException {
+		Connection connection = db.connect();
+		String query = "SELECT COUNT(*) FROM Reserves WHERE idHouse = ? AND (checkIn < ? AND checkOut > ?)";
+		PreparedStatement ps = connection.prepareStatement(query);
+		ps.setInt(1, idHouse);
+		ps.setDate(2, checkOut);
+		ps.setDate(3, checkIn);
+
+		ResultSet rs = ps.executeQuery();
+		boolean hayConflicto = false;
+		if (rs.next()) {
+			hayConflicto = rs.getInt(1) > 0;
+		}
+
+		rs.close();
+		db.closeConnection(connection);
+		return hayConflicto;
+	}
+
 }

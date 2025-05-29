@@ -119,20 +119,20 @@ body {
 
 <body>
 	<%
-		HousingDAO housingDAO = new HousingDAO();
-		HousingImagesDAO imgDAO = new HousingImagesDAO();
-		UserDAO userDAO = new UserDAO();
-		ReservesDAO reservesDAO = new ReservesDAO();
-		FacilityDAO facilitiesDAO = new FacilityDAO();
-		ImagesDAO imagesDAO = new ImagesDAO();
-		HousingImagesDAO housingImagesDAO = new HousingImagesDAO();
-		HousingFacilityDAO housingFacilityDAO = new HousingFacilityDAO();
-		List<Housing> housings = housingDAO.selectAll();
-		List<User> users = userDAO.selectAll();
-		List<Facilities> facilities = facilitiesDAO.selectAll();
-		List<Reserves> reserves = reservesDAO.selectAll();
-		String successMessage = null;
-		String errorMessage = null;
+	HousingDAO housingDAO = new HousingDAO();
+	HousingImagesDAO imgDAO = new HousingImagesDAO();
+	UserDAO userDAO = new UserDAO();
+	ReservesDAO reservesDAO = new ReservesDAO();
+	FacilityDAO facilitiesDAO = new FacilityDAO();
+	ImagesDAO imagesDAO = new ImagesDAO();
+	HousingImagesDAO housingImagesDAO = new HousingImagesDAO();
+	HousingFacilityDAO housingFacilityDAO = new HousingFacilityDAO();
+	List<Housing> housings = housingDAO.selectAll();
+	List<User> users = userDAO.selectAll();
+	List<Facilities> facilities = facilitiesDAO.selectAll();
+	List<Reserves> reserves = reservesDAO.selectAll();
+	String successMessage = null;
+	String errorMessage = null;
 
 		String action = "";
 		if ("POST".equalsIgnoreCase(request.getMethod())) {
@@ -154,20 +154,38 @@ body {
 			break;
 
 			case "submit_insert_nest":
-		String image = request.getParameter("image");
-		String newName = request.getParameter("newName");
-		String newLocation = request.getParameter("newLocation");
-		int numGuest = Integer.parseInt(request.getParameter("numGuest"));
-		int numBedroom = Integer.parseInt(request.getParameter("numBedroom"));
-		int numBed = Integer.parseInt(request.getParameter("numBed"));
-		int numBath = Integer.parseInt(request.getParameter("numBaths"));
-		int idType = Integer.parseInt(request.getParameter("idTypes"));
-		double price = Double.parseDouble(request.getParameter("price"));
-		String description = request.getParameter("description");
-		boolean available = "1".equals(request.getParameter("Available"));
-		int newHousing = housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath,
-				idType, price, description, available);
-		successMessage = "Nest added successfully!";
+		try {
+			String newName = request.getParameter("newName");
+			String newLocation = request.getParameter("newLocation");
+			int numGuest = Integer.parseInt(request.getParameter("numGuest"));
+			int numBedroom = Integer.parseInt(request.getParameter("numBedroom"));
+			int numBed = Integer.parseInt(request.getParameter("numBed"));
+			int numBath = Integer.parseInt(request.getParameter("numBaths"));
+			int idType = Integer.parseInt(request.getParameter("idTypes"));
+			double price = Double.parseDouble(request.getParameter("price"));
+			String description = request.getParameter("description");
+			boolean available = "1".equals(request.getParameter("Available"));
+			int newHousing = housingDAO.insertHousing(newName, newLocation, numGuest, numBedroom, numBed, numBath,
+					idType, price, description, available);
+
+			String imageUrl = request.getParameter("image");
+			int newImage = imagesDAO.insertImage(imageUrl);
+			housingImagesDAO.insertImage(newHousing, newImage);
+
+			String[] newFacilities = { request.getParameter("facilities1"), request.getParameter("facilities2"),
+					request.getParameter("facilities3") };
+
+			for (String facilityId : newFacilities) {
+				if (facilityId != null && !facilityId.isEmpty()) {
+					housingFacilityDAO.insertFacility(newHousing, Integer.parseInt(facilityId));
+				}
+
+			}
+			successMessage = "Nest added successfully!";
+		} catch (Exception e) {
+			errorMessage = "Error adding nest:" + e.getMessage();
+			e.printStackTrace();
+		}
 		break;
 			case "list_users":
 

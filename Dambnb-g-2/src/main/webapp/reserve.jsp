@@ -53,23 +53,36 @@
 
 		Date checkIn = Date.valueOf(checkInStr);
 		Date checkOut = Date.valueOf(checkOutStr);
-		HousingDAO hdao = new HousingDAO();
-		Housing housing = hdao.selectById(idHouse);
 
-		long noches = java.time.temporal.ChronoUnit.DAYS.between(checkIn.toLocalDate(), checkOut.toLocalDate());
-		double pricePerNight = housing.getPrice();
-		double totalPrice = noches * pricePerNight;
+		// Validación: fechas pasadas
+		LocalDate today = LocalDate.now();
+		if (checkIn.toLocalDate().isBefore(today) || checkOut.toLocalDate().isBefore(today)) {
+			out.println(
+			"<div class='alert alert-warning text-center'>You cannot select past dates for check-in or check-out.</div>");
+		} else {
+			HousingDAO hdao = new HousingDAO();
+			Housing housing = hdao.selectById(idHouse);
 
-		ReservesDAO rdao = new ReservesDAO();
+			long noches = java.time.temporal.ChronoUnit.DAYS.between(checkIn.toLocalDate(), checkOut.toLocalDate());
+			double pricePerNight = housing.getPrice();
+			double totalPrice = noches * pricePerNight;
 
+			ReservesDAO rdao = new ReservesDAO();
+
+			// Validación: reserva existente en ese rango
+			if (rdao.existeConflictoDeReserva(idHouse, checkIn, checkOut)) {
+		out.println(
+				"<div class='alert alert-warning text-center'>There is already a reservation for this house during the selected dates. Please choose different dates.</div>");
+			} else {
 		rdao.insertReserve(idUser, housing.getIdHouse(), housing.getName(), guests, totalPrice, checkIn, checkOut);
 
 		reservaExitosa = true;
 		detallesReserva = "Reservation at <strong>" + housing.getName() + "</strong> from <strong>" + checkInStr
-		+ "</strong> to <strong>" + checkOutStr + "</strong> for <strong>" + guests
-		+ "</strong> guests over <strong>" + noches + "</strong> night(s).<br>Total Price: <strong>$" + totalPrice
-		+ "</strong>";
-
+				+ "</strong> to <strong>" + checkOutStr + "</strong> for <strong>" + guests
+				+ "</strong> guests over <strong>" + noches + "</strong> night(s).<br>Total Price: <strong>$"
+				+ totalPrice + "</strong>";
+			}
+		}
 	} catch (Exception e) {
 		out.println("<div class='alert alert-danger'>Error: " + e.getMessage() + "</div>");
 	}
@@ -130,16 +143,20 @@
 					value="<%=phone%>" readonly>
 			</div>
 
+			<%
+			String todayStr = java.time.LocalDate.now().toString();
+			%>
+
 			<div class="col-md-6">
 				<label for="checkIn" class="form-label">Check-In</label> <input
 					type="date" class="form-control" id="checkIn" name="checkIn"
-					value="<%=checkIn%>" required>
+					value="<%=checkIn%>" min="<%=todayStr%>" required>
 			</div>
 
 			<div class="col-md-6">
 				<label for="checkOut" class="form-label">Check-Out</label> <input
 					type="date" class="form-control" id="checkOut" name="checkOut"
-					value="<%=checkOut%>" required>
+					value="<%=checkOut%>" min="<%=todayStr%>" required>
 			</div>
 
 			<div class="col-md-6">
