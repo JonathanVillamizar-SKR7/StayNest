@@ -11,7 +11,27 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="stylesheet" href="styles/home.css">
+
+<style>
+footer {
+	margin-top: auto;
+	padding: 2rem 0;
+	background-color: var(--primary-color);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 26rem;
+}
+
+footer img {
+	margin: 0;
+}
+
+footer .logo {
+	width: 5rem;
+	height: auto;
+}
+</style>
 </head>
 <body>
 	<footer
@@ -37,11 +57,11 @@
 		<div class="col mb-3">
 			<h5 id="footer-title">Explore</h5>
 			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="#"
+				<li class="nav-item mb-3"><a href="index.jsp?idType=4"
 					class="nav-link p-0 text-muted">Countryside Retreats</a></li>
-				<li class="nav-item mb-3"><a href="#"
+				<li class="nav-item mb-3"><a href="index.jsp?idType=3"
 					class="nav-link p-0 text-muted">Apartment Stays</a></li>
-				<li class="nav-item mb-3"><a href="#"
+				<li class="nav-item mb-3"><a href="index.jsp?idType=1"
 					class="nav-link p-0 text-muted">Cabin Getaways</a></li>
 			</ul>
 		</div>
@@ -57,8 +77,7 @@
 			</ul>
 		</div>
 		<div class="col-12 text-center mt-4">
-			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega -
-				Diana Kopyv</p>
+			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega</p>
 		</div>
 	</footer>
 </body>

@@ -1,4 +1,5 @@
-	<%@ page language="java" contentType="text/html; charset=UTF-8"
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="daxbnb.DAO.UserDAO"%>
 <%@ page import="daxbnb.DAO.ReservesDAO"%>
@@ -22,7 +23,7 @@
 <title>User Details</title>
 </head>
 <body>
-	<%@ include file="Header.jsp" %>
+	<%@ include file="Header.jsp"%>
 	<%
 	UserDAO userDAO = new UserDAO();
 	ReservesDAO resDAO = new ReservesDAO();
@@ -32,7 +33,7 @@
 	}
 	User user = userDAO.selectByUserName(userName);
 	%>
-	
+
 	<main>
 		<div class="p-5">
 			<h1>Details</h1>
@@ -62,7 +63,7 @@
 					<th scope="col">Total</th>
 				</thead>
 				<%-- Hacer con un for el body --%>
-				
+
 				<%
 				List<Reserves> reserves = resDAO.selectByIdUser(user.getIdUser());
 				for (Reserves a : reserves) {
@@ -86,5 +87,7 @@
 		</div>
 
 	</main>
+	<%@ include file="Footer.jsp"%>
+
 </body>
 </html>

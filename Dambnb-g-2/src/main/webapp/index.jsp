@@ -41,10 +41,11 @@
 	}
 	%>
 
-	<%@ include file="Header.jsp" %>
+	<%@ include file="Header.jsp"%>
 
 	<main style="background-color: white;">
-		<nav class="navbar navbar-expand-lg justify-content-center py-5 shadow-sm"
+		<nav
+			class="navbar navbar-expand-lg justify-content-center py-5 shadow-sm"
 			style="background-color: white;">
 			<a class="nav-link me-5 nav-link-custom" href="index.jsp">ALL</a> <a
 				class="nav-link me-5 nav-link-custom" href="index.jsp?idType=1">CABIN</a>
@@ -93,8 +94,9 @@
 							class="text-decoration-none">
 							<div class="card h-100"
 								style="background-color: white; border-color: transparent;">
-								<img class="card-img-top" style="height: 400px; object-fit: cover;"
-									src="<%=firstImg%>" alt="Card image cap">
+								<img class="card-img-top"
+									style="height: 400px; object-fit: cover;" src="<%=firstImg%>"
+									alt="Card image cap">
 								<div class="card-body">
 									<h3 class="card-title"><%=f.getName()%></h3>
 									<h5 class="card-text text-muted"><%=f.getLocation()%></h5>
@@ -124,53 +126,8 @@
 			</div>
 		</div>
 	</main>
-	<footer
-		class="row row-cols-1 row-cols-sm-2 row-cols-md-5 py-5 my-5 border-top">
-		<div class="col mb-3">
-			<a href="home.jsp"
-				class="d-flex align-items-center mb-3 link-dark text-decoration-none">
-				<img src="img/logo_white.png" width="60%" alt="">
-			</a>
-		</div>
-		<div class="col mb-3"></div>
-		<div class="col mb-3">
-			<h5 id="footer-title">About & Support</h5>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="aboutUs.jsp"
-					class="nav-link p-0 text-muted">About Us</a></li>
-				<li class="nav-item mb-3"><a href="contactUs.jsp"
-					class="nav-link p-0 text-muted">Contact Us</a></li>
-				<li class="nav-item mb-3"><a href="FAQ.jsp"
-					class="nav-link p-0 text-muted">FAQ</a></li>
-			</ul>
-		</div>
-		<div class="col mb-3">
-			<h5 id="footer-title">Explore</h5>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Countryside Retreats</a></li>
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Apartment Stays</a></li>
-				<li class="nav-item mb-3"><a href="#"
-					class="nav-link p-0 text-muted">Cabin Getaways</a></li>
-			</ul>
-		</div>
-		<div class="col mb-3">
-			<h5 id="footer-title">Policies & Security</h5>
-			<ul class="nav flex-column">
-				<li class="nav-item mb-3"><a href="privacyPolicy.jsp"
-					class="nav-link p-0 text-muted">Privacy Policy</a></li>
-				<li class="nav-item mb-3"><a href="term&conditions.jsp"
-					class="nav-link p-0 text-muted">Term & Conditions</a></li>
-				<li class="nav-item mb-3"><a href="refund.jsp"
-					class="nav-link p-0 text-muted">Refund & Cancellation Policy</a></li>
-			</ul>
-		</div>
-		<div class="col-12 text-center mt-4">
-			<p class="text-muted">@Jonathan Villamizar - Alfredo Noriega -
-				Diana Kopyv</p>
-		</div>
-	</footer>
+	<%@ include file="Footer.jsp"%>
+
 
 </body>
 </html>
