@@ -209,10 +209,18 @@ public class ReservesDAO {
 	 */
 	public int insertReserve(int idHouse, int idUser, String nameH, int numGuests, double totalPrice,
 			java.util.Date checkIn, java.util.Date checkOut) throws SQLException, ClassNotFoundException {
+		
+		System.out.println(idHouse);
+		System.out.println(idUser);
+		System.out.println(nameH);
+		System.out.println(numGuests);
+		System.out.println(totalPrice);
+		System.out.println(checkIn.toString());
+		System.out.println(checkOut.toString());
 		Connection connection = db.connect();
 		PreparedStatement ps = connection.prepareStatement(INSERT_RESERVES, Statement.RETURN_GENERATED_KEYS);
-		ps.setInt(1, idHouse);
-		ps.setInt(2, idUser);
+		ps.setInt(2, idHouse);
+		ps.setInt(1, idUser);
 		ps.setString(3, nameH);
 		ps.setDate(4, new java.sql.Date(checkIn.getTime()));
 		ps.setDate(5, new java.sql.Date(checkOut.getTime()));
