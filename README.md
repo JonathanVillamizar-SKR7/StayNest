@@ -24,7 +24,7 @@ StayNest permite a los usuarios buscar alojamientos, consultar su disponibilidad
 
 ## Equipo
 
-Proyecto desarrollado en colaboración por Alfredo, Jonathan y Diana, trabajando de forma conjunta en frontend, backend, diseño de base de datos y lógica de negocio.
+Proyecto desarrollado en colaboración por Alfredo y Jonathan, trabajando de forma conjunta en frontend, backend, diseño de base de datos y lógica de negocio.
 
 ## Estado
 
